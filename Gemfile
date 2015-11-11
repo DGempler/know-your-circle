@@ -29,6 +29,9 @@ gem 'aws-sdk', '~> 2'
 #Paperclip, for images
 gem "paperclip", git: "git://github.com/thoughtbot/paperclip.git"
 
+#Bootstrap
+gem 'bootstrap-sass'
+
 #mini_magick for working with ImageMagick
 # gem "mini_magick"
 
