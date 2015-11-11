@@ -1,3 +1,4 @@
 <%= content_tag :h1, @person.first_name %>
 <%= content_tag :h1, @person.last_name %>
-<%= image_tag @person.image.url %>
+<%= image_tag @person.image.url(:thumb) %>
+<%= image_tag @person.image.url(:medium) %>
