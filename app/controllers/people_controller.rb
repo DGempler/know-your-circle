@@ -9,9 +9,8 @@ class PeopleController < ApplicationController
 
   def create
     @person = Person.new person_params
-
     if @person.save
-      redirect_to @author
+      redirect_to @person
     else
       render :new
     end
@@ -33,7 +32,7 @@ class PeopleController < ApplicationController
 
   private
   def person_params
-    params.require(:person).permit(:first_name, :last_name)
+    params.require(:person).permit(:first_name, :last_name, :image)
   end
 
 end

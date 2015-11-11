@@ -26,6 +26,12 @@ gem 'sdoc', '~> 0.4.0', group: :doc
 # AWS
 gem 'aws-sdk', '~> 2'
 
+#Paperclip, for images
+gem "paperclip", git: "git://github.com/thoughtbot/paperclip.git"
+
+#mini_magick for working with ImageMagick
+# gem "mini_magick"
+
 # Use ActiveModel has_secure_password
 # gem 'bcrypt', '~> 3.1.7'
 

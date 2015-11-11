@@ -10,8 +10,8 @@ class CreatePeople < ActiveRecord::Migration
       t.string :bio
       t.string :location
       t.string :occupation
-      t.string :image_url
       t.date :dob
     end
   end
+
 end
