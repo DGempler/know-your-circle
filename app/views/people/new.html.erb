@@ -1,8 +1,11 @@
 <h3>Create a new peep!</h3>
 
 <%= form_for @person do |f| %>
-  <%= f.label :first_name %>
-  <%= f.text_field :first_name %>
-  <%= f.label :last_name %>
-  <%= f.text_field :last_name %>
-  <%= f.
+  <%= f.label :first_name %><br/>
+  <%= f.text_field :first_name %><br/>
+  <%= f.label :last_name %><br/>
+  <%= f.text_field :last_name %><br/>
+  <%= label_tag :image, 'image' %><br/>
+  <%= file_field_tag :image, accept: 'image/png,image/gif,image/jpeg' %><br/><br/>
+  <%= f.submit %>
+<% end %>
