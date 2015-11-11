@@ -12,13 +12,12 @@
  *
  */
 
-// Example using 'Cerulean' bootswatch
 
 //Import bootstrap-sprockets
 @import "bootstrap-sprockets";
 
 // Import cerulean variables
-@import "bootswatch/cerulean/variables";
+@import "bootswatch/superhero/variables";
 
 // Then bootstrap itself
 @import "bootstrap";
@@ -27,7 +26,7 @@
 body { padding-top: 60px; }
 
 // And finally bootswatch style itself
-@import "bootswatch/cerulean/bootswatch";
+@import "bootswatch/superhero/bootswatch";
 
 // Whatever application styles you have go last
-@import "base";
+/*@import "base";*/

@@ -32,6 +32,9 @@ gem "paperclip", git: "git://github.com/thoughtbot/paperclip.git"
 #Bootstrap
 gem 'bootstrap-sass'
 
+# Bootswatch
+gem 'bootswatch-rails'
+
 #mini_magick for working with ImageMagick
 # gem "mini_magick"
 
