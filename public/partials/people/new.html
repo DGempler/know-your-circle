@@ -18,3 +18,20 @@
   </div>
   <button type="submit" class="btn btn-default">Submit</button>
 </form>
+
+
+
+<div class="modal-body">
+  <form role="form" name="resourceForm" ng-submit="save()">
+    <div class="form-group">
+      <label>Title</label>
+      <input type="text" class="form-control" ng-required="true"
+            ng-model="myResource.title" placeholder="" />
+    </div>
+    <!--some other fields here -->
+    <div class="form-group">I was
+      <label>Attachment</label>
+      <input type="file" ngf-select ng-model="myResource.file_attachment" />
+    </div>
+  </form>
+</div>
