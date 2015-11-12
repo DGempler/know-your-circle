@@ -2,12 +2,13 @@ angular.module('memPeeps')
 .factory('Person', ['$resource', function($resource) {
   return $resource('//localhost:3000/api/people/:id');
 }])
-.factory('PersonFactory', ['Person', 'Upload', function(Person, Upload) {
+.factory('PersonFactory', ['Person', 'Upload', '$q', function(Person, Upload, $q) {
   var personFactory = {};
 
     // personFactory.people = Person.query();
 
   function sendPayload(formData, method, url) {
+    var deferred = $q.defer();
 
     Upload.upload({
       url: url,
@@ -24,11 +25,21 @@ angular.module('memPeeps')
           fd.append('person['+key+']', val);
         }
       }
+    })
+    .then(function (resp) {
+        deferred.resolve(resp.data);
+    }, function (resp) {
+        console.log('Error status: ' + resp.status);
     });
+    return deferred.promise;
   }
 
   personFactory.createWithAttachment = function(formData) {
-    sendPayload(formData, "POST", "//localhost:3000/api/people");
+    var deferred = $q.defer();
+    sendPayload(formData, "POST", "//localhost:3000/api/people").then(function(data) {
+      deferred.resolve(data);
+    });
+    return deferred.promise;
   };
 
 

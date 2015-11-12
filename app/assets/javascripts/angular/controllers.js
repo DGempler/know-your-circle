@@ -5,7 +5,7 @@ angular.module('memPeeps')
   .controller('homeController', ['$scope', function($scope) {
 
   }])
-  .controller('newPersonController', ['$scope', 'Person', 'PersonFactory', function($scope, Person, PersonFactory) {
+  .controller('newPersonController', ['$scope', 'Person', 'PersonFactory', '$location', function($scope, Person, PersonFactory, $location) {
     $scope.createPerson = function() {
       console.log($scope.person.first_name + " " + $scope.person.last_name);
       console.log($scope.person.image);
@@ -16,7 +16,9 @@ angular.module('memPeeps')
       //   $scope.person = {};
       // });
 
-      PersonFactory.createWithAttachment($scope.person);
+      PersonFactory.createWithAttachment($scope.person).then(function(data) {
+        $location.path('/people/show/' + data.id);
+      });
 
     };
 
