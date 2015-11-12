@@ -1,0 +1,18 @@
+<div class="page-header">
+  <h1>Your people</h1>
+</div>
+
+<div class='row'>
+  <div class='col-sm-2' ng-repeat='person in people.people'>
+    <div class='row'>
+      <div class='col-sm-12'>
+        <img ng-src='{{person.thumb}}' />
+      </div>
+    </div>
+    <div class='row'>
+      <div class='col-sm-12'>
+        <h4>{{person.first_name}} {{person.last_name}}</h4>
+      </div>
+    </div>
+  </div>
+</div>

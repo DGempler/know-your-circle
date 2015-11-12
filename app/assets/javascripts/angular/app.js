@@ -10,6 +10,10 @@ app.config(['$routeProvider', '$locationProvider', '$httpProvider', function($ro
       templateUrl: 'partials/index.html',
       controller: 'homeController'
     })
+    .when('/people/index', {
+      templateUrl: 'partials/people/index.html',
+      controller: 'indexPeopleController'
+    })
     .when('/people/new', {
       templateUrl: 'partials/people/new.html',
       controller: 'newPersonController'

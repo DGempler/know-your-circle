@@ -5,7 +5,14 @@ angular.module('memPeeps')
 .factory('PersonFactory', ['Person', 'Upload', '$q', function(Person, Upload, $q) {
   var personFactory = {};
 
-    // personFactory.people = Person.query();
+  personFactory.getPeople = function() {
+    var deferred = $q.defer();
+    Person.query(function(people) {
+      personFactory.people = people;
+      deferred.resolve(personFactory.people);
+    });
+    return deferred.promise;
+  };
 
   function sendPayload(formData, method, url) {
     var deferred = $q.defer();

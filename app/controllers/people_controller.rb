@@ -3,7 +3,16 @@ class PeopleController < ApplicationController
 
   def index
     @people = Person.all
-    render json: @people, status: :ok
+    people = []
+    @people.each do |person|
+      medium = person.image.url(:medium)
+      thumb = person.image.url(:thumb)
+      person = person.as_json
+      person[:medium] = medium
+      person[:thumb] = thumb
+      people << person
+    end
+    render json: people, status: :ok
   end
 
   def create

@@ -5,6 +5,12 @@ angular.module('memPeeps')
   .controller('homeController', ['$scope', function($scope) {
 
   }])
+  .controller('indexPeopleController', ['$scope', 'Person', 'PersonFactory', function($scope, Person, PersonFactory) {
+    $scope.people = {};
+    PersonFactory.getPeople().then(function(people) {
+      $scope.people.people = people;
+    });
+  }])
   .controller('newPersonController', ['$scope', 'Person', 'PersonFactory', '$location', function($scope, Person, PersonFactory, $location) {
     $scope.createPerson = function() {
       console.log($scope.person.first_name + " " + $scope.person.last_name);
