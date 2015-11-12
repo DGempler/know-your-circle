@@ -14,6 +14,10 @@ app.config(['$routeProvider', '$locationProvider', '$httpProvider', function($ro
       templateUrl: 'partials/people/new.html',
       controller: 'newPersonController'
     })
+    .when('/people/show/:id', {
+      templateUrl: 'partials/people/show.html',
+      controller: 'showPersonController'
+    })
     .otherwise({
       redirectTo: '/'
     });

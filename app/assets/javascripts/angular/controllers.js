@@ -18,5 +18,13 @@ angular.module('memPeeps')
 
     };
 
+  }])
+  .controller('showPersonController', ['$scope', '$routeParams', 'Person', 'PersonFactory', function($scope, $routeParams, Person, PersonFactory) {
+    console.log($routeParams.id);
+    Person.get({id: Number($routeParams.id)}, function(person) {
+      console.log(person);
+      $scope.person = person;
+    });
+
   }]);
 
