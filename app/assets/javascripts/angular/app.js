@@ -8,7 +8,11 @@ app.config(['$routeProvider', '$locationProvider', '$httpProvider', function($ro
   $routeProvider
     .when('/', {
       templateUrl: 'partials/index.html',
-      controller: 'indexController'
+      controller: 'homeController'
+    })
+    .when('/people/new', {
+      templateUrl: 'partials/people/new.html',
+      controller: 'newPersonController'
     })
     .otherwise({
       redirectTo: '/'
