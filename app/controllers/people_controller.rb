@@ -20,8 +20,10 @@ class PeopleController < ApplicationController
   end
 
   def show
-    puts as_json(@person)
-    render json: as_json(@person), status: :ok
+    medium = @person.image.url(:medium)
+    @person = @person.as_json
+    @person[:medium] = medium
+    render json: @person, status: :ok
   end
 
   def update
