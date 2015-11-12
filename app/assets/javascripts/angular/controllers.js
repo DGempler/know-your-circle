@@ -12,7 +12,7 @@ angular.module('memPeeps')
     });
   }])
   .controller('newPersonController', ['$scope', 'Person', 'PersonFactory', '$location', function($scope, Person, PersonFactory, $location) {
-    $scope.createPerson = function() {
+    $scope.submitPerson = function() {
       console.log($scope.person.first_name + " " + $scope.person.last_name);
       console.log($scope.person.image);
 
@@ -34,5 +34,17 @@ angular.module('memPeeps')
         }
       });
     };
+  }])
+  .controller('editPersonController', ['$scope', '$routeParams', 'Person', '$location', 'PersonFactory', function($scope, $routeParams, Person, $location, PersonFactory) {
+    Person.get({id: $routeParams.id}, function(person) {
+      $scope.person = person;
+    });
+
+    $scope.submitPerson = function() {
+      PersonFactory.updateWithAttachment($scope.person).then(function(data) {
+        $location.path('/people/show/' + data.id);
+      });
+    };
+
   }]);
 
