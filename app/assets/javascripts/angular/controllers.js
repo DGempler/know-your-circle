@@ -23,12 +23,16 @@ angular.module('memPeeps')
     };
 
   }])
-  .controller('showPersonController', ['$scope', '$routeParams', 'Person', 'PersonFactory', function($scope, $routeParams, Person, PersonFactory) {
-    console.log($routeParams.id);
-    Person.get({id: Number($routeParams.id)}, function(person) {
-      console.log(person);
+  .controller('showPersonController', ['$scope', '$routeParams', 'Person', '$location', function($scope, $routeParams, Person, $location) {
+    Person.get({id: $routeParams.id}, function(person) {
       $scope.person = person;
     });
-
+    $scope.deleteUser = function() {
+      Person.delete({id: $routeParams.id}, function(person) {
+        if (person) {
+          $location.path('/people/index');
+        }
+      });
+    };
   }]);
 
