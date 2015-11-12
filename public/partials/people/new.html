@@ -12,26 +12,13 @@
     <input ng-model="person.last_name" type="text" class="form-control" id="lastNameInput">
   </div>
   <div class="form-group">
+<!--     <input type='file' ngf-select ng-model="person.image" name="file" ngf-pattern="'image/*'"
+    accept="image/*" ngf-max-size="20MB" ngf-min-height="100"/> -->
     <label for="imageFileInput">Headshot</label>
-    <input type="file" ng-model="person.image" accept="image/*" id="imageFileInput" multiple image-file-reader/>
+    <input type="file" ng-model="person.image" accept="image/*" id="imageFileInput" multiple ngf-select/>
+
+
     <p class="help-block">Upload an image file of your person.</p>
   </div>
   <button type="submit" class="btn btn-default">Submit</button>
 </form>
-
-
-
-<div class="modal-body">
-  <form role="form" name="resourceForm" ng-submit="save()">
-    <div class="form-group">
-      <label>Title</label>
-      <input type="text" class="form-control" ng-required="true"
-            ng-model="myResource.title" placeholder="" />
-    </div>
-    <!--some other fields here -->
-    <div class="form-group">I was
-      <label>Attachment</label>
-      <input type="file" ngf-select ng-model="myResource.file_attachment" />
-    </div>
-  </form>
-</div>

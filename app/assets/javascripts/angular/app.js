@@ -1,4 +1,4 @@
-var app = angular.module('memPeeps', ['ngRoute', 'ngResource']);
+var app = angular.module('memPeeps', ['ngRoute', 'ngResource', 'ngFileUpload']);
 
 app.config(['$routeProvider', '$locationProvider', '$httpProvider', function($routeProvider, $locationProvider, $httpProvider) {
   // $locationProvider.html5Mode(true);

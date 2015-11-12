@@ -1,5 +1,6 @@
 class PeopleController < ApplicationController
   before_action :set_person, only: [:show, :update, :destroy]
+  before_action :process_params, only: [:create, :update]
 
   def index
     @people = Person.all
@@ -7,13 +8,13 @@ class PeopleController < ApplicationController
   end
 
   def create
-    if params[:image]
-      decode_image
-    end
+    # if params[:image]
+    #   decode_image
+    # end
 
     @person = Person.new person_params
     if @person.save
-      render json: as_json(@person), status: :created
+      render json: @person, status: :created
     else
       render json: @person.errors, status: :unprocessable_entity
     end
@@ -43,6 +44,17 @@ class PeopleController < ApplicationController
   def person_params
     params.require(:person).permit(:first_name, :last_name, :image)
   end
+
+  def process_params
+    # puts params[:person]
+    # puts params[:file]
+    # puts JSON.parse(params[:person])
+    # params[:person] = JSON.parse(params[:person]).with_indifferent_access
+    # if params['file']
+    #   params['person']['image'] = params['file']
+    # end
+  end
+
 
   def set_person
     @person = Person.find(params[:id])
