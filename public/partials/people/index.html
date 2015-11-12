@@ -4,15 +4,17 @@
 
 <div class='row'>
   <div class='col-sm-2' ng-repeat='person in people.people'>
-    <div class='row'>
-      <div class='col-sm-12'>
-        <img ng-src='{{person.thumb}}' />
+    <a href='#/people/show/{{person.id}}'>
+      <div class='row'>
+        <div class='col-sm-12'>
+          <img ng-src='{{person.thumb}}' />
+        </div>
       </div>
-    </div>
-    <div class='row'>
-      <div class='col-sm-12'>
-        <h4>{{person.first_name}} {{person.last_name}}</h4>
+      <div class='row'>
+        <div class='col-sm-12'>
+          <h4>{{person.first_name}} {{person.last_name}}</h4>
+        </div>
       </div>
-    </div>
+    </a>
   </div>
 </div>

@@ -16,12 +16,6 @@ angular.module('memPeeps')
       console.log($scope.person.first_name + " " + $scope.person.last_name);
       console.log($scope.person.image);
 
-      // var person = new Person($scope.person);
-      // person.$save().then(function(createdPerson) {
-      //   // PersonFactory.people.push(createdPerson);
-      //   $scope.person = {};
-      // });
-
       PersonFactory.createWithAttachment($scope.person).then(function(data) {
         $location.path('/people/show/' + data.id);
       });
