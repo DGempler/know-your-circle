@@ -42,10 +42,41 @@ angular.module('memPeeps')
     };
 
   }])
-  .controller('gamesIndexController', ['$scope', function($scope) {
+  .controller('gamesIndexController', ['$scope', '$uibModal', 'PersonFactory', function($scope, $uibModal, PersonFactory) {
+    $scope.people = {};
+
+    PersonFactory.getPeople().then(function(people) {
+      $scope.people.people = people;
+    });
+
+    $scope.open = function () {
+
+      var modalInstance = $uibModal.open({
+        animation: true,
+        templateUrl: 'partials/games/_flashcard_modal.html',
+        controller: 'gamesFlashcardsController',
+        size: 'lg',
+        resolve: {
+          people: function () {
+            return $scope.people.people;
+          }
+        }
+      });
+    };
 
   }])
-  .controller('gamesFlashcardsController', ['$scope', 'PersonFactory', function($scope, PersonFactory) {
+  .controller('gamesFlashcardsController', ['$scope', '$uibModalInstance', 'people', function ($scope, $uibModalInstance, people) {
+    $scope.people = {};
+
+    $scope.people.people = people;
+
+    $scope.ok = function () {
+      $uibModalInstance.close();
+    };
+
+    $scope.cancel = function () {
+      $uibModalInstance.dismiss('cancel');
+    };
 
   }]);
 
