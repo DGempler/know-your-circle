@@ -12,19 +12,27 @@ app.config(['$routeProvider', '$locationProvider', '$httpProvider', function($ro
     })
     .when('/people/index', {
       templateUrl: 'partials/people/index.html',
-      controller: 'indexPeopleController'
+      controller: 'peopleIndexController'
     })
     .when('/people/new', {
       templateUrl: 'partials/people/new.html',
-      controller: 'newPersonController'
+      controller: 'personNewController'
     })
     .when('/people/show/:id', {
       templateUrl: 'partials/people/show.html',
-      controller: 'showPersonController'
+      controller: 'personShowController'
     })
     .when('/people/:id/edit', {
       templateUrl: 'partials/people/edit.html',
-      controller: 'editPersonController'
+      controller: 'personEditController'
+    })
+    .when('/games/index', {
+      templateUrl: 'partials/games/index.html',
+      controller: 'gamesIndexController'
+    })
+    .when('/games/flashcards', {
+      templateUrl: 'partials/games/flashcards.html',
+      controller: 'gamesFlashcardsController'
     })
     .otherwise({
       redirectTo: '/'

@@ -4,20 +4,20 @@ angular.module('memPeeps')
   }])
   .controller('homeController', ['$scope', function($scope) {
   }])
-  .controller('indexPeopleController', ['$scope', 'PersonFactory', function($scope, PersonFactory) {
+  .controller('peopleIndexController', ['$scope', 'PersonFactory', function($scope, PersonFactory) {
     $scope.people = {};
     PersonFactory.getPeople().then(function(people) {
       $scope.people.people = people;
     });
   }])
-  .controller('newPersonController', ['$scope', 'PersonFactory', '$location', function($scope, PersonFactory, $location) {
+  .controller('personNewController', ['$scope', 'PersonFactory', '$location', function($scope, PersonFactory, $location) {
     $scope.submitPerson = function() {
       PersonFactory.createWithAttachment($scope.person).then(function(data) {
         $location.path('/people/show/' + data.id);
       });
     };
   }])
-  .controller('showPersonController', ['$scope', '$routeParams', '$location', 'PersonFactory', function($scope, $routeParams, $location, PersonFactory) {
+  .controller('personShowController', ['$scope', '$routeParams', '$location', 'PersonFactory', function($scope, $routeParams, $location, PersonFactory) {
     PersonFactory.getPerson($routeParams.id).then(function(person) {
       $scope.person = person;
     });
@@ -30,7 +30,7 @@ angular.module('memPeeps')
       });
     };
   }])
-  .controller('editPersonController', ['$scope', '$routeParams', '$location', 'PersonFactory', function($scope, $routeParams, $location, PersonFactory) {
+  .controller('personEditController', ['$scope', '$routeParams', '$location', 'PersonFactory', function($scope, $routeParams, $location, PersonFactory) {
     PersonFactory.getPerson($routeParams.id).then(function(person) {
       $scope.person = person;
     });
