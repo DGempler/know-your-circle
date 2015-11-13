@@ -41,5 +41,11 @@ angular.module('memPeeps')
       });
     };
 
+  }])
+  .controller('gamesIndexController', ['$scope', function($scope) {
+
+  }])
+  .controller('gamesFlashcardsController', ['$scope', 'PersonFactory', function($scope, PersonFactory) {
+
   }]);
 
