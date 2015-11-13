@@ -66,9 +66,29 @@ angular.module('memPeeps')
 
   }])
   .controller('gamesFlashcardsController', ['$scope', '$uibModalInstance', 'people', function ($scope, $uibModalInstance, people) {
-    $scope.people = {};
+    $scope.person = {};
+    var randomNumber = Math.floor(Math.random() * people.length);
+    $scope.person.randomPerson = people[randomNumber];
 
-    $scope.people.people = people;
+    function chooseNewRandomNumber() {
+      var newRandomNumber = Math.floor(Math.random() * people.length);
+      if (newRandomNumber !== randomNumber) {
+        randomNumber = newRandomNumber;
+        return randomNumber;
+      } else {
+        chooseNewRandomNumber();
+      }
+    }
+
+
+    $scope.submitPerson = function() {
+      if ($scope.person.guessPerson === $scope.person.randomPerson) {
+        console.log('Good job!');
+      } else {
+        console.log('Nope, you messed up!');
+      }
+      $scope.person.randomPerson = people[chooseNewRandomNumber()];
+    };
 
     $scope.ok = function () {
       $uibModalInstance.close();
