@@ -5,15 +5,6 @@ angular.module('memPeeps')
 .factory('PersonFactory', ['Person', 'Upload', '$q', function(Person, Upload, $q) {
   var personFactory = {};
 
-  personFactory.getPeople = function() {
-    var deferred = $q.defer();
-    Person.query(function(people) {
-      personFactory.people = people;
-      deferred.resolve(personFactory.people);
-    });
-    return deferred.promise;
-  };
-
   function sendPayload(formData, method, url) {
     var deferred = $q.defer();
 
@@ -40,6 +31,33 @@ angular.module('memPeeps')
     });
     return deferred.promise;
   }
+
+  personFactory.getPeople = function() {
+    var deferred = $q.defer();
+    Person.query(function(people) {
+      personFactory.people = people;
+      deferred.resolve(personFactory.people);
+    });
+    return deferred.promise;
+  };
+
+  personFactory.getPerson = function(id) {
+    var deferred = $q.defer();
+    Person.get({id: id}, function(person) {
+      deferred.resolve(person);
+    });
+    return deferred.promise;
+  };
+
+  personFactory.deletePerson = function(id) {
+    var deferred = $q.defer();
+    Person.delete({id: id}, function(person) {
+      if (person) {
+        deferred.resolve(person);
+      }
+    });
+    return deferred.promise;
+  };
 
   personFactory.createWithAttachment = function(formData) {
     var deferred = $q.defer();

@@ -3,40 +3,35 @@ angular.module('memPeeps')
 
   }])
   .controller('homeController', ['$scope', function($scope) {
-
   }])
-  .controller('indexPeopleController', ['$scope', 'Person', 'PersonFactory', function($scope, Person, PersonFactory) {
+  .controller('indexPeopleController', ['$scope', 'PersonFactory', function($scope, PersonFactory) {
     $scope.people = {};
     PersonFactory.getPeople().then(function(people) {
       $scope.people.people = people;
     });
   }])
-  .controller('newPersonController', ['$scope', 'Person', 'PersonFactory', '$location', function($scope, Person, PersonFactory, $location) {
+  .controller('newPersonController', ['$scope', 'PersonFactory', '$location', function($scope, PersonFactory, $location) {
     $scope.submitPerson = function() {
-      console.log($scope.person.first_name + " " + $scope.person.last_name);
-      console.log($scope.person.image);
-
       PersonFactory.createWithAttachment($scope.person).then(function(data) {
         $location.path('/people/show/' + data.id);
       });
-
     };
-
   }])
-  .controller('showPersonController', ['$scope', '$routeParams', 'Person', '$location', function($scope, $routeParams, Person, $location) {
-    Person.get({id: $routeParams.id}, function(person) {
+  .controller('showPersonController', ['$scope', '$routeParams', '$location', 'PersonFactory', function($scope, $routeParams, $location, PersonFactory) {
+    PersonFactory.getPerson($routeParams.id).then(function(person) {
       $scope.person = person;
     });
-    $scope.deleteUser = function() {
-      Person.delete({id: $routeParams.id}, function(person) {
+
+    $scope.deletePerson = function() {
+      PersonFactory.deletePerson($routeParams.id).then(function(person) {
         if (person) {
           $location.path('/people/index');
         }
       });
     };
   }])
-  .controller('editPersonController', ['$scope', '$routeParams', 'Person', '$location', 'PersonFactory', function($scope, $routeParams, Person, $location, PersonFactory) {
-    Person.get({id: $routeParams.id}, function(person) {
+  .controller('editPersonController', ['$scope', '$routeParams', '$location', 'PersonFactory', function($scope, $routeParams, $location, PersonFactory) {
+    PersonFactory.getPerson($routeParams.id).then(function(person) {
       $scope.person = person;
     });
 
