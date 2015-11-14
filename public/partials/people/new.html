@@ -13,7 +13,7 @@
         <label for="lastNameInput">Last Name</label>
         <input ng-model="person.last_name" type="text" class="form-control" id="lastNameInput" autofocus placeholder='Required' required />
       </div>
-      <div class="btn-group" role="group" aria-label="...">
+      <div class="btn-group" role="group" aria-label="..">
         <button type="radio" class="btn btn-default" ng-click='person.sex = "Male"'>Male</button>
         <button type="radio" class="btn btn-default" ng-click='person.sex = "Female"'>Female</button>
       </div>
@@ -22,8 +22,11 @@
         <input ng-model="person.nickname" type="text" class="form-control" id="nicknameInput" autofocus />
       </div>
       <div class="form-group">
-        <label for="nicknameInput">Other Hint</label>
-        <input ng-model="person.hint[0]" type="text" class="form-control" id="hintInput" autofocus />
+        <label for="nicknameInput">Hint</label>
+        <button ng-click='addHintInputs()' type="button" class="btn btn-default btn-xs pull-right">
+          <span class="glyphicon glyphicon-plus" aria-hidden="true"></span> Add more hints
+        </button>
+        <input ng-repeat='hint in person.hints track by $index' type="text" class="form-control" ng-model='person.hints[$index]' />
       </div>
       <div class="form-group">
         <label for="imageFileInput">Headshot</label>

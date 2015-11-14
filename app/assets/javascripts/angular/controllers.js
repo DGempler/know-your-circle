@@ -16,8 +16,17 @@ angular.module('memPeeps')
         $location.path('/people/show/' + data.id);
       });
     };
+    $scope.person = {};
+    $scope.person.hints = [""];
+
+
     $scope.addInputFields = function() {
       $scope.addedInputFields = true;
+    };
+
+    $scope.addHintInputs = function() {
+      $scope.person.hints.push('');
+      console.log($scope.person.hints);
     };
   }])
   .controller('personShowController', ['$scope', '$routeParams', '$location', 'PersonFactory', function($scope, $routeParams, $location, PersonFactory) {
