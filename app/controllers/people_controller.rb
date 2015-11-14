@@ -16,13 +16,18 @@ class PeopleController < ApplicationController
   end
 
   def create
-    # if params[:image]
-    #   decode_image
-    # end
-
     @person = Person.new person_params
     if @person.save
-      render json: @person, status: :created
+      hints = [{hint: 'nah'}, {hint: 'ah'}]
+      hints.each do |hint|
+        new_hint = Hint.create hint
+        @person.hints << new_hint
+      end
+      if @person.save
+        render json: @person, status: :created
+      else
+        render json: @person.errors, status: :unprocessable_entity
+      end
     else
       render json: @person.errors, status: :unprocessable_entity
     end
@@ -53,6 +58,11 @@ class PeopleController < ApplicationController
   private
   def person_params
     params.require(:person).permit(:first_name, :last_name, :image)
+  end
+
+  def hints_params
+    params[:hints] ||= [{hint: 'nah'}, {hint: 'ah'}]
+    params.permit(hints: [])
   end
 
   def set_person
