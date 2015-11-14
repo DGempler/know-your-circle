@@ -79,6 +79,11 @@ angular.module('memPeeps')
       }
     }
 
+    function next() {
+      $scope.person.guessPerson = {};
+      $scope.person.randomPerson = people[chooseNewRandomNumber()];
+    }
+
 
     $scope.submitPerson = function() {
       if ($scope.person.guessPerson.first_name === $scope.person.randomPerson.first_name) {
@@ -91,8 +96,11 @@ angular.module('memPeeps')
       } else {
         console.log('Nope, you messed up on the last name!');
       }
-      $scope.person.guessPerson = {};
-      $scope.person.randomPerson = people[chooseNewRandomNumber()];
+      next();
+    };
+
+    $scope.skip = function() {
+      next();
     };
 
     $scope.ok = function () {
