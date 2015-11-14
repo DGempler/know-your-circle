@@ -66,6 +66,7 @@ angular.module('memPeeps')
   }])
   .controller('gamesFlashcardsController', ['$scope', '$uibModalInstance', 'people', function ($scope, $uibModalInstance, people) {
     $scope.person = {};
+    $scope.person.guessPerson = {};
     var randomNumber = Math.floor(Math.random() * people.length);
     $scope.person.randomPerson = people[randomNumber];
 
