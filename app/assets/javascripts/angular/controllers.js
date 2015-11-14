@@ -16,6 +16,9 @@ angular.module('memPeeps')
         $location.path('/people/show/' + data.id);
       });
     };
+    $scope.addInputFields = function() {
+      $scope.addedInputFields = true;
+    };
   }])
   .controller('personShowController', ['$scope', '$routeParams', '$location', 'PersonFactory', function($scope, $routeParams, $location, PersonFactory) {
     PersonFactory.getPerson($routeParams.id).then(function(person) {
