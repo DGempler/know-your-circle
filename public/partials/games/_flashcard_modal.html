@@ -2,9 +2,9 @@
   <h3 class="modal-title">Who dis?</h3>
 </div>
 <div class="modal-body">
-  <div class='row'>
-    <div class='col-sm-4'>
-      <img ng-src='{{ person.randomPerson.medium }}' />
+<!--   <div class=''>
+    <div class=''> -->
+      <img ng-src='{{ person.randomPerson.medium }}' class='center-block'/>
       <form ng-submit='submitPerson()' autocomplete='off'>
         <div class="form-group">
           <label for="firstNameInput">First Name</label>
@@ -14,10 +14,10 @@
           <label for="lastNameInput">Last Name</label>
           <input ng-model="person.guessPerson.last_name" type="text" class="form-control" id="lastNameInput">
         </div>
-        <button type="submit" class="btn btn-success">Submit</button>
+        <button type="submit" class="btn btn-success center-block">Submit</button>
       </form>
-    </div>
-  </div>
+<!--     </div>
+  </div> -->
 </div>
 <div class="modal-footer">
   <button class="btn btn-primary" type="button" ng-click="done()">Done</button>

@@ -55,7 +55,6 @@ angular.module('memPeeps')
         animation: true,
         templateUrl: 'partials/games/_flashcard_modal.html',
         controller: 'gamesFlashcardsController',
-        size: 'lg',
         resolve: {
           people: function () {
             return $scope.people.people;
