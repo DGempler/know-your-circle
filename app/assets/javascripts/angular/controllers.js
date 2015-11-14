@@ -76,17 +76,23 @@ angular.module('memPeeps')
         randomNumber = newRandomNumber;
         return randomNumber;
       } else {
-        chooseNewRandomNumber();
+        return chooseNewRandomNumber();
       }
     }
 
 
     $scope.submitPerson = function() {
-      if ($scope.person.guessPerson === $scope.person.randomPerson) {
-        console.log('Good job!');
+      if ($scope.person.guessPerson.first_name === $scope.person.randomPerson.first_name) {
+        console.log('Good job! You got the first name right!');
       } else {
-        console.log('Nope, you messed up!');
+        console.log('Nope, you messed up on the first name!');
       }
+      if ($scope.person.guessPerson.last_name === $scope.person.randomPerson.last_name) {
+        console.log('Good job! You got the last name right!');
+      } else {
+        console.log('Nope, you messed up on the last name!');
+      }
+      $scope.person.guessPerson = {};
       $scope.person.randomPerson = people[chooseNewRandomNumber()];
     };
 

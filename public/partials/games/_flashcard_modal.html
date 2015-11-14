@@ -5,7 +5,7 @@
   <div class='row'>
     <div class='col-sm-4'>
       <img ng-src='{{ person.randomPerson.medium }}' />
-      <form ng-submit='submitPerson()'>
+      <form ng-submit='submitPerson()' autocomplete='off'>
         <div class="form-group">
           <label for="firstNameInput">First Name</label>
           <input ng-model="person.guessPerson.first_name" type="text" class="form-control" id="firstNameInput" autofocus>
@@ -14,7 +14,7 @@
           <label for="lastNameInput">Last Name</label>
           <input ng-model="person.guessPerson.last_name" type="text" class="form-control" id="lastNameInput">
         </div>
-        <button type="submit" class="btn btn-default">Submit</button>
+        <button type="submit" class="btn btn-success">Submit</button>
       </form>
     </div>
   </div>
