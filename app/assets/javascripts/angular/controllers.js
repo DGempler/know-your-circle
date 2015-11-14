@@ -80,6 +80,11 @@ angular.module('memPeeps')
     }
 
     function next() {
+      $scope.person.firstNameWrong = false;
+      $scope.person.lastNameWrong = false;
+      $scope.person.firstNameRight = false;
+      $scope.person.lastNameRight = false;
+      $scope.person.result = false;
       $scope.person.guessPerson = {};
       $scope.person.randomPerson = people[chooseNewRandomNumber()];
     }
@@ -87,23 +92,30 @@ angular.module('memPeeps')
 
     $scope.submitPerson = function() {
       if ($scope.person.guessPerson.first_name === $scope.person.randomPerson.first_name) {
-        console.log('Good job! You got the first name right!');
+        $scope.person.result = true;
+        $scope.person.firstNameRight = true;
       } else {
-        console.log('Nope, you messed up on the first name!');
+        $scope.person.result = true;
+        $scope.person.firstNameWrong = true;
       }
       if ($scope.person.guessPerson.last_name === $scope.person.randomPerson.last_name) {
-        console.log('Good job! You got the last name right!');
+        $scope.person.result = true;
+        $scope.person.lastNameRight = true;
       } else {
-        console.log('Nope, you messed up on the last name!');
+        $scope.person.result = true;
+        $scope.person.lastNameWrong = true;
       }
-      next();
     };
 
     $scope.skip = function() {
       next();
     };
 
-    $scope.ok = function () {
+    $scope.next = function() {
+      next();
+    };
+
+    $scope.done = function () {
       $uibModalInstance.close();
     };
 
