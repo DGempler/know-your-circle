@@ -1,1 +1,5 @@
 .nav, .pagination, .carousel, .panel-title a { cursor: pointer; }
+
+div#check-all {
+  margin-top: 34.5px;
+}

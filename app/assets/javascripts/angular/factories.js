@@ -14,15 +14,6 @@ angular.module('memPeeps')
       fields: formData,
       file: formData.person.image,
       fileFormDataName: 'person[image]',
-      /*formDataAppender: function(fd, key, val) {
-        if (angular.isArray(val)) {
-          angular.forEach(val, function(v) {
-            fd.append('person['+key+']', v);
-          });
-        } else {
-          fd.append('person['+key+']', val);
-        }
-      }*/
     })
     .then(function (resp) {
         deferred.resolve(resp.data);
