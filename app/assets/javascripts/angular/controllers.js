@@ -75,7 +75,9 @@ angular.module('memPeeps')
     };
 
     $scope.addHintInputs = function() {
-      $scope.hints.push('');
+      if ($scope.hints.length <= 3) {
+        $scope.hints.push('');
+      }
     };
   }])
   .controller('personShowController', ['$scope', '$routeParams', '$location', 'PersonFactory', function($scope, $routeParams, $location, PersonFactory) {
