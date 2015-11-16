@@ -11,9 +11,8 @@ angular.module('memPeeps')
     Upload.upload({
       url: url,
       method: method,
-      headers: {'Content-Type': 'multipart/form-data' },
       fields: formData,
-      file: formData.image,
+      file: formData.person.image,
       fileFormDataName: 'person[image]',
       /*formDataAppender: function(fd, key, val) {
         if (angular.isArray(val)) {

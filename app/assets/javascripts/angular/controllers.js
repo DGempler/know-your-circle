@@ -11,23 +11,16 @@ angular.module('memPeeps')
     });
   }])
   .controller('personNewController', ['$scope', 'PersonFactory', '$location', function($scope, PersonFactory, $location) {
-    $scope.submitPerson = function() {
-      // var hintsObject = {};
-      // hintsObject.hints = $scope.hints;
-      // $scope.hints['hints[]'].forEach(function(hintObject, index) {
-      //   hintsObject['hints[]'].push({hint: hintObject[index]});
-      // });
-      var newObject = {person: $scope.person, hints: $scope.hints};
-
-      console.log(newObject);
-      PersonFactory.createWithAttachment(newObject).then(function(data) {
-        $location.path('/people/show/' + data.id);
-      });
-    };
     $scope.person = {};
     $scope.hints = {};
     $scope.hints = [""];
 
+    $scope.submitPerson = function() {
+      var newObject = {person: $scope.person, hints: $scope.hints};
+      PersonFactory.createWithAttachment(newObject).then(function(data) {
+        $location.path('/people/show/' + data.id);
+      });
+    };
 
     $scope.addInputFields = function() {
       $scope.addedInputFields = true;
