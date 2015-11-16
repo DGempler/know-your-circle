@@ -11,10 +11,11 @@ angular.module('memPeeps')
     Upload.upload({
       url: url,
       method: method,
+      headers: {'Content-Type': 'multipart/form-data' },
       fields: formData,
       file: formData.image,
       fileFormDataName: 'person[image]',
-      formDataAppender: function(fd, key, val) {
+      /*formDataAppender: function(fd, key, val) {
         if (angular.isArray(val)) {
           angular.forEach(val, function(v) {
             fd.append('person['+key+']', v);
@@ -22,7 +23,7 @@ angular.module('memPeeps')
         } else {
           fd.append('person['+key+']', val);
         }
-      }
+      }*/
     })
     .then(function (resp) {
         deferred.resolve(resp.data);
