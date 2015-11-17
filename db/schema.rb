@@ -34,7 +34,7 @@ ActiveRecord::Schema.define(version: 20151114183624) do
     t.string   "bio"
     t.string   "location"
     t.string   "occupation"
-    t.date     "dob"
+    t.string   "dob"
     t.string   "image_file_name"
     t.string   "image_content_type"
     t.integer  "image_file_size"
