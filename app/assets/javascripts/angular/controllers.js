@@ -155,7 +155,6 @@ angular.module('memPeeps')
 
     $scope.submitPerson = function() {
       var newObject = {person: checkObjectForNullValues($scope.person), hints: checkArrayForNullValues($scope.hints)};
-      console.log(newObject);
       PersonFactory.updateWithAttachment(newObject).then(function(data) {
         $location.path('/people/show/' + data.id);
       });
@@ -202,7 +201,7 @@ angular.module('memPeeps')
     $scope.game.roundScore = 5;
     $scope.game.totalScore = 0;
     $scope.game.totalPossibleScore = 0;
-    $scope.game.otherHintsShown = [];
+    var otherHintsShown = [];
     $scope.game.hintCount = 0;
     var randomNumber = Math.floor(Math.random() * people.length);
     $scope.person.randomPerson = people[randomNumber];
@@ -229,11 +228,10 @@ angular.module('memPeeps')
 
 
     $scope.submitPerson = function() {
-      $scope.game.totalPossibleScore += 5;
       if ($scope.person.guessPerson.first_name === $scope.person.randomPerson.first_name) {
         $scope.person.result = true;
         $scope.person.firstNameRight = true;
-         $scope.game.totalScore += $scope.game.roundScore / 2;
+         $scope.game.totalScore += ($scope.game.roundScore / 2);
       } else {
         $scope.person.result = true;
         $scope.person.firstNameWrong = true;
@@ -241,11 +239,12 @@ angular.module('memPeeps')
       if ($scope.person.guessPerson.last_name === $scope.person.randomPerson.last_name) {
         $scope.person.result = true;
         $scope.person.lastNameRight = true;
-        $scope.game.totalScore += $scope.game.roundScore / 2;
+        $scope.game.totalScore += ($scope.game.roundScore / 2);
       } else {
         $scope.person.result = true;
         $scope.person.lastNameWrong = true;
       }
+      prepNextGameRound();
     };
 
     $scope.game.hintFirstLetterFirstName = function() {
@@ -256,15 +255,27 @@ angular.module('memPeeps')
 
     $scope.game.hintNickname = function() {
       showFirstNameHint();
-      console.log($scope.person.randomPerson.nickname);
       $scope.game.firstNameHintText = "This person's nickname is:";
       $scope.game.firstNameHint = $scope.person.randomPerson.nickname;
     };
 
     $scope.game.hintOther = function() {
+      var randomHintIndex;
       showFirstNameHint();
-      console.log($scope.person.randomPerson.hints);
-
+      if (otherHintsShown.length === $scope.person.randomPerson.hints.length) {
+        otherHintsShown = [];
+      }
+      var otherHintsLength = $scope.person.randomPerson.hints.length;
+      if (otherHintsLength !== 1) {
+        randomHintIndex = Math.floor(Math.random() * otherHintsLength);
+        while (otherHintsShown.indexOf(randomHintIndex) !== -1) {
+          randomHintIndex = Math.floor(Math.random() * otherHintsLength);
+        }
+      } else {
+        randomHintIndex = 0;
+      }
+      otherHintsShown.push(randomHintIndex);
+      $scope.game.firstNameHintText = $scope.person.randomPerson.hints[randomHintIndex].hint;
     };
 
     $scope.game.closeFirstNameHint = function() {
@@ -272,9 +283,23 @@ angular.module('memPeeps')
     };
 
     function showFirstNameHint() {
+      $scope.game.firstNameHintText = "";
+      $scope.game.firstNameHint = "";
       $scope.game.hintsShown = true;
       $scope.game.firstNameHintView = true;
       $scope.game.roundScore--;
+      $scope.game.hintCount++;
+    }
+
+    function prepNextGameRound () {
+      $scope.game.hintCount = 0;
+      $scope.game.firstNameHintView = false;
+      $scope.game.totalPossibleScore += 5;
+      $scope.game.roundScore = 5;
+      $scope.game.firstNameHintText = "";
+      $scope.game.firstNameHint = "";
+      otherHintsShown = [];
+      hintCount = 0;
     }
 
     $scope.skip = function() {

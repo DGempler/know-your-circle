@@ -14,10 +14,10 @@
             <div class='input-group'>
               <input ng-model="person.guessPerson.first_name" type="text" class="form-control" id="firstNameInput" autofocus>
               <div class="input-group-btn">
-                <button class="btn btn-info dropdown-toggle" type="button" id="firstNameHintDropdown" data-toggle="dropdown" aria-haspopup="true" aria-expanded="true">
+                <a class="btn btn-info dropdown-toggle" ng-class="{'disabled': game.hintCount > 2 }" type="button" id="firstNameHintDropdown" data-toggle="dropdown" aria-haspopup="true" aria-expanded="true">
                   Get Hint &nbsp;
                   <span class="caret"></span>
-                </button>
+                </a>
                 <ul class="dropdown-menu dropdown-menu-right bg-info" aria-labelledby="firstNameHintDropdown">
                   <li><a href="" ng-click='game.hintFirstLetterFirstName()' class='bg-info'>Starts with...</a></li>
                   <li ng-hide='!person.randomPerson.nickname'><a href="" ng-click='game.hintNickname()' class='bg-info'>Nickname</a></li>
@@ -45,10 +45,10 @@
             <div class='input-group'>
               <input ng-model="person.guessPerson.last_name" type="text" class="form-control" id="lastNameInput">
                 <div class="input-group-btn">
-                <button class="btn btn-info dropdown-toggle" type="button" id="lastNameHintDropdown" data-toggle="dropdown" aria-haspopup="true" aria-expanded="true">
+                <a class="btn btn-info dropdown-toggle" ng-class="{'disabled': game.hintCount > 2 }" type="button" id="lastNameHintDropdown" data-toggle="dropdown" aria-haspopup="true" aria-expanded="true">
                   Get Hint &nbsp;
                   <span class="caret"></span>
-                </button>
+                </a>
                 <ul class="dropdown-menu dropdown-menu-right" aria-labelledby="lastNameHintDropdown">
                   <li><a href="" ng-click='' class='bg-info'>Starts with...</a></li>
                   <li><a href="" ng-click='' class='bg-info'>Nickname</a></li>
@@ -81,7 +81,7 @@
   <div class='row'>
     <div class='col-sm-8 text-center'>
       <div class="well well-sm text-info">
-        Round Score: &nbsp;&nbsp;<span class='text-warning'><b>{{ game.roundScore }}</b></span> &nbsp;&nbsp; | &nbsp;&nbsp; Total Score: &nbsp;&nbsp;<span class='text-danger'><b>{{ game.totalScore }} / {{ game.totalPossibleScore }}</b></span>
+        Max Round Score: &nbsp;&nbsp;<span class='text-warning'><b>{{ game.roundScore }}</b></span> &nbsp;&nbsp; | &nbsp;&nbsp; Total Score: &nbsp;&nbsp;<span class='text-danger'><b>{{ game.totalScore }} / {{ game.totalPossibleScore }}</b></span>
       </div>
     </div>
     <div class='col-sm-4'>
