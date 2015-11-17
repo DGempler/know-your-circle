@@ -19,7 +19,7 @@ class PeopleController < ApplicationController
     @person = Person.new person_params
     if @person.save
       hints_params['hints'].each do |index, hint|
-        new_hint = Hint.create Hash[:hint,  hint]
+        new_hint = Hint.create hint
         @person.hints << new_hint
       end
       if @person.save
