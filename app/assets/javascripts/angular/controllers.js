@@ -116,19 +116,18 @@ angular.module('memPeeps')
   }])
   .controller('personEditController', ['$scope', '$routeParams', '$location', 'PersonFactory', function($scope, $routeParams, $location, PersonFactory) {
     PersonFactory.getPerson($routeParams.id).then(function(person) {
+      var momentDate = moment(person.dob).format();
       $scope.person = {};
       $scope.person.first_name = person.first_name;
       $scope.person.last_name = person.last_name;
       $scope.person.sex = person.sex;
       $scope.person.nickname = person.nickname;
-      $scope.person.image = person.image;
       $scope.person.middle_name = person.middle_name;
       $scope.person.location = person.location;
       $scope.person.occupation = person.occupation;
-      $scope.person.dob = person.dob;
+      $scope.person.dob = new Date(momentDate);
       $scope.person.bio = person.bio;
       $scope.person.id = person.id;
-
       $scope.hints = person.hints;
     });
 
@@ -154,13 +153,7 @@ angular.module('memPeeps')
 
     $scope.submitPerson = function() {
       var newObject = {person: checkObjectForNullValues($scope.person), hints: checkArrayForNullValues($scope.hints)};
-      PersonFactory.createWithAttachment(newObject).then(function(data) {
-        $location.path('/people/show/' + data.id);
-      });
-    };
-
-    $scope.submitPerson = function() {
-      var newObject = {person: checkObjectForNullValues($scope.person), hints: checkArrayForNullValues($scope.hints)};
+      console.log(newObject);
       PersonFactory.updateWithAttachment(newObject).then(function(data) {
         $location.path('/people/show/' + data.id);
       });
