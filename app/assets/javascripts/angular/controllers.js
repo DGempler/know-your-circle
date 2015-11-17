@@ -246,6 +246,9 @@ angular.module('memPeeps')
       }
     };
 
+    $scope.game.hintFirstLetterFirstName = function() {
+
+    }
     $scope.showHint = function() {
       $scope.game.roundScore--;
     };
@@ -265,6 +268,8 @@ angular.module('memPeeps')
     $scope.reset = function () {
       $uibModalInstance.dismiss('cancel');
     };
+
+
 
   }]);
 

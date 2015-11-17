@@ -4,14 +4,29 @@
 <div class="modal-body">
   <!-- <div class=''> -->
     <div class='row'>
-        <img ng-src='{{ person.randomPerson.medium }}' class='center-block'/>
+      <img ng-src='{{ person.randomPerson.medium }}' class='center-block'/>
 
       <div class='col-sm-10 col-sm-offset-1'>
         <form ng-submit='submitPerson()' autocomplete='off'>
+
           <div ng-hide='person.result' class="form-group">
             <label for="firstNameInput">First Name</label>
-            <input ng-model="person.guessPerson.first_name" type="text" class="form-control" id="firstNameInput" autofocus>
+            <div class='input-group'>
+              <input ng-model="person.guessPerson.first_name" type="text" class="form-control" id="firstNameInput" autofocus>
+              <div class="input-group-btn">
+                <button class="btn btn-info dropdown-toggle" type="button" id="firstNameHintDropdown" data-toggle="dropdown" aria-haspopup="true" aria-expanded="true">
+                  Get Hint &nbsp;
+                  <span class="caret"></span>
+                </button>
+                <ul class="dropdown-menu dropdown-menu-right bg-info" aria-labelledby="firstNameHintDropdown">
+                  <li><a href="" ng-click='game.hintFirstLetterFirstName()' class='bg-info'>Starts with...</a></li>
+                  <li><a href="" ng-click='game.hintNickname()' class='bg-info'>Nickname</a></li>
+                  <li><a href="" ng-click='game.hintOther()' class='bg-info'>Other Hint</a></li>
+                </ul>
+              </div>
+            </div>
           </div>
+
           <div ng-show='person.firstNameWrong' class="alert alert-warning">
             <h4>Wrong!</h4>
             <p>The correct first name was <b>{{ person.randomPerson.first_name }}</b></p>
@@ -19,10 +34,25 @@
           <div ng-show='person.firstNameRight' class="alert alert-success">
             <h4>Correct!</h4>
           </div>
+
           <div ng-hide='person.result' class="form-group">
             <label for="lastNameInput">Last Name</label>
-            <input ng-model="person.guessPerson.last_name" type="text" class="form-control" id="lastNameInput">
+            <div class='input-group'>
+              <input ng-model="person.guessPerson.last_name" type="text" class="form-control" id="lastNameInput">
+                <div class="input-group-btn">
+                <button class="btn btn-info dropdown-toggle" type="button" id="lastNameHintDropdown" data-toggle="dropdown" aria-haspopup="true" aria-expanded="true">
+                  Get Hint &nbsp;
+                  <span class="caret"></span>
+                </button>
+                <ul class="dropdown-menu dropdown-menu-right" aria-labelledby="lastNameHintDropdown">
+                  <li><a href="" ng-click='' class='bg-info'>Starts with...</a></li>
+                  <li><a href="" ng-click='' class='bg-info'>Nickname</a></li>
+                  <li><a href="" ng-click='' class='bg-info'>Other Hint</a></li>
+                </ul>
+              </div>
+            </div>
           </div>
+
           <div ng-show='person.lastNameWrong' class="alert alert-warning">
             <h4>Wrong!</h4>
             <p>The correct last name was <b>{{ person.randomPerson.last_name }}</b></p>
