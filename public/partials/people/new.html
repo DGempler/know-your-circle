@@ -60,8 +60,10 @@
   </div>
   <div class='row'>
     <div class='col-sm-4 col-sm-offset-4'>
-      <a ng-click='addInputFields()' ng-hide='addedInputFields' class="btn btn-primary btn-lg">Add more details</a>
-      <button ng-class='{"center-block": addedInputFields}' type="submit" class="btn btn-primary btn-lg">Submit</button>
+      <div ng-class='{"text-center": !addedInputFields}'>
+        <a ng-click='addInputFields()' ng-hide='addedInputFields' class="btn btn-primary btn-lg">Add more details</a>
+        <button ng-class='{"center-block": addedInputFields}' type="submit" class="btn btn-primary btn-lg">Submit</button>
+      </div>
     </div>
   </div>
 </form>
