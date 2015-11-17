@@ -18,8 +18,12 @@ class PeopleController < ApplicationController
   def create
     @person = Person.new person_params
     if @person.save
-      hints_params.each do |index, hint|
-        new_hint = Hint.create Hash["hint",  hint]
+      puts hints_params
+      puts hints_params['hints']
+      hints_params['hints'].each do |index, hint|
+        puts index
+        puts hint
+        new_hint = Hint.create Hash[:hint,  hint]
         @person.hints << new_hint
       end
       if @person.save
@@ -61,7 +65,7 @@ class PeopleController < ApplicationController
 
   def hints_params
     params[:hints] ||= []
-    params.require(:hints).permit(:'0', :'1', :'2')
+    params.permit(hints: [:'0', :'1', :'2'])
   end
 
   def set_person

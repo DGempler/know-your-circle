@@ -63,8 +63,32 @@ angular.module('memPeeps')
     $scope.hints = {};
     $scope.hints = [""];
 
+    function checkObjectForNullValues(object) {
+      var newObject = {};
+      for (var key in object) {
+        if ($scope.person[key]) {
+          newObject[key] = object[key];
+        }
+      }
+      return newObject;
+    }
+
+    function checkArrayForNullValues(array) {
+      var newArray = [];
+      array.forEach(function(value) {
+        if (value) {
+          newArray.push(value);
+        }
+      });
+      return newArray;
+    }
+
     $scope.submitPerson = function() {
-      var newObject = {person: $scope.person, hints: $scope.hints};
+      var newObject = {person: checkObjectForNullValues($scope.person), hints: checkArrayForNullValues($scope.hints)};
+      // var hintsArray = checkArrayForNullValues($scope.hints);
+      // if (hintsArray.length !== 0) {
+      //   newObject.hints = hintsArray;
+      // }
       PersonFactory.createWithAttachment(newObject).then(function(data) {
         $location.path('/people/show/' + data.id);
       });
@@ -75,7 +99,7 @@ angular.module('memPeeps')
     };
 
     $scope.addHintInputs = function() {
-      if ($scope.hints.length <= 3) {
+      if ($scope.hints.length <= 2) {
         $scope.hints.push('');
       }
     };
