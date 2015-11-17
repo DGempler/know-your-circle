@@ -25,7 +25,7 @@
   <div class='col-sm-4'>
     <p>Location: {{ person.location }}</p>
     <p>Occupation: {{ person.occupation }}</p>
-    <p>DOB: {{ person.dob }}</p>
+    <p>DOB: {{ person.dob | date : "MM/dd/yyyy" : 'UTC'}}</p>
     <p>Bio: {{ person.bio }}</p>
   </div>
 </div>
