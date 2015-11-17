@@ -21,6 +21,7 @@ angular.module('memPeeps')
         }
       });
       $q.all(promiseArray).then(function(people) {
+        $scope.people.someoneSelected = false;
         getPeople();
       });
     }
@@ -61,7 +62,7 @@ angular.module('memPeeps')
   .controller('personNewController', ['$scope', 'PersonFactory', '$location', function($scope, PersonFactory, $location) {
     $scope.person = {};
     $scope.hints = {};
-    $scope.hints = [""];
+    $scope.hints = [{hint: ""}];
 
     function checkObjectForNullValues(object) {
       var newObject = {};
@@ -100,7 +101,7 @@ angular.module('memPeeps')
 
     $scope.addHintInputs = function() {
       if ($scope.hints.length <= 2) {
-        $scope.hints.push('');
+        $scope.hints.push({hint: ''});
       }
     };
   }])
@@ -119,7 +120,9 @@ angular.module('memPeeps')
   }])
   .controller('personEditController', ['$scope', '$routeParams', '$location', 'PersonFactory', function($scope, $routeParams, $location, PersonFactory) {
     PersonFactory.getPerson($routeParams.id).then(function(person) {
+      console.log(person);
       $scope.person = person;
+      $scope.hints = person.hints;
     });
 
     $scope.submitPerson = function() {
@@ -127,6 +130,17 @@ angular.module('memPeeps')
         $location.path('/people/show/' + data.id);
       });
     };
+
+    $scope.addInputFields = function() {
+      $scope.addedInputFields = true;
+    };
+
+    $scope.addHintInputs = function() {
+      if ($scope.hints.length <= 2) {
+        $scope.hints.push('');
+      }
+    };
+
 
   }])
   .controller('gamesIndexController', ['$scope', '$uibModal', 'PersonFactory', function($scope, $uibModal, PersonFactory) {
