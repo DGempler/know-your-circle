@@ -228,7 +228,10 @@ angular.module('memPeeps')
 
 
     $scope.submitPerson = function() {
-      if ($scope.person.guessPerson.first_name === $scope.person.randomPerson.first_name) {
+      if ($scope.person.guessPerson.first_name) {
+        var guessedFirstName = $scope.person.guessPerson.first_name.toLowerCase();
+      }
+      if (guessedFirstName === $scope.person.randomPerson.first_name.toLowerCase()) {
         $scope.person.result = true;
         $scope.person.firstNameRight = true;
          $scope.game.totalScore += ($scope.game.roundScore / 2);
@@ -236,7 +239,10 @@ angular.module('memPeeps')
         $scope.person.result = true;
         $scope.person.firstNameWrong = true;
       }
-      if ($scope.person.guessPerson.last_name === $scope.person.randomPerson.last_name) {
+      if ($scope.person.guessPerson.last_name) {
+        var guessedLastName = $scope.person.guessPerson.last_name.toLowerCase();
+      }
+      if (guessedLastName === $scope.person.randomPerson.last_name.toLowerCase()) {
         $scope.person.result = true;
         $scope.person.lastNameRight = true;
         $scope.game.totalScore += ($scope.game.roundScore / 2);
