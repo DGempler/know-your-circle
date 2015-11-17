@@ -1,9 +1,32 @@
-<h1>{{ person.first_name }} {{ person.last_name }}</h1>
+<div class="page-header">
+  <h1 class='center-block'><center>{{ person.first_name }} {{ person.last_name }}</center></h1>
+</div>
 
-
-<img ng-src='{{ person.medium }}' />
-<img ng-src="{{ person.thumb }}">
-
-<a class="btn btn-default"  href='#/people/{{person.id}}/edit'>Edit Person</a>
-
-<button class="btn btn-default" ng-click='deletePerson()'>Delete Person</button>
+<div class='row'>
+  <div class='col-sm-12'>
+    <img ng-src='{{ person.medium }}' class='center-block'/>
+  </div>
+</div>
+<div class='row'>
+  <div class='col-sm-4 col-sm-offset-4'>
+    <div class='text-center'>
+      <a class="btn btn-default"  href='#/people/{{person.id}}/edit'>Edit Person</a>
+      <button class="btn btn-default" ng-click='deletePerson()'>Delete Person</button>
+    </div>
+  </div>
+</div>
+<div class='row'>
+  <div class='col-sm-4 col-sm-offset-2'>
+    <p>Middle name: {{ person.middle_name }}</p>
+    <p>Sex: {{ person.sex }}</p>
+    <p>Nickname: {{ person.nickname }}</p>
+    <p>Image: {{ person.image }}</p>
+    <p>Location: {{ person.location }}</p>
+  </div>
+  <div class='col-sm-4'>
+    <p>Occupation: {{ person.occupation }}</p>
+    <p>DOB: {{ person.dob }}</p>
+    <p>Bio: {{ person.bio }}</p>
+    <p ng-each='hint in person.hints track by $index'>Hint {{ $index + 1 }}: {{ hint.hint }}</p>
+  </div>
+</div>
