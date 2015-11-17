@@ -256,6 +256,7 @@ angular.module('memPeeps')
 
     $scope.game.hintNickname = function() {
       showFirstNameHint();
+      console.log($scope.person.randomPerson.nickname);
       $scope.game.firstNameHintText = "This person's nickname is:";
       $scope.game.firstNameHint = $scope.person.randomPerson.nickname;
     };

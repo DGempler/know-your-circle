@@ -20,8 +20,8 @@
                 </button>
                 <ul class="dropdown-menu dropdown-menu-right bg-info" aria-labelledby="firstNameHintDropdown">
                   <li><a href="" ng-click='game.hintFirstLetterFirstName()' class='bg-info'>Starts with...</a></li>
-                  <li><a href="" ng-click='game.hintNickname()' class='bg-info'>Nickname</a></li>
-                  <li><a href="" ng-click='game.hintOther()' class='bg-info'>Other Hint</a></li>
+                  <li ng-hide='!person.randomPerson.nickname'><a href="" ng-click='game.hintNickname()' class='bg-info'>Nickname</a></li>
+                  <li ng-hide='person.randomPerson.hints.length === 0'><a href="" ng-click='game.hintOther()' class='bg-info'>Other Hint</a></li>
                 </ul>
               </div>
             </div>
