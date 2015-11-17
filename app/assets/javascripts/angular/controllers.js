@@ -247,11 +247,11 @@ angular.module('memPeeps')
       next();
     };
 
-    $scope.done = function () {
+    $scope.close = function () {
       $uibModalInstance.close();
     };
 
-    $scope.cancel = function () {
+    $scope.reset = function () {
       $uibModalInstance.dismiss('cancel');
     };
 

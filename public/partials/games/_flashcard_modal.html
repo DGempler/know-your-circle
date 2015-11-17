@@ -31,7 +31,7 @@
             <h4>Correct!</h4>
           </div>
           <div class='row'>
-            <div class='col-sm-6 col-sm-offset-3'>
+            <div class='col-sm-6 col-sm-offset-3 text-center'>
               <a ng-hide='person.result' ng-click='skip()' class="btn btn-info btn-lg">Skip</a>
               <button ng-hide='person.result' type="submit" class="btn btn-success btn-lg">Submit</button>
               <a ng-show='person.result' ng-click='next()' class='btn btn-info btn-lg center-block'>Next</a>
@@ -43,6 +43,16 @@
   <!-- </div> -->
 </div>
 <div class="modal-footer">
-  <button class="btn btn-primary" type="button" ng-click="done()">Done</button>
-  <button class="btn btn-warning" type="button" ng-click="cancel()">Cancel</button>
+  <div class='row'>
+    <div class='col-sm-3 text-center'>
+      <div class="well well-sm text-info">
+        Score
+      </div>
+    </div>
+    <div class='col-sm-9'>
+      <button class="btn btn-warning" type="button" ng-click="reset()">Reset</button>
+      <button class="btn btn-primary" type="button" ng-click="close()">Close</button>
+    </div>
+  </div>
+
 </div>
