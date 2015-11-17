@@ -202,6 +202,8 @@ angular.module('memPeeps')
     $scope.game.roundScore = 5;
     $scope.game.totalScore = 0;
     $scope.game.totalPossibleScore = 0;
+    $scope.game.otherHintsShown = [];
+    $scope.game.hintCount = 0;
     var randomNumber = Math.floor(Math.random() * people.length);
     $scope.person.randomPerson = people[randomNumber];
 
@@ -247,11 +249,32 @@ angular.module('memPeeps')
     };
 
     $scope.game.hintFirstLetterFirstName = function() {
-
-    }
-    $scope.showHint = function() {
-      $scope.game.roundScore--;
+      showFirstNameHint();
+      $scope.game.firstNameHintText = "This person's first name starts with:";
+      $scope.game.firstNameHint = $scope.person.randomPerson.first_name[0];
     };
+
+    $scope.game.hintNickname = function() {
+      showFirstNameHint();
+      $scope.game.firstNameHintText = "This person's nickname is:";
+      $scope.game.firstNameHint = $scope.person.randomPerson.nickname;
+    };
+
+    $scope.game.hintOther = function() {
+      showFirstNameHint();
+      console.log($scope.person.randomPerson.hints);
+
+    };
+
+    $scope.game.closeFirstNameHint = function() {
+      $scope.game.firstNameHintView = false;
+    };
+
+    function showFirstNameHint() {
+      $scope.game.hintsShown = true;
+      $scope.game.firstNameHintView = true;
+      $scope.game.roundScore--;
+    }
 
     $scope.skip = function() {
       next();

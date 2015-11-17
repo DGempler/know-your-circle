@@ -9,7 +9,7 @@
       <div class='col-sm-10 col-sm-offset-1'>
         <form ng-submit='submitPerson()' autocomplete='off'>
 
-          <div ng-hide='person.result' class="form-group">
+          <div ng-hide='person.result || game.firstNameHintView' class="form-group">
             <label for="firstNameInput">First Name</label>
             <div class='input-group'>
               <input ng-model="person.guessPerson.first_name" type="text" class="form-control" id="firstNameInput" autofocus>
@@ -25,6 +25,11 @@
                 </ul>
               </div>
             </div>
+          </div>
+
+          <div ng-show='game.firstNameHintView' class="alert alert-info alert-dismissible ">
+            <button ng-click='game.closeFirstNameHint()' type="button" class="close" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+            <p>{{ game.firstNameHintText }}<b>&nbsp;{{ game.firstNameHint }}</b></p>
           </div>
 
           <div ng-show='person.firstNameWrong' class="alert alert-warning">
