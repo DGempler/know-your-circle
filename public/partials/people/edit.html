@@ -1,5 +1,5 @@
 <div class="page-header">
-  <h1>Add a person</h1>
+  <h1>Edit {{person.first_name}}</h1>
 </div>
 
 <form ng-submit='submitPerson()'>
@@ -7,11 +7,11 @@
     <div class='col-sm-6' ng-class='{"col-sm-offset-3": !addedInputFields}'>
       <div class="form-group">
         <label for="firstNameInput">First Name</label>
-        <input ng-model="person.first_name" type="text" class="form-control" id="firstNameInput" placeholder='Required' autofocus required />
+        <input ng-model="person.first_name" type="text" class="form-control" id="firstNameInput" placeholder='Required'  required autofocus />
       </div>
       <div class="form-group">
         <label for="lastNameInput">Last Name</label>
-        <input ng-model="person.last_name" type="text" class="form-control" id="lastNameInput" autofocus placeholder='Required' required />
+        <input ng-model="person.last_name" type="text" class="form-control" id="lastNameInput"  placeholder='Required' required />
       </div>
       <div class="btn-group" role="group" aria-label="..">
         <button type="radio" class="btn btn-default" ng-click='person.sex = "Male"'>Male</button>
@@ -19,13 +19,13 @@
       </div>
       <div class="form-group">
         <label for="nicknameInput">Nickname</label>
-        <input ng-model="person.nickname" type="text" class="form-control" id="nicknameInput" autofocus />
+        <input ng-model="person.nickname" type="text" class="form-control" id="nicknameInput"  />
       </div>
       <div class="form-group">
         <label for="nicknameInput">Hint</label>
-        <button ng-click='addHintInputs()' type="button" class="btn btn-default btn-xs pull-right">
+        <a ng-click='addHintInputs()' class="btn btn-default btn-xs pull-right">
           <span class="glyphicon glyphicon-plus" aria-hidden="true"></span> Add more hints
-        </button>
+        </a>
         <input ng-repeat='hint in hints track by $index' type="text" class="form-control" ng-model='hints[$index].hint' />
       </div>
       <div class="form-group">
@@ -41,19 +41,19 @@
       </div>
       <div class="form-group">
         <label for="locationInput">Location</label>
-        <input ng-model="person.location" type="text" class="form-control" id="locationInput" autofocus>
+        <input ng-model="person.location" type="text" class="form-control" id="locationInput" >
       </div>
       <div class="form-group">
         <label for="occupationInput">Occupation</label>
-        <input ng-model="person.occupation" type="text" class="form-control" id="occupationInput" autofocus>
+        <input ng-model="person.occupation" type="text" class="form-control" id="occupationInput" >
       </div>
       <div class="form-group">
         <label for="dobInput">Date of Birth</label>
-        <input ng-model="person.dob" type="date" class="form-control" id="dobInput" autofocus>
+        <input ng-model="person.dob" type="date" class="form-control" id="dobInput" >
       </div>
       <div class="form-group">
         <label for="bioInput">Bio</label>
-        <textarea rows="3" ng-model="person.bio" type="text" class="form-control" id="bioInput" autofocus></textarea>
+        <textarea rows="3" ng-model="person.bio" type="text" class="form-control" id="bioInput" ></textarea>
       </div>
 
     </div>

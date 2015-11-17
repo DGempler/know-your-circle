@@ -43,6 +43,17 @@ class PeopleController < ApplicationController
 
   def update
     if @person.update person_params
+      puts 'done'
+      hints_params['hints'].each do |index, hint|
+        begin
+          Hint.find(hint[:id]).update Hash[:hint,  hint[:hint]]
+        rescue ActiveRecord::RecordNotFound
+          new_hint = Hint.create Hash[:hint,  hint[:hint]]
+          @person.hints << new_hint
+          @person.save
+          return
+        end
+      end
       render json: @person, status: :ok
     else
       render json: @person.errors, status: :unprocessable_entity
@@ -61,7 +72,7 @@ class PeopleController < ApplicationController
 
   def hints_params
     params[:hints] ||= []
-    params.permit(hints: [:'0', :'1', :'2'])
+    params.permit(hints: [:'0', :"1", :"2", :id, :hint])
   end
 
   def set_person

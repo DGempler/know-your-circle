@@ -60,7 +60,7 @@ angular.module('memPeeps')
 
   personFactory.updateWithAttachment = function(formData) {
     var deferred = $q.defer();
-    sendPayload(formData, "PUT", "//localhost:3000/api/people/" + formData.id).then(function(data) {
+    sendPayload(formData, "PUT", "//localhost:3000/api/people/" + formData.person.id).then(function(data) {
       deferred.resolve(data);
     });
     return deferred.promise;

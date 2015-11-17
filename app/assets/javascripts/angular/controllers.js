@@ -67,7 +67,7 @@ angular.module('memPeeps')
     function checkObjectForNullValues(object) {
       var newObject = {};
       for (var key in object) {
-        if ($scope.person[key]) {
+        if ($scope.person[key] || key == 'image') {
           newObject[key] = object[key];
         }
       }
@@ -77,7 +77,7 @@ angular.module('memPeeps')
     function checkArrayForNullValues(array) {
       var newArray = [];
       array.forEach(function(value) {
-        if (value) {
+        if (value.hint) {
           newArray.push(value);
         }
       });
@@ -86,10 +86,6 @@ angular.module('memPeeps')
 
     $scope.submitPerson = function() {
       var newObject = {person: checkObjectForNullValues($scope.person), hints: checkArrayForNullValues($scope.hints)};
-      // var hintsArray = checkArrayForNullValues($scope.hints);
-      // if (hintsArray.length !== 0) {
-      //   newObject.hints = hintsArray;
-      // }
       PersonFactory.createWithAttachment(newObject).then(function(data) {
         $location.path('/people/show/' + data.id);
       });
@@ -120,13 +116,52 @@ angular.module('memPeeps')
   }])
   .controller('personEditController', ['$scope', '$routeParams', '$location', 'PersonFactory', function($scope, $routeParams, $location, PersonFactory) {
     PersonFactory.getPerson($routeParams.id).then(function(person) {
-      console.log(person);
-      $scope.person = person;
+      $scope.person = {};
+      $scope.person.first_name = person.first_name;
+      $scope.person.last_name = person.last_name;
+      $scope.person.sex = person.sex;
+      $scope.person.nickname = person.nickname;
+      $scope.person.image = person.image;
+      $scope.person.middle_name = person.middle_name;
+      $scope.person.location = person.location;
+      $scope.person.occupation = person.occupation;
+      $scope.person.dob = person.dob;
+      $scope.person.bio = person.bio;
+      $scope.person.id = person.id;
+
       $scope.hints = person.hints;
     });
 
+    function checkObjectForNullValues(object) {
+      var newObject = {};
+      for (var key in object) {
+        if ($scope.person[key] || key == 'image') {
+          newObject[key] = object[key];
+        }
+      }
+      return newObject;
+    }
+
+    function checkArrayForNullValues(array) {
+      var newArray = [];
+      array.forEach(function(value) {
+        if (value.hint) {
+          newArray.push(value);
+        }
+      });
+      return newArray;
+    }
+
     $scope.submitPerson = function() {
-      PersonFactory.updateWithAttachment($scope.person).then(function(data) {
+      var newObject = {person: checkObjectForNullValues($scope.person), hints: checkArrayForNullValues($scope.hints)};
+      PersonFactory.createWithAttachment(newObject).then(function(data) {
+        $location.path('/people/show/' + data.id);
+      });
+    };
+
+    $scope.submitPerson = function() {
+      var newObject = {person: checkObjectForNullValues($scope.person), hints: checkArrayForNullValues($scope.hints)};
+      PersonFactory.updateWithAttachment(newObject).then(function(data) {
         $location.path('/people/show/' + data.id);
       });
     };
