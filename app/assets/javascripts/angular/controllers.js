@@ -198,6 +198,10 @@ angular.module('memPeeps')
   .controller('gamesFlashcardsController', ['$scope', '$uibModalInstance', 'people', function ($scope, $uibModalInstance, people) {
     $scope.person = {};
     $scope.person.guessPerson = {};
+    $scope.game = {};
+    $scope.game.roundScore = 5;
+    $scope.game.totalScore = 0;
+    $scope.game.totalPossibleScore = 0;
     var randomNumber = Math.floor(Math.random() * people.length);
     $scope.person.randomPerson = people[randomNumber];
 
@@ -223,9 +227,11 @@ angular.module('memPeeps')
 
 
     $scope.submitPerson = function() {
+      $scope.game.totalPossibleScore += 5;
       if ($scope.person.guessPerson.first_name === $scope.person.randomPerson.first_name) {
         $scope.person.result = true;
         $scope.person.firstNameRight = true;
+         $scope.game.totalScore += $scope.game.roundScore / 2;
       } else {
         $scope.person.result = true;
         $scope.person.firstNameWrong = true;
@@ -233,10 +239,15 @@ angular.module('memPeeps')
       if ($scope.person.guessPerson.last_name === $scope.person.randomPerson.last_name) {
         $scope.person.result = true;
         $scope.person.lastNameRight = true;
+        $scope.game.totalScore += $scope.game.roundScore / 2;
       } else {
         $scope.person.result = true;
         $scope.person.lastNameWrong = true;
       }
+    };
+
+    $scope.showHint = function() {
+      $scope.game.roundScore--;
     };
 
     $scope.skip = function() {

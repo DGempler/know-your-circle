@@ -32,7 +32,7 @@
           </div>
           <div class='row'>
             <div class='col-sm-6 col-sm-offset-3 text-center'>
-              <a ng-hide='person.result' ng-click='skip()' class="btn btn-info btn-lg">Skip</a>
+              <a ng-hide='person.result || game.hintsShown' ng-click='skip()' class="btn btn-info btn-lg">Skip</a>
               <button ng-hide='person.result' type="submit" class="btn btn-success btn-lg">Submit</button>
               <a ng-show='person.result' ng-click='next()' class='btn btn-info btn-lg center-block'>Next</a>
             </div>
@@ -44,12 +44,12 @@
 </div>
 <div class="modal-footer">
   <div class='row'>
-    <div class='col-sm-3 text-center'>
+    <div class='col-sm-8 text-center'>
       <div class="well well-sm text-info">
-        Score
+        Round Score: &nbsp;&nbsp;<span class='text-warning'><b>{{ game.roundScore }}</b></span> &nbsp;&nbsp; | &nbsp;&nbsp; Total Score: &nbsp;&nbsp;<span class='text-danger'><b>{{ game.totalScore }} / {{ game.totalPossibleScore }}</b></span>
       </div>
     </div>
-    <div class='col-sm-9'>
+    <div class='col-sm-4'>
       <button class="btn btn-warning" type="button" ng-click="reset()">Reset</button>
       <button class="btn btn-primary" type="button" ng-click="close()">Close</button>
     </div>
