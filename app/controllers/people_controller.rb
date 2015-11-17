@@ -51,9 +51,9 @@ class PeopleController < ApplicationController
           new_hint = Hint.create Hash[:hint,  hint[:hint]]
           @person.hints << new_hint
           @person.save
-          return
         end
       end
+      puts 'about to render json'
       render json: @person, status: :ok
     else
       render json: @person.errors, status: :unprocessable_entity
