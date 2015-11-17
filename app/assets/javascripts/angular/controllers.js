@@ -128,6 +128,9 @@ angular.module('memPeeps')
       $scope.person.bio = person.bio;
       $scope.person.id = person.id;
       $scope.hints = person.hints;
+      if ($scope.hints.length === 0) {
+        $scope.hints.push({hint: ''});
+      }
     });
 
     function checkObjectForNullValues(object) {
