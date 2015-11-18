@@ -224,6 +224,7 @@ angular.module('memPeeps')
       $scope.person.result = false;
       $scope.person.guessPerson = {};
       $scope.person.randomPerson = people[chooseNewRandomNumber()];
+      $scope.game.roundScore = 5;
     }
 
 
@@ -326,7 +327,6 @@ angular.module('memPeeps')
       $scope.game.lastNameHintView = false;
       $scope.game.hintsShown = false;
       $scope.game.totalPossibleScore += 5;
-      $scope.game.roundScore = 5;
       $scope.game.firstNameHintText = "";
       $scope.game.firstNameHint = "";
       $scope.game.lastNameHintText = "";
