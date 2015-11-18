@@ -227,6 +227,7 @@ angular.module('memPeeps')
       $scope.person.randomPerson = people[chooseNewRandomNumber()];
       $scope.game.scoreMessage = "Max Round Score:"
       $scope.game.roundScore = 5;
+      $scope.game.hintCount = 0;
     }
 
 
@@ -329,7 +330,6 @@ angular.module('memPeeps')
     }
 
     function prepNextGameRound (reset) {
-      $scope.game.hintCount = 0;
       $scope.game.firstNameHintView = false;
       $scope.game.lastNameHintView = false;
       $scope.game.hintsShown = false;
@@ -362,6 +362,7 @@ angular.module('memPeeps')
       next();
       $scope.game.totalScore = 0;
       $scope.game.totalPossibleScore = 0;
+      $scope.game.scorePercentage = $scope.game.totalScore / $scope.game.totalPossibleScore;
     };
 
 
