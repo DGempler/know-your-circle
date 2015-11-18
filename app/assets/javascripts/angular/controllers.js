@@ -254,20 +254,38 @@ angular.module('memPeeps')
     };
 
     $scope.game.hintFirstLetterFirstName = function() {
-      showFirstNameHint();
+      showHint();
+      $scope.game.firstNameHintView = true;
       $scope.game.firstNameHintText = "This person's first name starts with:";
       $scope.game.firstNameHint = $scope.person.randomPerson.first_name[0];
     };
 
-    $scope.game.hintNickname = function() {
-      showFirstNameHint();
-      $scope.game.firstNameHintText = "This person's nickname is:";
-      $scope.game.firstNameHint = $scope.person.randomPerson.nickname;
+    $scope.game.hintFirstLetterLastName = function() {
+      showHint();
+      $scope.game.lastNameHintView = true;
+      $scope.game.lastNameHintText = "This person's last name starts with:";
+      $scope.game.lastNameHint = $scope.person.randomPerson.last_name[0];
     };
 
-    $scope.game.hintOther = function() {
+    $scope.game.hintNickname = function(nameType) {
+      if (nameType === 'firstNameHint') {
+        $scope.game.firstNameHintView = true;
+      } else {
+        $scope.game.lastNameHintView = true;
+      }
+      showHint();
+      $scope.game[nameType + "Text"] = "This person's nickname is:";
+      $scope.game[nameType] = $scope.person.randomPerson.nickname;
+    };
+
+    $scope.game.hintOther = function(nameType) {
+      if (nameType === 'firstNameHint') {
+        $scope.game.firstNameHintView = true;
+      } else {
+        $scope.game.lastNameHintView = true;
+      }
       var randomHintIndex;
-      showFirstNameHint();
+      showHint();
       if (otherHintsShown.length === $scope.person.randomPerson.hints.length) {
         otherHintsShown = [];
       }
@@ -281,18 +299,23 @@ angular.module('memPeeps')
         randomHintIndex = 0;
       }
       otherHintsShown.push(randomHintIndex);
-      $scope.game.firstNameHintText = $scope.person.randomPerson.hints[randomHintIndex].hint;
+      $scope.game[nameType + "Text"] = $scope.person.randomPerson.hints[randomHintIndex].hint;
     };
 
     $scope.game.closeFirstNameHint = function() {
       $scope.game.firstNameHintView = false;
     };
 
-    function showFirstNameHint() {
+    $scope.game.closeLastNameHint = function() {
+      $scope.game.lastNameHintView = false;
+    };
+
+    function showHint() {
       $scope.game.firstNameHintText = "";
       $scope.game.firstNameHint = "";
+      $scope.game.lastNameHintText = "";
+      $scope.game.lastNameHint = "";
       $scope.game.hintsShown = true;
-      $scope.game.firstNameHintView = true;
       $scope.game.roundScore--;
       $scope.game.hintCount++;
     }
@@ -300,10 +323,14 @@ angular.module('memPeeps')
     function prepNextGameRound () {
       $scope.game.hintCount = 0;
       $scope.game.firstNameHintView = false;
+      $scope.game.lastNameHintView = false;
+      $scope.game.hintsShown = false;
       $scope.game.totalPossibleScore += 5;
       $scope.game.roundScore = 5;
       $scope.game.firstNameHintText = "";
       $scope.game.firstNameHint = "";
+      $scope.game.lastNameHintText = "";
+      $scope.game.lastNameHint = "";
       otherHintsShown = [];
       hintCount = 0;
     }
