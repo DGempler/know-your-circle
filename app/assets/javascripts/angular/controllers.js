@@ -67,7 +67,7 @@ angular.module('memPeeps')
     function checkObjectForNullValues(object) {
       var newObject = {};
       for (var key in object) {
-        if ($scope.person[key] || key == 'image') {
+        if (object[key] || key == 'image') {
           newObject[key] = object[key];
         }
       }
@@ -115,7 +115,9 @@ angular.module('memPeeps')
     };
   }])
   .controller('personEditController', ['$scope', '$routeParams', '$location', 'PersonFactory', function($scope, $routeParams, $location, PersonFactory) {
+    var originalPerson;
     PersonFactory.getPerson($routeParams.id).then(function(person) {
+      originalPerson = person;
       $scope.person = {};
       $scope.person.first_name = person.first_name;
       $scope.person.last_name = person.last_name;
@@ -138,7 +140,7 @@ angular.module('memPeeps')
     function checkObjectForNullValues(object) {
       var newObject = {};
       for (var key in object) {
-        if ($scope.person[key] || key == 'image') {
+        if ((originalPerson[key] && !object[key]) || object[key]) {
           newObject[key] = object[key];
         }
       }
