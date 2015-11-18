@@ -2,28 +2,29 @@
   angular.module('memPeeps.people')
     .controller('personEditController', personEditController);
 
-  personEditController.$inject = ['$scope', '$routeParams', '$location', 'PersonFactory'];
+  personEditController.$inject = ['$routeParams', '$location', 'PersonFactory'];
 
-  function personEditController($scope, $routeParams, $location, PersonFactory) {
+  function personEditController($routeParams, $location, PersonFactory) {
+    var vm = this;
     var originalPerson;
     PersonFactory.getPerson($routeParams.id).then(function(person) {
       originalPerson = person;
-      $scope.person = {};
-      $scope.person.first_name = person.first_name;
-      $scope.person.last_name = person.last_name;
-      $scope.person.sex = person.sex;
-      $scope.person.nickname = person.nickname;
-      $scope.person.middle_name = person.middle_name;
-      $scope.person.location = person.location;
-      $scope.person.occupation = person.occupation;
+      vm.person = {};
+      vm.person.first_name = person.first_name;
+      vm.person.last_name = person.last_name;
+      vm.person.sex = person.sex;
+      vm.person.nickname = person.nickname;
+      vm.person.middle_name = person.middle_name;
+      vm.person.location = person.location;
+      vm.person.occupation = person.occupation;
       if (person.dob) {
-        $scope.person.dob = new Date(person.dob);
+        vm.person.dob = new Date(person.dob);
       }
-      $scope.person.bio = person.bio;
-      $scope.person.id = person.id;
-      $scope.hints = person.hints;
-      if ($scope.hints.length === 0) {
-        $scope.hints.push({hint: ''});
+      vm.person.bio = person.bio;
+      vm.person.id = person.id;
+      vm.hints = person.hints;
+      if (vm.hints.length === 0) {
+        vm.hints.push({hint: ''});
       }
     });
 
@@ -53,20 +54,20 @@
       return newArray;
     }
 
-    $scope.submitPerson = function() {
-      var newObject = {person: checkObjectForNullValues($scope.person), hints: checkArrayForNullValues($scope.hints)};
+    vm.submitPerson = function() {
+      var newObject = {person: checkObjectForNullValues(vm.person), hints: checkArrayForNullValues(vm.hints)};
       PersonFactory.updateWithAttachment(newObject).then(function(data) {
         $location.path('/people/show/' + data.id);
       });
     };
 
-    $scope.addInputFields = function() {
-      $scope.addedInputFields = true;
+    vm.addInputFields = function() {
+      vm.addedInputFields = true;
     };
 
-    $scope.addHintInputs = function() {
-      if ($scope.hints.length <= 2) {
-        $scope.hints.push('');
+    vm.addHintInputs = function() {
+      if (vm.hints.length <= 2) {
+        vm.hints.push('');
       }
     };
   }

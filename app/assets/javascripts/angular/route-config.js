@@ -26,7 +26,7 @@
       })
       .when('/people/:id/edit', {
         templateUrl: 'partials/people/edit.html',
-        controller: 'personEditController'
+        controller: 'personEditController as person'
       })
       .when('/games/index', {
         templateUrl: 'partials/games/index.html',
