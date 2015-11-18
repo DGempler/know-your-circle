@@ -154,7 +154,6 @@ angular.module('memPeeps')
 
     function checkArrayForNullValues(array) {
       var newArray = [];
-      console.log(array);
       array.forEach(function(value) {
         originalPerson.hints.forEach(function(orHint) {
           if (value.id) {
@@ -166,7 +165,6 @@ angular.module('memPeeps')
           }
         });
       });
-      console.log(newArray);
       return newArray;
     }
 

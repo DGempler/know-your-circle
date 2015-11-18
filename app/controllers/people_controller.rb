@@ -57,7 +57,6 @@ class PeopleController < ApplicationController
           end
         end
       end
-      puts 'about to render json'
       render json: @person, status: :ok
     else
       render json: @person.errors, status: :unprocessable_entity

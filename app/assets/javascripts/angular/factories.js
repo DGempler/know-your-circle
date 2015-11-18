@@ -7,7 +7,6 @@ angular.module('memPeeps')
 
   function sendPayload(formData, method, url) {
     var deferred = $q.defer();
-    console.log(formData);
     Upload.upload({
       url: url,
       method: method,
