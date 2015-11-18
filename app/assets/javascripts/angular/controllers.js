@@ -342,6 +342,7 @@ angular.module('memPeeps')
       if (!reset) {
         $scope.game.totalPossibleScore += 5;
       }
+      $scope.game.scorePercentage = $scope.game.totalScore / $scope.game.totalPossibleScore;
     }
 
     $scope.skip = function() {
