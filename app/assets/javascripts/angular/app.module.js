@@ -1,0 +1,1 @@
+angular.module('memPeeps', ['ngRoute', 'ngResource', 'ngFileUpload', 'ui.bootstrap']);
