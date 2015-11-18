@@ -104,6 +104,11 @@ angular.module('memPeeps')
   .controller('personShowController', ['$scope', '$routeParams', '$location', 'PersonFactory', function($scope, $routeParams, $location, PersonFactory) {
     PersonFactory.getPerson($routeParams.id).then(function(person) {
       $scope.person = person;
+      if ($scope.person.dob === 'null' || $scope.person.dob === null) {
+        $scope.person.dob = "";
+      } else {
+        $scope.person.dob = moment($scope.person.dob).format("MMM Do YYYY");
+      }
     });
 
     $scope.deletePerson = function() {
