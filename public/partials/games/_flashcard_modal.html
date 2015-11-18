@@ -88,7 +88,11 @@
       <div class="well well-sm text-info">
         {{ game.scoreMessage }} &nbsp;&nbsp;
 
-        <span ng-class="{'text-success': game.hintCount === 0, 'text-warning': game.hintCount === 1, 'text-primary': game.hintCount === 2, 'text-danger': game.hintCount === 3}">
+        <span ng-show='game.scoreMessage === "Max Round Score:"' ng-class="{'text-success': game.hintCount === 0, 'text-warning': game.hintCount === 1, 'text-primary': game.hintCount === 2, 'text-danger': game.hintCount === 3}">
+          <b>{{ game.roundScore }}</b>
+        </span>
+
+        <span ng-hide='game.scoreMessage === "Max Round Score:"' ng-class="{'text-success': game.roundScore >= 4, 'text-warning': game.roundScore < 4 && game.roundScore >= 3, 'text-primary': game.roundScore < 3 && game.roundScore >= 1.5, 'text-danger': game.roundScore < 1.5}">
           <b>{{ game.roundScore }}</b>
         </span>
 
