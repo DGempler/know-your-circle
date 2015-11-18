@@ -3,7 +3,7 @@ angular.module('memPeeps')
 
 gamesIndexController.$inject = ['$scope', '$uibModal', 'PersonFactory'];
 
-function gamesIndexController() {
+function gamesIndexController($scope, $uibModal, PersonFactory) {
   $scope.people = {};
 
   PersonFactory.getPeople().then(function(people) {
