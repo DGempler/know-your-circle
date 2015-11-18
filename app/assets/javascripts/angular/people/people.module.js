@@ -1,1 +1,3 @@
-angular.module('memPeeps.people', ['ngResource', 'ngFileUpload', 'ui.bootstrap']);
+(function() {
+  angular.module('memPeeps.people', ['ngResource', 'ngFileUpload', 'ui.bootstrap']);
+})();
