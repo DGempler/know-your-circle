@@ -1,3 +1,8 @@
 angular.module('memPeeps')
-  .controller('homeController', ['$scope', function($scope) {
-  }]);
+  .controller('homeController', homeController);
+
+  homeController.$inject = ['$scope'];
+
+  function homeController($scope) {
+
+  }
