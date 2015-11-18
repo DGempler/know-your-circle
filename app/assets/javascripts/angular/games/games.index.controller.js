@@ -17,7 +17,7 @@
       var modalInstance = $uibModal.open({
         animation: true,
         templateUrl: 'partials/games/_flashcard_modal.html',
-        controller: 'gamesFlashcardsController',
+        controller: 'gamesFlashcardsController as game',
         resolve: {
           people: function () {
             return vm.people.people;
