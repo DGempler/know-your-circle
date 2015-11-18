@@ -1,1 +1,3 @@
-angular.module('memPeeps.games', ['ui.bootstrap']);
+(function() {
+  angular.module('memPeeps.games', ['ui.bootstrap']);
+})();
