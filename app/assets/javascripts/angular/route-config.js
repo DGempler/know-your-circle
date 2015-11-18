@@ -18,11 +18,11 @@
       })
       .when('/people/new', {
         templateUrl: 'partials/people/new.html',
-        controller: 'personNewController'
+        controller: 'personNewController as person'
       })
       .when('/people/show/:id', {
         templateUrl: 'partials/people/show.html',
-        controller: 'personShowController'
+        controller: 'personShowController as person'
       })
       .when('/people/:id/edit', {
         templateUrl: 'partials/people/edit.html',
