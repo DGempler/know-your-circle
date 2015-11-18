@@ -154,11 +154,19 @@ angular.module('memPeeps')
 
     function checkArrayForNullValues(array) {
       var newArray = [];
+      console.log(array);
       array.forEach(function(value) {
-        if (value.hint) {
-          newArray.push(value);
-        }
+        originalPerson.hints.forEach(function(orHint) {
+          if (value.id) {
+            if (orHint.id === value.id) {
+              newArray.push(value);
+            }
+          } else if (value.hint) {
+            newArray.push(value);
+          }
+        });
       });
+      console.log(newArray);
       return newArray;
     }
 
