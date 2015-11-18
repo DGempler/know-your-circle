@@ -11,7 +11,6 @@
     $routeProvider
       .when('/', {
         templateUrl: 'partials/index.html',
-        controller: 'homeController'
       })
       .when('/people/index', {
         templateUrl: 'partials/people/index.html',
