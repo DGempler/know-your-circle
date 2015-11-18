@@ -30,7 +30,7 @@
       })
       .when('/games/index', {
         templateUrl: 'partials/games/index.html',
-        controller: 'gamesIndexController'
+        controller: 'gamesIndexController as game'
       })
       .when('/games/flashcards', {
         templateUrl: 'partials/games/flashcards.html',

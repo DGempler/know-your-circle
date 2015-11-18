@@ -2,16 +2,17 @@
   angular.module('memPeeps.games')
     .controller('gamesIndexController', gamesIndexController);
 
-  gamesIndexController.$inject = ['$scope', '$uibModal', 'PersonFactory'];
+  gamesIndexController.$inject = ['$uibModal', 'PersonFactory'];
 
-  function gamesIndexController($scope, $uibModal, PersonFactory) {
-    $scope.people = {};
+  function gamesIndexController($uibModal, PersonFactory) {
+    var vm = this;
+    vm.people = {};
 
     PersonFactory.getPeople().then(function(people) {
-      $scope.people.people = people;
+      vm.people.people = people;
     });
 
-    $scope.open = function () {
+    vm.open = function () {
 
       var modalInstance = $uibModal.open({
         animation: true,
@@ -19,7 +20,7 @@
         controller: 'gamesFlashcardsController',
         resolve: {
           people: function () {
-            return $scope.people.people;
+            return vm.people.people;
           }
         }
       });
