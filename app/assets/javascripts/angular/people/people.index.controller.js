@@ -2,54 +2,54 @@
   angular.module('memPeeps.people')
     .controller('peopleIndexController', peopleIndexController);
 
-  peopleIndexController.$inject = ['$scope', 'PersonFactory', '$q'];
+  peopleIndexController.$inject = ['PersonFactory', '$q'];
 
-  function peopleIndexController($scope, PersonFactory, $q) {
-    $scope.people = {};
+  function peopleIndexController(PersonFactory, $q) {
+    var vm = this;
 
     function getPeople() {
       PersonFactory.getPeople().then(function(people) {
-        $scope.people.people = people;
+        vm.people = people;
       });
     }
 
     function deleteSelected() {
       var promiseArray = [];
-      angular.forEach($scope.people.people, function(person) {
+      angular.forEach(vm.people, function(person) {
         if (person.selected) {
           promiseArray.push(PersonFactory.deletePerson(person.id));
         }
       });
       $q.all(promiseArray).then(function(people) {
-        $scope.people.someoneSelected = false;
+        vm.someoneSelected = false;
         getPeople();
       });
     }
-    $scope.selectAll = function(bool) {
+    vm.selectAll = function(bool) {
       if (bool) {
-        $scope.people.someoneSelected = true;
-        angular.forEach($scope.people.people, function(person) {
+        vm.someoneSelected = true;
+        angular.forEach(vm.people, function(person) {
           person.selected = true;
         });
       } else {
-        $scope.people.someoneSelected = false;
-        angular.forEach($scope.people.people, function(person) {
+        vm.someoneSelected = false;
+        angular.forEach(vm.people, function(person) {
           person.selected = false;
         });
       }
     };
 
-    $scope.personSelected = function() {
+    vm.personSelected = function() {
       var selected = false;
-      angular.forEach($scope.people.people, function(person) {
+      angular.forEach(vm.people, function(person) {
         if (person.selected) {
           selected = true;
         }
       });
-      $scope.people.someoneSelected = selected;
+      vm.someoneSelected = selected;
     };
 
-    $scope.clickDelete = function() {
+    vm.clickDelete = function() {
       var confirmDelete = window.confirm("Are you sure?");
       if (confirmDelete) {
         deleteSelected();

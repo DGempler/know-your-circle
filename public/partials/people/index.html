@@ -6,15 +6,15 @@
     <div class='col-sm-4'>
 
       <div class="btn-group pull-right" role="group" aria-label=".." id='check-all'>
-        <button ng-show='people.someoneSelected' class="btn btn-default" ng-click='clickDelete()' >Delete Selected</button>
-        <button type="button" class="btn btn-default"><input type='checkbox' ng-model='checked' ng-click='selectAll(checked)'></button>
+        <button ng-show='people.someoneSelected' class="btn btn-default" ng-click='people.clickDelete()' >Delete Selected</button>
+        <button type="button" class="btn btn-default"><input type='checkbox' ng-model='checked' ng-click='people.selectAll(checked)'></button>
         <div class="btn-group" role="group">
           <button type="button" class="btn btn-default dropdown-toggle" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
             <span class="caret"></span>
           </button>
           <ul class="dropdown-menu dropdown-menu-right">
-            <li><a ng-click='selectAll(true)'>Select All</a></li>
-            <li><a ng-click='selectAll()'>Select None</a></li>
+            <li><a ng-click='people.selectAll(true)'>Select All</a></li>
+            <li><a ng-click='people.selectAll()'>Select None</a></li>
           </ul>
         </div>
       </div>
@@ -28,7 +28,7 @@
         <div class='col-sm-12'>
           <div class='row text-center'>
             <div class='col-sm-2'>
-              <input type="checkbox" ng-model='person.selected' ng-click='personSelected()' />
+              <input type="checkbox" ng-model='person.selected' ng-click='people.personSelected()' />
             </div>
             <div class='col-sm-9'>
               <a href='#/people/show/{{person.id}}'>

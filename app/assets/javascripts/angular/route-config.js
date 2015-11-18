@@ -14,7 +14,7 @@
       })
       .when('/people/index', {
         templateUrl: 'partials/people/index.html',
-        controller: 'peopleIndexController'
+        controller: 'peopleIndexController as people'
       })
       .when('/people/new', {
         templateUrl: 'partials/people/new.html',
