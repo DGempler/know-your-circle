@@ -328,18 +328,20 @@ angular.module('memPeeps')
       $scope.game.hintCount++;
     }
 
-    function prepNextGameRound () {
+    function prepNextGameRound (reset) {
       $scope.game.hintCount = 0;
       $scope.game.firstNameHintView = false;
       $scope.game.lastNameHintView = false;
       $scope.game.hintsShown = false;
-      $scope.game.totalPossibleScore += 5;
       $scope.game.firstNameHintText = "";
       $scope.game.firstNameHint = "";
       $scope.game.lastNameHintText = "";
       $scope.game.lastNameHint = "";
       otherHintsShown = [];
       hintCount = 0;
+      if (!reset) {
+        $scope.game.totalPossibleScore += 5;
+      }
     }
 
     $scope.skip = function() {
@@ -350,12 +352,15 @@ angular.module('memPeeps')
       next();
     };
 
-    $scope.close = function () {
+    $scope.quit = function () {
       $uibModalInstance.close();
     };
 
     $scope.reset = function () {
-      $uibModalInstance.dismiss('cancel');
+      prepNextGameRound(true);
+      next();
+      $scope.game.totalScore = 0;
+      $scope.game.totalPossibleScore = 0;
     };
 
 
