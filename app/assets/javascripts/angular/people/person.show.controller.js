@@ -2,20 +2,19 @@
   angular.module('memPeeps.people')
     .controller('personShowController', personShowController);
 
-  personShowController.$inject = ['$routeParams', '$location', 'PersonFactory'];
+  personShowController.$inject = ['$scope', '$routeParams', '$location', 'PersonFactory'];
 
-  function personShowController($routeParams, $location, PersonFactory) {
-    var vm = this;
+  function personShowController($scope, $routeParams, $location, PersonFactory) {
     PersonFactory.getPerson($routeParams.id).then(function(person) {
-      vm.person = person;
-      if (vm.person.dob === 'null' || vm.person.dob === null) {
-        vm.person.dob = "";
+      $scope.person = person;
+      if ($scope.person.dob === 'null' || $scope.person.dob === null) {
+        $scope.person.dob = "";
       } else {
-        vm.person.dob = moment(vm.person.dob).format("MMM Do YYYY");
+        $scope.person.dob = moment($scope.person.dob).format("MMM Do YYYY");
       }
     });
 
-    vm.deletePerson = function() {
+    $scope.deletePerson = function() {
       PersonFactory.deletePerson($routeParams.id).then(function(person) {
         if (person) {
           $location.path('/people/index');
