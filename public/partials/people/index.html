@@ -23,7 +23,7 @@
 </div>
 
 <div class='row'>
-  <div class='col-sm-2' ng-repeat='person in people.people'>
+  <div class='col-sm-2' ng-repeat='person in people.people | orderBy : "first_name"'>
       <div class='row'>
         <div class='col-sm-12'>
           <div class='row'>
