@@ -1,4 +1,4 @@
-angular.module('memPeeps')
+angular.module('memPeeps.people')
   .controller('personEditController', personEditController);
 
 personEditController.$inject = ['$scope', '$routeParams', '$location', 'PersonFactory'];

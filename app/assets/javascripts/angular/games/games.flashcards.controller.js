@@ -1,4 +1,4 @@
-angular.module('memPeeps')
+angular.module('memPeeps.games')
   .controller('gamesFlashcardsController', gamesFlashcardsController);
 
 gamesFlashcardsController.$inject = ['$scope', '$uibModalInstance', 'people'];

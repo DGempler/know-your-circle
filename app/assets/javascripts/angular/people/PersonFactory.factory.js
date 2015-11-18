@@ -1,4 +1,4 @@
-angular.module('memPeeps')
+angular.module('memPeeps.people')
   .factory('PersonFactory', PersonFactory);
 
 PersonFactory.$inject = ['Person', 'Upload', '$q'];

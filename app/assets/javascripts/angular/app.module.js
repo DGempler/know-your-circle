@@ -1,1 +1,1 @@
-angular.module('memPeeps', ['ngRoute', 'ngResource', 'ngFileUpload', 'ui.bootstrap']);
+angular.module('memPeeps', ['ngRoute', 'memPeeps.people', 'memPeeps.games']);

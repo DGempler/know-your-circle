@@ -1,4 +1,4 @@
-angular.module('memPeeps')
+angular.module('memPeeps.people')
   .controller('peopleIndexController', peopleIndexController);
 
 peopleIndexController.$inject = ['$scope', 'PersonFactory', '$q'];

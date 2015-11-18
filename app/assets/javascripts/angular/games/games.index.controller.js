@@ -1,4 +1,4 @@
-angular.module('memPeeps')
+angular.module('memPeeps.games')
   .controller('gamesIndexController', gamesIndexController);
 
 gamesIndexController.$inject = ['$scope', '$uibModal', 'PersonFactory'];
