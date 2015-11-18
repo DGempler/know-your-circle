@@ -1,1 +1,3 @@
-angular.module('memPeeps', ['ngRoute', 'memPeeps.people', 'memPeeps.games']);
+(function() {
+  angular.module('memPeeps', ['ngRoute', 'memPeeps.people', 'memPeeps.games']);
+})();
