@@ -45,12 +45,16 @@ class PeopleController < ApplicationController
     if @person.update person_params
       puts 'done'
       hints_params['hints'].each do |index, hint|
-        begin
-          Hint.find(hint[:id]).update Hash[:hint,  hint[:hint]]
-        rescue ActiveRecord::RecordNotFound
-          new_hint = Hint.create Hash[:hint,  hint[:hint]]
-          @person.hints << new_hint
-          @person.save
+        if hint[:hint] === ""
+          Hint.find(hint[:id]).destroy
+        else
+          begin
+            Hint.find(hint[:id]).update Hash[:hint,  hint[:hint]]
+          rescue ActiveRecord::RecordNotFound
+            new_hint = Hint.create Hash[:hint,  hint[:hint]]
+            @person.hints << new_hint
+            @person.save
+          end
         end
       end
       puts 'about to render json'
