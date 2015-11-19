@@ -8,14 +8,6 @@
   </div>
 </div>
 <div class='row'>
-  <div class='col-sm-4 col-sm-offset-4'>
-    <div class='text-center'>
-      <a class="btn btn-default"  href='#/people/{{person.id}}/edit'>Edit Person</a>
-      <button class="btn btn-default" ng-click='deletePerson()'>Delete Person</button>
-    </div>
-  </div>
-</div>
-<div class='row'>
   <div class='col-sm-4 col-sm-offset-2'>
     <p>Middle name: {{ person.middle_name }}</p>
     <p>Sex: {{ person.sex }}</p>
@@ -27,5 +19,13 @@
     <p>Occupation: {{ person.occupation }}</p>
     <p>DOB: {{ person.dob }}</p>
     <p>Bio: {{ person.bio }}</p>
+  </div>
+</div>
+<div class='row'>
+  <div class='col-sm-4 col-sm-offset-4'>
+    <div class='text-center'>
+      <a class="btn btn-info"  href='#/people/{{person.id}}/edit'>Edit Person</a>
+      <button class="btn btn-danger" ng-click='deletePerson()'>Delete Person</button>
+    </div>
   </div>
 </div>
