@@ -30,7 +30,7 @@
       })
       .when('/games/index', {
         templateUrl: 'partials/games/index.html',
-        controller: 'gamesIndexController as game'
+        controller: 'gamesIndexController as games'
       })
       .otherwise({
         redirectTo: '/'
