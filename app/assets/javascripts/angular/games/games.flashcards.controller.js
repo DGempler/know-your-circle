@@ -2,10 +2,9 @@
   angular.module('memPeeps.games')
     .controller('gamesFlashcardsController', gamesFlashcardsController);
 
-  gamesFlashcardsController.$inject = ['$uibModalInstance', 'people'];
+  gamesFlashcardsController.$inject = ['$uibModalInstance', 'people', 'gamesFlashcardsFactory'];
 
-  function gamesFlashcardsController($uibModalInstance, people) {
-    console.log(people);
+  function gamesFlashcardsController($uibModalInstance, people, gamesFlashcardsFactory) {
     var vm = this;
     vm.person = {};
     vm.person.guessPerson = {};
