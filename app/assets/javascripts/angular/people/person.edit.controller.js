@@ -41,15 +41,18 @@
     function checkArrayForNullValues(array) {
       var newArray = [];
       array.forEach(function(value) {
+        var alreadyPushed = false;
         originalPerson.hints.forEach(function(orHint) {
           if (value.id) {
             if (orHint.id === value.id) {
               newArray.push(value);
+              alreadyPushed = true;
             }
-          } else if (value.hint) {
-            newArray.push(value);
           }
         });
+        if (value.hint && !alreadyPushed) {
+          newArray.push(value);
+        }
       });
       return newArray;
     }
