@@ -32,10 +32,6 @@
         templateUrl: 'partials/games/index.html',
         controller: 'gamesIndexController as game'
       })
-      .when('/games/flashcards', {
-        templateUrl: 'partials/games/flashcards.html',
-        controller: 'gamesFlashcardsController'
-      })
       .otherwise({
         redirectTo: '/'
       });
