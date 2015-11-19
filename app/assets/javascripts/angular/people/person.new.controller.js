@@ -2,12 +2,13 @@
   angular.module('memPeeps.people')
     .controller('personNewController', personNewController);
 
-  personNewController.$inject = ['$scope', 'PersonFactory', '$location'];
+  personNewController.$inject = ['PersonFactory', '$location'];
 
-  function personNewController($scope, PersonFactory, $location) {
-    $scope.person = {};
-    $scope.hints = {};
-    $scope.hints = [{hint: ""}];
+  function personNewController(PersonFactory, $location) {
+    var vm = this;
+    vm.person = {};
+    vm.hints = {};
+    vm.hints = [{hint: ""}];
 
     function checkObjectForNullValues(object) {
       var newObject = {};
@@ -29,20 +30,20 @@
       return newArray;
     }
 
-    $scope.submitPerson = function() {
-      var newObject = {person: checkObjectForNullValues($scope.person), hints: checkArrayForNullValues($scope.hints)};
+    vm.submitPerson = function() {
+      var newObject = {person: checkObjectForNullValues(vm.person), hints: checkArrayForNullValues(vm.hints)};
       PersonFactory.createWithAttachment(newObject).then(function(data) {
         $location.path('/people/show/' + data.id);
       });
     };
 
-    $scope.addInputFields = function() {
-      $scope.addedInputFields = true;
+    vm.addInputFields = function() {
+      vm.addedInputFields = true;
     };
 
-    $scope.addHintInputs = function() {
-      if ($scope.hints.length <= 2) {
-        $scope.hints.push({hint: ''});
+    vm.addHintInputs = function() {
+      if (vm.hints.length <= 2) {
+        vm.hints.push({hint: ''});
       }
     };
   }
