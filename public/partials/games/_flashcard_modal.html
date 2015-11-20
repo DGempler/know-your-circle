@@ -72,7 +72,7 @@
           </div>
           <div class='row'>
             <div class='col-sm-6 col-sm-offset-3 text-center'>
-              <a ng-hide='game.person.result || game.game.hintsShown' ng-click='game.skip()' class="btn btn-info btn-lg">Skip</a>
+              <a ng-hide='game.person.result || game.game.hintsShown' ng-click='game.next()' class="btn btn-info btn-lg">Skip</a>
               <button ng-hide='game.person.result' type="submit" class="btn btn-success btn-lg">Submit</button>
               <a ng-show='game.person.result' ng-click='game.next()' class='btn btn-info btn-lg'>Next</a>
             </div>

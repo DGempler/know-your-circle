@@ -5,7 +5,7 @@
   function gamesFlashcardsFactory() {
     var factory = {};
 
-
+    return factory;
   }
 
 

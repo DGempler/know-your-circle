@@ -156,10 +156,6 @@
       vm.game.scorePercentage = vm.game.totalScore / vm.game.totalPossibleScore;
     }
 
-    vm.skip = function() {
-      next();
-    };
-
     vm.next = function() {
       next();
     };
