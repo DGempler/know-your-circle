@@ -43,15 +43,19 @@
 
 
     vm.submitPerson = function() {
+      function correctGuessResult(typeRight) {
+        vm.person[typeRight] = true;
+        vm.person.result = true;
+        vm.game.totalScore += (vm.game.roundScore / 2);
+        scoredThisRound += (vm.game.roundScore / 2);
+      }
+
       var scoredThisRound = 0;
       if (vm.person.guessPerson.first_name) {
         var guessedFirstName = vm.person.guessPerson.first_name.toLowerCase();
       }
       if (guessedFirstName === vm.person.randomPerson.first_name.toLowerCase()) {
-        vm.person.result = true;
-        vm.person.firstNameRight = true;
-        vm.game.totalScore += (vm.game.roundScore / 2);
-        scoredThisRound += (vm.game.roundScore / 2);
+        correctGuessResult('firstNameRight');
       } else {
         vm.person.result = true;
         vm.person.firstNameWrong = true;
@@ -60,10 +64,7 @@
         var guessedLastName = vm.person.guessPerson.last_name.toLowerCase();
       }
       if (guessedLastName === vm.person.randomPerson.last_name.toLowerCase()) {
-        vm.person.result = true;
-        vm.person.lastNameRight = true;
-        vm.game.totalScore += (vm.game.roundScore / 2);
-        scoredThisRound += (vm.game.roundScore / 2);
+        correctGuessResult('lastNameRight');
       } else {
         vm.person.result = true;
         vm.person.lastNameWrong = true;
@@ -72,6 +73,8 @@
       vm.game.roundScore = scoredThisRound;
       prepNextGameRound();
     };
+
+
 
     vm.game.hintFirstLetterFirstName = function() {
       showHint();
