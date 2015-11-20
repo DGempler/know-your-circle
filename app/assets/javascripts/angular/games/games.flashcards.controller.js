@@ -43,6 +43,8 @@
 
 
     vm.submitPerson = function() {
+      var scoredThisRound = 0;
+
       function correctGuessResult(typeRight) {
         vm.person[typeRight] = true;
         vm.person.result = true;
@@ -50,31 +52,27 @@
         scoredThisRound += (vm.game.roundScore / 2);
       }
 
-      var scoredThisRound = 0;
-      if (vm.person.guessPerson.first_name) {
-        var guessedFirstName = vm.person.guessPerson.first_name.toLowerCase();
+      function checkGuess(guessType, typeRightWrong) {
+        var guessedName;
+        if (vm.person.guessPerson[guessType]) {
+          guessedName = vm.person.guessPerson[guessType].toLowerCase();
+        }
+        if (guessedName === vm.person.randomPerson[guessType].toLowerCase()) {
+          correctGuessResult(typeRightWrong + 'Right');
+        } else {
+          vm.person.result = true;
+          vm.person[typeRightWrong + 'Wrong'] = true;
+        }
       }
-      if (guessedFirstName === vm.person.randomPerson.first_name.toLowerCase()) {
-        correctGuessResult('firstNameRight');
-      } else {
-        vm.person.result = true;
-        vm.person.firstNameWrong = true;
-      }
-      if (vm.person.guessPerson.last_name) {
-        var guessedLastName = vm.person.guessPerson.last_name.toLowerCase();
-      }
-      if (guessedLastName === vm.person.randomPerson.last_name.toLowerCase()) {
-        correctGuessResult('lastNameRight');
-      } else {
-        vm.person.result = true;
-        vm.person.lastNameWrong = true;
-      }
+
+      checkGuess('first_name', 'firstName');
+      checkGuess('last_name', 'lastName');
+
       vm.game.scoreMessage = "Scored this round:";
       vm.game.roundScore = scoredThisRound;
       prepNextGameRound();
+
     };
-
-
 
     vm.game.hintFirstLetterFirstName = function() {
       showHint();
