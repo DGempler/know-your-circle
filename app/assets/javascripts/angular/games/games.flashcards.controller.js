@@ -131,29 +131,30 @@
     };
 
     function showHint() {
-      vm.game.firstNameHintText = "";
-      vm.game.firstNameHint = "";
-      vm.game.lastNameHintText = "";
-      vm.game.lastNameHint = "";
+      clearHintText();
       vm.game.hintsShown = true;
       vm.game.roundScore--;
       vm.game.hintCount++;
     }
 
     function prepNextGameRound (reset) {
+      clearHintText();
       vm.game.firstNameHintView = false;
       vm.game.lastNameHintView = false;
       vm.game.hintsShown = false;
-      vm.game.firstNameHintText = "";
-      vm.game.firstNameHint = "";
-      vm.game.lastNameHintText = "";
-      vm.game.lastNameHint = "";
       otherHintsShown = [];
       hintCount = 0;
       if (!reset) {
         vm.game.totalPossibleScore += 5;
       }
       vm.game.scorePercentage = vm.game.totalScore / vm.game.totalPossibleScore;
+    }
+
+    function clearHintText() {
+      vm.game.firstNameHintText = "";
+      vm.game.firstNameHint = "";
+      vm.game.lastNameHintText = "";
+      vm.game.lastNameHint = "";
     }
 
     vm.next = function() {
