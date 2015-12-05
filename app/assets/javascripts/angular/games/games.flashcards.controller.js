@@ -120,7 +120,7 @@
         randomHintIndex = 0;
       }
       otherHintsShown.push(randomHintIndex);
-      vm.game[nameType + "Text"] = vm.person.randomPerson.hints[randomHintIndex].hint;
+      vm.game[nameType + "Text"] = vm.person.randomPerson.hints[randomHintIndex];
     };
 
     vm.game.closeFirstNameHint = function() {
