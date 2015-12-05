@@ -26,7 +26,7 @@
         <a ng-click='person.addHintInputs()' class="btn btn-default btn-xs pull-right" ng-class='{"disabled": person.hints.hints.length > 2}'>
           <span class="glyphicon glyphicon-plus" aria-hidden="true"></span> Add more hints
         </a>
-        <input ng-repeat='hint in person.hints.hints track by $index' type="text" class="form-control" ng-model='person.hints.hints[$index].hint' id='hintInput' />
+        <input ng-repeat='hint in person.person.hints track by $index' type="text" class="form-control" ng-model='person.person.hints[$index]' id='hintInput' />
       </div>
       <div class="form-group">
         <label for="imageFileInput">Headshot</label>
