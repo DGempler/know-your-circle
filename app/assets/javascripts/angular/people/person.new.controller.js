@@ -19,16 +19,6 @@
       return newObject;
     }
 
-    /*function checkArrayForNullValues(array) {
-      var newArray = [];
-      array.forEach(function(value) {
-        if (value.hint) {
-          newArray.push(value);
-        }
-      });
-      return newArray;
-    }*/
-
     vm.submitPerson = function() {
       var newObject = {person: checkObjectForNullValues(vm.person)};
       PersonFactory.createWithAttachment(newObject).then(function(data) {
