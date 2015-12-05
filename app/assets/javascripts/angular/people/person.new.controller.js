@@ -7,8 +7,7 @@
   function personNewController(PersonFactory, $location) {
     var vm = this;
     vm.person = {};
-    vm.hints = {};
-    vm.hints = [{hint: ""}];
+    vm.person.hints = [""];
 
     function checkObjectForNullValues(object) {
       var newObject = {};
@@ -20,7 +19,7 @@
       return newObject;
     }
 
-    function checkArrayForNullValues(array) {
+    /*function checkArrayForNullValues(array) {
       var newArray = [];
       array.forEach(function(value) {
         if (value.hint) {
@@ -28,10 +27,10 @@
         }
       });
       return newArray;
-    }
+    }*/
 
     vm.submitPerson = function() {
-      var newObject = {person: checkObjectForNullValues(vm.person), hints: checkArrayForNullValues(vm.hints)};
+      var newObject = {person: checkObjectForNullValues(vm.person)};
       PersonFactory.createWithAttachment(newObject).then(function(data) {
         $location.path('/people/show/' + data.id);
       });
@@ -42,8 +41,8 @@
     };
 
     vm.addHintInputs = function() {
-      if (vm.hints.length <= 2) {
-        vm.hints.push({hint: ''});
+      if (vm.person.hints.length <= 2) {
+        vm.person.hints.push("");
       }
     };
   }
