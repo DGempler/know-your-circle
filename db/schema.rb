@@ -11,17 +11,10 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20151114183624) do
+ActiveRecord::Schema.define(version: 20151111195208) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
-
-  create_table "hints", force: :cascade do |t|
-    t.datetime "created_at"
-    t.datetime "updated_at"
-    t.string   "hint"
-    t.integer  "person_id"
-  end
 
   create_table "people", force: :cascade do |t|
     t.datetime "created_at"
@@ -35,6 +28,7 @@ ActiveRecord::Schema.define(version: 20151114183624) do
     t.string   "location"
     t.string   "occupation"
     t.string   "dob"
+    t.text     "hints",              default: [], array: true
     t.string   "image_file_name"
     t.string   "image_content_type"
     t.integer  "image_file_size"

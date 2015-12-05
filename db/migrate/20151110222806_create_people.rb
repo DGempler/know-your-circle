@@ -11,6 +11,7 @@ class CreatePeople < ActiveRecord::Migration
       t.string :location
       t.string :occupation
       t.string :dob
+      t.text :hints, array: true, default: []
     end
   end
 
