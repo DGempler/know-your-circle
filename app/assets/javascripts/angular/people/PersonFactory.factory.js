@@ -13,6 +13,7 @@
         url: url,
         method: method,
         fields: formData,
+        arrayKey: '[]',
         file: formData.person.image,
         fileFormDataName: 'person[image]',
       })

@@ -35,6 +35,7 @@
           newPersonObject[key] = submittedPerson[key];
         }
       }
+      console.log(newPersonObject);
       return newPersonObject;
     }
 
