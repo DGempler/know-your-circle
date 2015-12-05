@@ -57,13 +57,12 @@
       var newPerson = {};
       removeNullValues(submittedPerson, newPerson);
       removeEmptyHints(submittedPerson, newPerson);
-      console.log(newPerson);
       return newPerson;
     }
 
     vm.submitPerson = function() {
-      var newObject = {person: cleanPersonProps(vm.person)};
-      PersonFactory.updateWithAttachment(newObject).then(function(data) {
+      var cleanedPerson = {person: cleanPersonProps(vm.person)};
+      PersonFactory.updateWithAttachment(cleanedPerson).then(function(data) {
         $location.path('/people/show/' + data.id);
       });
     };
