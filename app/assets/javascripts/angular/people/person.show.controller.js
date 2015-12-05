@@ -12,6 +12,13 @@
       } else {
         $scope.person.dob = moment($scope.person.dob).format("MMM Do YYYY");
       }
+      var tempArray = [];
+      $scope.person.hints.forEach(function(hint) {
+        if (hint) {
+          tempArray.push(hint);
+        }
+      });
+      $scope.person.hints = tempArray;
     });
 
     $scope.deletePerson = function() {
