@@ -22,10 +22,16 @@
       }
       vm.person.bio = person.bio;
       vm.person.id = person.id;
-      vm.person.hints = person.hints;
+      vm.person.hints = [];
+      person.hints.forEach(function(hint) {
+        if (hint) {
+          vm.person.hints.push(hint);
+        }
+      });
       if (vm.person.hints.length === 0) {
         vm.person.hints.push("");
       }
+      console.log(vm.person.hints);
     });
 
     function checkObjectForNullValues(submittedPerson) {
