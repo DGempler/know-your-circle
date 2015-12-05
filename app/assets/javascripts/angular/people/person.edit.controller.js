@@ -31,7 +31,6 @@
       if (vm.person.hints.length === 0) {
         vm.person.hints.push("");
       }
-      console.log(vm.person.hints);
     });
 
     function checkObjectForNullValues(submittedPerson) {
@@ -41,7 +40,6 @@
           newPersonObject[key] = submittedPerson[key];
         }
       }
-      console.log(newPersonObject);
       return newPersonObject;
     }
 
