@@ -33,18 +33,36 @@
       }
     });
 
-    function checkObjectForNullValues(submittedPerson) {
-      var newPersonObject = {};
+    // prevent "null" from being sent as a value to server if form field is left blank
+    function removeNullValues(submittedPerson, newPerson) {
       for (var key in submittedPerson) {
+        // if original person had value, and submitted person doesn't OR sumbitted person now has a value
         if ((originalPerson[key] && !submittedPerson[key]) || submittedPerson[key]) {
-          newPersonObject[key] = submittedPerson[key];
+          newPerson[key] = submittedPerson[key];
         }
       }
-      return newPersonObject;
+    }
+
+    function removeEmptyHints(submittedPerson, newPerson) {
+      var tempArray = [];
+      submittedPerson.hints.forEach(function(hint) {
+        if (hint) {
+          tempArray.push(hint);
+        }
+      });
+      newPerson.hints = tempArray;
+    }
+
+    function cleanPersonProps(submittedPerson) {
+      var newPerson = {};
+      removeNullValues(submittedPerson, newPerson);
+      removeEmptyHints(submittedPerson, newPerson);
+      console.log(newPerson);
+      return newPerson;
     }
 
     vm.submitPerson = function() {
-      var newObject = {person: checkObjectForNullValues(vm.person)};
+      var newObject = {person: cleanPersonProps(vm.person)};
       PersonFactory.updateWithAttachment(newObject).then(function(data) {
         $location.path('/people/show/' + data.id);
       });
