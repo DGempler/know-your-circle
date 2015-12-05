@@ -9,19 +9,35 @@
     vm.person = {};
     vm.person.hints = [""];
 
-    function checkObjectForNullValues(object) {
-      var newObject = {};
-      for (var key in object) {
-        if (object[key] || key == 'image') {
-          newObject[key] = object[key];
+    // prevent "null" from being sent as a value to server if form field is left blank
+    function removeNullValues(submittedPerson, newPerson) {
+      for (var key in submittedPerson) {
+        if (submittedPerson[key] || key == 'image') {
+          newPerson[key] = submittedPerson[key];
         }
       }
-      return newObject;
+    }
+
+    function removeEmptyHints(submittedPerson, newPerson) {
+      var tempArray = [];
+      submittedPerson.hints.forEach(function(hint) {
+        if (hint) {
+          tempArray.push(hint);
+        }
+      });
+      newPerson.hints = tempArray;
+    }
+
+    function cleanPersonProps(submittedPerson) {
+      var newPerson = {};
+      removeNullValues(submittedPerson, newPerson);
+      removeEmptyHints(submittedPerson, newPerson);
+      return newPerson;
     }
 
     vm.submitPerson = function() {
-      var newObject = {person: checkObjectForNullValues(vm.person)};
-      PersonFactory.createWithAttachment(newObject).then(function(data) {
+      var cleanedPerson = {person: cleanPersonProps(vm.person)};
+      PersonFactory.createWithAttachment(cleanedPerson).then(function(data) {
         $location.path('/people/show/' + data.id);
       });
     };
