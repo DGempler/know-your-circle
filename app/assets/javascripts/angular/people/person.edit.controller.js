@@ -10,21 +10,16 @@
     PersonFactory.getPerson($routeParams.id).then(function(person) {
       originalPerson = person;
       vm.person = {};
-      vm.person.first_name = person.first_name;
-      vm.person.last_name = person.last_name;
-      vm.person.sex = person.sex;
-      vm.person.nickname = person.nickname;
-      vm.person.middle_name = person.middle_name;
-      vm.person.location = person.location;
-      vm.person.occupation = person.occupation;
+      for (var prop in person) {
+        if (prop !== 'dob') {
+          vm.person[prop] = person[prop];
+        }
+      }
       if (person.dob) {
         vm.person.dob = new Date(person.dob);
       }
-      vm.person.bio = person.bio;
-      vm.person.id = person.id;
-      vm.hints = person.hints;
-      if (vm.hints.length === 0) {
-        vm.hints.push({hint: ''});
+      if (vm.person.hints.length === 0) {
+        vm.person.hints.push("");
       }
     });
 
@@ -38,7 +33,7 @@
       return newObject;
     }
 
-    function checkArrayForNullValues(array) {
+    /*function checkArrayForNullValues(array) {
       var newArray = [];
       array.forEach(function(value) {
         var alreadyPushed = false;
@@ -55,10 +50,10 @@
         }
       });
       return newArray;
-    }
+    }*/
 
     vm.submitPerson = function() {
-      var newObject = {person: checkObjectForNullValues(vm.person), hints: checkArrayForNullValues(vm.hints)};
+      var newObject = {person: checkObjectForNullValues(vm.person)};
       PersonFactory.updateWithAttachment(newObject).then(function(data) {
         $location.path('/people/show/' + data.id);
       });
