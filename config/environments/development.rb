@@ -39,6 +39,7 @@ Rails.application.configure do
   # Raises error for missing translations
   # config.action_view.raise_on_missing_translations = true
 
+  # Paperclip configuration
   config.paperclip_defaults = {
     :storage => :s3,
     :s3_region => ENV['AWS_REGION'],
@@ -50,5 +51,10 @@ Rails.application.configure do
   }
 
   Paperclip.options[:command_path] = "/usr/local/bin"
+
+  # Mailcatcher configuration
+  config.action_mailer.default_url_options = { :host => 'localhost' }
+  config.action_mailer.delivery_method = :smtp
+  config.action_mailer.smtp_settings = { :address => 'localhost', :port => 1025 }
 
 end
