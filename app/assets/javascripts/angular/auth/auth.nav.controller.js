@@ -9,7 +9,6 @@
 
     vm.loginOpen = function() {
 
-
       var modalInstance = $uibModal.open({
         animation: true,
         templateUrl: '/partials/auth/_login_modal.html',
@@ -17,6 +16,16 @@
         size: 'sm'
       });
 
+    };
+
+    vm.signUp = function() {
+
+      var modalInstance = $uibModal.open({
+        animation: true,
+        templateUrl: '/partials/auth/_signup_modal.html',
+        controller: 'signupController as auth',
+        size: 'sm'
+      });
     };
 
   }
