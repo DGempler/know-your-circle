@@ -35,6 +35,13 @@ gem 'bootstrap-sass'
 # Bootswatch
 gem 'bootswatch-rails'
 
+# Use devise_token_auth for user auth
+gem 'devise_token_auth'
+
+# Use omniauth for oauth
+
+gem 'omniauth'
+
 #mini_magick for working with ImageMagick
 # gem "mini_magick"
 
