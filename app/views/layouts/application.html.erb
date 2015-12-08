@@ -10,7 +10,7 @@
 </head>
 <body ng-app='memPeeps'>
 
-  <ng-include src="'/partials/nav.html'"></ng-include>
+  <ng-include ng-contoller='navController as nav' src="'/partials/nav.html'"></ng-include>
 
   <div ng-view class='container'></div>
 
