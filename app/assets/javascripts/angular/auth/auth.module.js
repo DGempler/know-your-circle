@@ -1,3 +1,3 @@
 (function() {
-  angular.module('memPeeps.auth', ['ui.bootstrap']);
+  angular.module('memPeeps.auth', ['ui.bootstrap', 'ng-token-auth']);
 })();
