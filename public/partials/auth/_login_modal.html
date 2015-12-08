@@ -3,21 +3,21 @@
 </div>
 
 <div class="modal-body">
-        <form ng-submit='auth.login()'>
+  <form ng-submit='auth.login()'>
 
-          <div class="form-group">
-            <label for="email">Email address</label>
-            <input ng-model="auth.person.email" type="email" class="form-control" id="email" placeholder='Email' autofocus>
-          </div>
+    <div class="form-group">
+      <label for="email">Email address</label>
+      <input ng-model="auth.user.email" type="email" class="form-control" id="email" placeholder='Email' autofocus>
+    </div>
 
-          <div class="form-group">
-            <label for="password">Password</label>
-            <input ng-model="auth.person.password" type="password" class="form-control" id="password" placeholder='Password'>
-          </div>
+    <div class="form-group">
+      <label for="password">Password</label>
+      <input ng-model="auth.user.password" type="password" class="form-control" id="password" placeholder='Password'>
+    </div>
 
-          <button type="submit" class="btn btn-info btn-block">Log in</button>
+    <button type="submit" class="btn btn-info btn-block">Log in</button>
 
-        </form>
+  </form>
 </div>
 <div class="modal-footer">
   <div class='row'>
