@@ -6,11 +6,17 @@
 
     function loginController($uibModalInstance) {
       var vm = this;
-      vm.person = {};
+      vm.user = {};
+
 
       vm.close = function() {
         uibModalInstance.close();
       };
+
+      vm.login = function() {
+        console.log(vm.user.email);
+        console.log(vm.user.password);
+      }
 
 
 
