@@ -2,17 +2,21 @@
   angular.module('memPeeps.auth')
     .controller('signupController', signupController);
 
-    signupController.$inject = ['$uibModalInstance'];
+    signupController.$inject = ['$uibModalInstance', '$auth'];
 
-    function signupController($uibModalInstance) {
+    function signupController($uibModalInstance, $auth) {
       var vm = this;
-      var user = {};
+      vm.user = {};
 
       vm.signup = function() {
-        console.log(vm.user.email);
-        console.log(vm.user.password);
-        console.log(vm.user.confirmationPassword);
-      }
+        $auth.submitRegistration(vm.user)
+          .then(function(resp) {
+            console.log(resp);
+          })
+          .catch(function(error) {
+            console.log(error);
+          });
+      };
 
 
 
