@@ -14,23 +14,48 @@
       })
       .when('/people/index', {
         templateUrl: 'partials/people/index.html',
-        controller: 'peopleIndexController as people'
+        controller: 'peopleIndexController as people',
+        resolve: {
+          auth: function($auth) {
+            return $auth.validateUser();
+          }
+        }
       })
       .when('/people/new', {
         templateUrl: 'partials/people/new.html',
-        controller: 'personNewController as person'
+        controller: 'personNewController as person',
+        resolve: {
+          auth: function($auth) {
+            return $auth.validateUser();
+          }
+        }
       })
       .when('/people/show/:id', {
         templateUrl: 'partials/people/show.html',
-        controller: 'personShowController as person'
+        controller: 'personShowController as person',
+        resolve: {
+          auth: function($auth) {
+            return $auth.validateUser();
+          }
+        }
       })
       .when('/people/:id/edit', {
         templateUrl: 'partials/people/edit.html',
-        controller: 'personEditController as person'
+        controller: 'personEditController as person',
+        resolve: {
+          auth: function($auth) {
+            return $auth.validateUser();
+          }
+        }
       })
       .when('/games/index', {
         templateUrl: 'partials/games/index.html',
-        controller: 'gamesIndexController as games'
+        controller: 'gamesIndexController as games',
+        resolve: {
+          auth: function($auth) {
+            return $auth.validateUser();
+          }
+        }
       })
       .otherwise({
         redirectTo: '/'
