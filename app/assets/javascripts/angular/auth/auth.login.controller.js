@@ -8,11 +8,6 @@
       var vm = this;
       vm.user = {};
 
-
-      vm.close = function() {
-        $uibModalInstance.close();
-      };
-
       vm.login = function() {
         $auth.submitLogin(vm.user)
           .then(function(resp) {
