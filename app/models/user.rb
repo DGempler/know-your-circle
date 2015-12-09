@@ -4,4 +4,8 @@ class User < ActiveRecord::Base
           :recoverable, :rememberable, :trackable, :validatable,
           :confirmable, :omniauthable
   include DeviseTokenAuth::Concerns::User
+
+  validates_presence_of :email, :first_name, :last_name
+  validates_uniqueness_of :email
+
 end
