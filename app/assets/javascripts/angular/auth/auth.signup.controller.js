@@ -11,10 +11,10 @@
       vm.signup = function() {
         $auth.submitRegistration(vm.user)
           .then(function(resp) {
-            console.log(resp);
+            alert("A confirmation email has been sent to " + resp.data.data.email);
           })
           .catch(function(error) {
-            console.log(error);
+            alert("There was an error! Please try again!");
           });
       };
 
