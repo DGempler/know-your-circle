@@ -10,12 +10,13 @@
 
 
       vm.close = function() {
-        uibModalInstance.close();
+        $uibModalInstance.close();
       };
 
       vm.login = function() {
         $auth.submitLogin(vm.user)
           .then(function(resp) {
+            $uibModalInstance.close();
             alert("Thank you for logging in!");
             console.log(resp);
           })

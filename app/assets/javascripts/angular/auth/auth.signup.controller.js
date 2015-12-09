@@ -11,6 +11,7 @@
       vm.signup = function() {
         $auth.submitRegistration(vm.user)
           .then(function(resp) {
+            $uibModalInstance.close();
             alert("A confirmation email has been sent to " + resp.data.data.email);
           })
           .catch(function(error) {
