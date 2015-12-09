@@ -10,17 +10,17 @@
       <a class="navbar-brand" href="#/">MemPeeps</a>
     </div>
 
-    <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
+    <div ng-controller='navController as nav' class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
       <ul class="nav navbar-nav navbar-right">
-        <li><a href="#/people/new">Add Peeps</a></li>
-        <li><a href="#/people/index">See All Peeps</a></li>
-        <li><a href="#/games/index">Play Games</a></li>
-        <li class="dropdown" ng-controller='navController as nav'>
-          <a href="" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">Account <span class="caret"></span></a>
+        <li ng-show='user.id'><a href="#/people/new">Add Peeps</a></li>
+        <li ng-show='user.id'><a href="#/people/index">See All Peeps</a></li>
+        <li ng-show='user.id'><a href="#/games/index">Play Games</a></li>
+        <li ng-show='!user.id'><a ng-click='nav.signUp()'>Sign Up</a></li>
+        <li ng-show='!user.id'><a ng-click='nav.loginOpen()'>Log In</a></li>
+        <li ng-show='user.id' class="dropdown" >
+          <a class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">Account <span class="caret"></span></a>
           <ul class="dropdown-menu">
-            <li><a href="" ng-click='nav.loginOpen()'>Log In</a></li>
-            <li><a href="" ng-click='nav.signUp()'>Sign Up</a></li>
-            <li><a href="" ng-click='nav.logout()'>Log Out</a></li>
+            <li><a ng-click='nav.logout()'>Log Out</a></li>
             <li role="separator" class="divider"></li>
             <li><a href="#/profile">My Profile</a></li>
             <li role="separator" class="divider"></li>
