@@ -21,7 +21,9 @@
 
       vm.logInOpen = function() {
         $uibModalInstance.close();
-        AuthFactory.logInOpen();
+        setTimeout(function() {
+          AuthFactory.logInOpen();
+        }, 500);
       };
     }
 

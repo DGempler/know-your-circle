@@ -23,7 +23,9 @@
 
       vm.signUpOpen = function() {
         $uibModalInstance.close();
-        AuthFactory.signUpOpen();
+        setTimeout(function() {
+          AuthFactory.signUpOpen();
+        }, 500);
       };
 
     }
