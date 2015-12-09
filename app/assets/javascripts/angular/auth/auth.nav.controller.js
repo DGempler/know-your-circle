@@ -4,7 +4,7 @@
 
   navController.$inject = ['$uibModal', '$auth', 'AuthFactory'];
 
-  function navController($uibModal, $auth) {
+  function navController($uibModal, $auth, AuthFactory) {
     var vm = this;
 
     vm.logInOpen = function() {
