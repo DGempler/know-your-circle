@@ -13,7 +13,8 @@
         animation: true,
         templateUrl: '/partials/auth/_login_modal.html',
         controller: 'loginController as auth',
-        size: 'sm'
+        size: 'sm',
+        windowClass: "modal fade"
       });
 
     };
@@ -24,7 +25,8 @@
         animation: true,
         templateUrl: '/partials/auth/_signup_modal.html',
         controller: 'signupController as auth',
-        size: 'sm'
+        size: 'sm',
+        windowClass: "modal fade"
       });
     };
 

@@ -3,3 +3,9 @@
 div#check-all {
   margin-top: 34.5px;
 }
+
+.modal.fade .modal-dialog {
+    -webkit-transform: translate(0, 0);
+    -ms-transform: translate(0, 0);
+     transform: translate(0, 0);
+}
