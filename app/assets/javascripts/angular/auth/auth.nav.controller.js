@@ -2,12 +2,12 @@
   angular.module('memPeeps.auth')
     .controller('navController', navController);
 
-  navController.$inject = ['$uibModal', '$auth'];
+  navController.$inject = ['$uibModal', '$auth', 'AuthFactory'];
 
   function navController($uibModal, $auth) {
     var vm = this;
 
-    vm.loginOpen = function() {
+    vm.logInOpen = function() {
 
       var modalInstance = $uibModal.open({
         animation: true,
@@ -18,7 +18,7 @@
 
     };
 
-    vm.signUp = function() {
+    vm.signUpOpen = function() {
 
       var modalInstance = $uibModal.open({
         animation: true,
@@ -28,7 +28,7 @@
       });
     };
 
-    vm.logout = function() {
+    vm.logOut = function() {
       $auth.signOut()
         .then(function(resp) {
           console.log(resp);
@@ -37,6 +37,14 @@
           console.log(error);
         });
     };
+
+    AuthFactory.logInOpen = function() {
+      vm.logInOpen();
+    };
+
+    AuthFactory.signUpOpen = function() {
+      vm.signUpOpen();
+    }
 
   }
 
