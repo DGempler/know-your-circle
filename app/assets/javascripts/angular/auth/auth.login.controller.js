@@ -24,7 +24,7 @@
             alert("Sorry, there was an error.");
             console.log(error);
           });
-      }
+      };
     }
 
 
