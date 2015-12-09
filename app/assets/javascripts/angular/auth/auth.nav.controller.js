@@ -2,9 +2,9 @@
   angular.module('memPeeps.auth')
     .controller('navController', navController);
 
-  navController.$inject = ['$uibModal'];
+  navController.$inject = ['$uibModal', '$auth'];
 
-  function navController($uibModal) {
+  function navController($uibModal, $auth) {
     var vm = this;
 
     vm.loginOpen = function() {
@@ -27,6 +27,17 @@
         size: 'sm'
       });
     };
+
+    vm.logout = function() {
+      $auth.signOut()
+        .then(function(resp) {
+          console.log(resp);
+        })
+        .catch(function(error) {
+          console.log(error);
+        });
+
+    }
 
   }
 
