@@ -2,9 +2,9 @@
   angular.module('memPeeps.auth')
     .controller('loginController', loginController);
 
-    loginController.$inject = ['$uibModalInstance'];
+    loginController.$inject = ['$uibModalInstance', '$auth'];
 
-    function loginController($uibModalInstance) {
+    function loginController($uibModalInstance, $auth) {
       var vm = this;
       vm.user = {};
 
@@ -14,12 +14,16 @@
       };
 
       vm.login = function() {
-        console.log(vm.user.email);
-        console.log(vm.user.password);
+        $auth.submitLogin(vm.user)
+          .then(function(resp) {
+            alert("Thank you for logging in!");
+            console.log(resp);
+          })
+          .catch(function(error) {
+            alert("Sorry, there was an error.");
+            console.log(error);
+          });
       }
-
-
-
     }
 
 
