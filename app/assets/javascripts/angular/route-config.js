@@ -57,6 +57,15 @@
           }
         }
       })
+      .when('/profile', {
+        templateUrl: 'partials/users/profile.html',
+        controller: 'partialsController as profile',
+        resolve: {
+          auth: function($auth) {
+            return $auth.validateUser();
+          }
+        }
+      })
       .otherwise({
         redirectTo: '/'
       });
