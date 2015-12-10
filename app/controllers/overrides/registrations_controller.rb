@@ -146,15 +146,11 @@ module Overrides
     end
 
     def render_update_success
-      puts @resource
       medium = @resource.image.url(:medium)
-      puts medium
       thumb = @resource.image.url(:thumb)
-      puts thumb
       @resource_json = @resource.as_json
       @resource_json[:medium] = medium
       @resource_json[:thumb] = thumb
-      puts @resource_json
       render json: {
         status: 'success',
         data:   @resource_json
