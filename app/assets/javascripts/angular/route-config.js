@@ -66,6 +66,15 @@
           }
         }
       })
+      .when('/profile/edit', {
+        templateUrl: 'partials/users/edit.profile.html',
+        controller: 'editProfileController as profile',
+        resolve: {
+          auth: function($auth) {
+            return $auth.validateUser();
+          }
+        }
+      })
       .otherwise({
         redirectTo: '/'
       });
