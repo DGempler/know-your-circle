@@ -1,3 +1,3 @@
-function() {
+(function() {
   angular.module('memPeeps.users', []);
 })();
