@@ -2,9 +2,9 @@
   angular.module('memPeeps.users')
     .controller('profileController', profileController);
 
-  profileController.$inject = ['$rootScope'];
+  profileController.$inject = ['$rootScope', '$auth', '$location'];
 
-  function profileController($rootScope) {
+function profileController($rootScope, $auth, $location) {
     var vm = this;
     vm.user = {};
 
@@ -20,6 +20,18 @@
     }
 
     copyUser();
+
+    vm.deleteUser = function() {
+      $auth.destroyAccount()
+        .then(function(res) {
+          console.log(res);
+          $location.path('/');
+        })
+        .catch(function(err) {
+          console.log(err);
+          $location.path('/');
+        });
+    };
 
   }
 
