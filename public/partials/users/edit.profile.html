@@ -1,0 +1,65 @@
+<div class="page-header">
+  <h1>Edit / Add info to your profile</h1>
+</div>
+
+<form ng-submit='profile.submitUserUpdateAccount()'>
+  <div class='row'>
+    <div class='col-sm-6'>
+      <div class="form-group">
+        <label for="firstNameInput">First Name</label>
+        <input ng-model="profile.user.first_name" type="text" class="form-control" id="firstNameInput" autofocus required />
+      </div>
+      <div class="form-group">
+        <label for="middleNameInput">Middle Name</label>
+        <input ng-model="profile.user.middle_name" type="text" class="form-control" id="middleNameInput" />
+      </div>
+      <div class="form-group">
+        <label for="lastNameInput">Last Name</label>
+        <input ng-model="profile.user.last_name" type="text" class="form-control" id="lastNameInput" required />
+      </div>
+      <div class="form-group">
+        <label for="emailInput">Email</label>
+        <input ng-model="profile.user.email" type="text" class="form-control" id="emailInput" required />
+      </div>
+      <div class="btn-group" data-toggle='buttons'>
+        <label class='btn btn-default' ng-click='profile.user.sex = "Male"' ng-class='{"active": profile.user.sex === "Male"}'><input type="radio" />Male</label>
+        <label class='btn btn-default' ng-click='profile.user.sex = "Female"' ng-class='{"active": profile.user.sex === "Female"}'><input type="radio" />Female</label>
+      </div>
+      <div class="form-group">
+        <label for="imageFileInput">Headshot</label>
+        <input type="file" ng-model="profile.user.image" accept="image/*" id="imageFileInput" ngf-select ngf-pattern="'image/*'" ngf-max-size="5MB" ngf-min-height="50" class="text-info"/>
+        <p class="help-block">Upload an image file of yourself (recommended).</p>
+      </div>
+    </div>
+    <div class='col-sm-6'>
+      <div class="form-group">
+        <label for="nicknameInput">Nickname</label>
+        <input ng-model="profile.user.nickname" type="text" class="form-control" id="nicknameInput" >
+      </div>
+      <div class="form-group">
+        <label for="locationInput">Location</label>
+        <input ng-model="profile.user.location" type="text" class="form-control" id="locationInput" >
+      </div>
+      <div class="form-group">
+        <label for="occupationInput">Occupation</label>
+        <input ng-model="profile.user.occupation" type="text" class="form-control" id="occupationInput" >
+      </div>
+      <div class="form-group">
+        <label for="dobInput">Date of Birth</label>
+        <input ng-model="profile.user.dob" type="date" class="form-control" id="dobInput" >
+      </div>
+      <div class="form-group">
+        <label for="bioInput">Bio</label>
+        <textarea rows="3" ng-model="profile.user.bio" type="text" class="form-control" id="bioInput" ></textarea>
+      </div>
+    </div>
+  </div>
+  <div class='row'>
+    <div class='col-sm-6 col-sm-offset-3'>
+      <div class='text-center'>
+        <a href='#/people/index' class="btn btn-default btn-lg">Cancel</a>
+        <button type="submit" class="btn btn-primary btn-lg">Submit</button>
+      </div>
+    </div>
+  </div>
+</form>
