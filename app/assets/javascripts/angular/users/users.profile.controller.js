@@ -1,57 +1,20 @@
 (function() {
   angular.module('memPeeps.users')
-    .controller('editProfileController', editProfileController);
+    .controller('profileController', profileController);
 
-  editProfileController.$inject=['$rootScope', '$auth', 'Upload'];
+  profileController.$inject = ['$rootScope'];
 
-  function editProfileController($rootScope, $auth, Upload) {
+  function profileController($rootScope) {
     var vm = this;
     vm.user = $rootScope.user;
-    if ($rootScope.user.dob) {
-      vm.user.dob = new Date($rootScope.user.dob);
+    if ($rootScope.user.dob === 'null' || $rootScope.user.dob === null) {
+      vm.user.dob = "";
+    } else {
+      vm.user.dob = moment($rootScope.user.dob).format("MMM Do YYYY");
     }
     console.log(vm.user);
 
-    vm.submitUserUpdateAccount = function() {
-      if (vm.user.image) {
-        uploadUpload();
-      } else {
-        regularUserUpdate();
-      }
-
-    };
-
-    function uploadUpload() {
-      Upload.upload({
-          url: 'api/auth',
-          method: 'PUT',
-          fields: vm.user,
-          arrayKey: '[]',
-          file: vm.user.image,
-          fileFormDataName: 'user[image]',
-        })
-        .then(function (resp) {
-            console.log(resp);
-        }, function (resp) {
-            console.log('err');
-            console.log(resp);
-        });
-
-    }
-
-    function regularUserUpdate() {
-      $auth.updateAccount(vm.user)
-        .then(function(res) {
-          vm.user = res.data.data;
-          if (res.data.data.dob) {
-            vm.user.dob = new Date(res.data.data.dob);
-          }
-        })
-        .catch(function(err) {
-          console.log(err);
-        });
-    }
-
+    $scope.person = person;
   }
 
 })();
