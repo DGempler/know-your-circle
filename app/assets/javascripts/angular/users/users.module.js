@@ -1,3 +1,3 @@
 (function() {
-  angular.module('memPeeps.users', []);
+  angular.module('memPeeps.users', ['ngFileUpload']);
 })();
