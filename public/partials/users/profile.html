@@ -10,8 +10,12 @@
         <input ng-model="profile.user.first_name" type="text" class="form-control" id="firstNameInput" autofocus required />
       </div>
       <div class="form-group">
+        <label for="middleNameInput">Middle Name</label>
+        <input ng-model="profile.user.middle_name" type="text" class="form-control" id="middleNameInput" />
+      </div>
+      <div class="form-group">
         <label for="lastNameInput">Last Name</label>
-        <input ng-model="profile.user.last_name" type="text" class="form-control" id="lastNameInput"  placeholder='Required' required />
+        <input ng-model="profile.user.last_name" type="text" class="form-control" id="lastNameInput" required />
       </div>
       <div class="btn-group" data-toggle='buttons'>
         <label class='btn btn-default' ng-click='profile.user.sex = "Male"' ng-class='{"active": profile.user.sex === "Male"}'><input type="radio" />Male</label>
@@ -24,10 +28,6 @@
       </div>
     </div>
     <div ng-show='profile.addedInputFields' class='col-sm-6'>
-      <div class="form-group">
-        <label for="middleNameInput">Middle Name</label>
-        <input ng-model="profile.user.middle_name" type="text" class="form-control" id="middleNameInput" />
-      </div>
       <div class="form-group">
         <label for="locationInput">Location</label>
         <input ng-model="profile.user.location" type="text" class="form-control" id="locationInput" >
@@ -50,7 +50,7 @@
     <div class='col-sm-6 col-sm-offset-3'>
       <div class='text-center'>
         <a href='#/people/index' class="btn btn-default btn-lg">Cancel</a>
-        <a ng-click='addInputFields()' ng-hide='addedInputFields' class="btn btn-success btn-lg">Add more details</a>
+        <a ng-click='profile.addInputFields()' ng-hide='profile.addedInputFields' class="btn btn-success btn-lg">Add more details</a>
         <button type="submit" class="btn btn-primary btn-lg">Submit</button>
       </div>
     </div>
