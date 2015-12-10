@@ -17,6 +17,10 @@
         <label for="lastNameInput">Last Name</label>
         <input ng-model="profile.user.last_name" type="text" class="form-control" id="lastNameInput" required />
       </div>
+      <div class="form-group">
+        <label for="emailInput">Email</label>
+        <input ng-model="profile.user.email" type="text" class="form-control" id="emailInput" required />
+      </div>
       <div class="btn-group" data-toggle='buttons'>
         <label class='btn btn-default' ng-click='profile.user.sex = "Male"' ng-class='{"active": profile.user.sex === "Male"}'><input type="radio" />Male</label>
         <label class='btn btn-default' ng-click='profile.user.sex = "Female"' ng-class='{"active": profile.user.sex === "Female"}'><input type="radio" />Female</label>
@@ -28,6 +32,10 @@
       </div>
     </div>
     <div class='col-sm-6'>
+      <div class="form-group">
+        <label for="nicknameInput">Nickname</label>
+        <input ng-model="profile.user.nickname" type="text" class="form-control" id="nicknameInput" >
+      </div>
       <div class="form-group">
         <label for="locationInput">Location</label>
         <input ng-model="profile.user.location" type="text" class="form-control" id="locationInput" >
