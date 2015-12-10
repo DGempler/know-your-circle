@@ -1,0 +1,30 @@
+<div class="page-header">
+  <h1 class='center-block'><center>{{ profile.user.first_name }} {{ profile.user.last_name }}</center></h1>
+</div>
+
+<div class='row'>
+  <div class='col-sm-12'>
+    <img ng-src='{{ profile.user.medium }}' class='center-block'/>
+  </div>
+</div>
+<div class='row'>
+  <div class='col-sm-4 col-sm-offset-2'>
+    <p>Middle name: {{ profile.user.middle_name }}</p>
+    <p>Sex: {{ profile.user.sex }}</p>
+    <p>Nickname: {{ profile.user.nickname }}</p>
+  </div>
+  <div class='col-sm-4'>
+    <p>Location: {{ profile.user.location }}</p>
+    <p>Occupation: {{ profile.user.occupation }}</p>
+    <p>DOB: {{ profile.user.dob }}</p>
+    <p>Bio: {{ profile.user.bio }}</p>
+  </div>
+</div>
+<div class='row'>
+  <div class='col-sm-4 col-sm-offset-4'>
+    <div class='text-center'>
+      <a class="btn btn-info"  href='#/people/{{profile.user.id}}/edit'>Edit Profile</a>
+      <button class="btn btn-danger" ng-click='deletePerson()'>Delete Profile</button>
+    </div>
+  </div>
+</div>
