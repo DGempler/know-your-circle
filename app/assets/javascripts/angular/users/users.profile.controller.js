@@ -6,13 +6,20 @@
 
   function profileController($rootScope) {
     var vm = this;
-    vm.user = $rootScope.user;
-    if ($rootScope.user.dob === 'null' || $rootScope.user.dob === null) {
-      vm.user.dob = "";
-    } else {
-      vm.user.dob = moment($rootScope.user.dob).format("MMM Do YYYY");
+    vm.user = {};
+
+    function copyUser() {
+      for (var prop in $rootScope.user) {
+        vm.user[prop] = $rootScope.user[prop];
+      }
+      if ($rootScope.user.dob === 'null' || $rootScope.user.dob === null) {
+        vm.user.dob = "";
+      } else {
+        vm.user.dob = moment($rootScope.user.dob).format("MMM Do YYYY");
+      }
     }
-    console.log(vm.user);
+
+    copyUser();
 
   }
 

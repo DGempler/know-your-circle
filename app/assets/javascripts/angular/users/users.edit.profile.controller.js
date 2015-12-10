@@ -6,11 +6,18 @@
 
   function editProfileController($rootScope, $auth, Upload) {
     var vm = this;
-    vm.user = $rootScope.user;
-    if ($rootScope.user.dob) {
-      vm.user.dob = new Date($rootScope.user.dob);
+    vm.user = {};
+
+    function copyUser() {
+      for (var prop in $rootScope.user) {
+        vm.user[prop] = $rootScope.user[prop];
+      }
+      if ($rootScope.user.dob) {
+        vm.user.dob = new Date($rootScope.user.dob);
+      }
     }
-    console.log(vm.user);
+
+    copyUser();
 
     vm.submitUserUpdateAccount = function() {
       if (vm.user.image) {
