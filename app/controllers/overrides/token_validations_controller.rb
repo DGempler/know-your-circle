@@ -1,4 +1,4 @@
-module DeviseTokenAuth
+module Overrides
   class TokenValidationsController < DeviseTokenAuth::ApplicationController
     skip_before_filter :assert_is_devise_resource!, :only => [:validate_token]
     before_filter :set_user_by_token, :only => [:validate_token]
