@@ -4,7 +4,7 @@
 
   profileController.$inject=[];
 
-  function profileController($auth) {
+  function profileController() {
     var vm = this;
 
     vm.addInputFields = function() {
