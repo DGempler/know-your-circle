@@ -3,7 +3,8 @@ Rails.application.routes.draw do
   scope '/api' do
     mount_devise_token_auth_for 'User', at: 'auth', controllers: {
       token_validations: 'overrides/token_validations',
-      registrations: 'overrides/registrations'
+      registrations: 'overrides/registrations',
+      sessions: 'overrides/sessions'
     }
     resources :people
   end
