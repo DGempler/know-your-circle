@@ -2,9 +2,9 @@
   angular.module('memPeeps.users')
     .controller('editProfileController', editProfileController);
 
-  editProfileController.$inject=['$rootScope', '$auth', 'Upload'];
+  editProfileController.$inject=['$rootScope', '$auth', 'Upload', '$location'];
 
-  function editProfileController($rootScope, $auth, Upload) {
+  function editProfileController($rootScope, $auth, Upload, $location) {
     var vm = this;
     vm.user = {};
 
@@ -38,7 +38,7 @@
           fileFormDataName: 'user[image]',
         })
         .then(function (resp) {
-            console.log(resp);
+          $location.path('/profile');
         }, function (resp) {
             console.log('err');
             console.log(resp);
@@ -49,10 +49,7 @@
     function regularUserUpdate() {
       $auth.updateAccount(vm.user)
         .then(function(res) {
-          vm.user = res.data.data;
-          if (res.data.data.dob) {
-            vm.user.dob = new Date(res.data.data.dob);
-          }
+          $location.path('/profile');
         })
         .catch(function(err) {
           console.log(err);
