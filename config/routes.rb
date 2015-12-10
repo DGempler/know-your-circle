@@ -1,7 +1,9 @@
 Rails.application.routes.draw do
   root 'statics#index'
   scope '/api' do
-    mount_devise_token_auth_for 'User', at: 'auth'
+    mount_devise_token_auth_for 'User', at: 'auth', controllers: {
+      token_validations: 'overrides/token_validations'
+    }
     resources :people
   end
   # The priority is based upon order of creation: first created -> highest priority.

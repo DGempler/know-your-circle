@@ -10,6 +10,7 @@
     if ($rootScope.user.dob) {
       vm.user.dob = new Date($rootScope.user.dob);
     }
+    console.log(vm.user);
 
     vm.submitUserUpdateAccount = function() {
       if (vm.user.image) {
