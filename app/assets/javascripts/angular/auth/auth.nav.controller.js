@@ -46,7 +46,7 @@
 
     AuthFactory.signUpOpen = function() {
       vm.signUpOpen();
-    }
+    };
 
   }
 
