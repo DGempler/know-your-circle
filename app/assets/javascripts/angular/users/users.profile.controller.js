@@ -14,7 +14,6 @@
     }
     console.log(vm.user);
 
-    $scope.person = person;
   }
 
 })();
