@@ -32,12 +32,14 @@
       Upload.upload({
           url: 'api/auth',
           method: 'PUT',
+          headers: $auth.retrieveData('auth_headers'),
           fields: vm.user,
           arrayKey: '[]',
           file: vm.user.image,
           fileFormDataName: 'user[image]',
         })
         .then(function (resp) {
+          $rootScope.user = resp.data.data;
           $location.path('/profile');
         }, function (resp) {
             console.log('err');
