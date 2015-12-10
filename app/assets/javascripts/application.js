@@ -18,5 +18,6 @@
 //= require angular/people/people.module.js
 //= require angular/games/games.module.js
 //= require angular/auth/auth.module.js
+//= require angular/users/users.module.js
 //= require angular/app.module.js
 //= require_tree .
