@@ -12,7 +12,7 @@
       };
 
       vm.submitChangePassword = function() {
-        $auth.updateAccount(vm.user)
+        $auth.updatePassword(vm.user)
           .then(function(res) {
             $uibModalInstance.close();
             $location.path('/profile');
