@@ -19,8 +19,6 @@ function profileController($rootScope, $auth, $location, UserFactory) {
       }
     }
 
-    copyUser();
-
     vm.deleteUser = function() {
       var areYouSure = confirm("Are you sure you want to delete your account and your whole circle?");
       if (areYouSure) {
@@ -31,6 +29,8 @@ function profileController($rootScope, $auth, $location, UserFactory) {
     vm.changePassword = function() {
       UserFactory.openChangePasswordModal();
     };
+
+    copyUser();
 
   }
 
