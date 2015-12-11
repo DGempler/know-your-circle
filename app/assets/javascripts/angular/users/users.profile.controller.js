@@ -2,9 +2,9 @@
   angular.module('memPeeps.users')
     .controller('profileController', profileController);
 
-  profileController.$inject = ['$rootScope', '$auth', '$location'];
+  profileController.$inject = ['$rootScope', '$auth', '$location', 'UserFactory'];
 
-function profileController($rootScope, $auth, $location) {
+function profileController($rootScope, $auth, $location, UserFactory) {
     var vm = this;
     vm.user = {};
 
@@ -31,6 +31,10 @@ function profileController($rootScope, $auth, $location) {
           console.log(err);
           $location.path('/');
         });
+    };
+
+    vm.changePassword = function() {
+      UserFactory.openChangePasswordModal();
     };
 
   }
