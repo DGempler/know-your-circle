@@ -8,42 +8,41 @@
     <div class="form-group">
       <label for="first-name">First Name</label>
       <input ng-model="auth.user.first_name" type="text" class="form-control" id="first-name" placeholder='First Name' autofocus required="required" name='first_name'>
+      <div ng-show='buttonClicked' ng-messages="signUpForm.first_name.$error" class="text-warning">
+        <p ng-message="required">First name is required.</p>
+      </div>
     </div>
 
     <div class="form-group">
       <label for="last-name">Last Name</label>
       <input ng-model="auth.user.last_name" type="text" class="form-control" id="last-name" placeholder='Last Name'required="required" name='last_name'>
+      <div ng-show='buttonClicked' ng-messages="signUpForm.last_name.$error" class="text-warning">
+        <p ng-message="required">Last name is required.</p>
+      </div>
     </div>
-
-<!--     <div ng-show='auth.emailError' class="alert alert-primary alert-dismissible ">
-      <button type="button" class="close" aria-label="Close" data-dismiss="alert"><span aria-hidden="true">&times;</span></button>
-      <p><b>{{ auth.emailErrorMessage }}</b></p>
-    </div> -->
 
     <div class="form-group">
       <label for="email">Email address</label>
       <input ng-model="auth.user.email" type="email" class="form-control" id="email" placeholder='Email' required="required" name='email'>
+      <div ng-show='buttonClicked' ng-messages="signUpForm.email.$error" class="text-warning">
+        <p ng-message="required">Email is required.</p>
+        <p ng-message="email">Your email address is invalid. Please try again.</p>
+      </div>
     </div>
 
     <div class="form-group">
       <label for="password">Password</label>
-      <input ng-model="auth.user.password" type="password" class="form-control" id="password" placeholder='Passwords are case-sensitive' required="required" name='password' minlength="8" maxlength="72">
-      <div ng-show='buttonClicked' ng-messages="signUpForm.password.$error" >
-        <div ng-messages-include="partials/auth/password_messages.html"></div>
+      <input ng-model="auth.user.password" type="password" class="form-control" id="password" placeholder='Passwords are case-sensitive' required="required" name='password' minlength="8" maxlength="72" >
+      <div ng-show='buttonClicked' ng-messages="signUpForm.password.$error" class="text-warning">
+        <div ng-messages-include="partials/auth/messages.html"></div>
       </div>
     </div>
-
-<!--     <div ng-messages="auth.user.password_confirmation.$error" class="alert alert-primary alert-dismissible">
-      <button type="button" class="close" aria-label="Close" data-dismiss="alert"><span aria-hidden="true">&times;</span></button>
-      <p ng-message="matchTo"><b>Passwords must match</b></p>
-      <p ng-message="minLength"><b>Password must be a minimum length of 8 characters</b></p>
-    </div> -->
 
     <div class="form-group">
       <label for="password-confirmation">Confirm Password</label>
       <input ng-model="auth.user.password_confirmation" type="password" class="form-control" id="password-confirmation" placeholder='Confirm Password' required="required" name='password_confirmation' minlength="8" maxlength="72" match-to='auth.user.password'>
-      <div ng-show='buttonClicked' ng-messages="signUpForm.password_confirmation.$error" >
-        <div ng-messages-include="partials/auth/password_messages.html"></div>
+      <div ng-show='buttonClicked' ng-messages="signUpForm.password_confirmation.$error" class="text-warning">
+        <div ng-messages-include="partials/auth/messages.html"></div>
       </div>
     </div>
 
