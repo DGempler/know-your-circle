@@ -3,7 +3,7 @@
 </div>
 
 <div class="modal-body">
-  <form ng-submit='auth.signUp()' name='signUpForm' novalidate>
+  <form ng-submit='auth.signUp(signUpForm.$valid)' name='signUpForm' novalidate>
 
     <div class="form-group">
       <label for="first-name">First Name</label>
@@ -28,10 +28,8 @@
     <div class="form-group">
       <label for="password">Password</label>
       <input ng-model="auth.user.password" type="password" class="form-control" id="password" placeholder='Passwords are case-sensitive' required="required" name='password' minlength="8" maxlength="72">
-      <div ng-messages="signUpForm.password.$error" ng-messages-multiple>
-        <p ng-message="required"><b>You did not enter a field</b></p>
-        <p ng-message="minlength"><b>Password must have a minimum length of 8 characters</b></p>
-        <p ng-message="maxlength"><b>Password must have a maximum length of 72 characters</b></p>
+      <div ng-show='buttonClicked' ng-messages="signUpForm.password.$error" >
+        <div ng-messages-include="partials/auth/password_messages.html"></div>
       </div>
     </div>
 
@@ -44,15 +42,12 @@
     <div class="form-group">
       <label for="password-confirmation">Confirm Password</label>
       <input ng-model="auth.user.password_confirmation" type="password" class="form-control" id="password-confirmation" placeholder='Confirm Password' required="required" name='password_confirmation' minlength="8" maxlength="72" match-to='auth.user.password'>
-      <div ng-messages="signUpForm.password_confirmation.$error" ng-messages-multiple>
-        <p ng-message="required"><b>You did not enter a field</b></p>
-        <p ng-message="matchTo"><b>Passwords must match</b></p>
-        <p ng-message="minlength"><b>Password must have a minimum length of 8 characters</b></p>
-        <p ng-message="maxlength"><b>Password must have a maximum length of 72 characters</b></p>
+      <div ng-show='buttonClicked' ng-messages="signUpForm.password_confirmation.$error" >
+        <div ng-messages-include="partials/auth/password_messages.html"></div>
       </div>
     </div>
 
-    <button type="submit" class="btn btn-info btn-block">Log in</button>
+    <button type="submit" class="btn btn-info btn-block" ng-click='buttonClicked = true'>Sign Up</button>
 
   </form>
 </div>
