@@ -2,9 +2,9 @@
   angular.module('memPeeps.auth')
     .factory('AuthFactory', AuthFactory);
 
-    AuthFactory.$inject = ['$uibModal', '$auth', '$location'];
+    AuthFactory.$inject = ['$uibModal', '$auth', '$location', '$q'];
 
-    function AuthFactory($uibModal, $auth, $location) {
+    function AuthFactory($uibModal, $auth, $location, $q) {
       var factory = {};
 
       factory.logInOpen = function() {
@@ -25,16 +25,16 @@
       };
 
       factory.logIn = function(user, modal) {
+        var deferred = $q.defer();
         $auth.submitLogin(user)
           .then(function(resp) {
             modal.close();
-            alert("Thank you for logging in!");
-            console.log(resp);
+            $location.path('/people/index');
           })
           .catch(function(error) {
-            alert("Sorry, there was an error.");
-            console.log(error);
-        });
+            deferred.reject(error);
+          });
+          return deferred.promise;
       };
 
 

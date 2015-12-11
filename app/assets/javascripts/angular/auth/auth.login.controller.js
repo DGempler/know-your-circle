@@ -10,7 +10,10 @@
 
       vm.logIn = function(isValid) {
         if (isValid) {
-          AuthFactory.logIn(vm.user, $uibModalInstance);
+          AuthFactory.logIn(vm.user, $uibModalInstance)
+            .catch(function(failure) {
+              vm.errors = failure.errors;
+            });
         }
       };
 

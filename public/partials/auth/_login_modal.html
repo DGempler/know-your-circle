@@ -1,4 +1,9 @@
-<div class="modal-header text-center">
+<div ng-show='auth.errors' class="alert alert-warning text-center">
+  <h4 ng-repeat='error in auth.errors'>{{ error }}</h4>
+  <p>Please try again</p>
+</div>
+
+<div ng-hide='auth.errors' class="modal-header text-center">
   <h3 class="modal-title">Welcome back!</h3>
 </div>
 
