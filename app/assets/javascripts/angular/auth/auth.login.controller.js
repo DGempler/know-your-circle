@@ -8,8 +8,10 @@
       var vm = this;
       vm.user = {};
 
-      vm.logIn = function() {
-        AuthFactory.logIn(vm.user, $uibModalInstance);
+      vm.logIn = function(isValid) {
+        if (isValid) {
+          AuthFactory.logIn(vm.user, $uibModalInstance);
+        }
       };
 
       vm.openSignUpModal = function() {
