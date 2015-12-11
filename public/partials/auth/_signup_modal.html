@@ -3,31 +3,53 @@
 </div>
 
 <div class="modal-body">
-  <form ng-submit='auth.signUp()'>
+  <form ng-submit='auth.signUp()' name='signUpForm' novalidate>
 
     <div class="form-group">
       <label for="first-name">First Name</label>
-      <input ng-model="auth.user.first_name" type="text" class="form-control" id="first-name" placeholder='First Name' autofocus required="required">
+      <input ng-model="auth.user.first_name" type="text" class="form-control" id="first-name" placeholder='First Name' autofocus required="required" name='first_name'>
     </div>
 
     <div class="form-group">
       <label for="last-name">Last Name</label>
-      <input ng-model="auth.user.last_name" type="text" class="form-control" id="last-name" placeholder='Last Name'required="required">
+      <input ng-model="auth.user.last_name" type="text" class="form-control" id="last-name" placeholder='Last Name'required="required" name='last_name'>
     </div>
+
+<!--     <div ng-show='auth.emailError' class="alert alert-primary alert-dismissible ">
+      <button type="button" class="close" aria-label="Close" data-dismiss="alert"><span aria-hidden="true">&times;</span></button>
+      <p><b>{{ auth.emailErrorMessage }}</b></p>
+    </div> -->
 
     <div class="form-group">
       <label for="email">Email address</label>
-      <input ng-model="auth.user.email" type="email" class="form-control" id="email" placeholder='Email' required="required">
+      <input ng-model="auth.user.email" type="email" class="form-control" id="email" placeholder='Email' required="required" name='email'>
     </div>
 
     <div class="form-group">
       <label for="password">Password</label>
-      <input ng-model="auth.user.password" type="password" class="form-control" id="password" placeholder='Password' required="required">
+      <input ng-model="auth.user.password" type="password" class="form-control" id="password" placeholder='Passwords are case-sensitive' required="required" name='password' minlength="8" maxlength="72">
+      <div ng-messages="signUpForm.password.$error" ng-messages-multiple>
+        <p ng-message="required"><b>You did not enter a field</b></p>
+        <p ng-message="minlength"><b>Password must have a minimum length of 8 characters</b></p>
+        <p ng-message="maxlength"><b>Password must have a maximum length of 72 characters</b></p>
+      </div>
     </div>
+
+<!--     <div ng-messages="auth.user.password_confirmation.$error" class="alert alert-primary alert-dismissible">
+      <button type="button" class="close" aria-label="Close" data-dismiss="alert"><span aria-hidden="true">&times;</span></button>
+      <p ng-message="matchTo"><b>Passwords must match</b></p>
+      <p ng-message="minLength"><b>Password must be a minimum length of 8 characters</b></p>
+    </div> -->
 
     <div class="form-group">
       <label for="password-confirmation">Confirm Password</label>
-      <input ng-model="auth.user.password_confirmation" type="password" class="form-control" id="password-confirmation" placeholder='Confirm Password' required="required">
+      <input ng-model="auth.user.password_confirmation" type="password" class="form-control" id="password-confirmation" placeholder='Confirm Password' required="required" name='password_confirmation' minlength="8" maxlength="72" match-to='auth.user.password'>
+      <div ng-messages="signUpForm.password_confirmation.$error" ng-messages-multiple>
+        <p ng-message="required"><b>You did not enter a field</b></p>
+        <p ng-message="matchTo"><b>Passwords must match</b></p>
+        <p ng-message="minlength"><b>Password must have a minimum length of 8 characters</b></p>
+        <p ng-message="maxlength"><b>Password must have a maximum length of 72 characters</b></p>
+      </div>
     </div>
 
     <button type="submit" class="btn btn-info btn-block">Log in</button>
@@ -40,5 +62,4 @@
       <p>Already have an account? <a href='' ng-click='auth.openLogInModal()'>Log in</a></p>
     </div>
   </div>
-
 </div>
