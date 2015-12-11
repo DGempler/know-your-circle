@@ -2,9 +2,9 @@
   angular.module('memPeeps.users')
     .controller('editProfileController', editProfileController);
 
-  editProfileController.$inject=['$rootScope', 'UserFactory'];
+  editProfileController.$inject=['$rootScope', 'UserFactory', 'AuthFactory'];
 
-  function editProfileController($rootScope, UserFactory) {
+  function editProfileController($rootScope, UserFactory, AuthFactory) {
     var vm = this;
     vm.user = {};
 
@@ -27,7 +27,7 @@
     };
 
     vm.changePassword = function() {
-      UserFactory.openChangePasswordModal();
+      AuthFactory.openChangePasswordModal();
     };
 
     copyUser();

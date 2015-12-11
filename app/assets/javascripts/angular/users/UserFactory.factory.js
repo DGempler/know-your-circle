@@ -37,28 +37,6 @@
         });
       };
 
-      factory.openChangePasswordModal = function() {
-        var modalInstance = $uibModal.open({
-          animation: true,
-          templateUrl: 'partials/users/_changePassword_modal.html',
-          controller: 'changePasswordController as password',
-          size: 'sm',
-          windowClass: "modal fade"
-        });
-      };
-
-      factory.submitChangePassword = function(user, modal) {
-        $auth.updatePassword(user)
-          .then(function(res) {
-            modal.close();
-            console.log('success!');
-          })
-          .catch(function(err) {
-            modal.close();
-            console.log(err);
-          });
-      };
-
       factory.deleteUser = function() {
         $auth.destroyAccount()
         .then(function(res) {
