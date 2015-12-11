@@ -75,15 +75,6 @@
           }
         }
       })
-      .when('/profile/change_password', {
-        templateUrl: 'partials/users/changePassword.html',
-        controller: 'changePasswordController as password',
-        resolve: {
-          auth: function($auth) {
-            return $auth.validateUser();
-          }
-        }
-      })
       .otherwise({
         redirectTo: '/'
       });
