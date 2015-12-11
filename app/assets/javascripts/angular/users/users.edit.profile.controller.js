@@ -2,9 +2,9 @@
   angular.module('memPeeps.users')
     .controller('editProfileController', editProfileController);
 
-  editProfileController.$inject=['$rootScope', '$auth', 'Upload', '$location', 'UserFactory'];
+  editProfileController.$inject=['$rootScope', 'UserFactory'];
 
-  function editProfileController($rootScope, $auth, Upload, $location, UserFactory) {
+  function editProfileController($rootScope, UserFactory) {
     var vm = this;
     vm.user = {};
 
@@ -17,51 +17,20 @@
       }
     }
 
-    copyUser();
-
-    vm.submitUserUpdateAccount = function() {
+    vm.submitUpdateUserAccount = function() {
       if (vm.user.image) {
-        uploadUpload();
+        UserFactory.updateUserWithImage(vm.user);
       } else {
-        regularUserUpdate();
+        UserFactory.updateUser(vm.user);
       }
 
     };
-
-    function uploadUpload() {
-      Upload.upload({
-          url: 'api/auth',
-          method: 'PUT',
-          headers: $auth.retrieveData('auth_headers'),
-          fields: vm.user,
-          arrayKey: '[]',
-          file: vm.user.image,
-          fileFormDataName: 'user[image]',
-        })
-        .then(function (resp) {
-          $rootScope.user = resp.data.data;
-          $location.path('/profile');
-        }, function (resp) {
-            console.log('err');
-            console.log(resp);
-        });
-
-    }
-
-    function regularUserUpdate() {
-      $auth.updateAccount(vm.user)
-        .then(function(res) {
-          $location.path('/profile');
-        })
-        .catch(function(err) {
-          console.log(err);
-        });
-    }
 
     vm.changePassword = function() {
       UserFactory.openChangePasswordModal();
     };
 
+    copyUser();
   }
 
 })();
