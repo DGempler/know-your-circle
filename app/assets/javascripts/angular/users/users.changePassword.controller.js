@@ -15,7 +15,7 @@
         $auth.updatePassword(vm.user)
           .then(function(res) {
             $uibModalInstance.close();
-            $location.path('/profile');
+            console.log('success!');
           })
           .catch(function(err) {
             $uibModalInstance.close();
