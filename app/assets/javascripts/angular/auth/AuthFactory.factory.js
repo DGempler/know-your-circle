@@ -94,12 +94,21 @@
         $auth.updatePassword(user)
           .then(function(res) {
             modal.close();
-            console.log('success!');
+            factory.passwordChangeSuccessModalOpen();
           })
           .catch(function(err) {
             modal.close();
             console.log(err);
           });
+      };
+
+      factory.passwordChangeSuccessModalOpen = function() {
+        var modalInstance = $uibModal.open({
+          animation: true,
+          templateUrl: '/partials/auth/_passwordChangeSuccess_modal.html',
+          controller: 'passwordChangeSuccessController as password',
+          windowClass: "modal fade"
+        });
       };
 
       factory.confirmEmailModalOpen = function(email) {
