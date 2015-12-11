@@ -10,7 +10,10 @@
 
       vm.signUp = function(isValid) {
         if (isValid) {
-          AuthFactory.signUp(vm.user, $uibModalInstance);
+          AuthFactory.signUp(vm.user, $uibModalInstance)
+            .catch(function(failure) {
+              vm.error = failure.data.errors.full_messages[0];
+            });
         }
       };
 

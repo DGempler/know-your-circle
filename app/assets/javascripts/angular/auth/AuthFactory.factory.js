@@ -56,14 +56,16 @@
       };
 
       factory.signUp = function(user, modal) {
+        var deferred = $q.defer();
         $auth.submitRegistration(user)
           .then(function(resp) {
             modal.close();
             alert("A confirmation email has been sent to " + resp.data.data.email);
           })
           .catch(function(error) {
-            alert("There was an error! Please try again!");
+            deferred.reject(error);
           });
+        return deferred.promise;
       };
 
       factory.logOut = function() {
