@@ -47,6 +47,18 @@
         });
       };
 
+      factory.submitChangePassword = function(user, modal) {
+        $auth.updatePassword(user)
+          .then(function(res) {
+            modal.close();
+            console.log('success!');
+          })
+          .catch(function(err) {
+            modal.close();
+            console.log(err);
+          });
+      };
+
       factory.deleteUser = function() {
         $auth.destroyAccount()
         .then(function(res) {

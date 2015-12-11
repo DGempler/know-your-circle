@@ -2,9 +2,9 @@
   angular.module('memPeeps.users')
     .controller('changePasswordController', changePasswordController);
 
-    changePasswordController.$inject = ['$uibModalInstance', '$auth', '$rootScope', '$location'];
+    changePasswordController.$inject = ['$uibModalInstance', 'UserFactory'];
 
-    function changePasswordController($uibModalInstance, $auth, $rootScope, $location) {
+    function changePasswordController($uibModalInstance, UserFactory) {
       var vm = this;
 
       vm.closeModal = function() {
@@ -12,15 +12,7 @@
       };
 
       vm.submitChangePassword = function() {
-        $auth.updatePassword(vm.user)
-          .then(function(res) {
-            $uibModalInstance.close();
-            console.log('success!');
-          })
-          .catch(function(err) {
-            $uibModalInstance.close();
-            console.log(err);
-          });
+        UserFactory.submitChangePassword(vm.user, $uibModalInstance);
       };
 
     }
