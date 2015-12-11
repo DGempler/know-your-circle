@@ -13,7 +13,7 @@
     <div class="form-group">
       <label for="email">Email address</label>
       <input ng-model="auth.user.email" type="email" class="form-control" id="email" placeholder='Email' autofocus required="required" name='email'>
-      <div ng-show='buttonClicked' ng-messages="logInForm.email.$error" class="text-warning">
+      <div ng-show='password.buttonClicked' ng-messages="logInForm.email.$error" class="text-warning">
         <p ng-message="required">Email is required.</p>
         <p ng-message="email">Your email address is invalid. Please try again.</p>
       </div>
@@ -22,12 +22,12 @@
     <div class="form-group">
       <label for="password">Password</label>
       <input ng-model="auth.user.password" type="password" class="form-control" id="password" placeholder='Password' required="required" name='password'>
-      <div ng-show='buttonClicked' ng-messages="logInForm.password.$error" class="text-warning">
+      <div ng-show='password.buttonClicked' ng-messages="logInForm.password.$error" class="text-warning">
         <p ng-message="required">Password is required.</p>
       </div>
     </div>
 
-    <button type="submit" class="btn btn-info btn-block" ng-click='buttonClicked = true'>Log In</button>
+    <button type="submit" class="btn btn-info btn-block" ng-click='password.buttonClicked = true'>Log In</button>
 
   </form>
 </div>
