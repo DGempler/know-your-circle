@@ -2,9 +2,9 @@
   angular.module('memPeeps.users')
     .controller('profileController', profileController);
 
-  profileController.$inject = ['$rootScope', '$auth', '$location', 'UserFactory'];
+  profileController.$inject = ['$rootScope', 'UserFactory'];
 
-function profileController($rootScope, $auth, $location, UserFactory) {
+function profileController($rootScope, UserFactory) {
     var vm = this;
     vm.user = {};
 
