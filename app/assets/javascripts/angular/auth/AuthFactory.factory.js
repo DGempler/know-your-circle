@@ -60,7 +60,7 @@
         $auth.submitRegistration(user)
           .then(function(resp) {
             modal.close();
-            alert("A confirmation email has been sent to " + resp.data.data.email);
+            factory.confirmEmailModalOpen(resp.data.data.email);
           })
           .catch(function(error) {
             deferred.reject(error);
@@ -78,6 +78,20 @@
             console.log(error);
             $location.path('/');
           });
+      };
+
+      factory.confirmEmailModalOpen = function(email) {
+        var modalInstance = $uibModal.open({
+          animation: true,
+          templateUrl: '/partials/auth/_confirmEmail_modal.html',
+          controller: 'confirmEmailController as confirm',
+          windowClass: "modal fade",
+          resolve: {
+            email: function() {
+              return email;
+            }
+          }
+        });
       };
 
       return factory;
