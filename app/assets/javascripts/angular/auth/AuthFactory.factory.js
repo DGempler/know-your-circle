@@ -17,6 +17,27 @@
         });
       };
 
+      factory.openLogInModal = function(modal) {
+        modal.close();
+        setTimeout(function() {
+          factory.logInOpen();
+        }, 500);
+      };
+
+      factory.logIn = function(user, modal) {
+        $auth.submitLogin(user)
+          .then(function(resp) {
+            modal.close();
+            alert("Thank you for logging in!");
+            console.log(resp);
+          })
+          .catch(function(error) {
+            alert("Sorry, there was an error.");
+            console.log(error);
+        });
+      };
+
+
       factory.signUpOpen = function() {
         var modalInstance = $uibModal.open({
           animation: true,
@@ -25,6 +46,24 @@
           size: 'sm',
           windowClass: "modal fade"
         });
+      };
+
+      factory.openSignUpModal = function(modal) {
+        modal.close();
+        setTimeout(function() {
+          factory.signUpOpen();
+        }, 500);
+      };
+
+      factory.signUp = function(user, modal) {
+        $auth.submitRegistration(user)
+          .then(function(resp) {
+            modal.close();
+            alert("A confirmation email has been sent to " + resp.data.data.email);
+          })
+          .catch(function(error) {
+            alert("There was an error! Please try again!");
+          });
       };
 
       factory.logOut = function() {
