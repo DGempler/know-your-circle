@@ -22,15 +22,10 @@ function profileController($rootScope, $auth, $location, UserFactory) {
     copyUser();
 
     vm.deleteUser = function() {
-      $auth.destroyAccount()
-        .then(function(res) {
-          console.log(res);
-          $location.path('/');
-        })
-        .catch(function(err) {
-          console.log(err);
-          $location.path('/');
-        });
+      var areYouSure = confirm("Are you sure you want to delete your account and your whole circle?");
+      if (areYouSure) {
+        UserFactory.deleteUser();
+      }
     };
 
     vm.changePassword = function() {

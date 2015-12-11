@@ -2,9 +2,9 @@
   angular.module('memPeeps.users')
     .factory('UserFactory', UserFactory);
 
-    UserFactory.$inject = ['$uibModal'];
+    UserFactory.$inject = ['$uibModal', '$auth', '$location'];
 
-    function UserFactory($uibModal) {
+    function UserFactory($uibModal, $auth, $location) {
       var factory = {};
 
       factory.openChangePasswordModal = function() {
@@ -14,6 +14,18 @@
           controller: 'changePasswordController as password',
           size: 'sm',
           windowClass: "modal fade"
+        });
+      };
+
+      factory.deleteUser = function() {
+        $auth.destroyAccount()
+        .then(function(res) {
+          console.log(res);
+          $location.path('/');
+        })
+        .catch(function(err) {
+          console.log(err);
+          $location.path('/');
         });
       };
 
