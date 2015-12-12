@@ -7,7 +7,6 @@
     function confirmEmailController($uibModalInstance, email) {
       var vm = this;
       vm.email = email;
-      console.log(vm.email);
 
       vm.close = function() {
         $uibModalInstance.close();
