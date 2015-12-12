@@ -1,10 +1,10 @@
 (function() {
   angular.module('memPeeps.auth')
-    .controller('successController', successController);
+    .controller('messageController', messageController);
 
-    successController.$inject = ['$uibModalInstance', 'message'];
+    messageController.$inject = ['$uibModalInstance', 'message'];
 
-    function successController($uibModalInstance, message) {
+    function messageController($uibModalInstance, message) {
       var vm = this;
 
       vm.message = message;

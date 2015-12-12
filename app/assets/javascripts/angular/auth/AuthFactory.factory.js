@@ -72,11 +72,12 @@
         $auth.signOut()
           .then(function(resp) {
             $location.path('/');
-            factory.logOutSuccessModalOpen();
+            var message = "You have been logged out.";
+            factory.messageModalOpen(message);
           })
           .catch(function(error) {
-            console.log(error);
-            $location.path('/');
+            var message = 'There was an error logging you out. Please try again';
+            factory.messageModalOpen(message);
           });
       };
 
@@ -95,7 +96,8 @@
         $auth.updatePassword(user)
           .then(function(res) {
             modal.close();
-            factory.passwordChangeSuccessModalOpen();
+            var message = "Your password has been successfully updated.";
+            factory.messageModalOpen(message);
           })
           .catch(function(err) {
             deferred.reject(err);
@@ -103,15 +105,15 @@
           return deferred.promise;
       };
 
-      factory.passwordChangeSuccessModalOpen = function() {
+      factory.messageModalOpen = function(message) {
         var modalInstance = $uibModal.open({
           animation: true,
-          templateUrl: '/partials/auth/_success_modal.html',
-          controller: 'successController as success',
+          templateUrl: '/partials/auth/_message_modal.html',
+          controller: 'messageController as message',
           windowClass: "modal fade",
           resolve: {
             message: function() {
-              return "Your password has been successfully updated.";
+              return message;
             }
           }
         });
@@ -126,20 +128,6 @@
           resolve: {
             email: function() {
               return email;
-            }
-          }
-        });
-      };
-
-      factory.logOutSuccessModalOpen = function() {
-        var modalInstance = $uibModal.open({
-          animation: true,
-          templateUrl: '/partials/auth/_success_modal.html',
-          controller: 'successController as success',
-          windowClass: "modal fade",
-          resolve: {
-            message: function() {
-              return "You have been logged out.";
             }
           }
         });
