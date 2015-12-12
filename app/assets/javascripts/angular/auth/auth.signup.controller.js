@@ -13,7 +13,13 @@
           AuthFactory.signUp(vm.user, $uibModalInstance)
             .catch(function(failure) {
               vm.failureToggle = !vm.failureToggle;
-              vm.error = failure.data.errors.full_messages[0];
+              if (failure.data.errors)
+                vm.error = failure.data.errors.full_messages[0];
+              else {
+                // failure.statusText;
+                vm.error = "An error occured";
+                vm.refresh = true;
+              }
             });
         }
       };

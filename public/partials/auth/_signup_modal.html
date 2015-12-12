@@ -1,6 +1,6 @@
 <div ng-show='auth.error' class="alert text-center" ng-class="{'alert-danger': !auth.failureToggle , 'alert-warning': auth.failureToggle }">
   <h4>{{ auth.error }}.</h4>
-  <p>Please try again</p>
+  <p>Please <span ng-show='auth.refresh'>refresh the page and </span>try again</p>
 </div>
 
 <div ng-hide='auth.error' class="modal-header text-center">
