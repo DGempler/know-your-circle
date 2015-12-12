@@ -7,17 +7,6 @@
     function UserFactory($uibModal, $auth, $location, $rootScope, Upload) {
       var factory = {};
 
-      factory.updateUser = function(user) {
-        $auth.updateAccount(user)
-          .then(function(res) {
-            $location.path('/profile');
-          })
-          .catch(function(err) {
-            $location.path('/profile');
-            console.log(err);
-          });
-      };
-
       factory.updateUserWithImage = function(user) {
         Upload.upload({
           url: 'api/auth',
@@ -34,18 +23,6 @@
         }, function (err) {
             console.log('err');
             console.log(err);
-        });
-      };
-
-      factory.deleteUser = function() {
-        $auth.destroyAccount()
-        .then(function(res) {
-          console.log(res);
-          $location.path('/');
-        })
-        .catch(function(err) {
-          console.log(err);
-          $location.path('/');
         });
       };
 

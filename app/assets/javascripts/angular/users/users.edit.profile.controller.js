@@ -21,7 +21,7 @@
       if (vm.user.image) {
         UserFactory.updateUserWithImage(vm.user);
       } else {
-        UserFactory.updateUser(vm.user);
+        AuthFactory.updateUser(vm.user);
       }
 
     };

@@ -133,6 +133,29 @@
         });
       };
 
+      factory.updateUser = function(user) {
+        $auth.updateAccount(user)
+          .then(function(res) {
+            $location.path('/profile');
+          })
+          .catch(function(err) {
+            $location.path('/profile');
+            console.log(err);
+          });
+      };
+
+      factory.deleteUser = function() {
+        $auth.destroyAccount()
+        .then(function(res) {
+          console.log(res);
+          $location.path('/');
+        })
+        .catch(function(err) {
+          console.log(err);
+          $location.path('/');
+        });
+      };
+
       return factory;
     }
 
