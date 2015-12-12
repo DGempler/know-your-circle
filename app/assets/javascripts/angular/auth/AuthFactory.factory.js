@@ -139,8 +139,8 @@
             $location.path('/profile');
           })
           .catch(function(err) {
-            $location.path('/profile');
-            console.log(err);
+            var message = 'An error occured while trying update your information. Please try again.';
+            factory.messageModalOpen(message);
           });
       };
 
@@ -158,7 +158,7 @@
           $rootScope.user = resp.data.data;
           $location.path('/profile');
         }, function (err) {
-          var message = 'There was an error while updating your information. Please try again';
+          var message = 'An error occured while trying to update your information. Please try again.';
           factory.messageModalOpen(message);
         });
       };
