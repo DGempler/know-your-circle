@@ -166,12 +166,13 @@
       factory.deleteUser = function() {
         $auth.destroyAccount()
         .then(function(res) {
-          console.log(res);
           $location.path('/');
+          var message = 'Your account has been successfully deleted.';
+          factory.messageModalOpen(message);
         })
         .catch(function(err) {
-          console.log(err);
-          $location.path('/');
+          var message = 'An error occured while trying to delete your account. Please try again.';
+          factory.messageModalOpen(message);
         });
       };
 

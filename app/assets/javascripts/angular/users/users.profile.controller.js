@@ -2,9 +2,9 @@
   angular.module('memPeeps.users')
     .controller('profileController', profileController);
 
-  profileController.$inject = ['$rootScope', 'AuthFactory'];
+  profileController.$inject = ['$rootScope', 'UserFactory', 'AuthFactory'];
 
-function profileController($rootScope, AuthFactory) {
+function profileController($rootScope, UserFactory, AuthFactory) {
     var vm = this;
     vm.user = {};
 
@@ -20,10 +20,11 @@ function profileController($rootScope, AuthFactory) {
     }
 
     vm.deleteUser = function() {
-      var areYouSure = confirm("Are you sure you want to delete your account and your whole circle?");
-      if (areYouSure) {
-        AuthFactory.deleteUser();
-      }
+      var message = "Are you sure you want to delete your account and your whole circle?";
+      UserFactory.confirmMessageModalOpen(message)
+        .then(function() {
+          AuthFactory.deleteUser();
+        });
     };
 
     vm.changePassword = function() {
