@@ -106,9 +106,14 @@
       factory.passwordChangeSuccessModalOpen = function() {
         var modalInstance = $uibModal.open({
           animation: true,
-          templateUrl: '/partials/auth/_passwordChangeSuccess_modal.html',
-          controller: 'passwordChangeSuccessController as password',
-          windowClass: "modal fade"
+          templateUrl: '/partials/auth/_success_modal.html',
+          controller: 'successController as success',
+          windowClass: "modal fade",
+          resolve: {
+            message: function() {
+              return "Your password has been successfully updated.";
+            }
+          }
         });
       };
 
@@ -129,9 +134,14 @@
       factory.logOutSuccessModalOpen = function() {
         var modalInstance = $uibModal.open({
           animation: true,
-          templateUrl: '/partials/auth/_logOutSuccess_modal.html',
-          controller: 'logOutSuccessController as logout',
-          windowClass: "modal fade"
+          templateUrl: '/partials/auth/_success_modal.html',
+          controller: 'successController as success',
+          windowClass: "modal fade",
+          resolve: {
+            message: function() {
+              return "You have been logged out.";
+            }
+          }
         });
       };
 
