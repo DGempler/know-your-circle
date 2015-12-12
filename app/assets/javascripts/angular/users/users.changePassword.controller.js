@@ -2,9 +2,9 @@
   angular.module('memPeeps.users')
     .controller('changePasswordController', changePasswordController);
 
-    changePasswordController.$inject = ['$uibModalInstance', 'UserFactory', 'AuthFactory'];
+    changePasswordController.$inject = ['$uibModalInstance', 'AuthFactory'];
 
-    function changePasswordController($uibModalInstance, UserFactory, AuthFactory) {
+    function changePasswordController($uibModalInstance, AuthFactory) {
       var vm = this;
 
       vm.closeModal = function() {

@@ -2,9 +2,9 @@
   angular.module('memPeeps.users')
     .controller('editProfileController', editProfileController);
 
-  editProfileController.$inject=['$rootScope', 'UserFactory', 'AuthFactory'];
+  editProfileController.$inject=['$rootScope', 'AuthFactory'];
 
-  function editProfileController($rootScope, UserFactory, AuthFactory) {
+  function editProfileController($rootScope, AuthFactory) {
     var vm = this;
     vm.user = {};
 
