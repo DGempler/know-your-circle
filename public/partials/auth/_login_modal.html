@@ -1,4 +1,4 @@
-<div ng-show='auth.error' class="alert text-center" ng-class="{'alert-danger': !password.failureToggle , 'alert-warning': password.failureToggle }">
+<div ng-show='auth.error' class="alert text-center" ng-class="{'alert-danger': !auth.failureToggle , 'alert-warning': auth.failureToggle }">
   <h4 >{{ auth.error }}.</h4>
   <p>Please try again</p>
 </div>
