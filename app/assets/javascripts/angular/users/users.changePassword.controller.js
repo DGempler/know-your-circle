@@ -15,7 +15,7 @@
         if (isValid) {
           AuthFactory.submitChangePassword(vm.user, $uibModalInstance)
             .catch(function(failure) {
-              console.log(failure);
+              vm.failureToggle = !vm.failureToggle;
               vm.error = failure.data.errors.full_messages[0];
             });
         }

@@ -12,6 +12,7 @@
         if (isValid) {
           AuthFactory.logIn(vm.user, $uibModalInstance)
             .catch(function(failure) {
+              vm.failureToggle = !vm.failureToggle;
               vm.error = failure.errors[0];
             });
         }
