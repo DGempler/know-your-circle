@@ -11,8 +11,14 @@
         $uibModalInstance.close();
       };
 
-      vm.submitChangePassword = function() {
-        AuthFactory.submitChangePassword(vm.user, $uibModalInstance);
+      vm.submitChangePassword = function(isValid) {
+        if (isValid) {
+          AuthFactory.submitChangePassword(vm.user, $uibModalInstance)
+            .catch(function(failure) {
+              console.log(failure);
+              vm.error = failure.data.errors.full_messages[0];
+            });
+        }
       };
 
     }

@@ -91,15 +91,16 @@
       };
 
       factory.submitChangePassword = function(user, modal) {
+        var deferred = $q.defer();
         $auth.updatePassword(user)
           .then(function(res) {
             modal.close();
             factory.passwordChangeSuccessModalOpen();
           })
           .catch(function(err) {
-            modal.close();
-            console.log(err);
+            deferred.reject(err);
           });
+          return deferred.promise;
       };
 
       factory.passwordChangeSuccessModalOpen = function() {
