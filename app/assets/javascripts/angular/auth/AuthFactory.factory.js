@@ -71,8 +71,8 @@
       factory.logOut = function() {
         $auth.signOut()
           .then(function(resp) {
-            console.log('logged out!');
             $location.path('/');
+            factory.logOutSuccessModalOpen();
           })
           .catch(function(error) {
             console.log(error);
@@ -123,6 +123,15 @@
               return email;
             }
           }
+        });
+      };
+
+      factory.logOutSuccessModalOpen = function() {
+        var modalInstance = $uibModal.open({
+          animation: true,
+          templateUrl: '/partials/auth/_logOutSuccess_modal.html',
+          controller: 'logOutSuccessController as logout',
+          windowClass: "modal fade"
         });
       };
 
