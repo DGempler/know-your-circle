@@ -2,9 +2,9 @@
   angular.module('memPeeps.auth')
     .factory('AuthFactory', AuthFactory);
 
-    AuthFactory.$inject = ['$uibModal', '$auth', '$location', '$q'];
+    AuthFactory.$inject = ['$uibModal', '$auth', '$location', '$q', '$rootScope', 'Upload'];
 
-    function AuthFactory($uibModal, $auth, $location, $q) {
+    function AuthFactory($uibModal, $auth, $location, $q, $rootScope, Upload) {
       var factory = {};
 
       factory.logInOpen = function() {
@@ -142,6 +142,25 @@
             $location.path('/profile');
             console.log(err);
           });
+      };
+
+      factory.updateUserWithImage = function(user) {
+        Upload.upload({
+          url: 'api/auth',
+          method: 'PUT',
+          headers: $auth.retrieveData('auth_headers'),
+          fields: user,
+          arrayKey: '[]',
+          file: user.image,
+          fileFormDataName: 'user[image]',
+        })
+        .then(function (resp) {
+          $rootScope.user = resp.data.data;
+          $location.path('/profile');
+        }, function (err) {
+          var message = 'There was an error while updating your information. Please try again';
+          factory.messageModalOpen(message);
+        });
       };
 
       factory.deleteUser = function() {

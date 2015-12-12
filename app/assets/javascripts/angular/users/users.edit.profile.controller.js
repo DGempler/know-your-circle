@@ -19,7 +19,7 @@
 
     vm.submitUpdateUserAccount = function() {
       if (vm.user.image) {
-        UserFactory.updateUserWithImage(vm.user);
+        AuthFactory.updateUserWithImage(vm.user);
       } else {
         AuthFactory.updateUser(vm.user);
       }
