@@ -21,9 +21,14 @@
     }
 
     vm.submitUpdateUserAccount = function() {
+      console.log(vm.user.deleteImage);
+      console.log(vm.user.image);
       if (vm.user.image) {
         AuthFactory.updateUserWithImage(vm.user);
       } else {
+        if (vm.user.deleteImage) {
+          vm.user.image= null;
+        }
         AuthFactory.updateUser(vm.user);
       }
 
