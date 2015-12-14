@@ -9,3 +9,8 @@ div#check-all {
     -ms-transform: translate(0, 0);
      transform: translate(0, 0);
 }
+
+.extra-top-bottom-margins {
+  margin-top: 10px;
+  margin-bottom: 10px;
+}
