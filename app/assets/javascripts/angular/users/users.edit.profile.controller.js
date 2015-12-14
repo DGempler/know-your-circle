@@ -15,6 +15,9 @@
       if ($rootScope.user.dob) {
         vm.user.dob = new Date($rootScope.user.dob);
       }
+      if (!vm.user.image_updated_at) {
+
+      }
     }
 
     vm.submitUpdateUserAccount = function() {

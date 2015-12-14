@@ -28,7 +28,8 @@
       <div class="form-group">
         <label for="imageFileInput">Headshot</label>
         <input type="file" ng-model="profile.user.image" accept="image/*" id="imageFileInput" ngf-select ngf-pattern="'image/*'" ngf-max-size="5MB" ngf-min-height="50" class="text-info"/>
-        <p class="help-block">Upload an image file of yourself (recommended).</p>
+        <p ng-if='profile.user.image_updated_at' class="help-block">Choose a new profile image. Current image file name: "{{ profile.user.image_file_name }}"</p>
+        <p ng-if='!profile.user.image_updated_at' class="help-block">Upload a profile image of yourself (recommended).</p>
       </div>
     </div>
     <div class='col-sm-6'>
