@@ -1,5 +1,5 @@
 class ApplicationController < ActionController::Base
-  before_action :configure_permitted_parameters, if: :devise_controller?
+  before_action :configure_permitted_parameters, :sign_out_if_token_present, if: :devise_controller?
 
   protected
 
@@ -12,4 +12,12 @@ class ApplicationController < ActionController::Base
   # Prevent CSRF attacks by raising an exception.
   # For APIs, you may want to use :null_session instead.
   protect_from_forgery with: :null_session
+
+  private
+  def sign_out_if_token_present
+    if params[:auth_token].present? and (params[:auth_token] != current_user.authentication_token)
+      sign_out current_user
+    end
+  end
+
 end
