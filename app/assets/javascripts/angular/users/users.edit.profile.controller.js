@@ -2,9 +2,9 @@
   angular.module('memPeeps.users')
     .controller('editProfileController', editProfileController);
 
-  editProfileController.$inject=['$rootScope', 'AuthFactory'];
+  editProfileController.$inject=['$rootScope', 'AuthFactory', '$auth'];
 
-  function editProfileController($rootScope, AuthFactory) {
+  function editProfileController($rootScope, AuthFactory, $auth) {
     var vm = this;
     vm.user = {};
 
@@ -20,11 +20,20 @@
       }
     }
 
+    function removeNullValues() {
+      var newUser = {};
+      for (var key in vm.user) {
+        if (vm.user[key]) {
+          newUser[key] = vm.user[key];
+        }
+      }
+      return newUser;
+    }
+
     vm.submitUpdateUserAccount = function() {
-      console.log(vm.user.deleteImage);
-      console.log(vm.user.image);
       if (vm.user.image) {
-        AuthFactory.updateUserWithImage(vm.user);
+        var submitUser = removeNullValues();
+        AuthFactory.updateUserWithImage(submitUser);
       } else {
         if (vm.user.deleteImage) {
           vm.user.image= null;
