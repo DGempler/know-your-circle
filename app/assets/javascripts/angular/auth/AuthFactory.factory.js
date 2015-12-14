@@ -139,7 +139,14 @@
             $location.path('/profile');
           })
           .catch(function(err) {
-            var message = 'An error occured while trying update your information. Please try again.';
+            var message;
+            if (err.data.errors) {
+              // err.data.errors.full_messages[0];
+              message = "Email address is already in use. Please try again.";
+            } else {
+              // err.statusText;
+              message = 'An error occured while trying update your information. Please try again.';
+            }
             factory.messageModalOpen(message);
           });
       };
