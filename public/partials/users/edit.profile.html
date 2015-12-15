@@ -2,7 +2,7 @@
   <h1>Edit / Add info to your profile</h1>
 </div>
 
-<form ng-submit='profile.submitUpdateUserAccount()'>
+<form ng-submit='profile.submitUpdateUserAccount(editProfileForm.$valid)' name='editProfileForm'>
   <div class='row'>
     <div class='col-sm-6'>
       <div class="form-group">
@@ -34,13 +34,17 @@
         </div>
         <div class='row'>
           <div class='col-sm-7'>
-            <input type="file" ng-model="profile.user.image" accept="image/*" id="imageFileInput" ngf-select ngf-pattern="'image/*'" ngf-max-size="5MB" ngf-min-height="50" class="text-info"/>
+            <input type="file" ng-model="profile.user.image" accept="image/*" id="imageFileInput" ngf-select ngf-pattern="'image/*'" ngf-max-size="5MB" ngf-min-height="50" class="text-info" name="image" />
           </div>
           <div class='col-sm-5'>
             <label ng-show='profile.user.image_updated_at' class="checkbox">
               <input type="checkbox" ng-model='profile.user.deleteImage'>Or check here to remove your headshot.
             </label>
           </div>
+        </div>
+        <div ng-show='profile.buttonClicked' ng-messages="editProfileForm.image.$error" class="text-warning">
+          <p ng-message="minHeight">Image must be a minimum of 50px tall.</p>
+          <p ng-message="maxSize">Image is too large. The maximum allowed is 5 MB.</p>
         </div>
       </div>
     </div>
@@ -73,7 +77,7 @@
       <div class='text-center'>
         <a href='#/profile' class="btn btn-default btn-lg">Cancel</a>
         <a class="btn btn-warning btn-lg"  ng-click='profile.changePassword()'>Change Password</a>
-        <button type="submit" class="btn btn-primary btn-lg">Submit</button>
+        <button type="submit" class="btn btn-primary btn-lg" ng-click='profile.buttonClicked = true'>Submit</button>
       </div>
     </div>
   </div>

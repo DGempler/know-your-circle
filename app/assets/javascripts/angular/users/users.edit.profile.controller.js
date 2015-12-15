@@ -30,17 +30,18 @@
       return newUser;
     }
 
-    vm.submitUpdateUserAccount = function() {
-      if (vm.user.image) {
-        var submitUser = removeNullValues();
-        AuthFactory.updateUserWithImage(submitUser);
-      } else {
-        if (vm.user.deleteImage) {
-          vm.user.image= null;
+    vm.submitUpdateUserAccount = function(isValid) {
+      if (isValid) {
+        if (vm.user.image) {
+          var submitUser = removeNullValues();
+          AuthFactory.updateUserWithImage(submitUser);
+        } else {
+          if (vm.user.deleteImage) {
+            vm.user.image= null;
+          }
+          AuthFactory.updateUser(vm.user);
         }
-        AuthFactory.updateUser(vm.user);
       }
-
     };
 
     vm.changePassword = function() {
