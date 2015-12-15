@@ -1,8 +1,9 @@
 class PeopleController < ApplicationController
   before_action :set_person, only: [:show, :update, :destroy]
+  before_action :authenticate_user!
 
   def index
-    @people = Person.all
+    @people = current_user.people.all
     people = []
     @people.each do |person|
       medium = person.image.url(:medium)
