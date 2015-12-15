@@ -139,8 +139,9 @@
             $location.path('/profile');
           })
           .catch(function(err) {
+            console.log(err);
             var message;
-            if (err.data.errors) {
+            if (err.data.errors.full_messages) {
               // err.data.errors.full_messages[0];
               message = "Email address is already in use. Please try again.";
             } else {
