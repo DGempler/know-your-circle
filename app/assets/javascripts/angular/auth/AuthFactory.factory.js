@@ -125,10 +125,10 @@
       factory.updateUser = function(user) {
         $auth.updateAccount(user)
           .then(function(res) {
+            $rootScope.user = res.data.data;
             $location.path('/profile');
           })
           .catch(function(err) {
-            console.log(err);
             var message;
             if (err.data.errors.full_messages) {
               // err.data.errors.full_messages[0];
@@ -145,7 +145,6 @@
         Upload.upload({
           url: 'api/auth',
           method: 'PUT',
-          headers: $auth.retrieveData('auth_headers'),
           fields: user,
           arrayKey: '[]',
           file: user.image,
