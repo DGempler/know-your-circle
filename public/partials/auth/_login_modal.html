@@ -11,8 +11,8 @@
   <form ng-submit='auth.logIn(logInForm.$valid)' name="logInForm" novalidate>
 
     <div class="form-group">
-      <label for="email">Email address</label>
-      <input ng-model="auth.user.email" type="email" class="form-control" id="email" placeholder='Email' autofocus required="required" name='email'>
+      <label for="email">Email Address</label>
+      <input ng-model="auth.user.email" type="email" class="form-control" id="email" placeholder='Email Address' autofocus required="required" name='email'>
       <div ng-show='password.buttonClicked' ng-messages="logInForm.email.$error" class="text-warning">
         <p ng-message="required">Email is required.</p>
         <p ng-message="email">Your email address is invalid. Please try again.</p>
