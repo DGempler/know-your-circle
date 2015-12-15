@@ -27,8 +27,8 @@
     </div>
 
     <div class="form-group">
-      <label for="email">Email address</label>
-      <input ng-model="auth.user.email" type="email" class="form-control" id="email" placeholder='Email' required="required" name='email'>
+      <label for="email">Email Address</label>
+      <input ng-model="auth.user.email" type="email" class="form-control" id="email" placeholder='Email Address' required="required" name='email'>
       <div ng-show='password.buttonClicked' ng-messages="signUpForm.email.$error" class="text-warning">
         <p ng-message="required">Email is required.</p>
         <p ng-message="email">Your email address is invalid. Please try again.</p>
@@ -37,7 +37,7 @@
 
     <div class="form-group">
       <label for="password">Password</label>
-      <input ng-model="auth.user.password" type="password" class="form-control" id="password" placeholder='Passwords are case-sensitive' required="required" name='password' minlength="8" maxlength="72" >
+      <input ng-model="auth.user.password" type="password" class="form-control" id="password" placeholder='Password' required="required" name='password' minlength="8" maxlength="72" >
       <div ng-show='password.buttonClicked' ng-messages="signUpForm.password.$error" class="text-warning">
         <div ng-messages-include="partials/auth/messages.html"></div>
       </div>
