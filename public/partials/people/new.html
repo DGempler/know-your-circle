@@ -13,9 +13,10 @@
         <label for="lastNameInput">Last Name</label>
         <input ng-model="person.person.last_name" type="text" class="form-control" id="lastNameInput"  placeholder='Required' required />
       </div>
-      <div class="btn-group" data-toggle='buttons'>
-        <label class='btn btn-default' ng-click='person.person.sex = "Male"' ng-class='{"active": person.person.sex === "Male"}'><input type="radio" />Male</label>
-        <label class='btn btn-default' ng-click='person.person.sex = "Female"' ng-class='{"active": person.person.sex === "Female"}'><input type="radio" />Female</label>
+      <div class="form-group">
+        <label for="imageFileInput">Headshot</label>
+        <input type="file" ng-model="person.person.image" accept="image/*" id="imageFileInput" ngf-select ngf-pattern="'image/*'" ngf-max-size="5MB" ngf-min-height="50" class="text-info"/>
+        <p class="help-block">Upload an image file of your person (recommended for games).</p>
       </div>
       <div class="form-group">
         <label for="nicknameInput">Nickname</label>
@@ -28,10 +29,9 @@
         </a>
         <input ng-repeat='hint in person.person.hints track by $index' type="text" class="form-control" ng-model='person.person.hints[$index]' id='hintInput' />
       </div>
-      <div class="form-group">
-        <label for="imageFileInput">Headshot</label>
-        <input type="file" ng-model="person.person.image" accept="image/*" id="imageFileInput" ngf-select ngf-pattern="'image/*'" ngf-max-size="5MB" ngf-min-height="50" class="text-info"/>
-        <p class="help-block">Upload an image file of your person (recommended for games).</p>
+      <div class="btn-group extra-bottom-margins" data-toggle='buttons'>
+        <label class='btn btn-default' ng-click='person.person.sex = "Male"' ng-class='{"active": person.person.sex === "Male"}'><input type="radio" />Male</label>
+        <label class='btn btn-default' ng-click='person.person.sex = "Female"' ng-class='{"active": person.person.sex === "Female"}'><input type="radio" />Female</label>
       </div>
     </div>
     <div ng-show='person.addedInputFields' class='col-sm-6'>
@@ -60,9 +60,9 @@
   <div class='row'>
     <div class='col-sm-6 col-sm-offset-3'>
       <div class='text-center'>
-        <a href='#/people/index' class="btn btn-default btn-lg">Cancel</a>
-        <a ng-click='person.addInputFields()' ng-hide='person.addedInputFields' class="btn btn-success btn-lg">Add more details</a>
-        <button type="submit" class="btn btn-primary btn-lg">Submit</button>
+        <a href='#/people/index' class="btn btn-default">Cancel</a>
+        <a ng-click='person.addInputFields()' ng-hide='person.addedInputFields' class="btn btn-success">Add more details</a>
+        <button type="submit" class="btn btn-primary">Submit</button>
       </div>
     </div>
   </div>

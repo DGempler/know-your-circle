@@ -14,3 +14,7 @@ div#check-all {
   margin-top: 10px;
   margin-bottom: 10px;
 }
+
+.extra-bottom-margins {
+  margin-bottom: 10px;
+}
