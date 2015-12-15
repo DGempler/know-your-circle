@@ -1,4 +1,8 @@
 class Person < ActiveRecord::Base
+  belongs_to :user
+  has_many :memberships, dependent: :destroy
+  has_many :groups, through: :memberships
+
   validates_presence_of :first_name, :last_name
 
   # This method associates the attribute ":image_url" with a file attachment
