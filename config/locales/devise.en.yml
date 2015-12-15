@@ -2,7 +2,7 @@ en:
   devise:
     mailer:
       confirmation_instructions:
-        subject: "Know Your Circle Email Confirmation instructions"
+        subject: "Confirm your email with Know Your Circle"
   #     reset_password_instructions:
   #       subject: "Reset password instructions"
   #     unlock_instructions:
