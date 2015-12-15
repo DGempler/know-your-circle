@@ -60,7 +60,7 @@
         $auth.submitRegistration(user)
           .then(function(resp) {
             modal.close();
-            factory.confirmEmailModalOpen(resp.data.data.email);
+            factory.messageModalOpen(null, resp.data.data.email);
           })
           .catch(function(error) {
             deferred.reject(error);
@@ -105,7 +105,7 @@
           return deferred.promise;
       };
 
-      factory.messageModalOpen = function(message) {
+      factory.messageModalOpen = function(message, email) {
         var modalInstance = $uibModal.open({
           animation: true,
           templateUrl: '/partials/auth/_message_modal.html',
@@ -114,18 +114,7 @@
           resolve: {
             message: function() {
               return message;
-            }
-          }
-        });
-      };
-
-      factory.confirmEmailModalOpen = function(email) {
-        var modalInstance = $uibModal.open({
-          animation: true,
-          templateUrl: '/partials/auth/_confirmEmail_modal.html',
-          controller: 'confirmEmailController as confirm',
-          windowClass: "modal fade",
-          resolve: {
+            },
             email: function() {
               return email;
             }
