@@ -17,7 +17,7 @@ class PeopleController < ApplicationController
   end
 
   def create
-    @person = Person.new person_params
+    @person = current_user.people.new person_params
     if @person.save
       render json: @person, status: :created
     else
