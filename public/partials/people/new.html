@@ -29,9 +29,22 @@
         </a>
         <input ng-repeat='hint in person.person.hints track by $index' type="text" class="form-control" ng-model='person.person.hints[$index]' id='hintInput' />
       </div>
-      <div class="btn-group extra-bottom-margins" data-toggle='buttons'>
-        <label class='btn btn-default' ng-click='person.person.sex = "Male"' ng-class='{"active": person.person.sex === "Male"}'><input type="radio" />Male</label>
-        <label class='btn btn-default' ng-click='person.person.sex = "Female"' ng-class='{"active": person.person.sex === "Female"}'><input type="radio" />Female</label>
+      <div class='row'>
+        <div class='col-sm-4'>
+          <div class="btn-group extra-bottom-margins" data-toggle='buttons'>
+            <label class='btn btn-default' ng-click='person.person.sex = "Male"' ng-class='{"active": person.person.sex === "Male"}'><input type="radio" />Male</label>
+            <label class='btn btn-default' ng-click='person.person.sex = "Female"' ng-class='{"active": person.person.sex === "Female"}'><input type="radio" />Female</label>
+          </div>
+        </div>
+        <div class='col-sm-8'>
+          <div class="form-group">
+            <label for="group-select" class="col-lg-2 control-label">Group</label>
+            <div class="col-lg-10">
+              <select class="form-control" id="group-select" ng-model="person.person.group" ng-options="g as g for g in person.person.groups" ng-change='person.getGroup()'>
+              </select>
+            </div>
+          </div>
+        </div>
       </div>
     </div>
     <div ng-show='person.addedInputFields' class='col-sm-6'>
