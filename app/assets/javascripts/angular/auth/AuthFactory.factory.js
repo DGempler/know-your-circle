@@ -76,7 +76,7 @@
             factory.messageModalOpen(message);
           })
           .catch(function(error) {
-            var message = 'There was an error logging you out. Please try again';
+            var message = 'There was an error logging you out. Please try again.';
             factory.messageModalOpen(message);
           });
       };
