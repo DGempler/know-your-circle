@@ -22,9 +22,9 @@
 
     function removeNullValues() {
       var newUser = {};
-      for (var key in vm.user) {
-        if (vm.user[key]) {
-          newUser[key] = vm.user[key];
+      for (var prop in vm.user) {
+        if (vm.user[prop] || $rootScope.user[prop]) {
+          newUser[prop] = vm.user[prop];
         }
       }
       return newUser;
