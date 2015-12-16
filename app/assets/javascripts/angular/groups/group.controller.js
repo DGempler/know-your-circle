@@ -41,10 +41,17 @@
 
       vm.editGroup = function(group) {
         vm.group.edit = group;
+        vm.group.editName = group.name;
       };
 
       vm.submitEditGroup = function() {
+        GroupFactory.updateGroup(vm.group.edit.id, vm.group.editName)
+          .then(function(group) {
 
+          })
+          .catch(function(error) {
+            console.log(error);
+          });
       };
 
     }
