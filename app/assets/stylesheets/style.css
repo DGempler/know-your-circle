@@ -18,3 +18,7 @@ div#check-all {
 .extra-bottom-margins {
   margin-bottom: 10px;
 }
+
+.label {
+    margin-left: 5px;
+}

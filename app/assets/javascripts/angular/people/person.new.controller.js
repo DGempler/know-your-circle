@@ -13,7 +13,8 @@
 
     vm.getGroup = function() {
       if (vm.person.group === 'Create a new group') {
-        GroupFactory.openNewGroupModal();
+        //actually send original groups from server, not created groups
+        GroupFactory.openNewGroupModal(vm.person.groups);
       }
     };
 
