@@ -68,7 +68,7 @@
       }
     };
 
-    vm.editLabels = function() {
+    vm.editGroups = function() {
       GroupFactory.openGroupModal(vm.groups);
     };
 
