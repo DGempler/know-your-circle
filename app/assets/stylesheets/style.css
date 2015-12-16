@@ -28,6 +28,11 @@
     display: inline-block;
 }
 
+.label a {
+  text-decoration: none;
+  color: white;
+}
+
 span.glyphicon.glyphicon-remove {
   color: white;
 }

@@ -39,6 +39,10 @@
           });
       };
 
+      vm.editGroup = function(id) {
+        console.log(id);
+      }
+
 
     }
 

@@ -6,10 +6,15 @@
   <div>
     <h5>Click to edit or delete:</h5>
     <div class='extra-bottom-margins'>
-      <span class="label label-info" ng-repeat='group in modal.group.groups'>{{ group.name }} <a href='' ng-click='modal.deleteGroup(group.id)'><span class="glyphicon glyphicon-remove" aria-hidden="true"></span></a></span>
+      <span class="label label-info" ng-repeat='group in modal.group.groups'>
+        <a href='' ng-click='modal.editGroup(group.id)'>{{ group.name }}</a>&nbsp;
+        <a href='' ng-click='modal.deleteGroup(group.id)'>
+          <span class="glyphicon glyphicon-remove" aria-hidden="true"></span>
+        </a>
+      </span>
     </div>
   </div>
-  <a class="btn btn-primary btn-block" href="#" role="button" ng-click='modal.showNewForm = true' ng-show='!modal.showNewForm'>Add Group</a>
+  <a class="btn btn-primary btn-block" href="" role="button" ng-click='modal.showNewForm = true' ng-show='!modal.showNewForm'>Add Group</a>
   <form ng-show='modal.showNewForm' ng-submit='modal.submitNewGroup()'>
     <div class="form-group">
       <label for="new-group">New group name</label>
