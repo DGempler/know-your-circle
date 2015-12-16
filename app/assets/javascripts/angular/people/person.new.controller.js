@@ -8,17 +8,18 @@
     var vm = this;
     vm.person = {};
     vm.person.hints = [""];
+    vm.person.groups = [];
     var originalGroups;
 
     function getGroups() {
       GroupFactory.getGroups()
         .then(function(groups) {
           originalGroups = groups;
-          vm.person.groups = [];
+          vm.groups = [];
           groups.forEach(function(group) {
-            vm.person.groups.push(group);
+            vm.groups.push(group);
           });
-          vm.person.groups.push({name: 'Create a new group'});
+          vm.groups.push({name: 'Create a new group'});
         })
         .catch(function(error) {
           console.log(error);
@@ -26,20 +27,24 @@
     }
 
     vm.groupSelected = function() {
-      if (vm.person.group.name === 'Create a new group') {
-        vm.person.group = "";
+      if (vm.chosenGroup.name === 'Create a new group') {
+        vm.chosenGroup = "";
         GroupFactory.openNewGroupModal(originalGroups)
           .then(function(groups) {
             originalGroups = groups;
-            vm.person.groups = [];
+            vm.groups = [];
             groups.forEach(function(group) {
-              vm.person.groups.push(group);
+              vm.groups.push(group);
             });
-            vm.person.groups.push({name: 'Create a new group'});
+            vm.groups.push({name: 'Create a new group'});
           })
           .catch(function() {
             getGroups();
           });
+      } else {
+        console.log(vm.chosenGroup);
+        vm.person.groups.push(vm.chosenGroup);
+        vm.chosenGroup = "";
       }
     };
 
