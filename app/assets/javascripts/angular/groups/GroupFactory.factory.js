@@ -8,6 +8,7 @@
       var factory = {};
 
       factory.openNewGroupModal = function(groups) {
+        var deferred = $q.defer();
         var modalInstance = $uibModal.open({
           animation: true,
           templateUrl: '/partials/groups/_group_new_modal.html',
@@ -20,6 +21,14 @@
             }
           }
         });
+
+        modalInstance.result.then(function(groups) {
+          deferred.resolve(groups);
+        }, function() {
+          deffered.reject();
+        });
+
+        return deferred.promise;
       };
 
       factory.submitNewGroup = function(group) {

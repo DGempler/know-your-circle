@@ -10,7 +10,7 @@
       vm.group.groups = groups;
 
       vm.close = function() {
-        $uibModalInstance.close();
+        $uibModalInstance.close(vm.group.groups);
       };
 
       vm.submitNewGroup = function() {

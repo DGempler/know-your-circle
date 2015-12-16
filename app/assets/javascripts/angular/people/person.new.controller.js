@@ -8,15 +8,16 @@
     var vm = this;
     vm.person = {};
     vm.person.hints = [""];
-    var originalGroups = [];
+    vm.person.groups = [];
+    var originalGroups;
 
     function getGroups() {
       GroupFactory.getGroups()
         .then(function(groups) {
+          originalGroups = groups;
           groups.forEach(function(group) {
-            originalGroups.push(group);
+            vm.person.groups.push(group);
           });
-          vm.person.groups = groups;
           vm.person.groups.push({name: 'Create a new group'});
         })
         .catch(function(error) {
@@ -26,8 +27,19 @@
 
     vm.groupSelected = function() {
       if (vm.person.group.name === 'Create a new group') {
-        GroupFactory.openNewGroupModal(originalGroups);
         vm.person.group = "";
+        GroupFactory.openNewGroupModal(originalGroups)
+          .then(function(groups) {
+            originalGroups = groups;
+            vm.person.groups = [];
+            groups.forEach(function(group) {
+              vm.person.groups.push(group);
+            });
+            vm.person.groups.push({name: 'Create a new group'});
+          })
+          .catch(function() {
+            console.log('There was an error, or nothing that I could return');
+          });
       }
     };
 
