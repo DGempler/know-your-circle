@@ -25,7 +25,7 @@
         modalInstance.result.then(function(groups) {
           deferred.resolve(groups);
         }, function() {
-          deffered.reject();
+          deferred.reject();
         });
 
         return deferred.promise;

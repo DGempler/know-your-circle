@@ -8,13 +8,13 @@
     var vm = this;
     vm.person = {};
     vm.person.hints = [""];
-    vm.person.groups = [];
     var originalGroups;
 
     function getGroups() {
       GroupFactory.getGroups()
         .then(function(groups) {
           originalGroups = groups;
+          vm.person.groups = [];
           groups.forEach(function(group) {
             vm.person.groups.push(group);
           });
@@ -38,7 +38,7 @@
             vm.person.groups.push({name: 'Create a new group'});
           })
           .catch(function() {
-            console.log('There was an error, or nothing that I could return');
+            getGroups();
           });
       }
     };
