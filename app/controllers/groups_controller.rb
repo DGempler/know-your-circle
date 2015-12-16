@@ -17,25 +17,23 @@ class GroupsController < ApplicationController
   end
 
   def show
-    medium = @person.image.url(:medium)
-    thumb = @person.image.url(:thumb)
-    @person = @person.as_json
-    @person[:medium] = medium
-    @person[:thumb] = thumb
-    render json: @person, status: :ok
+    render json: @group, status: :ok
   end
 
   def update
-    if @person.update group_params
-      render json: @person, status: :ok
+    if @group.update group_params
+      render json: @group, status: :ok
     else
-      render json: @person.errors, status: :unprocessable_entity
+      render json: @group.errors, status: :unprocessable_entity
     end
   end
 
   def destroy
-    @person.destroy
-    render json: @person, status: :ok
+    if @group.destroy
+      render json: @group, status: :ok
+    else
+      render json: @group.errors, status: :unprocessable_entity
+    end
   end
 
   private
@@ -43,7 +41,7 @@ class GroupsController < ApplicationController
     params.require(:group).permit(:name)
   end
 
-  def set_person
+  def set_group
     @group = current_user.groups.find(params[:id])
   end
 

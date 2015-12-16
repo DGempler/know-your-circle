@@ -28,9 +28,9 @@
       vm.deleteGroup = function(id) {
         GroupFactory.deleteGroup(id)
           .then(function(group) {
-            vm.groups.groups.forEach(function(orGroup, index) {
+            vm.group.groups.forEach(function(orGroup, index) {
               if (group.id === orGroup.id) {
-                vm.groups.groups.splice(index, 1);
+                vm.group.groups.splice(index, 1);
               }
             });
           })
