@@ -11,10 +11,21 @@
     vm.person.group_ids = [];
     var originalGroups;
 
+    function cleanGroupIds(groupIds, allGroups) {
+      var newGroupIds = [];
+      allGroups.forEach(function(group) {
+        if (groupIds.indexOf(group.id) !== -1) {
+          newGroupIds.push(group.id);
+        }
+      });
+      return newGroupIds;
+    }
+
     function getGroups() {
       GroupFactory.getGroups()
         .then(function(groups) {
           originalGroups = groups;
+          vm.person.group_ids = cleanGroupIds(vm.person.group_ids, groups);
           vm.groups = [];
           groups.forEach(function(group) {
             vm.groups.push(group);
@@ -32,6 +43,7 @@
         GroupFactory.openNewGroupModal(originalGroups)
           .then(function(groups) {
             originalGroups = groups;
+            vm.person.group_ids = cleanGroupIds(vm.person.group_ids, groups);
             vm.groups = [];
             groups.forEach(function(group) {
               vm.groups.push(group);
