@@ -40,6 +40,8 @@
       };
 
       vm.editGroup = function(group) {
+        vm.showEditForm = true;
+        vm.showNewForm = false;
         vm.group.edit = group;
         vm.group.editName = group.name;
       };

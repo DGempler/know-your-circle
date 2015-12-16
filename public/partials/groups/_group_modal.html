@@ -7,7 +7,7 @@
     <h5>Click to edit or delete:</h5>
     <div class='extra-bottom-margins'>
       <span class="label label-info" ng-repeat='group in modal.group.groups'>
-        <a href='' ng-click='modal.editGroup(group); modal.showEditForm = true'>{{ group.name }}</a>&nbsp;
+        <a href='' ng-click='modal.editGroup(group)'>{{ group.name }}</a>&nbsp;
         <a href='' ng-click='modal.deleteGroup(group.id)'>
           <span class="glyphicon glyphicon-remove" aria-hidden="true"></span>
         </a>
@@ -19,16 +19,16 @@
       <label for="new-group">New group name</label>
       <input ng-model="modal.group.new" type="new-group" class="form-control" id="new-group" autofocus required="required" >
     </div>
-    <button type="submit" class="btn btn-warning btn-block">Submit</button>
+    <button type="submit" class="btn btn-primary btn-block">Submit</button>
   </form>
   <form class='extra-bottom-margins' ng-show='modal.showEditForm' ng-submit='modal.submitEditGroup()'>
     <div class="form-group">
       <label for="new-group">Change group name</label>
       <input ng-model="modal.group.editName" type="new-group" class="form-control" id="new-group" autofocus required="required" >
     </div>
-    <button type="submit" class="btn btn-warning btn-block">Submit</button>
+    <button type="submit" class="btn btn-warning btn-block">Submit Name</button>
   </form>
-  <a class="btn btn-primary btn-block" href="" role="button" ng-click='modal.showNewForm = true' ng-show='!modal.showNewForm'>Add Group</a>
+  <a class="btn btn-primary btn-block" href="" role="button" ng-click='modal.showNewForm = true; modal.showEditForm = false' ng-show='!modal.showNewForm'>Add Group</a>
 </div>
 
 <div class="modal-footer">
