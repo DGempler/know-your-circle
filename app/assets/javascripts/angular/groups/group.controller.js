@@ -10,7 +10,7 @@
       vm.group.groups = groups;
 
       vm.close = function() {
-        // $uibModalInstance.close(vm.group.groups);
+        $uibModalInstance.close();
       };
 
       vm.submitNewGroup = function() {
@@ -40,9 +40,8 @@
       };
 
       vm.editGroup = function(id) {
-        console.log(id);
-      }
 
+      };
 
     }
 
