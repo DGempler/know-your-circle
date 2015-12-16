@@ -45,17 +45,23 @@
       };
 
       vm.submitEditGroup = function() {
-        GroupFactory.updateGroup(vm.group.edit.id, vm.group.editName)
-          .then(function(updatedGroup) {
-            vm.group.groups.forEach(function(oldGroup, index) {
-              if (oldGroup.id === updatedGroup.id) {
-                vm.group.groups[index] = updatedGroup;
-              }
+        if (vm.group.editName !== vm.group.edit.name) {
+          GroupFactory.updateGroup(vm.group.edit.id, vm.group.editName)
+            .then(function(updatedGroup) {
+              vm.group.edit = {};
+              vm.group.editName = "";
+              vm.group.groups.forEach(function(oldGroup, index) {
+                if (oldGroup.id === updatedGroup.id) {
+                  vm.group.groups[index] = updatedGroup;
+                }
+              });
+            })
+            .catch(function(error) {
+              console.log(error);
             });
-          })
-          .catch(function(error) {
-            console.log(error);
-          });
+        } else {
+          console.log('no change!');
+        }
       };
 
     }
