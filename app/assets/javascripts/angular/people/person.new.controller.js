@@ -50,6 +50,14 @@
       }
     };
 
+    vm.removeGroup = function(id) {
+      vm.person.groups.forEach(function(group, index) {
+        if (id === group.id) {
+          vm.person.groups.splice(index, 1);
+        }
+      });
+    };
+
     // prevent "null" from being sent as a value to server if form field is left blank
     function removeNullValues(submittedPerson, newPerson) {
       for (var key in submittedPerson) {
