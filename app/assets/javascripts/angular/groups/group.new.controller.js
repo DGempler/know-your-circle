@@ -14,8 +14,13 @@
       };
 
       vm.submitNewGroup = function() {
-        console.log('submited new group ' + vm.group.new);
-        // GroupFactory.submitNewGroup(vm.group.new);
+        GroupFactory.submitNewGroup({name: vm.group.new})
+          .then(function(data) {
+            console.log(data);
+          })
+          .catch(function(err) {
+            console.log(err);
+          });
       };
 
 

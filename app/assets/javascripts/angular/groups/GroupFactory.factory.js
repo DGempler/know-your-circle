@@ -2,9 +2,9 @@
   angular.module('memPeeps.groups')
     .factory('GroupFactory', GroupFactory);
 
-    GroupFactory.$inject = ['$uibModal', '$q'];
+    GroupFactory.$inject = ['$uibModal', '$q', 'Group'];
 
-    function GroupFactory($uibModal, $q) {
+    function GroupFactory($uibModal, $q, Group) {
       var factory = {};
 
       factory.openNewGroupModal = function(groups) {
@@ -23,7 +23,17 @@
       };
 
       factory.submitNewGroup = function(group) {
-
+        var deferred = $q.defer();
+        var newGroup = new Group(group);
+        newGroup.$save
+          .then(function(res) {
+          console.log(res);
+          deferred.resolve(res);
+        })
+          .catch(function(err) {
+            deferred.reject(err);
+          });
+        return deferred.promise;
       };
 
       return factory;
