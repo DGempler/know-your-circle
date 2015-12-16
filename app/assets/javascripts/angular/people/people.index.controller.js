@@ -69,7 +69,7 @@
     };
 
     vm.editLabels = function() {
-
+      GroupFactory.openGroupModal(vm.groups);
     };
 
     getPeople();

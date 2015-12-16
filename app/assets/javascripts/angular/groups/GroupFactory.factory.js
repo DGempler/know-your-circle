@@ -31,6 +31,21 @@
         return deferred.promise;
       };
 
+      factory.openGroupModal = function(groups) {
+        var modalInstance = $uibModal.open({
+          animation: true,
+          templateUrl: '/partials/groups/_group_modal.html',
+          controller: 'groupController as modal',
+          windowClass: "modal fade",
+          resolve: {
+            groups: function() {
+              return groups;
+            }
+          }
+        });
+
+      };
+
       factory.submitNewGroup = function(group) {
         var deferred = $q.defer();
         var newGroup = new Group({ name: group });
