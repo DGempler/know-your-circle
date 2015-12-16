@@ -39,7 +39,11 @@
           });
       };
 
-      vm.editGroup = function(id) {
+      vm.editGroup = function(group) {
+        vm.group.edit = group;
+      };
+
+      vm.submitEditGroup = function() {
 
       };
 
