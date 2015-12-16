@@ -3,13 +3,6 @@
 </div>
 
 <div class="modal-body">
-  <div>
-    <h5>Current groups:</h5>
-    <div>
-      <span class="label label-info" ng-repeat='group in modal.group.groups'>{{ group.name }} <a href='' ng-click='modal.deleteGroup(group.id)'><span class="glyphicon glyphicon-remove" aria-hidden="true"></span></a></span>
-    </div>
-  </div>
-  <br />
   <form ng-submit='modal.submitNewGroup()'>
       <div class="form-group">
         <label for="new-group">New group name</label>
@@ -19,6 +12,14 @@
       <button type="submit" class="btn btn-primary btn-block">Submit</button>
 
     </form>
+  <div>
+    <h5>All of your current groups:</h5>
+    <!-- <p>(deleting them here will remove them for all people)</p> -->
+    <div>
+      <span class="label label-info" ng-repeat='group in modal.group.groups'>{{ group.name }} <a href='' ng-click='modal.deleteGroup(group.id)'><span class="glyphicon glyphicon-remove" aria-hidden="true"></span></a></span>
+    </div>
+  </div>
+  <br />
 </div>
 
 <div class="modal-footer">
