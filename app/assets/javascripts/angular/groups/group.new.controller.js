@@ -15,7 +15,7 @@
 
       vm.submitNewGroup = function() {
         console.log('submited new group ' + vm.group.new);
-        // GroupFactory.submitGroup(vm.group.new);
+        // GroupFactory.submitNewGroup(vm.group.new);
       };
 
 

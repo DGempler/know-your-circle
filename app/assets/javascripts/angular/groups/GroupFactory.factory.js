@@ -22,6 +22,10 @@
         });
       };
 
+      factory.submitNewGroup = function(group) {
+
+      };
+
       return factory;
     }
 })();

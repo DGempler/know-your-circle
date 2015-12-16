@@ -8,11 +8,11 @@
     var vm = this;
     vm.person = {};
     vm.person.hints = [""];
-    vm.person.groups = ['friends', 'enemies'];
-    vm.person.groups.push('Create a new group');
+    vm.person.groups = [{name: 'friends'}, {name: 'enemies'}];
+    vm.person.groups.push({name: 'Create a new group'});
 
     vm.getGroup = function() {
-      if (vm.person.group === 'Create a new group') {
+      if (vm.person.group.name === 'Create a new group') {
         //actually send original groups from server, not created groups
         GroupFactory.openNewGroupModal(vm.person.groups);
       }
