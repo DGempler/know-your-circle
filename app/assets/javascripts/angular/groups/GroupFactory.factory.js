@@ -35,7 +35,7 @@
         var modalInstance = $uibModal.open({
           animation: true,
           templateUrl: '/partials/groups/_group_modal.html',
-          controller: 'groupNewController as modal',
+          controller: 'groupController as modal',
           windowClass: "modal fade",
           size: 'sm',
           resolve: {
