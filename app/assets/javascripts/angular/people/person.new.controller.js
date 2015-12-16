@@ -42,7 +42,6 @@
             getGroups();
           });
       } else {
-        console.log(vm.chosenGroup);
         if (vm.person.groups.indexOf(vm.chosenGroup) === -1) {
           vm.person.groups.push(vm.chosenGroup);
         }
