@@ -2,9 +2,9 @@
   angular.module('memPeeps.people')
     .controller('personNewController', personNewController);
 
-  personNewController.$inject = ['PersonFactory', '$location'];
+  personNewController.$inject = ['PersonFactory', '$location', 'GroupFactory'];
 
-  function personNewController(PersonFactory, $location) {
+  function personNewController(PersonFactory, $location, GroupFactory) {
     var vm = this;
     vm.person = {};
     vm.person.hints = [""];
@@ -13,7 +13,7 @@
 
     vm.getGroup = function() {
       if (vm.person.group === 'Create a new group') {
-        console.log('open sesame!');
+        GroupFactory.openNewGroupModal();
       }
     };
 

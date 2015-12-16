@@ -1,3 +1,3 @@
 (function() {
-  angular.module('memPeeps.groups', []);
+  angular.module('memPeeps.groups', ['ngResource', 'ui.bootstrap']);
 })();
