@@ -27,15 +27,13 @@
         var newGroup = new Group(group);
         newGroup.$save()
           .then(function(res) {
-          console.log(res);
-          deferred.resolve(res);
-        })
+            deferred.resolve(res);
+          })
           .catch(function(err) {
             deferred.reject(err);
           });
         return deferred.promise;
       };
-
       return factory;
     }
 })();

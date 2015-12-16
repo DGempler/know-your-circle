@@ -16,7 +16,7 @@
       vm.submitNewGroup = function() {
         GroupFactory.submitNewGroup({name: vm.group.new})
           .then(function(data) {
-            console.log(data);
+            vm.group.groups.push(data);
           })
           .catch(function(err) {
             console.log(err);
