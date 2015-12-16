@@ -46,8 +46,12 @@
 
       vm.submitEditGroup = function() {
         GroupFactory.updateGroup(vm.group.edit.id, vm.group.editName)
-          .then(function(group) {
-            console.log(group);
+          .then(function(updatedGroup) {
+            vm.group.groups.forEach(function(oldGroup, index) {
+              if (oldGroup.id === updatedGroup.id) {
+                vm.group.groups[index] = updatedGroup;
+              }
+            });
           })
           .catch(function(error) {
             console.log(error);
