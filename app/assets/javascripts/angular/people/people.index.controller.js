@@ -2,16 +2,28 @@
   angular.module('memPeeps.people')
     .controller('peopleIndexController', peopleIndexController);
 
-  peopleIndexController.$inject = ['PersonFactory', '$q'];
+  peopleIndexController.$inject = ['PersonFactory', 'GroupFactory', '$q'];
 
-  function peopleIndexController(PersonFactory, $q) {
+  function peopleIndexController(PersonFactory, GroupFactory, $q) {
     var vm = this;
 
     function getPeople() {
       PersonFactory.getPeople().then(function(people) {
         vm.people = people;
+        getGroups();
       });
     }
+
+    function getGroups() {
+      GroupFactory.getGroups()
+        .then(function(groups) {
+          vm.groups = groups;
+        })
+        .catch(function(error) {
+          console.log(error);
+        });
+    }
+
 
     function deleteSelected() {
       var promiseArray = [];
@@ -54,6 +66,10 @@
       if (confirmDelete) {
         deleteSelected();
       }
+    };
+
+    vm.editLabels = function() {
+
     };
 
     getPeople();
