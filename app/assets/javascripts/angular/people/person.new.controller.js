@@ -8,7 +8,7 @@
     var vm = this;
     vm.person = {};
     vm.person.hints = [""];
-    vm.person.groups = [];
+    vm.person.group_ids = [];
     var originalGroups;
 
     function getGroups() {
@@ -42,17 +42,17 @@
             getGroups();
           });
       } else {
-        if (vm.person.groups.indexOf(vm.chosenGroup) === -1) {
-          vm.person.groups.push(vm.chosenGroup);
+        if (vm.person.group_ids.indexOf(vm.chosenGroup.id) === -1) {
+          vm.person.group_ids.push(vm.chosenGroup.id);
         }
         vm.chosenGroup = "";
       }
     };
 
-    vm.removeGroup = function(id) {
-      vm.person.groups.forEach(function(group, index) {
-        if (id === group.id) {
-          vm.person.groups.splice(index, 1);
+    vm.removeGroup = function(removeId) {
+      vm.person.group_ids.forEach(function(groupId, index) {
+        if (removeId === groupId) {
+          vm.person.group_ids.splice(index, 1);
         }
       });
     };
