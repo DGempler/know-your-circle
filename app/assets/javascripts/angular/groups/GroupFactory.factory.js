@@ -8,7 +8,12 @@
       var factory = {};
 
       factory.openNewGroupModal = function() {
-        console.log('ha ha open!');
+        var modalInstance = $uibModal.open({
+          animation: true,
+          templateUrl: '/partials/groups/_group_new_modal.html',
+          controller: 'groupNewController as group',
+          windowClass: "modal fade",
+        });
       };
 
       return factory;
