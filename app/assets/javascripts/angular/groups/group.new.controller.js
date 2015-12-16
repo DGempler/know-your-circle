@@ -17,9 +17,11 @@
         GroupFactory.submitNewGroup({name: vm.group.new})
           .then(function(data) {
             vm.group.groups.push(data);
+            vm.group.new = "";
           })
           .catch(function(err) {
             console.log(err);
+            vm.group.new = "";
           });
       };
 
