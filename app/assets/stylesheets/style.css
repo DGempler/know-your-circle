@@ -1,7 +1,11 @@
 .nav, .pagination, .carousel, .panel-title a { cursor: pointer; }
 
-div#check-all {
+.extra-margin-top-h1 {
   margin-top: 34.5px;
+}
+
+.extra-margin-top-h3 {
+  margin-top: 20.5px;
 }
 
 .modal.fade .modal-dialog {
