@@ -50,7 +50,7 @@ class PeopleController < ApplicationController
   private
   def person_params
     params[:person][:hints] ||= []
-    params.require(:person).permit(:first_name, :middle_name, :last_name, :image, :sex, :nickname, :bio, :location, :occupation, :dob, hints: [])
+    params.require(:person).permit(:first_name, :middle_name, :last_name, :image, :sex, :nickname, :bio, :location, :occupation, :dob, hints: [], group_ids: [])
   end
 
   def set_person
