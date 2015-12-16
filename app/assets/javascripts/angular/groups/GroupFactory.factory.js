@@ -72,11 +72,21 @@
 
       factory.deleteGroup = function(id) {
         var deferred = $q.defer();
-        Group.delete({id: id}, function(group) {
+        Group.delete({ id: id }, function(group) {
           deferred.resolve(group);
         }, function(err) {
           deferred.reject(err);
         });
+        return deferred.promise;
+      };
+
+      factory.updateGroup = function(id, name) {
+        var deferred = $q.defer();
+        Group.update({ id: id }, { name: name }, function(group) {
+            deferred.resolve(group);
+          }, function(err) {
+            deferred.reject(err);
+          });
         return deferred.promise;
       };
 

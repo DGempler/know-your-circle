@@ -47,7 +47,7 @@
       vm.submitEditGroup = function() {
         GroupFactory.updateGroup(vm.group.edit.id, vm.group.editName)
           .then(function(group) {
-
+            console.log(group);
           })
           .catch(function(error) {
             console.log(error);
