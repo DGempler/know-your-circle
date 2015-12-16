@@ -21,4 +21,5 @@ div#check-all {
 
 .label {
     margin-left: 5px;
+    display: inline-block;
 }
