@@ -24,7 +24,7 @@
 
       factory.submitNewGroup = function(group) {
         var deferred = $q.defer();
-        var newGroup = new Group(group);
+        var newGroup = new Group({ name: group });
         newGroup.$save()
           .then(function(res) {
             deferred.resolve(res);
@@ -42,6 +42,16 @@
           }, function(err) {
             deferred.reject(err);
           });
+        return deferred.promise;
+      };
+
+      factory.deleteGroup = function(id) {
+        var deferred = $q.defer();
+        Group.delete({id: id}, function(group) {
+          deferred.resolve(group);
+        }, function(err) {
+          deferred.reject(err);
+        });
         return deferred.promise;
       };
 

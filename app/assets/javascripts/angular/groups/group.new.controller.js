@@ -14,7 +14,7 @@
       };
 
       vm.submitNewGroup = function() {
-        GroupFactory.submitNewGroup({name: vm.group.new})
+        GroupFactory.submitNewGroup(vm.group.new)
           .then(function(data) {
             vm.group.groups.push(data);
             vm.group.new = "";
@@ -26,7 +26,17 @@
       };
 
       vm.deleteGroup = function(id) {
-        console.log(id);
+        GroupFactory.deleteGroup(id)
+          .then(function(group) {
+            vm.groups.groups.forEach(function(orGroup, index) {
+              if (group.id === orGroup.id) {
+                vm.groups.groups.splice(index, 1);
+              }
+            });
+          })
+          .catch(function(error) {
+            console.log(error);
+          });
       };
 
 
