@@ -25,7 +25,6 @@
       factory.submitNewGroup = function(group) {
         var deferred = $q.defer();
         var newGroup = new Group(group);
-        console.log(newGroup);
         newGroup.$save()
           .then(function(res) {
           console.log(res);
