@@ -47,7 +47,7 @@
         </div>
       </div>
       <div class='extra-bottom-margins'>
-        <span class="label label-info" ng-repeat='group in person.person.groups'>{{ group.name }} <a href='' ng-click='person.removeGroup(group.id)'><span class="glyphicon glyphicon-remove" aria-hidden="true"></span></a></span>
+        <span class="label label-info" ng-repeat='group in person.groups | chosenGroups : person.person.group_ids'>{{ group.name }} <a href='' ng-click='person.removeGroup(group.id)'><span class="glyphicon glyphicon-remove" aria-hidden="true"></span></a></span>
       </div>
     </div>
     <div ng-show='person.addedInputFields' class='col-sm-6'>
