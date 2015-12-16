@@ -43,7 +43,9 @@
           });
       } else {
         console.log(vm.chosenGroup);
-        vm.person.groups.push(vm.chosenGroup);
+        if (vm.person.groups.indexOf(vm.chosenGroup) === -1) {
+          vm.person.groups.push(vm.chosenGroup);
+        }
         vm.chosenGroup = "";
       }
     };
