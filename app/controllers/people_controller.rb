@@ -28,7 +28,7 @@ class PeopleController < ApplicationController
   def show
     medium = @person.image.url(:medium)
     thumb = @person.image.url(:thumb)
-    @person = @person.as_json
+    @person = @person.as_json(include: :groups)
     @person[:medium] = medium
     @person[:thumb] = thumb
     render json: @person, status: :ok
@@ -55,6 +55,7 @@ class PeopleController < ApplicationController
 
   def set_person
     @person = current_user.people.find(params[:id])
+
   end
 
 end
