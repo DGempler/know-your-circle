@@ -25,6 +25,10 @@
           });
       };
 
+      vm.deleteGroup = function(id) {
+        console.log(id);
+      };
+
 
     }
 

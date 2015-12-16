@@ -6,7 +6,7 @@
   <div>
     <h5>Current groups:</h5>
     <div>
-      <span class="label label-info" ng-repeat='group in modal.group.groups'>{{ group.name }}</span>
+      <span class="label label-info" ng-repeat='group in modal.group.groups'>{{ group.name }} <a href='' ng-click='modal.deleteGroup(group.id)'><span class="glyphicon glyphicon-remove" aria-hidden="true"></span></a></span>
     </div>
   </div>
   <br />

@@ -23,3 +23,7 @@ div#check-all {
     margin-left: 5px;
     display: inline-block;
 }
+
+span.glyphicon.glyphicon-remove {
+  color: white;
+}
