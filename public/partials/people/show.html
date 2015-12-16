@@ -8,6 +8,13 @@
   </div>
 </div>
 <div class='row'>
+  <div class='col-sm-8 col-sm-offset-2'>
+    <div class='extra-bottom-margins text-center'>
+      <span class="label label-info" ng-repeat='group in person.groups'>{{ group.name }}</span>
+    </div>
+  </div>
+</div>
+<div class='row'>
   <div class='col-sm-4 col-sm-offset-2'>
     <p>Middle name: {{ person.middle_name }}</p>
     <p>Sex: {{ person.sex }}</p>
