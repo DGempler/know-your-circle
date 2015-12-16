@@ -24,7 +24,7 @@
         });
     }
 
-    vm.getGroup = function() {
+    vm.groupSelected = function() {
       if (vm.person.group.name === 'Create a new group') {
         GroupFactory.openNewGroupModal(originalGroups);
       }
