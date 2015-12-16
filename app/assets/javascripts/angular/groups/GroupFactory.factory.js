@@ -34,6 +34,17 @@
           });
         return deferred.promise;
       };
+
+      factory.getGroups = function() {
+        var deferred = $q.defer();
+        Group.query(function(groups) {
+            deferred.resolve(groups);
+          }, function(err) {
+            deferred.reject(err);
+          });
+        return deferred.promise;
+      };
+
       return factory;
     }
 })();

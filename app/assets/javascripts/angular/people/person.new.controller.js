@@ -8,13 +8,25 @@
     var vm = this;
     vm.person = {};
     vm.person.hints = [""];
-    vm.person.groups = [{name: 'friends'}, {name: 'enemies'}];
-    vm.person.groups.push({name: 'Create a new group'});
+    var originalGroups = [];
+
+    function getGroups() {
+      GroupFactory.getGroups()
+        .then(function(groups) {
+          groups.forEach(function(group) {
+            originalGroups.push(group);
+          });
+          vm.person.groups = groups;
+          vm.person.groups.push({name: 'Create a new group'});
+        })
+        .catch(function(error) {
+          console.log(error);
+        });
+    }
 
     vm.getGroup = function() {
       if (vm.person.group.name === 'Create a new group') {
-        //actually send original groups from server, not created groups
-        GroupFactory.openNewGroupModal(vm.person.groups);
+        GroupFactory.openNewGroupModal(originalGroups);
       }
     };
 
@@ -60,5 +72,8 @@
         vm.person.hints.push("");
       }
     };
+
+    getGroups();
+
   }
 })();
