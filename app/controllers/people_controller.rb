@@ -8,7 +8,7 @@ class PeopleController < ApplicationController
     @people.each do |person|
       medium = person.image.url(:medium)
       thumb = person.image.url(:thumb)
-      person = person.as_json
+      person = person.as_json(include: :groups)
       person[:medium] = medium
       person[:thumb] = thumb
       people << person
