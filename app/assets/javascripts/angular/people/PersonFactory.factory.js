@@ -68,6 +68,14 @@
       return deferred.promise;
     };
 
+    personFactory.update = function(person) {
+      var deferred = $q.defer();
+      Person.update({id: person.id}, person, function(person) {
+        deferred.resolve(person);
+      }, function(err) {
+        deferred.reject(err);
+      });
+    };
     return personFactory;
   }
 })();
