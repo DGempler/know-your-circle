@@ -70,7 +70,6 @@
 
     personFactory.updateGroups = function(person) {
       var deferred = $q.defer();
-      console.log(person);
       Person.update({id: person.id}, {person: {group_ids: person.group_ids}}, function(person) {
         deferred.resolve(person);
       }, function(err) {
