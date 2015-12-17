@@ -28,9 +28,18 @@
 
       vm.stageGroupForDeletion = function(id) {
         vm.stagedForDeletion[id] = !vm.stagedForDeletion[id];
+        if (Object.keys(vm.stagedForDeletion).length !== 0) {
+          vm.showDeleteGroupsButton = true;
+        } else {
+          vm.showDeleteGroupsButton = false;
+        }
+        vm.showEditForm = false;
+        vm.showNewForm = false;
+        vm.group.edit = {};
+        vm.group.editName = "";
       };
 
-      vm.deleteGroup = function(id) {
+      vm.deleteGroups = function(id) {
         GroupFactory.deleteGroup(id)
           .then(function(group) {
             vm.group.groups.forEach(function(orGroup, index) {
@@ -47,6 +56,8 @@
       vm.editGroup = function(group) {
         vm.showEditForm = true;
         vm.showNewForm = false;
+        vm.showDeleteGroupsButton = false;
+        vm.stagedForDeletion = {};
         vm.group.edit = group;
         vm.group.editName = group.name;
       };
@@ -69,6 +80,15 @@
         } else {
           console.log('no change!');
         }
+      };
+
+      vm.clickShowNewForm = function() {
+        vm.showNewForm = true;
+        vm.showEditForm = false;
+        vm.showDeleteGroupsButton = false;
+        vm.stagedForDeletion = {};
+        vm.group.edit = {};
+        vm.group.editName = "";
       };
 
     }

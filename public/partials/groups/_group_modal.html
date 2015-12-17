@@ -13,6 +13,7 @@
         </a>
       </span>
     </div>
+    <a class="btn btn-danger btn-block extra-bottom-margins" href="" role="button" ng-click='modal.deleteGroups()' ng-show='modal.showDeleteGroupsButton'>Confirm Delete</a>
   </div>
   <form class='extra-bottom-margins' ng-show='modal.showNewForm' ng-submit='modal.submitNewGroup()'>
     <div class="form-group">
@@ -28,7 +29,7 @@
     </div>
     <button type="submit" class="btn btn-warning btn-block">Submit Name</button>
   </form>
-  <a class="btn btn-primary btn-block" href="" role="button" ng-click='modal.showNewForm = true; modal.showEditForm = false' ng-show='!modal.showNewForm'>Add Group</a>
+  <a class="btn btn-primary btn-block" href="" role="button" ng-click='modal.clickShowNewForm()' ng-show='!modal.showNewForm'>Add Group</a>
 </div>
 
 <div class="modal-footer">
