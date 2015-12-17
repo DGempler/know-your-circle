@@ -8,6 +8,7 @@
       var vm = this;
       vm.group = {};
       vm.group.groups = groups;
+      vm.stagedForDeletion = {};
 
       vm.close = function() {
         $uibModalInstance.close();
@@ -23,6 +24,10 @@
             console.log(err);
             vm.group.new = "";
           });
+      };
+
+      vm.stageGroupForDeletion = function(id) {
+        vm.stagedForDeletion[id] = !vm.stagedForDeletion[id];
       };
 
       vm.deleteGroup = function(id) {
