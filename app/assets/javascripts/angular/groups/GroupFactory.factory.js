@@ -11,8 +11,8 @@
         var deferred = $q.defer();
         var modalInstance = $uibModal.open({
           animation: true,
-          templateUrl: '/partials/groups/_group_new_modal.html',
-          controller: 'groupNewController as modal',
+          templateUrl: '/partials/groups/_group_modal.html',
+          controller: 'groupController as modal',
           windowClass: "modal fade",
           size: 'sm',
           resolve: {
