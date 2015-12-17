@@ -69,7 +69,13 @@
     };
 
     vm.editGroups = function() {
-      GroupFactory.openGroupModal(vm.groups);
+      GroupFactory.openGroupModal(vm.groups)
+        .then(function(groups) {
+          vm.groups = groups;
+        })
+        .catch(function() {
+          getGroups();
+        });
     };
 
     getPeople();

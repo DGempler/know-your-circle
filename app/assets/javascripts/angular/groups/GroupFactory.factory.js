@@ -32,6 +32,7 @@
       };
 
       factory.openGroupModal = function(groups) {
+        var deferred = $q.defer();
         var modalInstance = $uibModal.open({
           animation: true,
           templateUrl: '/partials/groups/_group_modal.html',
@@ -45,6 +46,13 @@
           }
         });
 
+        modalInstance.result.then(function(groups) {
+          deferred.resolve(groups);
+        }, function() {
+          deferred.reject();
+        });
+
+        return deferred.promise;
       };
 
       factory.submitNewGroup = function(group) {

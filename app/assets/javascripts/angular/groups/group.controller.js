@@ -11,7 +11,7 @@
       vm.stagedForDeletion = {};
 
       vm.close = function() {
-        $uibModalInstance.close();
+        $uibModalInstance.close(vm.group.groups);
       };
 
       vm.submitNewGroup = function() {
@@ -50,7 +50,6 @@
             newGroups.push(group);
           }
         });
-        console.log(newGroups);
         return newGroups;
       }
 
