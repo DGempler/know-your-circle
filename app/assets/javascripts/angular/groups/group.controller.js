@@ -62,6 +62,7 @@
 
         $q.all(promiseArray).then(function(groups) {
           vm.group.groups = cleanGroups(stagedForDeletionArray, vm.group.groups);
+          vm.showDeleteGroupsButton = false;
         })
         .catch(function(error) {
           console.log(error);
