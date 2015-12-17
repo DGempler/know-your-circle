@@ -13,7 +13,7 @@
         </a>
       </span>
     </div>
-    <a class="btn btn-danger btn-block extra-bottom-margins" href="" role="button" ng-click='modal.deleteGroups()' ng-show='modal.showDeleteGroupsButton'>Confirm Delete</a>
+    <a class="btn btn-danger btn-block extra-bottom-margins" href="" uib-tooltip="Chosen group(s) will be removed from ALL people" tooltip-placement="bottom" ng-click='modal.deleteGroups()' ng-show='modal.showDeleteGroupsButton'>Confirm Delete</a>
   </div>
   <form class='extra-bottom-margins' ng-show='modal.showNewForm' ng-submit='modal.submitNewGroup()'>
     <div class="form-group">
@@ -27,7 +27,7 @@
       <label for="new-group">Change group name</label>
       <input ng-model="modal.group.editName" type="new-group" class="form-control" id="new-group" autofocus required="required" >
     </div>
-    <button type="submit" class="btn btn-warning btn-block">Submit Name</button>
+    <button uib-tooltip="Group name change will apply to ALL people" tooltip-placement="bottom" type="submit" class="btn btn-warning btn-block">Submit Name</button>
   </form>
   <a class="btn btn-primary btn-block" href="" role="button" ng-click='modal.clickShowNewForm()' ng-show='!modal.showNewForm'>Add Group</a>
 </div>
