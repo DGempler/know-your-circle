@@ -8,6 +8,10 @@
   margin-top: 20.5px;
 }
 
+.extra-margin-top-glyph {
+  margin-top: 10.5px;
+}
+
 .modal.fade .modal-dialog {
     -webkit-transform: translate(0, 0);
     -ms-transform: translate(0, 0);

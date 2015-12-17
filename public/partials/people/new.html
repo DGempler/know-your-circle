@@ -15,18 +15,19 @@
       </div>
       <div class='row'>
         <div class='col-sm-4'>
-          <div class="btn-group extra-bottom-margins" data-toggle='buttons'>
+          <div class="btn-group" data-toggle='buttons'>
             <label class='btn btn-default' ng-click='person.person.sex = "Male"' ng-class='{"active": person.person.sex === "Male"}'><input type="radio" />Male</label>
             <label class='btn btn-default' ng-click='person.person.sex = "Female"' ng-class='{"active": person.person.sex === "Female"}'><input type="radio" />Female</label>
           </div>
         </div>
         <div class='col-sm-8'>
           <div class="form-group">
-            <label for="group-select" class="col-lg-2 control-label">Apply Group</label>
-            <div class="col-lg-10">
+            <label for="group-select" class="col-sm-2 control-label">Apply Group</label>
+            <div class="col-sm-9">
               <select class="form-control" id="group-select" ng-model="person.chosenGroup" ng-options="g as g.name for g in person.groups" ng-change='person.groupSelected()'>
               </select>
             </div>
+            <span class="glyphicon glyphicon-question-sign pull-right extra-margin-top-glyph" aria-hidden="true"></span>
           </div>
         </div>
       </div>
