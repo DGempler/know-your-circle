@@ -78,6 +78,20 @@
         });
     };
 
+    vm.applyGroup = function(groupId) {
+      vm.person.group_ids.push(vm.chosenGroup.id);
+      var promiseArray = [];
+      angular.forEach(vm.people, function(person) {
+        if (person.selected) {
+          promiseArray.push(PersonFactory.deletePerson(person.id));
+        }
+      });
+      $q.all(promiseArray).then(function(people) {
+        vm.someoneSelected = false;
+        getPeople();
+      });
+    }
+
     getPeople();
 
   }
