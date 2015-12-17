@@ -82,7 +82,11 @@
       var promiseArray = [];
       angular.forEach(vm.people, function(person) {
         if (person.selected) {
-          person.group_ids = [groupId];
+          person.group_ids = [];
+          person.groups.forEach(function(group) {
+            person.group_ids.push(group.id);
+          });
+          person.group_ids.push(groupId);
           promiseArray.push(PersonFactory.updateGroups(person));
         }
       });
