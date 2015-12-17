@@ -71,7 +71,8 @@
           vm.showDeleteGroupsButton = false;
         })
         .catch(function(error) {
-          AuthFactory.messageModalOpen('There was an error while deleting your groups. Please refresh the page to try again.');
+          var message = 'There was an error while deleting your groups. Please refresh the page to try again.';
+          AuthFactory.messageModalOpen(message);
         });
       };
 
@@ -98,10 +99,12 @@
               vm.showEditForm = false;
             })
             .catch(function(error) {
-              AuthFactory.messageModalOpen('There was an error while changing your group. Please refresh the page to try again.');
+              var message = 'There was an error while changing your group. Please refresh the page to try again.';
+              AuthFactory.messageModalOpen(message);
             });
         } else {
-          AuthFactory.messageModalOpen('Your submitted group name matches the existing one. Please try again.');
+          var message = 'Your submitted group name matches the existing one. Please try again.';
+          AuthFactory.messageModalOpen(message);
         }
       };
 
