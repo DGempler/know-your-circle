@@ -99,7 +99,12 @@
               vm.showEditForm = false;
             })
             .catch(function(error) {
-              var message = 'There was an error while changing your group. Please refresh the page to try again.';
+              var message;
+              if (error.data && error.data.name) {
+                message = error.data.name[0];
+              } else {
+                message = 'There was an error while changing your group. Please refresh the page to try again.';
+              }
               AuthFactory.messageModalOpen(message);
             });
         } else {
