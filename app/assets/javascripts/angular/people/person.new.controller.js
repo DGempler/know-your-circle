@@ -40,7 +40,7 @@
     vm.groupSelected = function() {
       if (vm.chosenGroup.name === 'Create a new group') {
         vm.chosenGroup = "";
-        GroupFactory.openNewGroupModal(originalGroups)
+        GroupFactory.openGroupModal(originalGroups)
           .then(function(groups) {
             originalGroups = groups;
             vm.person.group_ids = cleanGroupIds(vm.person.group_ids, groups);

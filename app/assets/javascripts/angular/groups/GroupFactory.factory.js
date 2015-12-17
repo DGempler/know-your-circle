@@ -7,30 +7,6 @@
     function GroupFactory($uibModal, $q, Group) {
       var factory = {};
 
-      factory.openNewGroupModal = function(groups) {
-        var deferred = $q.defer();
-        var modalInstance = $uibModal.open({
-          animation: true,
-          templateUrl: '/partials/groups/_group_modal.html',
-          controller: 'groupController as modal',
-          windowClass: "modal fade",
-          size: 'sm',
-          resolve: {
-            groups: function() {
-              return groups;
-            }
-          }
-        });
-
-        modalInstance.result.then(function(groups) {
-          deferred.resolve(groups);
-        }, function() {
-          deferred.reject();
-        });
-
-        return deferred.promise;
-      };
-
       factory.openGroupModal = function(groups) {
         var deferred = $q.defer();
         var modalInstance = $uibModal.open({
