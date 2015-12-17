@@ -21,8 +21,13 @@
             vm.group.new = "";
           })
           .catch(function(err) {
-            console.log(err);
-            AuthFactory.messageModalOpen('There was an error while creating your group. Please refresh the page to try again.');
+            var message;
+            if (err.data && err.data.name) {
+              message = err.data.name[0];
+            } else {
+              message = 'There was an error while creating your group. Please refresh the page to try again.';
+            }
+            AuthFactory.messageModalOpen(message);
             vm.group.new = "";
           });
       };
