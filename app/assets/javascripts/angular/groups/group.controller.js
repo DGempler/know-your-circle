@@ -2,9 +2,9 @@
   angular.module('memPeeps.groups')
     .controller('groupController', groupController);
 
-    groupController.$inject = ['$uibModalInstance', 'groups', 'GroupFactory', '$q'];
+    groupController.$inject = ['$uibModalInstance', 'groups', 'GroupFactory', 'AuthFactory', '$q'];
 
-    function groupController($uibModalInstance, groups, GroupFactory, $q) {
+    function groupController($uibModalInstance, groups, GroupFactory, AuthFactory, $q) {
       var vm = this;
       vm.group = {};
       vm.group.groups = groups;
@@ -22,6 +22,7 @@
           })
           .catch(function(err) {
             console.log(err);
+            AuthFactory.messageModalOpen('There was an error while creating your group. Please refresh the page to try again.');
             vm.group.new = "";
           });
       };
@@ -65,7 +66,7 @@
           vm.showDeleteGroupsButton = false;
         })
         .catch(function(error) {
-          console.log(error);
+          AuthFactory.messageModalOpen('There was an error while deleting your groups. Please refresh the page to try again.');
         });
       };
 
@@ -92,10 +93,10 @@
               vm.showEditForm = false;
             })
             .catch(function(error) {
-              console.log(error);
+              AuthFactory.messageModalOpen('There was an error while changing your group. Please refresh the page to try again.');
             });
         } else {
-          console.log('no change!');
+          AuthFactory.messageModalOpen('Your submitted group name matches the existing one. Please try again.');
         }
       };
 

@@ -2,9 +2,9 @@
   angular.module('memPeeps.people')
     .controller('personNewController', personNewController);
 
-  personNewController.$inject = ['PersonFactory', '$location', 'GroupFactory'];
+  personNewController.$inject = ['PersonFactory', '$location', 'GroupFactory', 'AuthFactory'];
 
-  function personNewController(PersonFactory, $location, GroupFactory) {
+  function personNewController(PersonFactory, $location, GroupFactory, AuthFactory) {
     var vm = this;
     vm.person = {};
     vm.person.hints = [""];
@@ -33,7 +33,7 @@
           vm.groups.push({name: 'Create a new group'});
         })
         .catch(function(error) {
-          console.log(error);
+          AuthFactory.messageModalOpen('There was an error while loading your groups. Please refresh the page to try again.');
         });
     }
 

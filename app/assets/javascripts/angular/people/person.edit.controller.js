@@ -31,7 +31,7 @@
           vm.groups.push({name: 'Create a new group'});
         })
         .catch(function(error) {
-          AuthFactory.messageModalOpen('There was an error loading your groups. Please refresh the page to try again.');
+          AuthFactory.messageModalOpen('There was an error while loading your groups. Please refresh the page to try again.');
         });
     }
 
