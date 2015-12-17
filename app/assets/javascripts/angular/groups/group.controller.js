@@ -89,6 +89,7 @@
                   vm.group.groups[index] = updatedGroup;
                 }
               });
+              vm.showEditForm = false;
             })
             .catch(function(error) {
               console.log(error);
