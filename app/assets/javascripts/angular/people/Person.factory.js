@@ -5,6 +5,10 @@
   Person.$inject = ['$resource'];
 
   function Person($resource) {
-    return $resource('//localhost:3000/api/people/:id');
+    return $resource('//localhost:3000/api/people/:id', null, {
+          update: {
+        method:'PUT'
+      }
+    });
   }
 })();
