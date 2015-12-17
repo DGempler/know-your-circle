@@ -2,9 +2,9 @@
   angular.module('memPeeps.groups')
     .controller('groupController', groupController);
 
-    groupController.$inject = ['$uibModalInstance', 'groups', 'GroupFactory'];
+    groupController.$inject = ['$uibModalInstance', 'groups', 'GroupFactory', '$q'];
 
-    function groupController($uibModalInstance, groups, GroupFactory) {
+    function groupController($uibModalInstance, groups, GroupFactory, $q) {
       var vm = this;
       vm.group = {};
       vm.group.groups = groups;
@@ -27,7 +27,11 @@
       };
 
       vm.stageGroupForDeletion = function(id) {
-        vm.stagedForDeletion[id] = !vm.stagedForDeletion[id];
+        if (vm.stagedForDeletion[id]) {
+          delete vm.stagedForDeletion[id];
+        } else {
+          vm.stagedForDeletion[id] = true;
+        }
         if (Object.keys(vm.stagedForDeletion).length !== 0) {
           vm.showDeleteGroupsButton = true;
         } else {
@@ -39,18 +43,30 @@
         vm.group.editName = "";
       };
 
+      function cleanGroups(deletedGroupIds, oldGroups) {
+        var newGroups = [];
+        oldGroups.forEach(function(group) {
+          if (deletedGroupIds.indexOf(group.id.toString()) === -1) {
+            newGroups.push(group);
+          }
+        });
+        console.log(newGroups);
+        return newGroups;
+      }
+
       vm.deleteGroups = function(id) {
-        GroupFactory.deleteGroup(id)
-          .then(function(group) {
-            vm.group.groups.forEach(function(orGroup, index) {
-              if (group.id === orGroup.id) {
-                vm.group.groups.splice(index, 1);
-              }
-            });
-          })
-          .catch(function(error) {
-            console.log(error);
-          });
+        var promiseArray = [];
+        var stagedForDeletionArray = Object.keys(vm.stagedForDeletion);
+        stagedForDeletionArray.forEach(function(id) {
+          promiseArray.push(GroupFactory.deleteGroup(id));
+        });
+
+        $q.all(promiseArray).then(function(groups) {
+          vm.group.groups = cleanGroups(stagedForDeletionArray, vm.group.groups);
+        })
+        .catch(function(error) {
+          console.log(error);
+        });
       };
 
       vm.editGroup = function(group) {
