@@ -79,18 +79,21 @@
     };
 
     vm.applyGroup = function(groupId) {
-      vm.person.group_ids.push(vm.chosenGroup.id);
       var promiseArray = [];
       angular.forEach(vm.people, function(person) {
         if (person.selected) {
-          promiseArray.push(PersonFactory.deletePerson(person.id));
+          person.group_ids = [groupId];
+          promiseArray.push(PersonFactory.updateGroups(person));
         }
       });
       $q.all(promiseArray).then(function(people) {
         vm.someoneSelected = false;
         getPeople();
+      })
+      .catch(function(error) {
+        console.log(error);
       });
-    }
+    };
 
     getPeople();
 
