@@ -40,3 +40,8 @@ span.glyphicon {
 .input-group-addon {
   border-radius: 5px;
 }
+
+.tooltip.group-help .tooltip-inner {
+  width: 200px;
+  height: 80px;
+}

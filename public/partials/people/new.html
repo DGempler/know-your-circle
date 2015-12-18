@@ -27,7 +27,7 @@
               <select class="form-control" id="group-select" ng-model="person.chosenGroup" ng-options="g as g.name for g in person.groups" ng-change='person.groupSelected()'>
               </select>
               <span class="input-group-addon" aria-hidden="true">
-                <a uib-tooltip="Groups are a useful way to label and categorize your people. They also make it easy to send your people to other users." tooltip-placement="right">
+                <a tooltip-class='group-help' uib-tooltip="Groups are a useful way to label and categorize your people. They also make it easy to send your people to others." tooltip-placement="right">
                   <span class='glyphicon glyphicon-question-sign'></span>
                 </a>
               </span>
