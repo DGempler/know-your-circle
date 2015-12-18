@@ -132,6 +132,18 @@
       vm.someoneSelected = false;
     };
 
+    vm.filterGroup = function(chosenGroup) {
+      angular.forEach(vm.people, function(person) {
+        person.groups.forEach(function(personGroup) {
+          if (chosenGroup.id === personGroup.id) {
+            person.show = true;
+          } else {
+            person.show = false;
+          }
+        });
+      });
+    };
+
     getPeople();
 
   }
