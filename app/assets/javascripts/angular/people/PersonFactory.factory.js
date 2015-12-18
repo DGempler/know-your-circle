@@ -75,6 +75,7 @@
       }, function(err) {
         deferred.reject(err);
       });
+      return deferred.promise;
     };
     return personFactory;
   }
