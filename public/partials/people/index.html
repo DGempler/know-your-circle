@@ -12,7 +12,7 @@
             <span class="caret"></span>
           </button>
           <ul class="dropdown-menu dropdown-menu-left" aria-labelledby="groupDropDown">
-            <li><a href="" ng-repeat='group in people.groups' ng-click='people.applyGroup(group.id)'>{{ group.name }}</a></li>
+            <li><a href="" ng-repeat='group in people.groups' ng-click='people.applyGroup(group)'>{{ group.name }}</a></li>
           </ul>
         </div>
         <button ng-show='people.someoneSelected' class="btn btn-default" ng-click='people.clickDelete()' >Delete Selected</button>

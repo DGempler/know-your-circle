@@ -2,9 +2,9 @@
   angular.module('memPeeps.people')
     .controller('peopleIndexController', peopleIndexController);
 
-  peopleIndexController.$inject = ['PersonFactory', 'GroupFactory', '$q'];
+  peopleIndexController.$inject = ['PersonFactory', 'GroupFactory', '$q', 'AuthFactory'];
 
-  function peopleIndexController(PersonFactory, GroupFactory, $q) {
+  function peopleIndexController(PersonFactory, GroupFactory, $q, AuthFactory) {
     var vm = this;
 
     function getPeople() {
@@ -20,7 +20,8 @@
           vm.groups = groups;
         })
         .catch(function(error) {
-          console.log(error);
+          var message = 'There was an error while loading your groups. Please refresh the page to try again.';
+          AuthFactory.messageModalOpen(message);
         });
     }
 
@@ -78,25 +79,36 @@
         });
     };
 
-    vm.applyGroup = function(groupId) {
+    vm.applyGroup = function(newGroup) {
       var promiseArray = [];
       angular.forEach(vm.people, function(person) {
         if (person.selected) {
           person.group_ids = [];
-          person.groups.forEach(function(group) {
-            person.group_ids.push(group.id);
+          person.groups.forEach(function(existingGroup) {
+            person.group_ids.push(existingGroup.id);
           });
-          person.group_ids.push(groupId);
+          person.group_ids.push(newGroup.id);
           promiseArray.push(PersonFactory.updateGroups(person));
         }
       });
-      $q.all(promiseArray).then(function(people) {
-        vm.someoneSelected = false;
-        getPeople();
-      })
-      .catch(function(error) {
-        console.log(error);
-      });
+      $q.all(promiseArray)
+        .then(function(people) {
+          var message = newGroup.name + " has been added to: ";
+          people.forEach(function(person, index) {
+            if (index !== people.length - 1) {
+              message += person.first_name + " " + person.last_name + ", ";
+            } else {
+              message += person.first_name + " " + person.last_name;
+            }
+          });
+          AuthFactory.messageModalOpen(message);
+          vm.someoneSelected = false;
+          getPeople();
+        })
+        .catch(function(error) {
+          var message = 'There was an error applying your group. Please try again.';
+          AuthFactory.messageModalOpen(message);
+        });
     };
 
     getPeople();
