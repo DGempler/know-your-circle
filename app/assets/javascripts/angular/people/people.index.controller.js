@@ -143,14 +143,11 @@
 
     vm.filterGroup = function(chosenGroup) {
       angular.forEach(vm.people, function(person) {
-        console.log(person);
+        person.show = false;
         person.groups.forEach(function(personGroup) {
           if (chosenGroup.id === personGroup.id) {
             person.show = true;
-          } else {
-            person.show = false;
           }
-          console.log(person.show);
         });
       });
     };
