@@ -82,6 +82,7 @@
     vm.applyGroup = function(newGroup) {
       var promiseArray = [];
       var alreadyExistsArray = [];
+      var message;
       angular.forEach(vm.people, function(person) {
         if (person.selected) {
           person.group_ids = [];
@@ -96,35 +97,39 @@
           }
         }
       });
-      $q.all(promiseArray)
-        .then(function(people) {
-          var message = "";
-          if (people.length > 0) {
-            message += newGroup.name + " has been added to: ";
+      if (promiseArray.length > 0) {
+        $q.all(promiseArray)
+          .then(function(people) {
+            message = newGroup.name + " has been added to: ";
             people.forEach(function(person, index) {
               if (index !== people.length - 1) {
                 message += person.first_name + " " + person.last_name + ", ";
               } else {
-                message += person.first_name + " " + person.last_name;
+                message += person.first_name + " " + person.last_name + ".";
               }
             });
-          }
-          message += newGroup.name + " already exists on: ";
-          alreadyExistsArray.forEach(function(person, index) {
-            if (index !== alreadyExistsArray.length - 1) {
-                message += person.first_name + " " + person.last_name + ", ";
-              } else {
-                message += person.first_name + " " + person.last_name;
-              }
-          });
-            AuthFactory.messageModalOpen(message);
-            vm.someoneSelected = false;
+            if (alreadyExistsArray.length > 0) {
+              message += " It already existed on: ";
+              alreadyExistsArray.forEach(function(person, index) {
+                if (index !== alreadyExistsArray.length - 1) {
+                  message += person.first_name + " " + person.last_name + ", ";
+                } else {
+                  message += person.first_name + " " + person.last_name + ".";
+                }
+              });
+            }
             getPeople();
+            AuthFactory.messageModalOpen(message);
           })
-        .catch(function(error) {
-          var message = 'There was an error applying your group. Please try again.';
-          AuthFactory.messageModalOpen(message);
-        });
+          .catch(function(error) {
+            message = 'There was an error applying your group. Please try again.';
+            AuthFactory.messageModalOpen(message);
+          });
+      } else {
+        message = "This group already exists on selected person(s).";
+        AuthFactory.messageModalOpen(message);
+      }
+      vm.someoneSelected = false;
     };
 
     getPeople();
