@@ -28,7 +28,7 @@
                 <span class="caret"></span>
               </button>
               <ul class="dropdown-menu dropdown-menu-left" aria-labelledby="groupDropDown">
-                <li><a href="" ng-repeat='group in person.groups' ng-click='person.applyGroup(group)'>{{ group.name }}</a></li>
+                <li><a href="" ng-repeat='group in person.groups | unchosenGroups : person.person.group_ids' ng-click='person.applyGroup(group)'>{{ group.name }}</a></li>
                 <li role="separator" class="divider"></li>
                 <li><a href='' ng-click='person.createGroup()'>Create a new group</a></li>
               </ul>
