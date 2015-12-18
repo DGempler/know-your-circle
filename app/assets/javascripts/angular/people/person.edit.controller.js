@@ -28,7 +28,6 @@
           groups.forEach(function(group) {
             vm.groups.push(group);
           });
-          vm.groups.push({name: 'Create a new group'});
         })
         .catch(function(error) {
           var message = 'There was an error while loading your groups. Please refresh the page to try again.';
@@ -36,27 +35,24 @@
         });
     }
 
-    vm.groupSelected = function() {
-      if (vm.chosenGroup.name === 'Create a new group') {
-        vm.chosenGroup = "";
-        GroupFactory.openGroupModal(originalGroups)
-          .then(function(groups) {
-            originalGroups = groups;
-            vm.person.group_ids = cleanGroupIds(vm.person.group_ids, originalGroups);
-            vm.groups = [];
-            groups.forEach(function(group) {
-              vm.groups.push(group);
-            });
-            vm.groups.push({name: 'Create a new group'});
-          })
-          .catch(function() {
-            getGroups();
+    vm.createGroup = function() {
+      GroupFactory.openGroupModal(originalGroups)
+        .then(function(groups) {
+          originalGroups = groups;
+          vm.person.group_ids = cleanGroupIds(vm.person.group_ids, groups);
+          vm.groups = [];
+          groups.forEach(function(group) {
+            vm.groups.push(group);
           });
-      } else {
-        if (vm.person.group_ids.indexOf(vm.chosenGroup.id) === -1) {
-          vm.person.group_ids.push(vm.chosenGroup.id);
-        }
-        vm.chosenGroup = "";
+        })
+        .catch(function() {
+          getGroups();
+        });
+    };
+
+    vm.applyGroup = function(group) {
+      if (vm.person.group_ids.indexOf(group.id) === -1) {
+        vm.person.group_ids.push(group.id);
       }
     };
 
