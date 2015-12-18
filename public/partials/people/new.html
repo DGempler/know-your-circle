@@ -23,11 +23,15 @@
         <div class='col-sm-8'>
           <div class="form-group">
             <label for="group-select" class="col-sm-2 control-label">Apply Group</label>
-            <div class="col-sm-9">
+            <div class="col-sm-10 input-group">
               <select class="form-control" id="group-select" ng-model="person.chosenGroup" ng-options="g as g.name for g in person.groups" ng-change='person.groupSelected()'>
               </select>
+              <span class="input-group-addon" aria-hidden="true">
+                <a uib-tooltip="Groups are a useful way to label and categorize your people. They also make it easy to send your people to other users." tooltip-placement="right">
+                  <span class='glyphicon glyphicon-question-sign'></span>
+                </a>
+              </span>
             </div>
-            <span class="glyphicon glyphicon-question-sign pull-right extra-margin-top-glyph" aria-hidden="true"></span>
           </div>
         </div>
       </div>
