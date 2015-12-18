@@ -10,6 +10,9 @@
     function getPeople() {
       PersonFactory.getPeople().then(function(people) {
         vm.people = people;
+        vm.people.forEach(function(person) {
+          person.show = true;
+        });
         getGroups();
       });
     }
@@ -132,14 +135,22 @@
       vm.someoneSelected = false;
     };
 
+    vm.showAll = function() {
+      angular.forEach(vm.people, function(person) {
+        person.show = true;
+      });
+    };
+
     vm.filterGroup = function(chosenGroup) {
       angular.forEach(vm.people, function(person) {
+        console.log(person);
         person.groups.forEach(function(personGroup) {
           if (chosenGroup.id === personGroup.id) {
             person.show = true;
           } else {
             person.show = false;
           }
+          console.log(person.show);
         });
       });
     };
