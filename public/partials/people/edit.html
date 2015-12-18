@@ -15,17 +15,22 @@
       </div>
       <div class='row'>
         <div class='col-sm-4'>
-          <div class="btn-group extra-bottom-margins" data-toggle='buttons'>
+          <div class="btn-group" data-toggle='buttons'>
             <label class='btn btn-default' ng-click='person.person.sex = "Male"' ng-class='{"active": person.person.sex === "Male"}'><input type="radio" />Male</label>
             <label class='btn btn-default' ng-click='person.person.sex = "Female"' ng-class='{"active": person.person.sex === "Female"}'><input type="radio" />Female</label>
           </div>
         </div>
         <div class='col-sm-8'>
           <div class="form-group">
-            <label for="group-select" class="col-lg-2 control-label">Apply Group</label>
-            <div class="col-lg-10">
+            <label for="group-select" class="col-sm-2 control-label">Apply Group</label>
+            <div class="col-sm-10 input-group">
               <select class="form-control" id="group-select" ng-model="person.chosenGroup" ng-options="g as g.name for g in person.groups" ng-change='person.groupSelected()'>
               </select>
+              <span class="input-group-addon" aria-hidden="true">
+                <a tooltip-class='group-help' uib-tooltip="Groups are a useful way to label and categorize your people. They also make it easy to send your people to others." tooltip-placement="right">
+                  <span class='glyphicon glyphicon-question-sign'></span>
+                </a>
+              </span>
             </div>
           </div>
         </div>
@@ -34,9 +39,8 @@
         <span class="label label-info" ng-repeat='group in person.groups | chosenGroups : person.person.group_ids'>{{ group.name }} <a href='' ng-click='person.removeGroup(group.id)'><span class="glyphicon glyphicon-remove" aria-hidden="true"></span></a></span>
       </div>
       <div class="form-group">
-        <label for="imageFileInput">Headshot</label>
-        <input type="file" ng-model="person.person.image" accept="image/*" id="imageFileInput" ngf-select ngf-pattern="'image/*'" ngf-max-size="5MB" ngf-min-height="50" />
-        <p class="help-block">Upload an image file of your person (recommended for games).</p>
+        <input type="file" ng-model="person.person.image" accept="image/*" id="imageFileInput" ngf-select ngf-pattern="'image/*'" ngf-max-size="5MB" ngf-min-height="50" class="text-info"/>
+        <p class="help-block">Upload an headshot image of your person (recommended for games).</p>
       </div>
       <div class="form-group">
         <label for="nicknameInput">Nickname</label>
