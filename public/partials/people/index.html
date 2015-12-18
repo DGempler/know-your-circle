@@ -24,6 +24,8 @@
           <ul class="dropdown-menu dropdown-menu-right" aria-labelledby="selectDropDown">
             <li><a ng-click='people.selectAll(true)'>Select All</a></li>
             <li><a ng-click='people.selectAll()'>Select None</a></li>
+            <li role="separator" class="divider"></li>
+            <li><a href="" ng-repeat='group in people.groups' ng-click='people.filterGroup(group)'>{{ group.name }}</a></li>
           </ul>
         </div>
       </div>
