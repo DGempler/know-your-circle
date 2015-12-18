@@ -15,21 +15,32 @@
       };
 
       vm.submitNewGroup = function() {
-        GroupFactory.submitNewGroup(vm.group.new)
-          .then(function(data) {
-            vm.group.groups.push(data);
-            vm.group.new = "";
-          })
-          .catch(function(err) {
-            var message;
-            if (err.data && err.data.name) {
-              message = err.data.name[0];
-            } else {
-              message = 'There was an error while creating your group. Please refresh the page to try again.';
-            }
-            AuthFactory.messageModalOpen(message);
-            vm.group.new = "";
-          });
+        var matchCheck = false;
+        vm.group.groups.forEach(function(group) {
+          if (vm.group.new.toLowerCase() === group.name.toLowerCase()) {
+            matchCheck = true;
+          }
+        });
+        if (!matchCheck) {
+          GroupFactory.submitNewGroup(vm.group.new)
+            .then(function(data) {
+              vm.group.groups.push(data);
+              vm.group.new = "";
+            })
+            .catch(function(err) {
+              var message;
+              if (err.data && err.data.name) {
+                message = err.data.name[0];
+              } else {
+                message = 'There was an error while creating your group. Please refresh the page to try again.';
+              }
+              AuthFactory.messageModalOpen(message);
+              vm.group.new = "";
+            });
+        } else {
+          var message = 'This group already exists.';
+          AuthFactory.messageModalOpen(message);
+        }
       };
 
       vm.stageGroupForDeletion = function(id) {
@@ -87,26 +98,37 @@
 
       vm.submitEditGroup = function() {
         if (vm.group.editName !== vm.group.edit.name) {
-          GroupFactory.updateGroup(vm.group.edit.id, vm.group.editName)
-            .then(function(updatedGroup) {
-              vm.group.edit = {};
-              vm.group.editName = "";
-              vm.group.groups.forEach(function(oldGroup, index) {
-                if (oldGroup.id === updatedGroup.id) {
-                  vm.group.groups[index] = updatedGroup;
+          var matchCheck = false;
+          vm.group.groups.forEach(function(group) {
+            if (vm.group.editName.toLowerCase() === group.name.toLowerCase()) {
+              matchCheck = true;
+            }
+          });
+          if (!matchCheck) {
+            GroupFactory.updateGroup(vm.group.edit.id, vm.group.editName)
+              .then(function(updatedGroup) {
+                vm.group.edit = {};
+                vm.group.editName = "";
+                vm.group.groups.forEach(function(oldGroup, index) {
+                  if (oldGroup.id === updatedGroup.id) {
+                    vm.group.groups[index] = updatedGroup;
+                  }
+                });
+                vm.showEditForm = false;
+              })
+              .catch(function(error) {
+                var message;
+                if (error.data && error.data.name) {
+                  message = error.data.name[0];
+                } else {
+                  message = 'There was an error while changing your group. Please refresh the page to try again.';
                 }
+                AuthFactory.messageModalOpen(message);
               });
-              vm.showEditForm = false;
-            })
-            .catch(function(error) {
-              var message;
-              if (error.data && error.data.name) {
-                message = error.data.name[0];
-              } else {
-                message = 'There was an error while changing your group. Please refresh the page to try again.';
-              }
-              AuthFactory.messageModalOpen(message);
-            });
+          } else {
+            var message = 'This group already exists.';
+            AuthFactory.messageModalOpen(message);
+          }
         } else {
           var message = 'Your submitted group name matches the existing one. Please try again.';
           AuthFactory.messageModalOpen(message);
