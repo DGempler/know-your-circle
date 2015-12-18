@@ -16,14 +16,14 @@
           </ul>
         </div>
         <button ng-show='people.someoneSelected' class="btn btn-default" ng-click='people.clickDelete()' >Delete Selected</button>
-        <button type="button" class="btn btn-default"><input type='checkbox' ng-model='people.someoneSelected' ng-click='people.selectAll(people.someoneSelected)'></button>
+        <button type="button" class="btn btn-default"><input type='checkbox' ng-model='people.someoneSelected' ng-click='people.selectAllCheckbox(people.someoneSelected)'></button>
         <div class="btn-group" role="group">
           <button type="button" class="btn btn-default dropdown-toggle" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false" id="selectDropDown">
             <span class="caret"></span>
           </button>
           <ul class="dropdown-menu dropdown-menu-right" aria-labelledby="selectDropDown">
-            <li><a ng-click='people.selectAll(true)'>Select All</a></li>
-            <li><a ng-click='people.selectAll()'>Select None</a></li>
+            <li><a ng-click='people.selectAll()'>Select All</a></li>
+            <li><a ng-click='people.selectNone()'>Select None</a></li>
             <li role="separator" class="divider"></li>
             <li><a href="" ng-click='people.showAll()'>Show All</a>
             <li role="separator" class="divider"></li>

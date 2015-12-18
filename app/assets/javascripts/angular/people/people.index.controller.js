@@ -6,6 +6,7 @@
 
   function peopleIndexController(PersonFactory, GroupFactory, $q, AuthFactory) {
     var vm = this;
+    var filteredByGroup = false;
 
     function getPeople() {
       PersonFactory.getPeople().then(function(people) {
@@ -41,18 +42,56 @@
         getPeople();
       });
     }
-    vm.selectAll = function(bool) {
-      if (bool) {
-        vm.someoneSelected = true;
+
+    vm.selectAll = function() {
+      vm.someoneSelected = true;
+      angular.forEach(vm.people, function(person) {
+        person.selected = true;
+      });
+    };
+
+    vm.selectAllCheckbox = function(bool) {
+      if (filteredByGroup) {
+        var someoneSelected = false;
         angular.forEach(vm.people, function(person) {
-          person.selected = true;
+          if (person.show && person.selected) {
+            someoneSelected = true;
+          }
         });
+        if (!someoneSelected) {
+          vm.someoneSelected = true;
+          angular.forEach(vm.people, function(person) {
+            if (person.show) {
+              person.selected = true;
+            }
+          });
+        } else {
+          angular.forEach(vm.people, function(person) {
+            if (person.show) {
+              person.selected = false;
+            }
+          });
+        }
       } else {
-        vm.someoneSelected = false;
-        angular.forEach(vm.people, function(person) {
-          person.selected = false;
-        });
+        if (bool) {
+          vm.someoneSelected = true;
+          angular.forEach(vm.people, function(person) {
+            person.selected = true;
+          });
+        } else {
+          vm.someoneSelected = false;
+          angular.forEach(vm.people, function(person) {
+            person.selected = false;
+          });
+        }
       }
+    };
+
+    vm.selectNone = function() {
+      vm.someoneSelected = false;
+      angular.forEach(vm.people, function(person) {
+        person.selected = false;
+      });
     };
 
     vm.personSelected = function() {
@@ -86,6 +125,7 @@
       var promiseArray = [];
       var alreadyExistsArray = [];
       var message;
+      vm.someoneSelected = false;
       angular.forEach(vm.people, function(person) {
         if (person.selected) {
           person.group_ids = [];
@@ -132,16 +172,17 @@
         message = "This group already exists on selected person(s).";
         AuthFactory.messageModalOpen(message);
       }
-      vm.someoneSelected = false;
     };
 
     vm.showAll = function() {
+      filteredByGroup = false;
       angular.forEach(vm.people, function(person) {
         person.show = true;
       });
     };
 
     vm.filterGroup = function(chosenGroup) {
+      filteredByGroup = true;
       angular.forEach(vm.people, function(person) {
         person.show = false;
         person.groups.forEach(function(personGroup) {
