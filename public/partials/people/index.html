@@ -1,10 +1,9 @@
-<div class="page-header">
+<div class="page-header" ng-class="{ 'no-bottom-margins' : people.filteredByGroup , 'extra-bottom-margins-header' : !people.filteredByGroup} ">
   <div class='row'>
     <div class='col-sm-6'>
       <h1>Your people</h1>
     </div>
     <div class='col-sm-6'>
-
       <div class="btn-group pull-right extra-margin-top-h1" role="group" aria-label="...">
         <div class="btn-group" role="group">
           <button ng-show='people.someoneSelected' class="btn btn-default dropdown-toggle" type="button" id="groupDropDown" data-toggle="dropdown" aria-haspopup="true" aria-expanded="true">
@@ -25,12 +24,21 @@
             <li><a ng-click='people.selectAll()'>Select All</a></li>
             <li><a ng-click='people.selectNone()'>Select None</a></li>
             <li role="separator" class="divider"></li>
-            <li><a href="" ng-click='people.showAll()'>Show All</a>
+            <li><a href="" ng-click='people.showAll()'>Show All</a></li>
             <li role="separator" class="divider"></li>
             <li><a href="" ng-repeat='group in people.groups' ng-click='people.filterGroup(group)'>{{ group.name }}</a></li>
           </ul>
         </div>
       </div>
+    </div>
+  </div>
+</div>
+
+<div class='row extra-bottom-margins' ng-show='people.filteredByGroup'>
+  <div class='col-sm-12'>
+    <div class="btn-group btn-group-xs pull-right" role="group" aria-label="...">
+        <a type="button" class="btn btn-default">Select All Shown</a>
+        <a type="button" class="btn btn-default">Select None Shown</a>
     </div>
   </div>
 </div>

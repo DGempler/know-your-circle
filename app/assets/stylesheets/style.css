@@ -23,6 +23,14 @@
   margin-bottom: 10px;
 }
 
+.extra-bottom-margins-header {
+  margin-bottom: 32px;
+}
+
+.no-bottom-margins {
+  margin-bottom: 0px;
+}
+
 .label {
     margin-left: 5px;
     display: inline-block;
