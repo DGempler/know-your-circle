@@ -91,12 +91,28 @@
       return newPerson;
     }
 
-    vm.submitPerson = function() {
-      var cleanedPerson = {person: cleanPersonProps(vm.person)};
-      PersonFactory.updateWithAttachment(cleanedPerson).then(function(data) {
-        $location.path('/people/show/' + data.id);
-      });
+    vm.submitPerson = function(isValid) {
+      if (isValid) {
+        var cleanedPerson = {person: cleanPersonProps(vm.person)};
+        PersonFactory.updateWithAttachment(cleanedPerson).then(function(data) {
+          $location.path('/people/show/' + data.id);
+        });
+      }
     };
+
+    /*vm.submitUpdateUserAccount = function(isValid) {
+      if (isValid) {
+        if (vm.user.image) {
+          var submitUser = removeNullValues();
+          AuthFactory.updateUserWithImage(submitUser);
+        } else {
+          if (vm.user.deleteImage) {
+            vm.user.image= null;
+          }
+          AuthFactory.updateUser(vm.user);
+        }
+      }
+    };*/
 
     vm.addInputFields = function() {
       vm.addedInputFields = true;
@@ -124,6 +140,8 @@
       vm.person.bio = person.bio;
       vm.person.id = person.id;
       vm.person.group_ids = [];
+      vm.person.image_updated_at = person.image_updated_at;
+      vm.person.image_file_name = person.image_file_name;
       person.groups.forEach(function(group) {
         vm.person.group_ids.push(group.id);
       });
