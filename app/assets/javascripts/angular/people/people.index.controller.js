@@ -65,6 +65,7 @@
     };
 
     vm.selectAllShown = function() {
+      vm.someoneSelected = true;
       angular.forEach(vm.people, function(person) {
         if (person.show) {
           person.selected = true;
@@ -73,11 +74,17 @@
     };
 
     vm.selectNoneShown = function() {
+      var someStillSelected = false;
       angular.forEach(vm.people, function(person) {
-          if (person.show) {
-            person.selected = false;
-          }
-        });
+        if (person.show) {
+          person.selected = false;
+        } else if (person.selected) {
+          someStillSelected = true;
+        }
+      });
+      if (!someStillSelected) {
+        vm.someoneSelected = false;
+      }
     };
 
     vm.personSelected = function() {
