@@ -8,4 +8,6 @@ Devise.setup do |config|
   # See: http://stackoverflow.com/q/19600905/806956
   # config.navigational_formats = [:json]
   config.case_insensitive_keys = [:email]
+
+  config.secret_key = ENV["DEVISE_SECRET_KEY"]
 end
