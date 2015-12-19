@@ -68,6 +68,16 @@
       return deferred.promise;
     };
 
+    personFactory.updateWithoutAttachment = function(person) {
+      var deferred = $q.defer();
+      Person.update({id: person.person.id}, person, function(person) {
+        deferred.resolve(person);
+      }, function(err) {
+        deferred.reject(err);
+      });
+      return deferred.promise;
+    };
+
     personFactory.updateGroups = function(person) {
       var deferred = $q.defer();
       Person.update({id: person.id}, {person: {group_ids: person.group_ids}}, function(person) {
@@ -77,6 +87,7 @@
       });
       return deferred.promise;
     };
+
     return personFactory;
   }
 })();

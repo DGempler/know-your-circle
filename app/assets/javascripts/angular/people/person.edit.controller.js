@@ -68,7 +68,7 @@
     function removeNullValues(submittedPerson, newPerson) {
       for (var key in submittedPerson) {
         // if original person had value, and submitted person doesn't OR sumbitted person now has a value
-        if ((originalPerson[key] && !submittedPerson[key]) || submittedPerson[key]) {
+        if ((originalPerson[key] && !submittedPerson[key]) || submittedPerson[key] || key === 'image') {
           newPerson[key] = submittedPerson[key];
         }
       }
@@ -93,26 +93,22 @@
 
     vm.submitPerson = function(isValid) {
       if (isValid) {
-        var cleanedPerson = {person: cleanPersonProps(vm.person)};
-        PersonFactory.updateWithAttachment(cleanedPerson).then(function(data) {
-          $location.path('/people/show/' + data.id);
-        });
-      }
-    };
-
-    /*vm.submitUpdateUserAccount = function(isValid) {
-      if (isValid) {
-        if (vm.user.image) {
-          var submitUser = removeNullValues();
-          AuthFactory.updateUserWithImage(submitUser);
+        if (vm.person.image) {
+          var cleanedPerson = {person: cleanPersonProps(vm.person)};
+          PersonFactory.updateWithAttachment(cleanedPerson).then(function(data) {
+            $location.path('/people/show/' + data.id);
+          });
         } else {
-          if (vm.user.deleteImage) {
-            vm.user.image= null;
+          if (vm.person.deleteImage) {
+            vm.person.image = null;
           }
-          AuthFactory.updateUser(vm.user);
+          var cleanedPerson = {person: cleanPersonProps(vm.person)};
+          PersonFactory.updateWithoutAttachment(cleanedPerson).then(function(data) {
+            $location.path('/people/show/' + data.id);
+          });
         }
       }
-    };*/
+    };
 
     vm.addInputFields = function() {
       vm.addedInputFields = true;
