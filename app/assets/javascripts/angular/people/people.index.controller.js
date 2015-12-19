@@ -6,7 +6,6 @@
 
   function peopleIndexController(PersonFactory, GroupFactory, $q, AuthFactory) {
     var vm = this;
-    var filteredByGroup = false;
 
     function getPeople() {
       PersonFactory.getPeople().then(function(people) {
@@ -51,7 +50,7 @@
     };
 
     vm.selectAllCheckbox = function(bool) {
-      if (filteredByGroup) {
+      if (vm.filteredByGroup) {
         var someoneSelected = false;
         angular.forEach(vm.people, function(person) {
           if (person.show && person.selected) {
@@ -175,14 +174,14 @@
     };
 
     vm.showAll = function() {
-      filteredByGroup = false;
+      vm.filteredByGroup = false;
       angular.forEach(vm.people, function(person) {
         person.show = true;
       });
     };
 
     vm.filterGroup = function(chosenGroup) {
-      filteredByGroup = true;
+      vm.filteredByGroup = true;
       angular.forEach(vm.people, function(person) {
         person.groups.forEach(function(personGroup) {
           person.show = chosenGroup.id === personGroup.id ? true : false;
