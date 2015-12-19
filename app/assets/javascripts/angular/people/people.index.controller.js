@@ -28,7 +28,6 @@
         });
     }
 
-
     function deleteSelected() {
       var promiseArray = [];
       angular.forEach(vm.people, function(person) {
@@ -42,6 +41,15 @@
       });
     }
 
+
+    vm.selectAllCheckbox = function(bool) {
+      if (bool) {
+        vm.selectAll();
+      } else {
+        vm.selectNone();
+      }
+    };
+
     vm.selectAll = function() {
       vm.someoneSelected = true;
       angular.forEach(vm.people, function(person) {
@@ -49,48 +57,27 @@
       });
     };
 
-    vm.selectAllCheckbox = function(bool) {
-      if (vm.filteredByGroup) {
-        var someoneSelected = false;
-        angular.forEach(vm.people, function(person) {
-          if (person.show && person.selected) {
-            someoneSelected = true;
-          }
-        });
-        if (!someoneSelected) {
-          vm.someoneSelected = true;
-          angular.forEach(vm.people, function(person) {
-            if (person.show) {
-              person.selected = true;
-            }
-          });
-        } else {
-          angular.forEach(vm.people, function(person) {
-            if (person.show) {
-              person.selected = false;
-            }
-          });
-        }
-      } else {
-        if (bool) {
-          vm.someoneSelected = true;
-          angular.forEach(vm.people, function(person) {
-            person.selected = true;
-          });
-        } else {
-          vm.someoneSelected = false;
-          angular.forEach(vm.people, function(person) {
-            person.selected = false;
-          });
-        }
-      }
-    };
-
     vm.selectNone = function() {
       vm.someoneSelected = false;
       angular.forEach(vm.people, function(person) {
         person.selected = false;
       });
+    };
+
+    vm.selectAllShown = function() {
+      angular.forEach(vm.people, function(person) {
+        if (person.show) {
+          person.selected = true;
+        }
+      });
+    };
+
+    vm.selectNoneShown = function() {
+      angular.forEach(vm.people, function(person) {
+          if (person.show) {
+            person.selected = false;
+          }
+        });
     };
 
     vm.personSelected = function() {
@@ -183,8 +170,11 @@
     vm.filterGroup = function(chosenGroup) {
       vm.filteredByGroup = true;
       angular.forEach(vm.people, function(person) {
+        person.show = false;
         person.groups.forEach(function(personGroup) {
-          person.show = chosenGroup.id === personGroup.id ? true : false;
+          if (chosenGroup.id === personGroup.id) {
+            person.show = true;
+          }
         });
       });
     };

@@ -15,7 +15,9 @@
           </ul>
         </div>
         <button ng-show='people.someoneSelected' class="btn btn-default" ng-click='people.clickDelete()' >Delete Selected</button>
-        <button type="button" class="btn btn-default"><input type='checkbox' ng-model='people.someoneSelected' ng-click='people.selectAllCheckbox(people.someoneSelected)'></button>
+        <button type="button" class="btn btn-default">
+          <input type='checkbox' ng-model='people.someoneSelected' ng-click='people.selectAllCheckbox(people.someoneSelected)'>
+        </button>
         <div class="btn-group" role="group">
           <button type="button" class="btn btn-default dropdown-toggle" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false" id="selectDropDown">
             <span class="caret"></span>
