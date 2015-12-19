@@ -169,6 +169,7 @@
 
     vm.filterGroup = function(chosenGroup) {
       vm.filteredByGroup = true;
+      vm.filteredGroup = chosenGroup.name;
       angular.forEach(vm.people, function(person) {
         person.show = false;
         person.groups.forEach(function(personGroup) {

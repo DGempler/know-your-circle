@@ -37,7 +37,10 @@
 </div>
 
 <div class='row extra-bottom-margins' ng-show='people.filteredByGroup'>
-  <div class='col-sm-12'>
+  <div class='col-sm-6'>
+    <span class="label label-info">{{ people.filteredGroup }}</span>
+  </div>
+  <div class='col-sm-6'>
     <div class="btn-group btn-group-xs pull-right" role="group" aria-label="...">
         <a type="button" class="btn btn-default" ng-click='people.selectAllShown()'>Select All Shown</a>
         <a type="button" class="btn btn-default" ng-click='people.selectNoneShown()'>Select None Shown</a>
