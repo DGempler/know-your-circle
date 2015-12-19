@@ -92,11 +92,13 @@
       return newPerson;
     }
 
-    vm.submitPerson = function() {
-      var cleanedPerson = {person: cleanPersonProps(vm.person)};
-      PersonFactory.createWithAttachment(cleanedPerson).then(function(data) {
-        $location.path('/people/show/' + data.id);
-      });
+    vm.submitPerson = function(isValid) {
+      if (isValid) {
+        var cleanedPerson = {person: cleanPersonProps(vm.person)};
+        PersonFactory.createWithAttachment(cleanedPerson).then(function(data) {
+          $location.path('/people/show/' + data.id);
+        });
+      }
     };
 
     vm.addInputFields = function() {

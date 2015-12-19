@@ -2,7 +2,7 @@
   <h1>Add a person</h1>
 </div>
 
-<form ng-submit='person.submitPerson()'>
+<form ng-submit='person.submitPerson(newPersonForm.$valid)' name='newPersonForm'>
   <div class='row'>
     <div class='col-sm-6' ng-class='{"col-sm-offset-3": !person.addedInputFields}'>
       <div class="form-group">
@@ -42,10 +42,17 @@
       <div class='extra-bottom-margins'>
         <span class="label label-info" ng-repeat='group in person.groups | chosenGroups : person.person.group_ids'>{{ group.name }} <a href='' ng-click='person.removeGroup(group.id)'><span class="glyphicon glyphicon-remove" aria-hidden="true"></span></a></span>
       </div>
+
       <div class="form-group">
-        <input type="file" ng-model="person.person.image" accept="image/*" id="imageFileInput" ngf-select ngf-pattern="'image/*'" ngf-max-size="5MB" ngf-min-height="50" class="text-info"/>
-        <p class="help-block">Upload an headshot image of your person (recommended for games).</p>
+        <label for="imageFileInput">Upload person's Headshot (recommended for games)</label>
+        <input type="file" ng-model="person.person.image" accept="image/*" id="imageFileInput" ngf-select ngf-pattern="'image/*'" ngf-max-size="5MB" ngf-min-height="50" class="text-info" name="image" />
+
+        <div ng-show='person.buttonClicked' ng-messages="newPersonForm.image.$error" class="text-warning">
+          <p ng-message="minHeight">Image must be a minimum of 50px tall.</p>
+          <p ng-message="maxSize">Image is too large. The maximum allowed is 5 MB.</p>
+        </div>
       </div>
+
       <div class="form-group">
         <label for="nicknameInput">Nickname</label>
         <input ng-model="person.person.nickname" type="text" class="form-control" id="nicknameInput"  />
@@ -86,7 +93,7 @@
       <div class='text-center'>
         <a href='#/people/index' class="btn btn-default">Cancel</a>
         <a ng-click='person.addInputFields()' ng-hide='person.addedInputFields' class="btn btn-success">Add more details</a>
-        <button type="submit" class="btn btn-primary">Submit</button>
+        <button type="submit" class="btn btn-primary" ng-click='person.buttonClicked = true'>Submit</button>
       </div>
     </div>
   </div>
