@@ -93,8 +93,9 @@
 
     vm.submitPerson = function(isValid) {
       if (isValid) {
+        var cleanedPerson;
         if (vm.person.image) {
-          var cleanedPerson = {person: cleanPersonProps(vm.person)};
+          cleanedPerson = {person: cleanPersonProps(vm.person)};
           PersonFactory.updateWithAttachment(cleanedPerson).then(function(data) {
             $location.path('/people/show/' + data.id);
           });
@@ -102,7 +103,7 @@
           if (vm.person.deleteImage) {
             vm.person.image = null;
           }
-          var cleanedPerson = {person: cleanPersonProps(vm.person)};
+          cleanedPerson = {person: cleanPersonProps(vm.person)};
           PersonFactory.updateWithoutAttachment(cleanedPerson).then(function(data) {
             $location.path('/people/show/' + data.id);
           });
