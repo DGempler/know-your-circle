@@ -54,7 +54,7 @@
 
     personFactory.createWithAttachment = function(formData) {
       var deferred = $q.defer();
-      sendPayload(formData, "POST", "//localhost:3000/api/people").then(function(data) {
+      sendPayload(formData, "POST", "/api/people").then(function(data) {
         deferred.resolve(data);
       });
       return deferred.promise;
@@ -62,7 +62,7 @@
 
     personFactory.updateWithAttachment = function(formData) {
       var deferred = $q.defer();
-      sendPayload(formData, "PUT", "//localhost:3000/api/people/" + formData.person.id).then(function(data) {
+      sendPayload(formData, "PUT", "/api/people/" + formData.person.id).then(function(data) {
         deferred.resolve(data);
       });
       return deferred.promise;
