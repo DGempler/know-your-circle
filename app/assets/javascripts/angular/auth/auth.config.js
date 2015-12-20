@@ -6,7 +6,7 @@
 
     function configuration($authProvider) {
       $authProvider.configure({
-        apiUrl: '//localhost:3000/api',
+        apiUrl: process.env.PORT + '/api' || "//localhost:3000/api",
         confirmationSuccessUrl: 'http://localhost:3000/#/profile/edit'
       });
     }
