@@ -6,8 +6,8 @@
 
     function configuration($authProvider) {
       $authProvider.configure({
-        apiUrl: 'https://knowyourcircle.herokuapp.com/api',
-        confirmationSuccessUrl: 'http://localhost:3000/#/profile/edit'
+        apiUrl: '/api',
+        confirmationSuccessUrl: '/#/profile/edit'
       });
     }
 
