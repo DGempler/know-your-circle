@@ -9,6 +9,7 @@
     $routeProvider
       .when('/', {
         templateUrl: 'partials/index.html',
+        controller: 'indexController as index'
       })
       .when('/people/index', {
         templateUrl: 'partials/people/index.html',
