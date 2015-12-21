@@ -12,8 +12,8 @@
 
     <div ng-controller='navController as nav' class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
       <ul class="nav navbar-nav navbar-right">
-        <li ng-show='user.id'><a href="#/people/new">Add Peeps</a></li>
-        <li ng-show='user.id'><a href="#/people/index">See All Peeps</a></li>
+        <li ng-show='user.id'><a href="#/people/new">Add People</a></li>
+        <li ng-show='user.id'><a href="#/people/index">Your Circle</a></li>
         <li ng-show='user.id'><a href="#/games/index">Play Games</a></li>
         <li ng-show='!user.id'><a ng-click='nav.signUpOpen()'>Sign Up</a></li>
         <li ng-show='!user.id'><a ng-click='nav.logInOpen()'>Log In</a></li>
