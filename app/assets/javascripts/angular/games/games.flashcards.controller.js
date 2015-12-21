@@ -19,12 +19,16 @@
     vm.person.randomPerson = people[randomNumber];
 
     function chooseNewRandomNumber() {
-      var newRandomNumber = Math.floor(Math.random() * people.length);
-      if (newRandomNumber !== randomNumber) {
-        randomNumber = newRandomNumber;
+      if (people.length === 1) {
         return randomNumber;
       } else {
-        return chooseNewRandomNumber();
+        var newRandomNumber = Math.floor(Math.random() * people.length);
+        if (newRandomNumber !== randomNumber) {
+          randomNumber = newRandomNumber;
+          return randomNumber;
+        } else {
+          return chooseNewRandomNumber();
+        }
       }
     }
 
