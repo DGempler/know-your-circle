@@ -2,9 +2,9 @@
   angular.module('memPeeps.people')
     .controller('peopleIndexController', peopleIndexController);
 
-  peopleIndexController.$inject = ['PersonFactory', 'GroupFactory', '$q', 'AuthFactory'];
+  peopleIndexController.$inject = ['PersonFactory', 'GroupFactory', '$q', 'AuthFactory', 'UserFactory'];
 
-  function peopleIndexController(PersonFactory, GroupFactory, $q, AuthFactory) {
+  function peopleIndexController(PersonFactory, GroupFactory, $q, AuthFactory, UserFactory) {
     var vm = this;
 
     function getPeople() {
@@ -98,10 +98,11 @@
     };
 
     vm.clickDelete = function() {
-      var confirmDelete = window.confirm("Are you sure?");
-      if (confirmDelete) {
-        deleteSelected();
-      }
+      var message = "Are you sure?";
+      UserFactory.confirmMessageModalOpen(message)
+        .then(function() {
+          deleteSelected();
+        });
     };
 
     vm.editGroups = function() {
