@@ -30,7 +30,7 @@
           });
         })
         .catch(function(error) {
-          var message = 'There was an error while loading your groups. Please refresh the page to try again.';
+          var message = 'An error occured while loading your groups. Please refresh the page to try again.';
           AuthFactory.messageModalOpen(message);
         });
     }
@@ -96,17 +96,27 @@
         var cleanedPerson;
         if (vm.person.image) {
           cleanedPerson = {person: cleanPersonProps(vm.person)};
-          PersonFactory.updateWithAttachment(cleanedPerson).then(function(data) {
-            $location.path('/people/show/' + data.id);
-          });
+          PersonFactory.updateWithAttachment(cleanedPerson)
+            .then(function(data) {
+              $location.path('/people/show/' + data.id);
+            })
+            .catch(function(err) {
+              var message = 'An error occured while updating your person. Please refresh the page and try again.';
+              AuthFactory.messageModalOpen(message);
+            });
         } else {
           if (vm.person.deleteImage) {
             vm.person.image = null;
           }
           cleanedPerson = {person: cleanPersonProps(vm.person)};
-          PersonFactory.updateWithoutAttachment(cleanedPerson).then(function(data) {
-            $location.path('/people/show/' + data.id);
-          });
+          PersonFactory.updateWithoutAttachment(cleanedPerson)
+            .then(function(data) {
+              $location.path('/people/show/' + data.id);
+            })
+            .catch(function(error) {
+              var message = 'An error occured while updating your person. Please refresh the page and try again.';
+              AuthFactory.messageModalOpen(message);
+            });
         }
       }
     };
