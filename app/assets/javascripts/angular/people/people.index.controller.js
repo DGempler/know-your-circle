@@ -164,7 +164,7 @@
             AuthFactory.messageModalOpen(message);
           })
           .catch(function(error) {
-            message = 'There was an error applying your group. Please try again.';
+            message = 'An error occured while applying your group. Please refresh the page and try again.';
             AuthFactory.messageModalOpen(message);
           });
       } else {
