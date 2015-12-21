@@ -18,9 +18,9 @@
         fileFormDataName: 'person[image]',
       })
       .then(function (resp) {
-          deferred.resolve(resp.data);
-      }, function (resp) {
-          console.log('Error status: ' + resp.status);
+        deferred.resolve(resp.data);
+      }, function (err) {
+        deferred.reject(err);
       });
       return deferred.promise;
     }
@@ -54,17 +54,25 @@
 
     personFactory.createWithAttachment = function(formData) {
       var deferred = $q.defer();
-      sendPayload(formData, "POST", "/api/people").then(function(data) {
-        deferred.resolve(data);
-      });
+      sendPayload(formData, "POST", "/api/people")
+        .then(function(data) {
+          deferred.resolve(data);
+        })
+        .catch(function(err) {
+          deferred.reject(err);
+        });
       return deferred.promise;
     };
 
     personFactory.updateWithAttachment = function(formData) {
       var deferred = $q.defer();
-      sendPayload(formData, "PUT", "/api/people/" + formData.person.id).then(function(data) {
-        deferred.resolve(data);
-      });
+      sendPayload(formData, "PUT", "/api/people/" + formData.person.id)
+        .then(function(data) {
+          deferred.resolve(data);
+        })
+        .catch(function(err) {
+          deferred.reject(err);
+        });
       return deferred.promise;
     };
 
