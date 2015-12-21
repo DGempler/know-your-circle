@@ -88,7 +88,7 @@
 <div class="modal-footer">
   <div class='row'>
     <div class='col-sm-8 text-center'>
-      <div class="well well-sm text-info">
+      <div ng-show='game.person.randomPerson' class="well well-sm text-info">
         {{ game.game.scoreMessage }} &nbsp;&nbsp;
 
         <span ng-show='game.game.scoreMessage === "Max Round Score:"' ng-class="{'text-success': game.game.hintCount === 0, 'text-warning': game.game.hintCount === 1, 'text-primary': game.game.hintCount === 2, 'text-danger': game.game.hintCount === 3}">
@@ -108,8 +108,9 @@
       </div>
     </div>
     <div class='col-sm-4'>
-      <button class="btn btn-warning" type="button" ng-click="game.reset()">Reset</button>
-      <button class="btn btn-primary" type="button" ng-click="game.quit()">Quit</button>
+      <button ng-show='game.person.randomPerson' class="btn btn-warning" type="button" ng-click="game.reset()">Reset</button>
+      <button ng-show='game.person.randomPerson' class="btn btn-primary" type="button" ng-click="game.quit()">Quit</button>
+      <button ng-hide='game.person.randomPerson' class="btn btn-primary" type="button" ng-click="game.quit()">Close</button>
     </div>
   </div>
 </div>
