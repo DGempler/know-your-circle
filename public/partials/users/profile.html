@@ -1,5 +1,5 @@
 <div class="page-header">
-  <h1 class='center-block'><center>{{ profile.user.first_name }} {{ profile.user.last_name }}</center></h1>
+  <h1 class='center-block'><center>{{ profile.user.first_name }} {{ profile.user.middle_name }} {{ profile.user.last_name }}</center></h1>
 </div>
 
 <div class='row'>
@@ -10,7 +10,6 @@
 <div class='row'>
   <div class='col-sm-4 col-sm-offset-2'>
     <p>Email: {{ profile.user.email }}</p>
-    <p>Middle name: {{ profile.user.middle_name }}</p>
     <p>Sex: {{ profile.user.sex }}</p>
     <p>Nickname: {{ profile.user.nickname }}</p>
   </div>
