@@ -23,7 +23,7 @@
           vm.groups = groups;
         })
         .catch(function(error) {
-          var message = 'There was an error while loading your groups. Please refresh the page to try again.';
+          var message = 'An error occured while loading your groups. Please refresh the page to try again.';
           AuthFactory.messageModalOpen(message);
         });
     }
@@ -35,10 +35,15 @@
           promiseArray.push(PersonFactory.deletePerson(person.id));
         }
       });
-      $q.all(promiseArray).then(function(people) {
-        vm.someoneSelected = false;
-        getPeople();
-      });
+      $q.all(promiseArray)
+        .then(function(people) {
+          vm.someoneSelected = false;
+          getPeople();
+        })
+        .catch(function(errors) {
+          var message = 'An error occured while deleting your people. Please refresh the page and try again.';
+          AuthFactory.messageModalOpen(message);
+        });
     }
 
 
