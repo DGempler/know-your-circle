@@ -1,5 +1,5 @@
 (function() {
-  angular.module('memPeeps.auth')
+  angular.module('knowYourCircle.auth')
     .controller('navController', navController);
 
   navController.$inject = ['$uibModal', '$auth', 'AuthFactory', '$location'];

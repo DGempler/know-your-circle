@@ -1,5 +1,5 @@
 (function() {
-  angular.module('memPeeps.groups')
+  angular.module('knowYourCircle.groups')
     .controller('groupController', groupController);
 
     groupController.$inject = ['$uibModalInstance', 'groups', 'GroupFactory', 'AuthFactory', '$q'];

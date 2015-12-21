@@ -1,5 +1,5 @@
 (function() {
-  angular.module('memPeeps.auth')
+  angular.module('knowYourCircle.auth')
     .controller('signupController', signupController);
 
     signupController.$inject = ['$uibModalInstance', 'AuthFactory'];

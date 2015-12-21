@@ -1,5 +1,5 @@
 (function() {
-  angular.module('memPeeps.groups')
+  angular.module('knowYourCircle.groups')
   .factory('Group', Group);
 
   Group.$inject = ['$resource'];

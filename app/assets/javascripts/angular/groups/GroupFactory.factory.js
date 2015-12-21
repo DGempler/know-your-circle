@@ -1,5 +1,5 @@
 (function() {
-  angular.module('memPeeps.groups')
+  angular.module('knowYourCircle.groups')
     .factory('GroupFactory', GroupFactory);
 
     GroupFactory.$inject = ['$uibModal', '$q', 'Group'];

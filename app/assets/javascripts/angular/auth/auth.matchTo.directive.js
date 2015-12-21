@@ -1,5 +1,5 @@
 (function() {
-  angular.module('memPeeps.auth')
+  angular.module('knowYourCircle.auth')
     .directive('matchTo', matchTo);
 
   function matchTo() {

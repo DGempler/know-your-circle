@@ -1,5 +1,5 @@
 (function() {
-  angular.module('memPeeps.games')
+  angular.module('knowYourCircle.games')
     .controller('gamesFlashcardsController', gamesFlashcardsController);
 
   gamesFlashcardsController.$inject = ['$uibModalInstance', 'people'];

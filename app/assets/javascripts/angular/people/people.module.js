@@ -1,3 +1,3 @@
 (function() {
-  angular.module('memPeeps.people', ['ngResource', 'ngFileUpload', 'ui.bootstrap']);
+  angular.module('knowYourCircle.people', ['ngResource', 'ngFileUpload', 'ui.bootstrap']);
 })();

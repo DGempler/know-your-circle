@@ -1,5 +1,5 @@
 (function() {
-  angular.module('memPeeps.users')
+  angular.module('knowYourCircle.users')
     .controller('confirmMessageController', confirmMessageController);
 
     confirmMessageController.$inject = ['$uibModalInstance', 'message'];

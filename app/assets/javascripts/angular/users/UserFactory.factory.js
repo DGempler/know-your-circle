@@ -1,5 +1,5 @@
 (function() {
-  angular.module('memPeeps.users')
+  angular.module('knowYourCircle.users')
     .factory('UserFactory', UserFactory);
 
     UserFactory.$inject = ['$uibModal', '$q'];

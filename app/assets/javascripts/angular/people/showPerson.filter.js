@@ -1,5 +1,5 @@
 (function() {
-  angular.module('memPeeps.people')
+  angular.module('knowYourCircle.people')
     .filter('showPerson', showPerson);
 
     function showPerson() {

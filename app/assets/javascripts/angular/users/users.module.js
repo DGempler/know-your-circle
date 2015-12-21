@@ -1,3 +1,3 @@
 (function() {
-  angular.module('memPeeps.users', ['ngFileUpload', 'ngAnimate', 'memPeeps.auth']);
+  angular.module('knowYourCircle.users', ['ngFileUpload', 'ngAnimate', 'knowYourCircle.auth']);
 })();

@@ -1,3 +1,3 @@
 (function() {
-  angular.module('memPeeps.groups', ['ngResource', 'ui.bootstrap']);
+  angular.module('knowYourCircle.groups', ['ngResource', 'ui.bootstrap']);
 })();

@@ -1,5 +1,5 @@
 (function() {
-  angular.module('memPeeps.users')
+  angular.module('knowYourCircle.users')
     .controller('editProfileController', editProfileController);
 
   editProfileController.$inject=['$rootScope', 'AuthFactory', '$auth'];

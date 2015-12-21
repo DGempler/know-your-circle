@@ -1,5 +1,5 @@
 (function() {
-  angular.module('memPeeps.auth')
+  angular.module('knowYourCircle.auth')
     .factory('AuthFactory', AuthFactory);
 
     AuthFactory.$inject = ['$uibModal', '$auth', '$location', '$q', '$rootScope', 'Upload'];

@@ -1,5 +1,5 @@
 (function() {
-  angular.module('memPeeps.people')
+  angular.module('knowYourCircle.people')
     .controller('personNewController', personNewController);
 
   personNewController.$inject = ['PersonFactory', '$location', 'GroupFactory', 'AuthFactory'];

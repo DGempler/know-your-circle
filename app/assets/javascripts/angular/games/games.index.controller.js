@@ -1,5 +1,5 @@
 (function() {
-  angular.module('memPeeps.games')
+  angular.module('knowYourCircle.games')
     .controller('gamesIndexController', gamesIndexController);
 
   gamesIndexController.$inject = ['$uibModal', 'PersonFactory'];
