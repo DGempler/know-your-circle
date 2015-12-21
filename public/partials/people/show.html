@@ -1,5 +1,5 @@
 <div class="page-header">
-  <h1 class='center-block'><center>{{ person.first_name }} {{ person.last_name }}</center></h1>
+  <h1 class='center-block'><center>{{ person.first_name }} {{ person.middle_name }} {{ person.last_name }}</center></h1>
 </div>
 
 <div class='row'>
@@ -16,7 +16,6 @@
 </div>
 <div class='row'>
   <div class='col-sm-4 col-sm-offset-2'>
-    <p>Middle name: {{ person.middle_name }}</p>
     <p>Sex: {{ person.sex }}</p>
     <p>Nickname: {{ person.nickname }}</p>
     <p ng-repeat='hint in person.hints track by $index'>Hint {{ $index + 1 }}: {{ hint }}</p>
