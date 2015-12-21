@@ -2,85 +2,88 @@
   <h3 class="modal-title">Who is this?</h3>
 </div>
 <div class="modal-body">
-  <!-- <div class=''> -->
-    <div class='row'>
-      <img ng-src='{{ game.person.randomPerson.medium }}' class='center-block'/>
+  <div class='text-center' ng-hide='game.person.randomPerson'>
+    <h4>Can't tell?</h4>
+    <p>That's because you have no people!</p>
+    <p>Click <a ng-click='game.quit()' href='#/people/new'>here</a> to add some!</p>
+  </div>
+  <div ng-show='game.person.randomPerson' class='row'>
+    <img ng-src='{{ game.person.randomPerson.medium }}' class='center-block'/>
 
-      <div class='col-sm-10 col-sm-offset-1'>
-        <form ng-submit='game.submitPerson()' autocomplete='off'>
+    <div class='col-sm-10 col-sm-offset-1'>
+      <form ng-submit='game.submitPerson()' autocomplete='off'>
 
-          <div ng-hide='game.person.result || game.game.firstNameHintView' class="form-group">
-            <label for="firstNameInput">First Name</label>
-            <div class='input-group'>
-              <input ng-model="game.person.guessPerson.first_name" type="text" class="form-control" id="firstNameInput" autofocus>
+        <div ng-hide='game.person.result || game.game.firstNameHintView' class="form-group">
+          <label for="firstNameInput">First Name</label>
+          <div class='input-group'>
+            <input ng-model="game.person.guessPerson.first_name" type="text" class="form-control" id="firstNameInput" autofocus>
+            <div class="input-group-btn">
+              <a class="btn btn-info dropdown-toggle" ng-class="{'disabled': game.game.hintCount > 2 || game.game.firstNameHintView || game.game.lastNameHintView }" type="button" id="firstNameHintDropdown" data-toggle="dropdown" aria-haspopup="true" aria-expanded="true">
+                Get Hint &nbsp;
+                <span class="caret"></span>
+              </a>
+              <ul class="dropdown-menu dropdown-menu-right bg-info" aria-labelledby="firstNameHintDropdown">
+                <li><a href="" ng-click='game.game.hintFirstLetterFirstName()' class='bg-info'>Starts with...</a></li>
+                <li ng-hide='!game.person.randomPerson.nickname'><a href="" ng-click='game.game.hintNickname("firstNameHint")' class='bg-info'>Nickname</a></li>
+                <li ng-hide='game.person.randomPerson.hints.length === 0'><a href="" ng-click='game.game.hintOther("firstNameHint")' class='bg-info'>Other Hint</a></li>
+              </ul>
+            </div>
+          </div>
+        </div>
+
+        <div ng-show='game.game.firstNameHintView' class="alert alert-info alert-dismissible ">
+          <button ng-click='game.game.closeFirstNameHint()' type="button" class="close" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+          <p>{{ game.game.firstNameHintText }}<b>&nbsp;{{ game.game.firstNameHint }}</b></p>
+        </div>
+
+        <div ng-show='game.person.firstNameWrong' class="alert alert-warning">
+          <h4>Wrong!</h4>
+          <p>The correct first name was <b>{{ game.person.randomPerson.first_name }}</b></p>
+        </div>
+        <div ng-show='game.person.firstNameRight' class="alert alert-success">
+          <h4>Correct!</h4>
+        </div>
+
+        <div ng-hide='game.person.result || game.game.lastNameHintView' class="form-group">
+          <label for="lastNameInput">Last Name</label>
+          <div class='input-group'>
+            <input ng-model="game.person.guessPerson.last_name" type="text" class="form-control" id="lastNameInput">
               <div class="input-group-btn">
-                <a class="btn btn-info dropdown-toggle" ng-class="{'disabled': game.game.hintCount > 2 || game.game.firstNameHintView || game.game.lastNameHintView }" type="button" id="firstNameHintDropdown" data-toggle="dropdown" aria-haspopup="true" aria-expanded="true">
-                  Get Hint &nbsp;
-                  <span class="caret"></span>
-                </a>
-                <ul class="dropdown-menu dropdown-menu-right bg-info" aria-labelledby="firstNameHintDropdown">
-                  <li><a href="" ng-click='game.game.hintFirstLetterFirstName()' class='bg-info'>Starts with...</a></li>
-                  <li ng-hide='!game.person.randomPerson.nickname'><a href="" ng-click='game.game.hintNickname("firstNameHint")' class='bg-info'>Nickname</a></li>
-                  <li ng-hide='game.person.randomPerson.hints.length === 0'><a href="" ng-click='game.game.hintOther("firstNameHint")' class='bg-info'>Other Hint</a></li>
-                </ul>
-              </div>
+              <a class="btn btn-info dropdown-toggle" ng-class="{'disabled': game.game.hintCount > 2 || game.game.firstNameHintView || game.game.lastNameHintView }" type="button" id="lastNameHintDropdown" data-toggle="dropdown" aria-haspopup="true" aria-expanded="true">
+                Get Hint &nbsp;
+                <span class="caret"></span>
+              </a>
+              <ul class="dropdown-menu dropdown-menu-right" aria-labelledby="lastNameHintDropdown">
+                <li><a href="" ng-click='game.game.hintFirstLetterLastName()' class='bg-info'>Starts with...</a></li>
+                <li ng-hide='!game.person.randomPerson.nickname'><a href="" ng-click='game.game.hintNickname("lastNameHint")' class='bg-info'>Nickname</a></li>
+                <li ng-hide='game.person.randomPerson.hints.length === 0'><a href="" ng-click='game.game.hintOther("lastNameHint")' class='bg-info'>Other Hint</a></li>
+              </ul>
             </div>
           </div>
+        </div>
 
-          <div ng-show='game.game.firstNameHintView' class="alert alert-info alert-dismissible ">
-            <button ng-click='game.game.closeFirstNameHint()' type="button" class="close" aria-label="Close"><span aria-hidden="true">&times;</span></button>
-            <p>{{ game.game.firstNameHintText }}<b>&nbsp;{{ game.game.firstNameHint }}</b></p>
-          </div>
+        <div ng-show='game.game.lastNameHintView' class="alert alert-info alert-dismissible ">
+          <button ng-click='game.game.closeLastNameHint()' type="button" class="close" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+          <p>{{ game.game.lastNameHintText }}<b>&nbsp;{{ game.game.lastNameHint }}</b></p>
+        </div>
 
-          <div ng-show='game.person.firstNameWrong' class="alert alert-warning">
-            <h4>Wrong!</h4>
-            <p>The correct first name was <b>{{ game.person.randomPerson.first_name }}</b></p>
+        <div ng-show='game.person.lastNameWrong' class="alert alert-warning">
+          <h4>Wrong!</h4>
+          <p>The correct last name was <b>{{ game.person.randomPerson.last_name }}</b></p>
+        </div>
+        <div ng-show='game.person.lastNameRight' class="alert alert-success">
+          <h4>Correct!</h4>
+        </div>
+        <div class='row'>
+          <div class='col-sm-6 col-sm-offset-3 text-center'>
+            <a ng-hide='game.person.result || game.game.hintsShown' ng-click='game.next()' class="btn btn-info btn-lg">Skip</a>
+            <button ng-hide='game.person.result' type="submit" class="btn btn-success btn-lg">Submit</button>
+            <a ng-show='game.person.result' ng-click='game.next()' class='btn btn-info btn-lg'>Next</a>
           </div>
-          <div ng-show='game.person.firstNameRight' class="alert alert-success">
-            <h4>Correct!</h4>
-          </div>
-
-          <div ng-hide='game.person.result || game.game.lastNameHintView' class="form-group">
-            <label for="lastNameInput">Last Name</label>
-            <div class='input-group'>
-              <input ng-model="game.person.guessPerson.last_name" type="text" class="form-control" id="lastNameInput">
-                <div class="input-group-btn">
-                <a class="btn btn-info dropdown-toggle" ng-class="{'disabled': game.game.hintCount > 2 || game.game.firstNameHintView || game.game.lastNameHintView }" type="button" id="lastNameHintDropdown" data-toggle="dropdown" aria-haspopup="true" aria-expanded="true">
-                  Get Hint &nbsp;
-                  <span class="caret"></span>
-                </a>
-                <ul class="dropdown-menu dropdown-menu-right" aria-labelledby="lastNameHintDropdown">
-                  <li><a href="" ng-click='game.game.hintFirstLetterLastName()' class='bg-info'>Starts with...</a></li>
-                  <li ng-hide='!game.person.randomPerson.nickname'><a href="" ng-click='game.game.hintNickname("lastNameHint")' class='bg-info'>Nickname</a></li>
-                  <li ng-hide='game.person.randomPerson.hints.length === 0'><a href="" ng-click='game.game.hintOther("lastNameHint")' class='bg-info'>Other Hint</a></li>
-                </ul>
-              </div>
-            </div>
-          </div>
-
-          <div ng-show='game.game.lastNameHintView' class="alert alert-info alert-dismissible ">
-            <button ng-click='game.game.closeLastNameHint()' type="button" class="close" aria-label="Close"><span aria-hidden="true">&times;</span></button>
-            <p>{{ game.game.lastNameHintText }}<b>&nbsp;{{ game.game.lastNameHint }}</b></p>
-          </div>
-
-          <div ng-show='game.person.lastNameWrong' class="alert alert-warning">
-            <h4>Wrong!</h4>
-            <p>The correct last name was <b>{{ game.person.randomPerson.last_name }}</b></p>
-          </div>
-          <div ng-show='game.person.lastNameRight' class="alert alert-success">
-            <h4>Correct!</h4>
-          </div>
-          <div class='row'>
-            <div class='col-sm-6 col-sm-offset-3 text-center'>
-              <a ng-hide='game.person.result || game.game.hintsShown' ng-click='game.next()' class="btn btn-info btn-lg">Skip</a>
-              <button ng-hide='game.person.result' type="submit" class="btn btn-success btn-lg">Submit</button>
-              <a ng-show='game.person.result' ng-click='game.next()' class='btn btn-info btn-lg'>Next</a>
-            </div>
-          </div>
-        </form>
-      </div>
+        </div>
+      </form>
     </div>
-  <!-- </div> -->
+  </div>
 </div>
 <div class="modal-footer">
   <div class='row'>
@@ -109,5 +112,4 @@
       <button class="btn btn-primary" type="button" ng-click="game.quit()">Quit</button>
     </div>
   </div>
-
 </div>
