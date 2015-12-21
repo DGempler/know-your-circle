@@ -1,4 +1,4 @@
-angular.module('memPeeps')
+angular.module('knowYourCircle')
   .run(run);
 
   run.$inject = ['$rootScope', 'AuthFactory', 'UserFactory'];

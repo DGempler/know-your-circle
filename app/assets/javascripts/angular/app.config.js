@@ -1,5 +1,5 @@
 (function() {
-  angular.module('memPeeps')
+  angular.module('knowYourCircle')
     .config(config);
 
   config.$inject = ['$routeProvider', '$locationProvider', '$httpProvider'];

@@ -1,3 +1,3 @@
 (function() {
-  angular.module('memPeeps', ['ngRoute', 'ng-token-auth', 'memPeeps.auth', 'memPeeps.people', 'memPeeps.games', 'memPeeps.users', 'memPeeps.groups']);
+  angular.module('knowYourCircle', ['ngRoute', 'ng-token-auth', 'knowYourCircle.auth', 'knowYourCircle.people', 'knowYourCircle.games', 'knowYourCircle.users', 'knowYourCircle.groups']);
 })();
