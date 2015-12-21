@@ -48,34 +48,39 @@
 
 
     vm.selectAllCheckbox = function(bool) {
-      if (bool) {
+      if (bool && vm.people.length > 0) {
         vm.selectAll();
       } else {
+        vm.someoneSelected = false;
         vm.selectNone();
       }
     };
 
     vm.selectAll = function() {
-      vm.someoneSelected = true;
-      angular.forEach(vm.people, function(person) {
-        person.selected = true;
-      });
+      if (vm.people.length > 0) {
+        vm.someoneSelected = true;
+        angular.forEach(vm.people, function(person) {
+          person.selected = true;
+        });
+      }
     };
 
     vm.selectNone = function() {
-      vm.someoneSelected = false;
-      angular.forEach(vm.people, function(person) {
-        person.selected = false;
-      });
+        vm.someoneSelected = false;
+        angular.forEach(vm.people, function(person) {
+          person.selected = false;
+        });
     };
 
     vm.selectAllShown = function() {
-      vm.someoneSelected = true;
-      angular.forEach(vm.people, function(person) {
-        if (person.show) {
-          person.selected = true;
-        }
-      });
+      if (vm.people.length > 0) {
+        vm.someoneSelected = true;
+        angular.forEach(vm.people, function(person) {
+          if (person.show) {
+            person.selected = true;
+          }
+        });
+      }
     };
 
     vm.selectNoneShown = function() {
