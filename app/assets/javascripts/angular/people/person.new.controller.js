@@ -59,11 +59,13 @@
     };
 
     vm.removeGroup = function(removeId) {
-      vm.person.group_ids.forEach(function(groupId, index) {
-        if (removeId === groupId) {
-          vm.person.group_ids.splice(index, 1);
+      //splice inside of iteration OK here because it only happens once
+      for (var i = 0; i < vm.person.group_ids.length; i++) {
+        if (removeId === vm.person.group_ids[i]) {
+          vm.person.group_ids.splice(i, 1);
+          break;
         }
-      });
+      }
     };
 
     // prevent "null" from being sent as a value to server if form field is left blank
