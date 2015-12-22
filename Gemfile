@@ -60,6 +60,7 @@ group :development, :test do
   # Call 'pry' anywhere in the code to stop execution and get a debugger console
   gem 'pry'
   gem 'rspec-rails'
+  gem 'shoulda-matchers'
 end
 
 group :development do
