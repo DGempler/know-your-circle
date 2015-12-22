@@ -38,5 +38,15 @@ describe User, 'validations' do
   it { should validate_presence_of(:first_name) }
   it { should validate_presence_of(:last_name) }
 
+end
+
+
+
+describe User, 'associations' do
+
+  # subject(:user) { User.create }
+
+  it { is_expected.to have_many :people }
+  it { is_expected.to have_many :groups }
 
 end
