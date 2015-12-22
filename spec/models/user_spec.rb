@@ -16,32 +16,25 @@ describe User, 'response' do
 end
 
 describe User, 'validations' do
-  it { should validate_uniqueness_of(:email) }
-  it { should validate_presence_of(:email) }
+  it { should validate_uniqueness_of :email }
+  it { should validate_presence_of :email }
 
   describe 'email when it is missing @ symbol' do
     subject(:invalid_email) { User.create(email: 'haha.com', password: 'abcdefgh', first_name: 'John', last_name: 'Doe')}
     it { is_expected.to_not be_valid }
   end
 
-  it { should validate_presence_of(:password) }
+  it { should validate_presence_of :password }
 
-  it { should validate_length_of(:password) }
+  it { should validate_length_of :password }
 
-
-
-  it { should validate_presence_of(:first_name) }
-  it { should validate_presence_of(:last_name) }
-
+  it { should validate_presence_of :first_name }
+  it { should validate_presence_of :last_name }
 end
 
 
 
 describe User, 'associations' do
-
-  # subject(:user) { User.create }
-
   it { is_expected.to have_many :people }
   it { is_expected.to have_many :groups }
-
 end
