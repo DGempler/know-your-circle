@@ -49,9 +49,14 @@ describe PeopleController, :type => :controller do
       expect( response.status ).to eq(201)
     end
 
+    it "should return the requested person" do
+      get :show, id: created_person.id
+      expect( response.body ).to include('created_at', 'updated_at')
+      expect( response.status ).to eq(200)
+    end
+
     it "should return the newly edited person for update action" do
       put :update, { id: created_person.id , person: { first_name: 'newfirstname', last_name: 'newlastname' }}
-      puts response.body
       expect( JSON.parse(response.body)['first_name'] ).to eq('newfirstname')
       expect( JSON.parse(response.body)['last_name'] ).to eq('newlastname')
       expect( response.status ).to eq(200)
