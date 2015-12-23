@@ -55,7 +55,14 @@ class PeopleController < ApplicationController
   end
 
   def set_person
-    @person = current_user.people.find(params[:id])
+    if current_user
+      @person = current_user.people.find(params[:id])
+    else
+      render json: {
+        error: "The request requires user authentication",
+        status: 401
+      }, status: 401
+    end
 
   end
 
