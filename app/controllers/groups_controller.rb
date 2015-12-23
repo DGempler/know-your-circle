@@ -42,7 +42,14 @@ class GroupsController < ApplicationController
   end
 
   def set_group
-    @group = current_user.groups.find(params[:id])
+    if current_user
+      @group = current_user.groups.find(params[:id])
+    else
+      render json: {
+        error: "The request requires user authentication",
+        status: 401
+      }, status: 401
+    end
   end
 
 end
