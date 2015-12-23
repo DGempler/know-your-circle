@@ -31,20 +31,30 @@ describe PeopleController, :type => :controller do
   end
 
   describe "signed in user" do
+    let(:created_user) { create(:user) }
+    let(:created_person) { create(:person, user_id: created_user.id) }
     before :each do
-      login_with create( :user )
+      login_with created_user
     end
 
-    it "index should send all people" do
+    it "should send all people for index action" do
       get :index
       expect( JSON.parse(response.body) ).to eq([])
       expect( response.status ).to eq(200)
     end
 
-    it "create should return the newly created person" do
-      post :create, { person: { first_name: 'a', last_name: 'b' } }
-      puts response.body
+    it "should return the newly created person for create action" do
+      post :create, { person: attributes_for(:person) }
+      expect( response.body ).to include('created_at', 'updated_at')
       expect( response.status ).to eq(201)
+    end
+
+    it "should return the newly edited person for update action" do
+      put :update, { id: created_person.id , person: { first_name: 'newfirstname', last_name: 'newlastname' }}
+      puts response.body
+      expect( JSON.parse(response.body)['first_name'] ).to eq('newfirstname')
+      expect( JSON.parse(response.body)['last_name'] ).to eq('newlastname')
+      expect( response.status ).to eq(200)
     end
 
   end
