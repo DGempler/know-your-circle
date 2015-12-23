@@ -24,6 +24,8 @@ RSpec.configure do |config|
   # assertion/expectation library such as wrong or the stdlib/minitest
   # assertions if you prefer.
 
+  config.include Requests::JsonHelpers, type: :request
+
   config.include ControllerHelpers, type: :controller
     Warden.test_mode!
 
