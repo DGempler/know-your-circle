@@ -35,10 +35,17 @@ describe PeopleController, :type => :controller do
       login_with create( :user )
     end
 
-    it "should send the user json with all people" do
+    it "index should send all people" do
       get :index
-      puts response.body
       expect( JSON.parse(response.body) ).to eq([])
+      expect( response.status ).to eq(200)
     end
+
+    it "create should return the newly created person" do
+      post :create, { person: { first_name: 'a', last_name: 'b' } }
+      puts response.body
+      expect( response.status ).to eq(201)
+    end
+
   end
 end
