@@ -7,8 +7,24 @@ describe PeopleController, :type => :controller do
       login_with nil
     end
 
-    it "should get unauthorized 401 status code" do
+    it "should get a 401 for index action" do
       get :index
+      expect( response.status ).to eq(401)
+    end
+    it "should get a 401 for create action" do
+      post :create
+      expect( response.status ).to eq(401)
+    end
+    it "should get a 401 for show action" do
+      get :show, id: ""
+      expect( response.status ).to eq(401)
+    end
+    it "should get a 401 for update action" do
+      post :update, id: ""
+      expect( response.status ).to eq(401)
+    end
+    it "should get a 401 for destroy action" do
+      get :destroy, id: ""
       expect( response.status ).to eq(401)
     end
 
