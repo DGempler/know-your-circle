@@ -57,9 +57,20 @@ describe PeopleController, :type => :controller do
 
     it "should return the newly edited person for update action" do
       put :update, { id: created_person.id , person: { first_name: 'newfirstname', last_name: 'newlastname' }}
+      expect( JSON.parse(response.body)['id'] ).to eq(created_person.id)
       expect( JSON.parse(response.body)['first_name'] ).to eq('newfirstname')
       expect( JSON.parse(response.body)['last_name'] ).to eq('newlastname')
       expect( response.status ).to eq(200)
+    end
+
+    it "should return the deleted person for delete action" do
+      delete :destroy, { id: created_person.id }
+      expect( JSON.parse(response.body)['id'] ).to eq(created_person.id)
+      expect( response.status ).to eq(200)
+    end
+
+    it "delete action should have removed person from user" do
+      expect( created_user.people ).to eq([])
     end
 
   end
