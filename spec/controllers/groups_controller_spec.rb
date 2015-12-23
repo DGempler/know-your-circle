@@ -30,52 +30,48 @@ describe GroupsController, :type => :controller do
 
   end
 
-=begin
-
   describe "signed in user" do
     let(:created_user) { create(:user) }
-    let(:created_person) { create(:person, user_id: created_user.id) }
+    let(:created_group) { create(:group, user_id: created_user.id) }
     before :each do
       login_with created_user
     end
 
-    it "should send all people for index action" do
+    it "should send all groups for index action" do
       get :index
       expect( JSON.parse(response.body) ).to eq([])
       expect( response.status ).to eq(200)
     end
 
-    it "should return the newly created person for create action" do
-      post :create, { person: attributes_for(:person) }
+    it "should return the newly created group for create action" do
+      post :create, { group: attributes_for(:group) }
       expect( response.body ).to include('created_at', 'updated_at')
       expect( response.status ).to eq(201)
     end
 
-    it "should return the requested person" do
-      get :show, id: created_person.id
+    it "should return the requested group" do
+      get :show, id: created_group.id
       expect( response.body ).to include('created_at', 'updated_at')
       expect( response.status ).to eq(200)
     end
 
-    it "should return the newly edited person for update action" do
-      put :update, { id: created_person.id , person: { first_name: 'newfirstname', last_name: 'newlastname' }}
-      expect( JSON.parse(response.body)['id'] ).to eq(created_person.id)
-      expect( JSON.parse(response.body)['first_name'] ).to eq('newfirstname')
-      expect( JSON.parse(response.body)['last_name'] ).to eq('newlastname')
+    it "should return the newly edited group for update action" do
+      put :update, { id: created_group.id , group: { name: 'newGroupName' }}
+      expect( JSON.parse(response.body)['id'] ).to eq(created_group.id)
+      expect( JSON.parse(response.body)['name'] ).to eq('newGroupName')
       expect( response.status ).to eq(200)
     end
 
-    it "should return the deleted person for delete action" do
-      delete :destroy, { id: created_person.id }
-      expect( JSON.parse(response.body)['id'] ).to eq(created_person.id)
+    it "should return the deleted group for delete action" do
+      delete :destroy, { id: created_group.id }
+      expect( JSON.parse(response.body)['id'] ).to eq(created_group.id)
       expect( response.status ).to eq(200)
     end
 
-    it "delete action should have removed person from user" do
-      expect( created_user.people ).to eq([])
+    it "delete action should have removed group from user" do
+      expect( created_user.groups ).to eq([])
     end
 
   end
-=end
 
 end
