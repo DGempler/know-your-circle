@@ -1,6 +1,7 @@
 require 'rails_helper'
 
 describe GroupsController, :type => :controller do
+  let(:created_user) { create(:user) }
   describe "anonymous user" do
     before :each do
       # This simulates an anonymous user
@@ -16,22 +17,21 @@ describe GroupsController, :type => :controller do
       expect( response.status ).to eq(401)
     end
     it "should get a 401 for show action" do
-      get :show, id: ""
+      get :show, id: created_user.id
       expect( response.status ).to eq(401)
     end
     it "should get a 401 for update action" do
-      post :update, id: ""
+      post :update, id: created_user.id
       expect( response.status ).to eq(401)
     end
     it "should get a 401 for destroy action" do
-      get :destroy, id: ""
+      get :destroy, id: created_user.id
       expect( response.status ).to eq(401)
     end
 
   end
 
   describe "signed in user" do
-    let(:created_user) { create(:user) }
     let(:created_group) { create(:group, user_id: created_user.id) }
     before :each do
       login_with created_user
