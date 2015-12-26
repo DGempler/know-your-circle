@@ -65,7 +65,8 @@ group :development, :test do
   gem 'capybara'
   gem 'guard-rspec'
   gem 'spring-commands-rspec'
-  gem 'vcr'
+  gem "database_cleaner"
+  gem "selenium-webdriver"
 end
 
 group :test do
