@@ -11,6 +11,8 @@ feature "Visit website", js: true do
   scenario "anonymous user" do
     visit '/'
 
+    expect(page).to have_content("Sign Up")
+    expect(page).to have_content("Log In")
     expect(page).not_to have_content("Get started by adding some people!")
     expect(page).not_to have_content("Add People")
     expect(page).not_to have_content("Play Games")
