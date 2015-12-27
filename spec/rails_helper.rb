@@ -5,7 +5,7 @@ require File.expand_path('../../config/environment', __FILE__)
 abort("The Rails environment is running in production mode!") if Rails.env.production?
 require 'spec_helper'
 require 'rspec/rails'
-require 'devise'
+require 'capybara/rails'
 # Add additional requires below this line. Rails is not loaded until this point!
 
 # Requires supporting ruby files with custom matchers and macros, etc, in
@@ -27,6 +27,10 @@ require 'devise'
 # If you are not using ActiveRecord, you can remove this line.
 ActiveRecord::Migration.maintain_test_schema!
 
+Capybara.app_host = "http://localhost:3000"
+Capybara.server_host = "localhost"
+Capybara.server_port = "3000"
+
 RSpec.configure do |config|
   # Remove this line if you're not using ActiveRecord or ActiveRecord fixtures
   config.fixture_path = "#{::Rails.root}/spec/fixtures"
@@ -34,6 +38,30 @@ RSpec.configure do |config|
   config.include FactoryGirl::Syntax::Methods
   config.include Devise::TestHelpers, type: :controller
   config.include Warden::Test::Helpers
+
+  config.around(:each, type: :feature, js: true) do |ex|
+    DatabaseCleaner.strategy = :truncation
+    DatabaseCleaner.start
+    self.use_transactional_fixtures = false
+    ex.run
+    self.use_transactional_fixtures = true
+    DatabaseCleaner.clean
+  end
+
+  config.before do
+    WebMock.enable!
+    if Capybara.current_driver != :rack_test
+      selenium_requests = %r{/((__.+__)|(hub/session.*))$}
+      WebMock.disable_net_connect! :allow => selenium_requests
+    else
+      WebMock.disable_net_connect! :allow_localhost => true
+    end
+  end
+
+  # for connections where we need to have network access we just tag it network
+  config.before(:each, :network => true) do
+    WebMock.disable!
+  end
 
   # If you're not using ActiveRecord, or you'd prefer not to run each of your
   # examples within a transaction, remove the following line or assign false
