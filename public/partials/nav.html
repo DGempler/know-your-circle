@@ -15,11 +15,11 @@
         <li ng-show='user.id'><a href="#/people/new">Add People</a></li>
         <li ng-show='user.id'><a href="#/people/index">Your Circle</a></li>
         <li ng-show='user.id'><a href="#/games/index">Play Games</a></li>
-        <li ng-show='!user.id'><a ng-click='nav.signUpOpen()'>Sign Up</a></li>
-        <li ng-show='!user.id'><a ng-click='nav.logInOpen()'>Log In</a></li>
-        <li ng-show='user.id' class="dropdown" >
-          <a class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">Account <span class="caret"></span></a>
-          <ul class="dropdown-menu">
+        <li ng-show='!user.id'><a ng-click='nav.signUpOpen()' id='sign-up' href="">Sign Up</a></li>
+        <li ng-show='!user.id'><a ng-click='nav.logInOpen()' id='log-in' href="">Log In</a></li>
+        <li ng-show='user.id' class="dropdown">
+          <a id='accountDropdown' class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false" href="">Account <span class="caret"></span></a>
+          <ul class="dropdown-menu" aria-labelledby='accountDropdown'>
             <li><a href="#/profile">My Profile</a></li>
             <li role="separator" class="divider"></li>
             <li><a ng-click='nav.logOut()'>Log Out</a></li>
