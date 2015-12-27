@@ -18,6 +18,7 @@ feature 'Authentication', js: true do
 
     scenario 'with invalid credentials' do
       @login_modal.log_in('fake_email@fake.com', 'not a real password')
+      expect(page).to have_content('Invalid credentials.')
       expect(page).to have_content('Please try again')
     end
 
