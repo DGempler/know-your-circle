@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20151215210231) do
+ActiveRecord::Schema.define(version: 20151228220524) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -23,11 +23,37 @@ ActiveRecord::Schema.define(version: 20151215210231) do
     t.integer  "user_id"
   end
 
+  create_table "guest_user_people", force: :cascade do |t|
+    t.string   "first_name"
+    t.string   "middle_name"
+    t.string   "last_name"
+    t.string   "sex"
+    t.string   "nickname"
+    t.string   "bio"
+    t.string   "location"
+    t.string   "occupation"
+    t.string   "dob"
+    t.string   "dod"
+    t.text     "hints",              default: [],   array: true
+    t.boolean  "is_guest",           default: true
+    t.string   "image_file_name"
+    t.string   "image_content_type"
+    t.integer  "image_file_size"
+    t.datetime "image_updated_at"
+  end
+
   create_table "memberships", force: :cascade do |t|
     t.datetime "created_at"
     t.datetime "updated_at"
     t.integer  "group_id"
     t.integer  "person_id"
+  end
+
+  create_table "ownerships", force: :cascade do |t|
+    t.datetime "created_at"
+    t.datetime "updated_at"
+    t.integer  "user_id"
+    t.integer  "guest_user_person_id"
   end
 
   create_table "people", force: :cascade do |t|
