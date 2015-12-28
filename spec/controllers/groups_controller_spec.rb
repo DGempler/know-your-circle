@@ -39,7 +39,7 @@ describe GroupsController, :type => :controller do
 
     it "should send all groups for index action" do
       get :index
-      expect( JSON.parse(response.body) ).to eq([])
+      expect( json ).to eq([])
       expect( response.status ).to eq(200)
     end
 
@@ -57,14 +57,14 @@ describe GroupsController, :type => :controller do
 
     it "should return the newly edited group for update action" do
       put :update, { id: created_group.id , group: { name: 'newGroupName' }}
-      expect( JSON.parse(response.body)['id'] ).to eq(created_group.id)
-      expect( JSON.parse(response.body)['name'] ).to eq('newGroupName')
+      expect( json['id'] ).to eq(created_group.id)
+      expect( json['name'] ).to eq('newGroupName')
       expect( response.status ).to eq(200)
     end
 
     it "should return the deleted group for delete action" do
       delete :destroy, { id: created_group.id }
-      expect( JSON.parse(response.body)['id'] ).to eq(created_group.id)
+      expect( json['id'] ).to eq(created_group.id)
       expect( response.status ).to eq(200)
     end
 

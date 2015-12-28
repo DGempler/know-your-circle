@@ -7,6 +7,7 @@ require 'spec_helper'
 require 'rspec/rails'
 require 'capybara/rails'
 require_relative 'support/login_modal.rb'
+require_relative 'support/request_helpers.rb'
 # Add additional requires below this line. Rails is not loaded until this point!
 
 # Requires supporting ruby files with custom matchers and macros, etc, in
@@ -39,6 +40,8 @@ RSpec.configure do |config|
   config.include FactoryGirl::Syntax::Methods
   config.include Devise::TestHelpers, type: :controller
   config.include Warden::Test::Helpers
+
+  config.include Requests::JsonHelpers
 
   config.around(:each, type: :feature, js: true) do |ex|
     DatabaseCleaner.strategy = :truncation
