@@ -7,6 +7,7 @@ require 'spec_helper'
 require 'rspec/rails'
 require 'capybara/rails'
 require_relative 'support/login_modal.rb'
+require_relative 'support/registration_modal.rb'
 require_relative 'support/request_helpers.rb'
 # Add additional requires below this line. Rails is not loaded until this point!
 
