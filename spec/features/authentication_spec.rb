@@ -2,14 +2,13 @@ require 'rails_helper.rb'
 
 feature 'Authentication', js: true do
   before do
-    visit '/'
-    click_link('log-in')
     @login_modal = LoginModal.new
+    @login_modal.visit
+    @user = create(:confirmed_user)
   end
 
   feature 'login' do
     scenario 'with valid inputs' do
-      @user = create(:confirmed_user)
       @login_modal.log_in(@user.email, @user.password)
       expect(page).to have_content("Add People")
       expect(page).to have_content("Play Games")
@@ -22,5 +21,17 @@ feature 'Authentication', js: true do
       expect(page).to have_content('Please try again')
     end
 
+  end
+
+  feature 'page access' do
+    scenario 'visiting people index when signed in' do
+      @login_modal.log_in(@user.email, @user.password)
+      expect(page).to have_css('h1', text: 'Your people')
+    end
+
+    scenario 'visiting "groups" page when not signed in' do
+      visit '#/people/index'
+      expect(page).not_to have_css('h1', text: 'Your people')
+    end
   end
 end
