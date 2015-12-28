@@ -44,6 +44,10 @@ gem 'devise_token_auth'
 
 gem 'omniauth'
 
+# sidekiq and redis for workers
+gem 'sidekiq'
+gem 'redis'
+
 #mini_magick for working with ImageMagick
 # gem "mini_magick"
 
