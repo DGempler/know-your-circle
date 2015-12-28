@@ -14,11 +14,11 @@
       .when('/people/index', {
         templateUrl: 'partials/people/index.html',
         controller: 'peopleIndexController as people',
-        resolve: {
-          auth: ['$auth', function($auth) {
-            return $auth.validateUser();
-          }]
-        }
+        // resolve: {
+        //   auth: ['$auth', function($auth) {
+        //     return $auth.validateUser();
+        //   }]
+        // }
       })
       .when('/people/new', {
         templateUrl: 'partials/people/new.html',
