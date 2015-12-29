@@ -27,7 +27,6 @@ namespace :db do
         ["Chester_A._Arthur", "September 19, 1881 – March 4, 1885", "Republican"],
         ["Grover_Cleveland", "March 4, 1885 – March 4, 1889", "Democratic"],
         ["Benjamin_Harrison", "March 4, 1889 – March 4, 1893", "Republican"],
-        ["Grover_Cleveland", "March 4, 1893 – March 4, 1897", "Democratic"],
         ["William_McKinley", "March 4, 1897 – September 14, 1901", "Republican"],
         ["Theodore_Roosevelt", "September 14, 1901 – March 4, 1909", "Republican"],
         ["William_Howard_Taft", "March 4, 1909 – March 4, 1913", "Republican"],
