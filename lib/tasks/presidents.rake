@@ -3,11 +3,11 @@ namespace :db do
   namespace :seed do
     task :presidents => :environment do
       groups = Hash.new
-      groups[:dead] = Group.create(name: "Dead")
-      groups[:alive] = Group.create(name: "Alive")
-      groups[:dem] = Group.create(name: "Democratic")
-      groups[:rep] = Group.create(name: "Republican")
-      groups[:other_party] = Group.create(name: "Other Party")
+      groups['dead'] = Group.create(name: "Dead").id
+      groups['alive'] = Group.create(name: "Alive").id
+      groups['dem'] = Group.create(name: "Democratic").id
+      groups['rep'] = Group.create(name: "Republican").id
+      groups['other_party'] = Group.create(name: "Other Party").id
 
       presidents = [
         ["George_Washington", "April 30, 1789 – March 4, 1797", "Non-partisan"],
