@@ -40,14 +40,14 @@ class PresidentsWorker
     end
 
     president[:hints] = [
-      "Was the #{ order }#{ number_suffix } President of the United States.",
-      "Term of office was #{ president_array[1] }.",
+      "Was the #{ order }#{ number_suffix } President of the United States",
+      "Term of office was #{ president_array[1] }",
       "Party affiliation was #{ president_array[2] }"
     ]
 
     if president[:first_name] = "Grover"
-      president[:hints][0] = "Was the 22nd & 24th President of the United States."
-      president[:hints][1] = "Terms of office were March 4, 1885 – March 4, 1889 AND March 4, 1893 – March 4, 1897."
+      president[:hints][0] = "Was the 22nd & 24th President of the United States"
+      president[:hints][1] = "Terms of office were March 4, 1885 – March 4, 1889 AND March 4, 1893 – March 4, 1897"
     end
 
     guest_user_person = GuestUserPerson.create(president)
