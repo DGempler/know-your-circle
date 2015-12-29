@@ -2,7 +2,14 @@ desc "Create Presidents People"
 namespace :db do
   namespace :seed do
     task :presidents => :environment do
-      @presidents = [
+      groups = Hash.new
+      groups[:dead] = Group.create(name: "Dead")
+      groups[:alive] = Group.create(name: "Alive")
+      groups[:dem] = Group.create(name: "Democratic")
+      groups[:rep] = Group.create(name: "Republican")
+      groups[:other_party] = Group.create(name: "Other Party")
+
+      presidents = [
         ["George_Washington", "April 30, 1789 – March 4, 1797", "Non-partisan"],
         ["John_Adams", "March 4, 1797 – March 4, 1801", "Federalist"],
         ["Thomas_Jefferson", "March 4, 1801 – March 4, 1809", "Democratic-Republican"],
@@ -48,8 +55,8 @@ namespace :db do
         ["Barack_Obama", "January 20, 2009 – present day", "Democratic"]
       ]
 
-      @presidents.each_index do |index|
-        PresidentsWorker.perform_async(@presidents[index], index)
+      presidents.each_index do |index|
+        PresidentsWorker.perform_async(presidents[index], index, groups)
       end
     end
   end
