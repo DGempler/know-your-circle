@@ -45,6 +45,10 @@ class PresidentsWorker
       "Party affiliation was #{ president_array[2] }"
     ]
 
+    if president[:first_name] = "Grover"
+      president[:hints][0] = "Was the 22nd & 24th President of the United States."
+    end
+
     guest_user_person = GuestUserPerson.create(president)
     guest_user_person.image_from_url image
     guest_user_person.save
