@@ -40,7 +40,7 @@ class PresidentsWorker
     end
 
     president[:hints] = [
-      "Was our #{ order }#{ number_suffix } president.",
+      "Was the #{ order }#{ number_suffix } President of the United States.",
       "Term of office was #{ president_array[1] }.",
       "Party affiliation was #{ president_array[2] }"
     ]
