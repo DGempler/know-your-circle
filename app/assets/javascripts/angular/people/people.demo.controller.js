@@ -107,7 +107,7 @@
       angular.forEach(vm.people, function(person) {
         person.show = false;
         person.groups.forEach(function(personGroup) {
-          if (chosenGroup.id === personGroup.id) {
+          if (chosenGroup.name === personGroup.name) {
             person.show = true;
           }
         });
