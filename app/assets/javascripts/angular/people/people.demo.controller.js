@@ -89,14 +89,6 @@
       vm.someoneSelected = selected;
     };
 
-    vm.clickDelete = function() {
-      var message = "Are you sure?";
-      UserFactory.confirmMessageModalOpen(message)
-        .then(function() {
-          deleteSelected();
-        });
-    };
-
     vm.showAll = function() {
       vm.filteredByGroup = false;
       angular.forEach(vm.people, function(person) {
