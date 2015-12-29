@@ -16,4 +16,8 @@ class GuestUserPerson < ActiveRecord::Base
   # Validate the attached image is image/jpg, image/png, etc
   validates_attachment_content_type :image, :content_type => /\Aimage\/.*\Z/
 
+  def image_from_url(url)
+    self.image = URI.parse(url)
+  end
+
 end
