@@ -4,6 +4,7 @@ class PresidentsWorker
 
   def perform(president_array, index)
     president = Hash.new
+    image = ""
     wiki_url = "https://en.wikipedia.org/w/api.php?action=query&prop=extracts|pageimages&pithumbsize=300&piprop=thumbnail&format=json&exintro=1&explaintext=1&titles=#{ president_array[0] }"
     response = Typhoeus.get(wiki_url).body
     wiki_response = JSON.parse(response)['query']
@@ -23,7 +24,7 @@ class PresidentsWorker
 
     wiki_response_pages.each do |page_id, object|
       president[:bio] = wiki_response_pages[page_id]['extract']
-      president[:image_from_url] = wiki_response_pages[page_id]['thumbnail']['source']
+      image = wiki_response_pages[page_id]['thumbnail']['source']
     end
 
     order = index + 1
@@ -45,6 +46,9 @@ class PresidentsWorker
     ]
 
     guest_user_person = GuestUserPerson.create(president)
+    guest_user_person.image_from_url image
+    guest_user_person.save
+
     puts "guest_user_person: #{guest_user_person.id}"
   end
 end
