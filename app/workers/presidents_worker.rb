@@ -4,7 +4,7 @@ class PresidentsWorker
 
   def perform(president_array, index)
     president = Hash.new
-    wiki_url = "https://en.wikipedia.org/w/api.php?action=query&prop=extracts|pageimages&pithumbsize=300&piprop=thumbnail&format=json&exintro=1&explaintext=1&titles=#{ president_array[1] }"
+    wiki_url = "https://en.wikipedia.org/w/api.php?action=query&prop=extracts|pageimages&pithumbsize=300&piprop=thumbnail&format=json&exintro=1&explaintext=1&titles=#{ president_array[0] }"
     response = Typhoeus.get(wiki_url).body
     wiki_response = JSON.parse(response)['query']
 
@@ -40,8 +40,8 @@ class PresidentsWorker
 
     president[:hints] = [
       "Was our #{ order }#{ number_suffix } president.",
-      "Term of office was #{ president_array[2] }.",
-      "Party affiliation was #{ president_array[3] }"
+      "Term of office was #{ president_array[1] }.",
+      "Party affiliation was #{ president_array[2] }"
     ]
 
     guest_user_person = GuestUserPerson.create(president)
