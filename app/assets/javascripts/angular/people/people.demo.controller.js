@@ -2,14 +2,14 @@
   angular.module('knowYourCircle.people')
     .controller('peopleDemoController', peopleDemoController);
 
-  peopleDemoController.$inject = ['PersonFactory', 'GroupFactory', '$q', 'AuthFactory', 'UserFactory'];
+  peopleDemoController.$inject = ['DemoFactory', 'GroupFactory', '$q', 'AuthFactory', 'UserFactory'];
 
-  function peopleDemoController(PersonFactory, GroupFactory, $q, AuthFactory, UserFactory) {
+  function peopleDemoController(DemoFactory, GroupFactory, $q, AuthFactory, UserFactory) {
     var vm = this;
     vm.demoMode = true;
 
     function getPeople() {
-      PersonFactory.getPeople().then(function(people) {
+      DemoFactory.getPeople().then(function(people) {
         vm.people = people;
         vm.people.forEach(function(person) {
           person.show = true;
