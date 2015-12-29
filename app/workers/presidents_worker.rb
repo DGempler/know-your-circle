@@ -47,6 +47,7 @@ class PresidentsWorker
 
     if president[:first_name] = "Grover"
       president[:hints][0] = "Was the 22nd & 24th President of the United States."
+      president[:hints][1] = "Terms of office were March 4, 1885 – March 4, 1889 AND March 4, 1893 – March 4, 1897."
     end
 
     guest_user_person = GuestUserPerson.create(president)
