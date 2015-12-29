@@ -30,6 +30,8 @@
       Person.query(function(people) {
         personFactory.people = people;
         deferred.resolve(personFactory.people);
+      }, function(err) {
+        deferred.reject(err);
       });
       return deferred.promise;
     };
@@ -38,6 +40,8 @@
       var deferred = $q.defer();
       Person.get({id: id}, function(person) {
         deferred.resolve(person);
+      }, function(err) {
+        deferred.reject(err);
       });
       return deferred.promise;
     };
@@ -48,6 +52,8 @@
         if (person) {
           deferred.resolve(person);
         }
+      }, function(err) {
+        deferred.reject(err);
       });
       return deferred.promise;
     };
