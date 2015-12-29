@@ -43,7 +43,8 @@ class ApplicationController < ActionController::Base
 
   private
   def create_guest_user
-    u = User.create(first_name: "guest", last_name: "guest", email: "guest_#{Time.now.to_i}#{rand(100)}@example.com")
+    u = User.new(first_name: "guest", last_name: "guest", email: "guest_#{Time.now.to_i}#{rand(100)}@example.com")
+    u.save!(:validate => false)
 
     groups = ["Dead", "Alive", "Democratic", "Republican", "Other"]
 
@@ -57,7 +58,6 @@ class ApplicationController < ActionController::Base
       u.guest_user_people << person
     end
 
-    u.save!(:validate => false)
     session[:guest_user_id] = u.id
     u
   end
