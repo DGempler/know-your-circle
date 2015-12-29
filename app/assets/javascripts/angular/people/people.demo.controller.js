@@ -6,6 +6,7 @@
 
   function peopleDemoController(PersonFactory, GroupFactory, $q, AuthFactory, UserFactory) {
     var vm = this;
+    vm.demoMode = true;
 
     function getPeople() {
       PersonFactory.getPeople().then(function(people) {
@@ -112,16 +113,6 @@
       UserFactory.confirmMessageModalOpen(message)
         .then(function() {
           deleteSelected();
-        });
-    };
-
-    vm.editGroups = function() {
-      GroupFactory.openGroupModal(vm.groups)
-        .then(function(groups) {
-          vm.groups = groups;
-        })
-        .catch(function() {
-          getGroups();
         });
     };
 
