@@ -3,7 +3,6 @@ namespace :db do
   namespace :seed do
     task :presidents => :environment do
       @presidents = [
-
         ["https://en.wikipedia.org/wiki/George_Washington", "George_Washington", "April 30, 1789 – March 4, 1797", "Non-partisan"],
         ["https://en.wikipedia.org/wiki/John_Adams", "John_Adams", "March 4, 1797 – March 4, 1801", "Federalist"],
         ["https://en.wikipedia.org/wiki/Thomas_Jefferson", "Thomas_Jefferson", "March 4, 1801 – March 4, 1809", "Democratic-Republican"],
@@ -48,11 +47,6 @@ namespace :db do
         ["https://en.wikipedia.org/wiki/Bill_Clinton", "Bill_Clinton", "January 20, 1993 – January 20, 2001", "Democratic"],
         ["https://en.wikipedia.org/wiki/George_W._Bush", "George_W._Bush", "January 20, 2001 – January 20, 2009", "Republican"],
         ["https://en.wikipedia.org/wiki/Barack_Obama", "Barack_Obama", "January 20, 2009 – present day", "Democratic"]
-
-
-
-
-
       ]
 
       @presidents.each do |presidents, index|
@@ -61,16 +55,3 @@ namespace :db do
     end
   end
 end
-
-=begin
-"https://en.wikipedia.org/w/api.php?action=query&prop=extracts&titles=George_Washington&format=json&exintro=1" #returns intro
-        "https://en.wikipedia.org/w/api.php?action=query&prop=extracts&titles=George_Washington&format=json" #returns a bunch of stuff
-        "https://en.wikipedia.org/w/api.php?action=query&titles=George_Washington&format=json&exintro=1" #returns basic page info (title, page ID)
-
-        "https://en.wikipedia.org/w/api.php?action=query&prop=extracts|pageimages&titles=George_Washington&format=json&exintro=1"
-
-
-        "http://en.wikipedia.org/w/api.php?action=query&prop=revisions&titles=George_Washington&format=json"
-
-
-        =end
