@@ -14,3 +14,5 @@
 
 # Ignore .env variables
 .env
+
+dump.rdb
