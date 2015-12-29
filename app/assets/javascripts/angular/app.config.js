@@ -13,7 +13,7 @@
       })
       .when('/people/demo', {
         templateUrl: 'partials/people/index.html',
-        controller: 'peopleDemoController as demo'
+        controller: 'peopleDemoController as people'
       })
       .when('/people/index', {
         templateUrl: 'partials/people/index.html',
