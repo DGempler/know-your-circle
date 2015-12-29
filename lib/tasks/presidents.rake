@@ -55,8 +55,8 @@ namespace :db do
 
       ]
 
-      @presidents.each do |presidents|
-        PresidentsWorker.perform_async(presidents)
+      @presidents.each do |presidents, index|
+        PresidentsWorker.perform_async(presidents, index)
       end
     end
   end
