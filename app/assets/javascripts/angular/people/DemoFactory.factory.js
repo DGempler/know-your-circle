@@ -11,7 +11,7 @@
       var deferred = $q.defer();
 
       $http.get('/api/demo/').then(function(guestUserPeople) {
-        demoFactory.guestUserPeople = guestUserPeople;
+        demoFactory.guestUserPeople = guestUserPeople.data;
         deferred.resolve(demoFactory.guestUserPeople);
       }, function(err) {
         deferred.reject(err);
