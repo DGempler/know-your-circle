@@ -29,11 +29,11 @@ class PresidentsWorker
 
     order = index + 1
 
-    if order == 1
+    if order == 1 || order == 21 || order == 31 || order == 41
       number_suffix = "st"
-    elsif order == 2
+    elsif order == 2 || order == 22 || order == 32 || order == 42
       number_suffix = "nd"
-    elsif order == 3
+    elsif order == 3 || order == 23 || order == 33 || order == 43
       number_suffix = "rd"
     else
       number_suffix = "th"
