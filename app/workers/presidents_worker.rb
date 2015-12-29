@@ -6,6 +6,7 @@ class PresidentsWorker
     president = Hash.new
     image = ""
     party = president_array[2]
+    alive_presidents = ["Carter", "Bush", "Clinton", "Obama"]
     wiki_url = "https://en.wikipedia.org/w/api.php?action=query&prop=extracts|pageimages&pithumbsize=300&piprop=thumbnail&format=json&exintro=1&explaintext=1&titles=#{ president_array[0] }"
     response = Typhoeus.get(wiki_url).body
     wiki_response = JSON.parse(response)['query']
@@ -46,7 +47,7 @@ class PresidentsWorker
       "Party affiliation: #{ party }"
     ]
 
-    if president[:first_name] = "Grover"
+    if president[:first_name] == "Grover"
       president[:hints][0] = "Was the 22nd & 24th President of the United States"
       president[:hints][1] = "Terms of office were March 4, 1885 – March 4, 1889 AND March 4, 1893 – March 4, 1897"
     end
@@ -54,20 +55,26 @@ class PresidentsWorker
     guest_user_person = GuestUserPerson.create(president)
     guest_user_person.image_from_url image
 
+
     if party == "Democratic"
-      guest_user_person.groups << groups[:dem]
+      dem_group = Group.find(groups['dem'])
+      guest_user_person.groups << dem_group
     elsif party == "Republican"
-      guest_user_person.groups << groups[:rep]
+      rep_group = Group.find(groups['rep'])
+      guest_user_person.groups << rep_group
     else
-      guest_user_person.groups << groups[:other_party]
+      other_party_group = Group.find(groups['other_party'])
+      guest_user_person.groups << other_party_group
     end
 
-    alive_presidents = ["Carter", "Bush", "Clinton", "Obama"]
+
 
     if alive_presidents.include? president[:last_name]
-      guest_user_person.groups << groups[:alive]
+      alive_group = Group.find(groups['alive'])
+      guest_user_person.groups << alive_group
     else
-      guest_user_person.groups << groups[:dead]
+      dead_group = Group.find(groups['dead'])
+      guest_user_person.groups << dead_group
     end
 
     guest_user_person.save
