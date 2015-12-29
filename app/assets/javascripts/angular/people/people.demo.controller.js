@@ -8,14 +8,19 @@
     var vm = this;
     vm.demoMode = true;
 
-    function getPeople() {
-      DemoFactory.getGuestUserPeople().then(function(people) {
-        vm.people = people;
-        vm.people.forEach(function(person) {
-          person.show = true;
+    function getGuestUserPeople() {
+      DemoFactory.getGuestUserPeople()
+        .then(function(people) {
+          vm.people = people;
+          vm.people.forEach(function(person) {
+            person.show = true;
+          });
+          getGroups();
+        })
+        .catch(function(error) {
+          var message = 'An error occured while loading your people. Please refresh the page to try again.';
+          AuthFactory.messageModalOpen(message);
         });
-        getGroups();
-      });
     }
 
     function getGroups() {
@@ -109,7 +114,7 @@
       });
     };
 
-    getPeople();
+    getGuestUserPeople();
 
   }
 })();
