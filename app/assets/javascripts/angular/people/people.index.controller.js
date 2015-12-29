@@ -14,6 +14,10 @@
           person.show = true;
         });
         getGroups();
+      })
+      .catch(function(error) {
+          var message = 'An error occured while loading your people. Please refresh the page to try again.';
+          AuthFactory.messageModalOpen(message);
       });
     }
 
