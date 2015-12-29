@@ -2,6 +2,7 @@ desc "Create Presidents People"
 namespace :db do
   namespace :seed do
     task :presidents => :environment do
+      puts 'about to work'
       @presidents = [
         ["George_Washington", "April 30, 1789 – March 4, 1797", "Non-partisan"],
         ["John_Adams", "March 4, 1797 – March 4, 1801", "Federalist"],
@@ -49,8 +50,8 @@ namespace :db do
         ["Barack_Obama", "January 20, 2009 – present day", "Democratic"]
       ]
 
-      @presidents.each do |presidents, index|
-        PresidentsWorker.perform_async(presidents, index)
+      @presidents.each_index do |index|
+        PresidentsWorker.perform_async(@presidents[index], index)
       end
     end
   end
