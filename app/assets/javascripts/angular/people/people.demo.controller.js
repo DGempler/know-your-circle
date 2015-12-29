@@ -9,7 +9,7 @@
     vm.demoMode = true;
 
     function getPeople() {
-      DemoFactory.getPeople().then(function(people) {
+      DemoFactory.getGuestUserPeople().then(function(people) {
         vm.people = people;
         vm.people.forEach(function(person) {
           person.show = true;
