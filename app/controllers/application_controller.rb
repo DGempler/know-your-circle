@@ -45,6 +45,12 @@ class ApplicationController < ActionController::Base
   def create_guest_user
     u = User.create(first_name: "guest", last_name: "guest", email: "guest_#{Time.now.to_i}#{rand(100)}@example.com")
 
+    groups = ["Dead", "Alive", "Democratic", "Republican", "Other"]
+
+    groups.each do |group|
+      g = Group.create(name: group, user_id: u.id)
+    end
+
     guest_user_people = GuestUserPerson.all
 
     guest_user_people.each do |person|
