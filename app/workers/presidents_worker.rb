@@ -2,9 +2,10 @@ class PresidentsWorker
   include Sidekiq::Worker
   sidekiq_options retry: false
 
-  def perform(president_array, index)
+  def perform(president_array, index, groups)
     president = Hash.new
     image = ""
+    party = president_array[2]
     wiki_url = "https://en.wikipedia.org/w/api.php?action=query&prop=extracts|pageimages&pithumbsize=300&piprop=thumbnail&format=json&exintro=1&explaintext=1&titles=#{ president_array[0] }"
     response = Typhoeus.get(wiki_url).body
     wiki_response = JSON.parse(response)['query']
@@ -42,7 +43,7 @@ class PresidentsWorker
     president[:hints] = [
       "Was the #{ order }#{ number_suffix } President of the United States",
       "Term of office was #{ president_array[1] }",
-      "Party affiliation was #{ president_array[2] }"
+      "Party affiliation: #{ party }"
     ]
 
     if president[:first_name] = "Grover"
@@ -52,6 +53,23 @@ class PresidentsWorker
 
     guest_user_person = GuestUserPerson.create(president)
     guest_user_person.image_from_url image
+
+    if party == "Democratic"
+      guest_user_person.groups << groups[:dem]
+    elsif party == "Republican"
+      guest_user_person.groups << groups[:rep]
+    else
+      guest_user_person.groups << groups[:other_party]
+    end
+
+    alive_presidents = ["Carter", "Bush", "Clinton", "Obama"]
+
+    if alive_presidents.include? president[:last_name]
+      guest_user_person.groups << groups[:alive]
+    else
+      guest_user_person.groups << groups[:dead]
+    end
+
     guest_user_person.save
 
     puts "guest_user_person: #{guest_user_person.id}"
