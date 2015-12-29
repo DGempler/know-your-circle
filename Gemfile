@@ -44,6 +44,9 @@ gem 'devise_token_auth'
 
 gem 'omniauth'
 
+# typheous for external http requests
+gem "typhoeus"
+
 # sidekiq and redis for workers
 gem 'sidekiq'
 gem 'redis'
