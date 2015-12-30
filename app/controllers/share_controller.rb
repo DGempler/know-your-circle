@@ -24,7 +24,12 @@ class ShareController < ApplicationController
 
 
     people.each do |person|
-      other_user.people << person.dup
+      duplicate_person = person.dup
+      if person.image
+        image = URI.parse(person.image.url)
+        duplicate_person.image = image
+      end
+      other_user.people << duplicate_person
     end
 
     unless other_user_existed
