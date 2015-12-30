@@ -5,9 +5,21 @@
     </div>
     <div class='col-sm-6'>
       <div class="btn-group pull-right extra-margin-top-h1" role="group" aria-label="...">
+        <div class="btn-group" role="group">
+          <button  class="btn btn-default dropdown-toggle" type="button" id="shareDropDown" data-toggle="dropdown" aria-haspopup="true" aria-expanded="true">
+            Share People&nbsp;
+            <span class="caret"></span>
+          </button>
+          <ul class="dropdown-menu dropdown-menu-left" aria-labelledby="shareDropDown">
+            <li ng-class="{ 'disabled' : people.demoMode }">
+              <a href="" ng-click='people.shareSelected()'>All Selected</a>
+              <a href="" ng-click='people.shareGroups()'>By Group</a>
+            </li>
+          </ul>
+        </div>
         <div class="btn-group" role="group" ng-show='people.someoneSelected'>
           <button  class="btn btn-default dropdown-toggle" type="button" id="groupDropDown" data-toggle="dropdown" aria-haspopup="true" aria-expanded="true">
-            Apply Group
+            Apply Group&nbsp;
             <span class="caret"></span>
           </button>
           <ul class="dropdown-menu dropdown-menu-left" aria-labelledby="groupDropDown">
