@@ -2,9 +2,9 @@
   angular.module('knowYourCircle.people')
     .factory('PersonFactory', PersonFactory);
 
-  PersonFactory.$inject = ['Person', 'Upload', '$q'];
+  PersonFactory.$inject = ['Person', 'Upload', '$q', '$uibModal'];
 
-  function PersonFactory(Person, Upload, $q) {
+  function PersonFactory(Person, Upload, $q, $uibModal) {
     var personFactory = {};
 
     function sendPayload(formData, method, url) {
@@ -100,6 +100,24 @@
         deferred.reject(err);
       });
       return deferred.promise;
+    };
+
+    personFactory.shareSelectedModalOpen = function() {
+      var modalInstance = $uibModal.open({
+        animation: true,
+        templateUrl: '/partials/people/_shareSelected_modal.html',
+        controller: 'shareSelectedController as modal',
+        windowClass: "modal fade"
+      });
+    };
+
+    personFactory.shareGroupsModalOpen = function() {
+      var modalInstance = $uibModal.open({
+        animation: true,
+        templateUrl: '/partials/people/_shareGroups_modal.html',
+        controller: 'shareGroupsController as modal',
+        windowClass: "modal fade"
+      });
     };
 
     return personFactory;
