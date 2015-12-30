@@ -2,9 +2,9 @@
   angular.module('knowYourCircle.groups')
     .controller('shareGroupsController', shareGroupsController);
 
-    shareGroupsController.$inject = ['$uibModalInstance', 'groups', 'GroupFactory', 'AuthFactory', '$q'];
+    shareGroupsController.$inject = ['$uibModalInstance', 'groups', 'AuthFactory'];
 
-    function shareGroupsController($uibModalInstance, groups, GroupFactory, AuthFactory, $q) {
+    function shareGroupsController($uibModalInstance, groups, AuthFactory) {
       var vm = this;
       vm.groups = groups;
       vm.selected = {};
