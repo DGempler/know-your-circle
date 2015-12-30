@@ -31,6 +31,13 @@
       });
     };
 
+    shareFactory.shareGroups = function(payload) {
+
+
+
+
+    };
+
     return shareFactory;
   }
 })();
