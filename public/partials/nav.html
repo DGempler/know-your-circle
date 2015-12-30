@@ -14,7 +14,8 @@
       <ul class="nav navbar-nav navbar-right">
         <li ng-show='user.id'><a href="#/people/new">Add People</a></li>
         <li ng-show='user.id'><a href="#/people/index">Your Circle</a></li>
-        <li ng-show='user.id'><a href="#/games/index">Play Games</a></li>
+        <li><a href="#/people/demo">Your Demo Circle</a></li>
+        <li><a href="#/games/index">Play Games</a></li>
         <li ng-show='!user.id'><a ng-click='nav.signUpOpen()' id='sign-up' href="">Sign Up</a></li>
         <li ng-show='!user.id'><a ng-click='nav.logInOpen()' id='log-in' href="">Log In</a></li>
         <li ng-show='user.id' class="dropdown">
