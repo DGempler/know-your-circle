@@ -2,14 +2,13 @@
   angular.module('knowYourCircle')
     .controller('indexController', indexController);
 
-    indexController.$inject = ['AuthFactory'];
+    indexController.$inject = ['AuthFactory', '$routeParams'];
 
-    function indexController(AuthFactory) {
+    function indexController(AuthFactory, $routeParams) {
       var vm = this;
-
-      vm.logInModalOpen = function() {
-        AuthFactory.logInOpen();
-      };
+      if ($routeParams.email) {
+        AuthFactory.signUpOpen($routeParams.email);
+      }
     }
 
 })();
