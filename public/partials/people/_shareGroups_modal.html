@@ -1,12 +1,12 @@
 <div class="modal-header text-center">
-  <h3 class="modal-title">Share Your Groups</h3>
+  <h3 class="modal-title">Share Your Circle by Groups</h3>
 </div>
 
 <div class="modal-body">
   <div>
     <h4 ng-show='modal.groups.length > 0'>Select Groups to Share</h5>
     <div class='extra-bottom-margins'>
-      <span class="label" ng-repeat='group in modal.groups' ng-class="{'label-info': !modal.selected[group.id], 'label-default': modal.selected[group.id]}">
+      <span class="label" ng-repeat='group in modal.groups' ng-class="{'label-info': !modal.selected[group.id], 'label-success': modal.selected[group.id]}">
         <a href='' ng-click='modal.selectGroup(group.id)'>{{ group.name }}</a>
       </span>
     </div>
