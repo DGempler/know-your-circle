@@ -10,6 +10,7 @@ Rails.application.routes.draw do
     resources :groups
     get '/demo', to: 'demo#index'
     get '/demo/:id', to: 'demo#show'
+    post '/share', to: 'share#create'
   end
   # The priority is based upon order of creation: first created -> highest priority.
   # See how all your routes lay out with "rake routes".
