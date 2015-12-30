@@ -117,6 +117,7 @@
         templateUrl: '/partials/people/_shareGroups_modal.html',
         controller: 'shareGroupsController as modal',
         windowClass: "modal fade",
+        size: 'sm',
         resolve: {
           groups: function() {
             return groups;
