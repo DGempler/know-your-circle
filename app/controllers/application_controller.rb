@@ -46,12 +46,6 @@ class ApplicationController < ActionController::Base
     u = User.new(first_name: "guest", last_name: "guest", email: "guest_#{Time.now.to_i}#{rand(100)}@example.com")
     u.save!(:validate => false)
 
-    groups = ["Dead", "Alive", "Democratic", "Republican", "Other Party"]
-
-    groups.each do |group|
-      g = Group.create(name: group, user_id: u.id)
-    end
-
     session[:guest_user_id] = u.id
     u
   end
