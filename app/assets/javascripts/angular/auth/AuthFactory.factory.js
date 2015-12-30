@@ -38,13 +38,18 @@
       };
 
 
-      factory.signUpOpen = function() {
+      factory.signUpOpen = function(email) {
         var modalInstance = $uibModal.open({
           animation: true,
           templateUrl: '/partials/auth/_signup_modal.html',
           controller: 'signupController as auth',
           size: 'sm',
-          windowClass: "modal fade"
+          windowClass: "modal fade",
+          resolve: {
+            email: function() {
+              return email;
+            }
+          }
         });
       };
 
