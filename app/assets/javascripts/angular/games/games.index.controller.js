@@ -8,7 +8,7 @@
     var vm = this;
     vm.people = {};
 
-    if ($routeParams.demo) {
+    if ($routeParams.demo === 'true') {
       DemoFactory.getGuestUserPeople()
         .then(function(people) {
           vm.people.people = people;
