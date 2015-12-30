@@ -3,7 +3,7 @@ class PeopleController < ApplicationController
   before_action :authenticate_user!
 
   def index
-    @people = current_or_guest_user.people.all
+    @people = current_user.people.all
     people = []
     @people.each do |person|
       medium = person.image.url(:medium)
@@ -17,7 +17,7 @@ class PeopleController < ApplicationController
   end
 
   def create
-    @person = current_or_guest_user.people.new person_params
+    @person = current_user.people.new person_params
     if @person.save
       render json: @person, status: :created
     else
@@ -55,8 +55,8 @@ class PeopleController < ApplicationController
   end
 
   def set_person
-    if current_or_guest_user
-      @person = current_or_guest_user.people.find(params[:id])
+    if current_user
+      @person = current_user.people.find(params[:id])
     else
       render json: {
         error: "The request requires user authentication",
