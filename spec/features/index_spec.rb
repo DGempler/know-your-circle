@@ -13,9 +13,10 @@ feature "Visit website", js: true do
 
     expect(page).to have_content("Sign Up")
     expect(page).to have_content("Log In")
+    expect(page).to have_content("Play Games")
+    expect(page).to have_content("Your Demo Circle")
     expect(page).not_to have_content("Get started by adding some people!")
     expect(page).not_to have_content("Add People")
-    expect(page).not_to have_content("Play Games")
     expect(page).not_to have_content("Account")
     expect(page).not_to have_content("My Profile")
     expect(page).not_to have_content("Log Out")

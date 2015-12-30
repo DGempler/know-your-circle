@@ -8,9 +8,9 @@ describe GroupsController, :type => :controller do
       login_with nil
     end
 
-    it "should get a 401 for index action" do
+    it "should get a 200 for index action" do
       get :index
-      expect( response.status ).to eq(401)
+      expect( response.status ).to eq(200)
     end
     it "should get a 401 for create action" do
       post :create
