@@ -3,7 +3,6 @@ class ShareMailer < ApplicationMailer
   def new_user(sending_user, receiving_user)
     @sending_user = sending_user
     @receiving_user = receiving_user
-    @url = '/#/sign_up'
     mail(to: @receiving_user.email, subject: "#{@sending_user.first_name} #{@sending_user.last_name} has invited you to Know Your Circle!" )
 
   end
@@ -11,7 +10,6 @@ class ShareMailer < ApplicationMailer
   def existing_user(sending_user, receiving_user)
     @sending_user = sending_user
     @receiving_user = receiving_user
-    @url = '/#/log_in'
     mail(to: @receiving_user.email, subject: "#You've been sent some people!" )
   end
 end
