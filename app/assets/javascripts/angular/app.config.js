@@ -55,7 +55,7 @@
           }]
         }
       })
-      .when('/games/index', {
+      .when('/games/index/:demo', {
         templateUrl: 'partials/games/index.html',
         controller: 'gamesIndexController as games'
       })
