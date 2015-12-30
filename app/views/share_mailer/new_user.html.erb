@@ -1,9 +1,9 @@
 <h4 class="h4" style="color: #202020; display: block; font-family: 'Lato', 'Helvetica Neue', Helvetica, Arial, sans-serif; font-size: 22px; font-weight: bold; line-height: 100%; text-align: left; margin: 0 0 10px;" align="left">
-  <%= "#{@sending_user.first_name} #{@sending_user.last_name} (#{sending_user.email})" %>has shared someone from his Circle with you!
+  <%= "#{@sending_user.first_name} #{@sending_user.last_name} (#{@sending_user.email})" %> has shared someone from their Circle with you!
 </h4>&#13;
 <br />&#13;
-<strong>Get started:</strong> Follow this link to create your account:&#13;
+<strong>Get started:</strong> Follow this link to create your account and see who:&#13;
 <br />&#13;
 <br />&#13;
 &#13;
-<%= link_to 'Acivate my account', "/#/sign_up/#{@receiving_user.email}".html_safe %>
+<%= link_to 'Activate My Account', "#{root_url}/#/sign_up/#{@receiving_user.email.html_safe}" %>
