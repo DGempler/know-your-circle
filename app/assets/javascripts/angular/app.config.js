@@ -57,12 +57,7 @@
       })
       .when('/games/index', {
         templateUrl: 'partials/games/index.html',
-        controller: 'gamesIndexController as games',
-        resolve: {
-          auth: ['$auth', function($auth) {
-            return $auth.validateUser();
-          }]
-        }
+        controller: 'gamesIndexController as games'
       })
       .when('/profile', {
         templateUrl: 'partials/users/profile.html',
