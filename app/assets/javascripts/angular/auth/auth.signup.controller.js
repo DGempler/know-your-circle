@@ -2,11 +2,16 @@
   angular.module('knowYourCircle.auth')
     .controller('signupController', signupController);
 
-    signupController.$inject = ['$uibModalInstance', 'AuthFactory'];
+    signupController.$inject = ['$uibModalInstance', 'email', 'AuthFactory'];
 
-    function signupController($uibModalInstance, AuthFactory) {
+    function signupController($uibModalInstance, email ,AuthFactory) {
       var vm = this;
       vm.user = {};
+
+      if (email) {
+        vm.alreadyHasEmail = true;
+        vm.user.email = email;
+      }
 
       vm.signUp = function(isValid) {
         if (isValid) {
