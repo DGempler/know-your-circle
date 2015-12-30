@@ -52,12 +52,6 @@ class ApplicationController < ActionController::Base
       g = Group.create(name: group, user_id: u.id)
     end
 
-    guest_user_people = GuestUserPerson.all
-
-    guest_user_people.each do |person|
-      u.guest_user_people << person
-    end
-
     session[:guest_user_id] = u.id
     u
   end
