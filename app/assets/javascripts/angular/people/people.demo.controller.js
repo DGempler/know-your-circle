@@ -7,6 +7,7 @@
   function peopleDemoController(DemoFactory, GroupFactory, $q, AuthFactory, UserFactory) {
     var vm = this;
     vm.demoMode = true;
+    vm.sortPeopleBy = "id";
 
     function getGuestUserPeople() {
       DemoFactory.getGuestUserPeople()

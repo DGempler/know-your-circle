@@ -6,6 +6,7 @@
 
   function peopleIndexController(PersonFactory, GroupFactory, $q, AuthFactory, UserFactory) {
     var vm = this;
+    vm.sortPeopleBy = "first_name";
 
     function getPeople() {
       PersonFactory.getPeople().then(function(people) {
