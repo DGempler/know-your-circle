@@ -1,37 +1,37 @@
 <div class="page-header">
-  <h1 class='center-block'><center>{{ person.first_name }} {{ person.middle_name }} {{ person.last_name }}</center></h1>
+  <h1 class='center-block'><center>{{ person.person.first_name }} {{ person.person.middle_name }} {{ person.person.last_name }}</center></h1>
 </div>
 
 <div class='row'>
   <div class='col-sm-12'>
-    <img ng-src='{{ person.medium }}' class='center-block'/>
+    <img ng-src='{{ person.person.medium }}' class='center-block'/>
   </div>
 </div>
 <div class='row'>
   <div class='col-sm-8 col-sm-offset-2'>
     <div class='extra-bottom-margins text-center'>
-      <span class="label label-info" ng-repeat='group in person.groups'>{{ group.name }}</span>
+      <span class="label label-info" ng-repeat='group in person.person.groups'>{{ group.name }}</span>
     </div>
   </div>
 </div>
 <div class='row'>
   <div class='col-sm-4 col-sm-offset-2'>
-    <p>Sex: {{ person.sex }}</p>
-    <p>Nickname: {{ person.nickname }}</p>
-    <p ng-repeat='hint in person.hints track by $index'>Hint {{ $index + 1 }}: {{ hint }}</p>
+    <p>Sex: {{ person.person.sex }}</p>
+    <p>Nickname: {{ person.person.nickname }}</p>
+    <p ng-repeat='hint in person.person.hints track by $index'>Hint {{ $index + 1 }}: {{ hint }}</p>
   </div>
   <div class='col-sm-4'>
-    <p>Location: {{ person.location }}</p>
-    <p>Occupation: {{ person.occupation }}</p>
-    <p>DOB: {{ person.dob }}</p>
-    <p>Bio: {{ person.bio }}</p>
+    <p>Location: {{ person.person.location }}</p>
+    <p>Occupation: {{ person.person.occupation }}</p>
+    <p>DOB: {{ person.person.dob }}</p>
+    <p>Bio: {{ person.person.bio }}</p>
   </div>
 </div>
 <div class='row'>
   <div class='col-sm-4 col-sm-offset-4'>
     <div class='text-center'>
-      <a class="btn btn-info"  href='#/people/{{person.id}}/edit'>Edit Person</a>
-      <button class="btn btn-danger" ng-click='deletePerson()'>Delete Person</button>
+      <a ng-class="{ 'disabled' : people.demoMode }" class="btn btn-info"  href='#/people/{{person.person.id}}/edit'>Edit Person</a>
+      <button ng-class="{ 'disabled' : people.demoMode }" class="btn btn-danger" ng-click='deletePerson()'>Delete Person</button>
     </div>
   </div>
 </div>

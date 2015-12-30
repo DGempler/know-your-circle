@@ -6,6 +6,7 @@
 
   function personDemoShowController($routeParams, DemoFactory, AuthFactory) {
     var vm = this;
+    vm.demoMode = true;
 
     DemoFactory.getGuestUserPerson($routeParams.id)
       .then(function(person) {
