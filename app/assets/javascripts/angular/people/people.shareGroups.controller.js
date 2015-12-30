@@ -22,13 +22,13 @@
       };
 
       vm.send = function(id) {
-        var payLoad = {};
+        var payload = {};
         var selected = Object.keys(vm.selected);
 
-        payLoad.email = vm.email;
-        payLoad.groups = selected;
+        payload.email = vm.email;
+        payload.groups = selected;
 
-        ShareFactory.shareGroups(payLoad)
+        ShareFactory.shareGroups(payload)
           .then(function(success) {
             var message = 'Your selected groups have been sent to ' + vm.email;
             AuthFactory.messageModalOpen(message);
