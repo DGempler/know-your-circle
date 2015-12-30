@@ -2,9 +2,24 @@ class PeopleController < ApplicationController
   before_action :authenticate_user!
 
   def create
-    @user = User.new share_params[:email]
+    user = User.new share_params[:email]
 
-    current_user
+    people = []
+
+    share_params[:group_ids].each do |id|
+      group = current_user.groups.includes(:people).find(id)
+      group.people.each do |person|
+        people << person if !people.include? person
+      end
+
+    puts 'about'
+    puts 'to'
+    puts 'puts'
+    puts 'people'
+    puts people
+    puts user
+
+    end
 
     if @person.save
       render json: @person, status: :created
