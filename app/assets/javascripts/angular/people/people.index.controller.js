@@ -203,6 +203,14 @@
       });
     };
 
+    vm.shareSelected = function() {
+      PersonFactory.shareSelectedModalOpen();
+    };
+
+    vm.shareGroups = function() {
+      PersonFactory.shareGroupsModalOpen();
+    };
+
     getPeople();
 
   }
