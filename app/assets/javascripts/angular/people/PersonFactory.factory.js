@@ -111,12 +111,17 @@
       });
     };
 
-    personFactory.shareGroupsModalOpen = function() {
+    personFactory.shareGroupsModalOpen = function(groups) {
       var modalInstance = $uibModal.open({
         animation: true,
         templateUrl: '/partials/people/_shareGroups_modal.html',
         controller: 'shareGroupsController as modal',
-        windowClass: "modal fade"
+        windowClass: "modal fade",
+        resolve: {
+          groups: function() {
+            return groups;
+          }
+        }
       });
     };
 

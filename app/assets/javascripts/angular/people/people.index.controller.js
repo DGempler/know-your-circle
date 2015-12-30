@@ -208,7 +208,7 @@
     };
 
     vm.shareGroups = function() {
-      PersonFactory.shareGroupsModalOpen();
+      PersonFactory.shareGroupsModalOpen(vm.groups);
     };
 
     getPeople();
