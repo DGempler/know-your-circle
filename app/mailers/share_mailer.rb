@@ -1,0 +1,2 @@
+class ShareMailer < ApplicationMailer
+end
