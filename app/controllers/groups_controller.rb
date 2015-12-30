@@ -1,9 +1,9 @@
 class GroupsController < ApplicationController
   before_action :set_group, only: [:show, :update, :destroy]
-  before_action :authenticate_user!, except: [:index]
+  before_action :authenticate_user!
 
   def index
-    @groups = current_or_guest_user.groups.all
+    @groups = current_user.groups.all
     render json: @groups, status: :ok
   end
 
