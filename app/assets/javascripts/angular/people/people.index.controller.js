@@ -2,9 +2,9 @@
   angular.module('knowYourCircle.people')
     .controller('peopleIndexController', peopleIndexController);
 
-  peopleIndexController.$inject = ['PersonFactory', 'GroupFactory', '$q', 'AuthFactory', 'UserFactory'];
+  peopleIndexController.$inject = ['PersonFactory', 'GroupFactory', '$q', 'AuthFactory', 'UserFactory', 'ShareFactory'];
 
-  function peopleIndexController(PersonFactory, GroupFactory, $q, AuthFactory, UserFactory) {
+  function peopleIndexController(PersonFactory, GroupFactory, $q, AuthFactory, UserFactory, ShareFactory) {
     var vm = this;
     vm.sortPeopleBy = "first_name";
 
@@ -204,11 +204,11 @@
     };
 
     vm.shareSelected = function() {
-      PersonFactory.shareSelectedModalOpen();
+      ShareFactory.shareSelectedModalOpen();
     };
 
     vm.shareGroups = function() {
-      PersonFactory.shareGroupsModalOpen(vm.groups);
+      ShareFactory.shareGroupsModalOpen(vm.groups);
     };
 
     getPeople();
