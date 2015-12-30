@@ -25,7 +25,7 @@ class ShareController < ApplicationController
 
     people.each do |person|
       duplicate_person = person.dup
-      if person.image
+      if person.image.url != "/assets/images/original/missing.png"
         image = URI.parse(person.image.url)
         duplicate_person.image = image
       end
@@ -34,12 +34,14 @@ class ShareController < ApplicationController
 
     unless other_user_existed
       if other_user.save!(validate: false)
+        ShareMailer.new_user(current_user, other_user).deliver_now
         render json: other_user, status: :created
       else
         render json: other_user.errors, status: :unprocessable_entity
       end
     else
       if other_user.save
+        ShareMailer.existing_user(current_user, other_user).deliver_now
         render json: other_user, status: :ok
       else
         render json: other_user.errors, status: :unprocessable_entity
