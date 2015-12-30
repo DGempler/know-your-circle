@@ -9,6 +9,6 @@ class ShareMailer < ApplicationMailer
   def existing_user(sending_user, receiving_user)
     @sending_user = sending_user
     @receiving_user = receiving_user
-    mail(to: @receiving_user.email, subject: "#You've been sent some people!" )
+    mail(to: @receiving_user.email, subject: "You've been sent some people!" )
   end
 end
