@@ -6,4 +6,4 @@
 <br />&#13;
 <br />&#13;
 &#13;
-<%= link_to 'Activate My Account', "#{root_url}/#/sign_up/#{@receiving_user.email.html_safe}" %>
+<%= link_to 'Activate My Account', "#{root_url}/#/?email=#{@receiving_user.email.html_safe}" %>
