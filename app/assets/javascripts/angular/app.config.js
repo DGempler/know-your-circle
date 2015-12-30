@@ -15,7 +15,7 @@
         templateUrl: 'partials/people/index.html',
         controller: 'peopleDemoController as people'
       })
-      .when('/people/demo/:id', {
+      .when('/people/demo/show/:id', {
         templateUrl: 'partials/people/show.html',
         controller: 'personDemoShowController as person',
       })
