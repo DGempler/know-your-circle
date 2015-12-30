@@ -23,15 +23,15 @@
 
       vm.send = function(id) {
         var payload = {};
-        payload.user = {};
+        // payload.user = {};
         var selected = Object.keys(vm.selected);
 
         if (selected.length === 0) {
           // DO SOMETHING!!!!
         }
 
-        payload.user.email = vm.email;
-        payload.user.group_ids = selected;
+        payload.email = vm.email;
+        payload.group_ids = selected;
 
         ShareFactory.shareGroups(payload)
           .then(function(success) {
