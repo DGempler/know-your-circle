@@ -21,11 +21,11 @@ class PeopleController < ApplicationController
 
     end
 
-    if @person.save
-      render json: @person, status: :created
-    else
-      render json: @person.errors, status: :unprocessable_entity
-    end
+    # if @person.save
+    #   render json: @person, status: :created
+    # else
+    #   render json: @person.errors, status: :unprocessable_entity
+    # end
   end
 
   private
