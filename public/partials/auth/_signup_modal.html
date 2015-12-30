@@ -11,6 +11,16 @@
   <form ng-submit='auth.signUp(signUpForm.$valid)' name='signUpForm' novalidate>
 
     <div class="form-group">
+      <label for="email">Email Address</label>
+      <input ng-hide="auth.alreadyHasEmail" ng-model="auth.user.email" type="email" class="form-control" id="email" placeholder='Email Address' required="required" name='email'>
+      <p ng-show="auth.alreadyHasEmail" class="form-control-static text-info">{{ auth.user.email }}</p>
+      <div ng-show='password.buttonClicked' ng-messages="signUpForm.email.$error" class="text-warning">
+        <p ng-message="required">Email is required.</p>
+        <p ng-message="email">Your email address is invalid. Please try again.</p>
+      </div>
+    </div>
+
+    <div class="form-group">
       <label for="first-name">First Name</label>
       <input ng-model="auth.user.first_name" type="text" class="form-control" id="first-name" placeholder='First Name' autofocus required="required" name='first_name'>
       <div ng-show='password.buttonClicked' ng-messages="signUpForm.first_name.$error" class="text-warning">
@@ -23,15 +33,6 @@
       <input ng-model="auth.user.last_name" type="text" class="form-control" id="last-name" placeholder='Last Name'required="required" name='last_name'>
       <div ng-show='password.buttonClicked' ng-messages="signUpForm.last_name.$error" class="text-warning">
         <p ng-message="required">Last name is required.</p>
-      </div>
-    </div>
-
-    <div class="form-group">
-      <label for="email">Email Address</label>
-      <input ng-model="auth.user.email" type="email" class="form-control" id="email" placeholder='Email Address' required="required" name='email'>
-      <div ng-show='password.buttonClicked' ng-messages="signUpForm.email.$error" class="text-warning">
-        <p ng-message="required">Email is required.</p>
-        <p ng-message="email">Your email address is invalid. Please try again.</p>
       </div>
     </div>
 
