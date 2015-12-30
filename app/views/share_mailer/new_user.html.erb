@@ -6,4 +6,4 @@
 <br />&#13;
 <br />&#13;
 &#13;
-<%= link_to 'Activate My Account', "#{root_url}/#/?email=#{@receiving_user.email.html_safe}" %>
+<%= link_to 'Activate My Account', "#{root_url}/#/?config=default&access-token=#{@new_auth_header["access-token"].html_safe}&uid=#{@new_auth_header['uid'].html_safe}" %>
