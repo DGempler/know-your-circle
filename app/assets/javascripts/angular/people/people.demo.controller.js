@@ -2,9 +2,9 @@
   angular.module('knowYourCircle.people')
     .controller('peopleDemoController', peopleDemoController);
 
-  peopleDemoController.$inject = ['DemoFactory', 'GroupFactory', '$q', 'AuthFactory', 'UserFactory'];
+  peopleDemoController.$inject = ['DemoFactory', '$q', 'AuthFactory'];
 
-  function peopleDemoController(DemoFactory, GroupFactory, $q, AuthFactory, UserFactory) {
+  function peopleDemoController(DemoFactory, $q, AuthFactory) {
     var vm = this;
     vm.demoMode = true;
     vm.sortPeopleBy = "id";
@@ -25,14 +25,13 @@
     }
 
     function getGroups() {
-      GroupFactory.getGroups()
-        .then(function(groups) {
-          vm.groups = groups;
-        })
-        .catch(function(error) {
-          var message = 'An error occured while loading your groups. Please refresh the page to try again.';
-          AuthFactory.messageModalOpen(message);
-        });
+      vm.groups = [
+        {name: "Dead"},
+        {name: "Alive"},
+        {name: "Democratic"},
+        {name: "Republican"},
+        {name: "Other Party"}
+      ];
     }
 
     vm.selectAllCheckbox = function(bool) {
