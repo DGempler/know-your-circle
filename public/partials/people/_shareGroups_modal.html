@@ -7,14 +7,14 @@
     <h4 ng-show='modal.groups.length > 0'>Select Groups to Share</h5>
     <div class='extra-bottom-margins'>
       <span class="label" ng-repeat='group in modal.groups' ng-class="{'label-info': !modal.selected[group.id], 'label-default': modal.selected[group.id]}">
-        <a href='' ng-click='modal.selectGroup(group)'>{{ group.name }}</a>
+        <a href='' ng-click='modal.selectGroup(group.id)'>{{ group.name }}</a>
       </span>
     </div>
   </div>
   <form class='extra-bottom-margins' ng-submit='modal.send()'>
     <div class="form-group">
-      <label for="new-group">Email address</label>
-      <input ng-model="modal.email" type="new-group" class="form-control" id="new-group" autofocus required="required" >
+      <label for="email">Email address</label>
+      <input ng-model="modal.email" type="email" class="form-control" id="email" autofocus required="required" >
     </div>
     <button type="submit" class="btn btn-primary btn-block">Send</button>
   </form>
