@@ -102,30 +102,6 @@
       return deferred.promise;
     };
 
-    personFactory.shareSelectedModalOpen = function() {
-      var modalInstance = $uibModal.open({
-        animation: true,
-        templateUrl: '/partials/people/_shareSelected_modal.html',
-        controller: 'shareSelectedController as modal',
-        windowClass: "modal fade"
-      });
-    };
-
-    personFactory.shareGroupsModalOpen = function(groups) {
-      var modalInstance = $uibModal.open({
-        animation: true,
-        templateUrl: '/partials/people/_shareGroups_modal.html',
-        controller: 'shareGroupsController as modal',
-        windowClass: "modal fade",
-        size: 'sm',
-        resolve: {
-          groups: function() {
-            return groups;
-          }
-        }
-      });
-    };
-
     return personFactory;
   }
 })();
