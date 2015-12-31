@@ -4,7 +4,7 @@
 
 <div class="modal-body">
   <div class='row'>
-    <h4 ng-show='modal.groups.length > 0'>Select Groups to Share</h4>
+    <h4 ng-show='modal.groups.length > 0' class='text-center'>Select Groups to Share</h4>
     <div class='extra-bottom-margins'>
       <span class="label" ng-repeat='group in modal.groups' ng-class="{'label-info': !modal.selected[group.id], 'label-success': modal.selected[group.id]}">
         <a href='' ng-click='modal.selectGroup(group.id)'>{{ group.name }}</a>
