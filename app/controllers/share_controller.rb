@@ -4,7 +4,6 @@ class ShareController < ApplicationController
   def create
     other_user = User.where(email: (share_params[:email].try :downcase))
 
-
     unless other_user.present?
       other_user_existed = false
       other_user = User.new(email: (share_params[:email].try :downcase), share_pending: true)
@@ -15,13 +14,19 @@ class ShareController < ApplicationController
 
     people = []
 
-    share_params[:group_ids].each do |id|
-      group = current_user.groups.find(id)
-      group.people.each do |person|
+    if share_params[:group_ids]
+      share_params[:group_ids].each do |id|
+        group = current_user.groups.find(id)
+        group.people.each do |person|
+          people << person if !people.include? person
+        end
+      end
+    else
+      share_params[:people_ids].each do |id|
+        person = current_user.people.find(id)
         people << person if !people.include? person
       end
     end
-
 
     people.each do |person|
       duplicate_person = person.dup
@@ -52,8 +57,7 @@ class ShareController < ApplicationController
 
   private
   def share_params
-    params[:share][:group_ids] ||= []
-    params.require(:share).permit(:email, group_ids: [])
+    params.require(:share).permit(:email, group_ids: [], people_ids: [])
   end
 
 end
