@@ -2,12 +2,16 @@
   angular.module('knowYourCircle.groups')
     .controller('shareGroupsController', shareGroupsController);
 
-    shareGroupsController.$inject = ['$uibModalInstance', 'groups', 'ShareFactory', 'AuthFactory'];
+    shareGroupsController.$inject = ['$uibModalInstance', 'groups', 'size', 'ShareFactory', 'AuthFactory'];
 
-    function shareGroupsController($uibModalInstance, groups, ShareFactory, AuthFactory) {
+    function shareGroupsController($uibModalInstance, groups, size, ShareFactory, AuthFactory) {
       var vm = this;
       vm.groups = groups;
       vm.selected = {};
+
+      if (size !== 'sm') {
+        vm.mediumSize = true;
+      }
 
       vm.close = function() {
         $uibModalInstance.close();
