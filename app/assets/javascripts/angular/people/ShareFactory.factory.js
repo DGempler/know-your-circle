@@ -46,10 +46,8 @@
     shareFactory.share = function(payload) {
       var deferred = $q.defer();
       $http.post('/api/share', payload).then(function(user) {
-        console.log(user);
         deferred.resolve(user);
       }, function(error) {
-        console.log(error);
         deffered.resolve(error);
       });
       return deferred.promise;
