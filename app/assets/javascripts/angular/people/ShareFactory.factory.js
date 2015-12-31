@@ -25,7 +25,7 @@
       });
     };
 
-    shareFactory.shareGroupsModalOpen = function(groups, size, people) {
+    shareFactory.shareGroupsModalOpen = function(groups, size) {
       var modalInstance = $uibModal.open({
         animation: true,
         templateUrl: '/partials/people/_shareGroups_modal.html',
@@ -38,10 +38,7 @@
           },
           size: function() {
             return size;
-          },
-          people: function() {
-            return people;
-          },
+          }
         }
       });
     };
