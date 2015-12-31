@@ -7,7 +7,7 @@ class ShareController < ApplicationController
 
     unless other_user.present?
       other_user_existed = false
-      other_user = User.new(email: share_params[:email])
+      other_user = User.new(email: share_params[:email], share_pending: true)
     else
       other_user_existed = true
       other_user = other_user[0]
