@@ -11,6 +11,9 @@
       </div>
       <button type="submit" class="btn btn-primary btn-block">Send</button>
     </form>
+    <div ng-class="{ 'col-sm-8' : modal.mediumSize, 'col-sm-offset-2' : modal.mediumSize }" ng-show='modal.emailsMatch' class="text-primary text-center">
+      <h5><strong>You are not allowed to share people with yourself.</strong></h5>
+    </div>
   </div>
   <div class='row'>
     <h4 ng-show='modal.people.length > 0' class='text-center'>Selected People</h4>

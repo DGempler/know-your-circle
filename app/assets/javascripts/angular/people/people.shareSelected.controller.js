@@ -2,9 +2,9 @@
   angular.module('knowYourCircle.groups')
     .controller('shareSelectedController', shareSelectedController);
 
-    shareSelectedController.$inject = ['$uibModalInstance', 'people', 'size', 'ShareFactory', 'AuthFactory'];
+    shareSelectedController.$inject = ['$uibModalInstance', 'people', 'size', 'ShareFactory', 'AuthFactory', '$rootScope'];
 
-    function shareSelectedController($uibModalInstance, people, size, ShareFactory, AuthFactory) {
+    function shareSelectedController($uibModalInstance, people, size, ShareFactory, AuthFactory, $rootScope) {
       var vm = this;
       vm.people = people;
 
@@ -17,6 +17,13 @@
       };
 
       vm.send = function() {
+        if (vm.email.toLowerCase() === $rootScope.user.email) {
+          vm.emailsMatch = true;
+          return;
+        } else {
+          vm.emailsMatch = false;
+        }
+
         var payload = {};
         payload.people_ids = [];
         vm.people.forEach(function(person) {

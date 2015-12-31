@@ -2,9 +2,9 @@
   angular.module('knowYourCircle.groups')
     .controller('shareGroupsController', shareGroupsController);
 
-    shareGroupsController.$inject = ['$uibModalInstance', 'groups', 'size', 'ShareFactory', 'AuthFactory'];
+    shareGroupsController.$inject = ['$uibModalInstance', 'groups', 'size', 'ShareFactory', 'AuthFactory', '$rootScope'];
 
-    function shareGroupsController($uibModalInstance, groups, size, ShareFactory, AuthFactory) {
+    function shareGroupsController($uibModalInstance, groups, size, ShareFactory, AuthFactory, $rootScope) {
       var vm = this;
       vm.groups = groups;
       vm.selected = {};
@@ -26,9 +26,14 @@
       };
 
       vm.send = function() {
-        var payload = {};
-        var selected = Object.keys(vm.selected);
+        if (vm.email.toLowerCase() === $rootScope.user.email) {
+          vm.emailsMatch = true;
+          return;
+        } else {
+          vm.emailsMatch = false;
+        }
 
+        var selected = Object.keys(vm.selected);
         if (selected.length === 0) {
           vm.noneSelected = true;
           return;
@@ -36,6 +41,7 @@
           vm.noneSelected = false;
         }
 
+        var payload = {};
         payload.email = vm.email;
         payload.group_ids = selected;
 
