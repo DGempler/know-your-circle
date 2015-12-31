@@ -3,21 +3,23 @@
 </div>
 
 <div class="modal-body">
-  <div>
-    <h4 ng-show='modal.groups.length > 0'>Select Groups to Share</h5>
+  <div class='row'>
+    <h4 ng-show='modal.groups.length > 0'>Select Groups to Share</h4>
     <div class='extra-bottom-margins'>
       <span class="label" ng-repeat='group in modal.groups' ng-class="{'label-info': !modal.selected[group.id], 'label-success': modal.selected[group.id]}">
         <a href='' ng-click='modal.selectGroup(group.id)'>{{ group.name }}</a>
       </span>
     </div>
   </div>
-  <form class='extra-bottom-margins' ng-submit='modal.send()'>
-    <div class="form-group">
-      <label for="email">Email address</label>
-      <input ng-model="modal.email" type="email" class="form-control" id="email" autofocus required="required" >
-    </div>
-    <button type="submit" class="btn btn-primary btn-block">Send</button>
-  </form>
+  <div class='row'>
+    <form ng-class="{ 'col-sm-8' : modal.mediumSize, 'col-sm-offset-2' : modal.mediumSize }" class='extra-bottom-margins' ng-submit='modal.send()'>
+      <div class="form-group">
+        <label for="email">Email address</label>
+        <input ng-model="modal.email" type="email" class="form-control" id="email" autofocus required="required" >
+      </div>
+      <button type="submit" class="btn btn-primary btn-block">Send</button>
+    </form>
+  </div>
 </div>
 
 <div class="modal-footer">

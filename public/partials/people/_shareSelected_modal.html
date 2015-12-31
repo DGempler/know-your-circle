@@ -3,15 +3,17 @@
 </div>
 
 <div class="modal-body">
-  <form class='extra-bottom-margins' ng-submit='modal.send()'>
-    <div class="form-group">
-      <label for="email">Email address</label>
-      <input ng-model="modal.email" type="email" class="form-control" id="email" autofocus required="required" >
-    </div>
-    <button type="submit" class="btn btn-primary btn-block">Send</button>
-  </form>
-  <div>
-    <h4 ng-show='modal.people.length > 0'>Selected People</h5>
+  <div class='row'>
+    <form ng-class="{ 'col-sm-8' : modal.mediumSize, 'col-sm-offset-2' : modal.mediumSize }" class='extra-bottom-margins' ng-submit='modal.send()'>
+      <div class="form-group">
+        <label for="email">Email address</label>
+        <input ng-model="modal.email" type="email" class="form-control" id="email" autofocus required="required" >
+      </div>
+      <button type="submit" class="btn btn-primary btn-block">Send</button>
+    </form>
+  </div>
+  <div class='row'>
+    <h4 ng-show='modal.people.length > 0'>Selected People</h4>
     <div class='extra-bottom-margins'>
       <span class="label label-info" ng-repeat='person in modal.people'>
         {{ person.first_name }} {{ person.middle_name }} {{ person.last_name }}
