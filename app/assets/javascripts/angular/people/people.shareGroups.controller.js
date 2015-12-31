@@ -21,7 +21,7 @@
         }
       };
 
-      vm.send = function(id) {
+      vm.send = function() {
         var payload = {};
         // payload.user = {};
         var selected = Object.keys(vm.selected);
