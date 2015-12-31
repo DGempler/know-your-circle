@@ -27,11 +27,13 @@
 
       vm.send = function() {
         var payload = {};
-        // payload.user = {};
         var selected = Object.keys(vm.selected);
 
         if (selected.length === 0) {
-          // DO SOMETHING!!!!
+          vm.noneSelected = true;
+          return;
+        } else {
+          vm.noneSelected = false;
         }
 
         payload.email = vm.email;
@@ -41,6 +43,7 @@
           .then(function(success) {
             var message = 'The people in your selected groups have been sent to ' + vm.email;
             AuthFactory.messageModalOpen(message);
+            vm.email = "";
           })
           .catch(function(error) {
             var message = 'There was an error while sharing the people in your selected groups. Please try again.';
