@@ -10,7 +10,7 @@
       vm.selected = {};
 
       vm.close = function() {
-        $uibModalInstance.close(vm.group.groups);
+        $uibModalInstance.close();
       };
 
       vm.selectGroup = function(id) {
