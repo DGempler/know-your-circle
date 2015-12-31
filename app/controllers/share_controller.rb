@@ -54,8 +54,11 @@ class ShareController < ApplicationController
       end
     end
 
+    have_people_to_add = false
+
     people_to_add.each do |person|
       unless other_user_people_original_ids.include? person.original_id
+        have_people_to_add = true
         duplicate_person = person.dup
         if person.image.url != "/assets/images/original/missing.png"
           image = URI.parse(person.image.url)
@@ -63,6 +66,11 @@ class ShareController < ApplicationController
         end
         other_user.people << duplicate_person
       end
+    end
+
+    if !have_people_to_add
+      render json: { error: "The recepient already has these people in their Circle."}, status: :unprocessable_entity
+      return
     end
 
     unless other_user_existed
