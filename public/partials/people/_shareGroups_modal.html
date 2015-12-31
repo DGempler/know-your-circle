@@ -11,7 +11,7 @@
       </span>
     </div>
   </div>
-  <div class='row'>
+  <div ng-class="{ 'row' : modal.mediumSize }">
     <form ng-class="{ 'col-sm-8' : modal.mediumSize, 'col-sm-offset-2' : modal.mediumSize }" class='extra-bottom-margins' ng-submit='modal.send()'>
       <div class="form-group">
         <label for="email">Email address</label>
