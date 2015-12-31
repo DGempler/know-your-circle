@@ -19,7 +19,9 @@ class Person < ActiveRecord::Base
 
   private
   def assign_original_id
-    self.original_id = self.id
+    unless self.original_id
+      self.original_id = self.id
+    end
   end
 
 end
