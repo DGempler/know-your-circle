@@ -15,4 +15,11 @@ class Person < ActiveRecord::Base
   # Validate the attached image is image/jpg, image/png, etc
   validates_attachment_content_type :image, :content_type => /\Aimage\/.*\Z/
 
+  after_create :assign_original_id
+
+  private
+  def assign_original_id
+    self.original_id = self.id
+  end
+
 end
