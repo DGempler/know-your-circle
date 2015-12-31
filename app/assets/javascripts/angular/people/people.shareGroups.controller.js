@@ -33,7 +33,7 @@
         payload.email = vm.email;
         payload.group_ids = selected;
 
-        ShareFactory.shareGroups(payload)
+        ShareFactory.share(payload)
           .then(function(success) {
             var message = 'The people in your selected groups have been sent to ' + vm.email;
             AuthFactory.messageModalOpen(message);
