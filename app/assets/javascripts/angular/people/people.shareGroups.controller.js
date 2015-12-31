@@ -35,11 +35,11 @@
 
         ShareFactory.shareGroups(payload)
           .then(function(success) {
-            var message = 'Your selected groups have been sent to ' + vm.email;
+            var message = 'The people in your selected groups have been sent to ' + vm.email;
             AuthFactory.messageModalOpen(message);
           })
           .catch(function(error) {
-            var message = 'There was an error while sharing your groups. Please try again.';
+            var message = 'There was an error while sharing the people in your selected groups. Please try again.';
             AuthFactory.messageModalOpen(message);
           });
       };
