@@ -10,14 +10,13 @@ class ShareController < ApplicationController
       return
     end
 
-    other_user = User.where(email: (share_params[:email].try :downcase))
+    other_user = User.includes(:people).find_by(email: (sign_up_params[:email].try :downcase))
 
     unless other_user.present?
       other_user_existed = false
       other_user = User.new(email: (share_params[:email].try :downcase), share_pending: true)
     else
       other_user_existed = true
-      other_user = other_user[0]
     end
 
     people = []
