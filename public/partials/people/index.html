@@ -20,7 +20,7 @@
           </ul>
         </div>
         <div class="btn-group" role="group" ng-show='people.someoneSelected'>
-          <button  class="btn btn-default dropdown-toggle" type="button" id="groupDropDown" data-toggle="dropdown" aria-haspopup="true" aria-expanded="true">
+          <button  ng-class="{ 'disabled' : people.groups.length === 0 }" class="btn btn-default dropdown-toggle" type="button" id="groupDropDown" data-toggle="dropdown" aria-haspopup="true" aria-expanded="true">
             Apply Group&nbsp;
             <span class="caret"></span>
           </button>
