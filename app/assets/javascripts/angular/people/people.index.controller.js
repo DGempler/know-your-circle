@@ -224,7 +224,7 @@
       } else {
         size = 'sm';
       }
-      ShareFactory.shareGroupsModalOpen(vm.groups, size);
+      ShareFactory.shareGroupsModalOpen(vm.groups, size, vm.people);
     };
 
     getPeople();
