@@ -12,10 +12,10 @@
           </button>
           <ul class="dropdown-menu dropdown-menu-left" aria-labelledby="shareDropDown">
             <li ng-class="{ 'disabled' : people.demoMode || !people.someoneSelected}">
-              <a href="" ng-click='people.shareSelected()'>All Selected</a>
+              <a href="" ng-click='people.demoMode || !people.someoneSelected || people.shareSelected()'>All Selected</a>
             </li>
-            <li ng-class="{ 'disabled' : people.demoMode || people.groups.length === 0 }">
-              <a href="" ng-click='people.shareGroups()'>By Groups</a>
+            <li ng-class="{ 'disabled' : people.demoMode || !people.groups.length }">
+              <a href="" ng-click='people.demoMode || !people.groups.length || people.shareGroups()'>By Groups</a>
             </li>
           </ul>
         </div>
