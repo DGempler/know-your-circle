@@ -15,17 +15,28 @@ class ShareController < ApplicationController
     people = []
 
     if share_params[:group_ids]
+      have_people_to_add = false
       share_params[:group_ids].each do |id|
         group = current_user.groups.find(id)
-        group.people.each do |person|
-          people << person if !people.include? person
+        if group.people.present?
+          have_people_to_add = true
+          group.people.each do |person|
+            people << person if !people.include? person
+          end
         end
       end
-    else
+      if !have_people_to_add
+        render json: { error: "No people exist in chosen groups."}, status: :unprocessable_entity
+        return
+      end
+    elsif share_params[:people_ids]
       share_params[:people_ids].each do |id|
         person = current_user.people.find(id)
         people << person if !people.include? person
       end
+    else
+      render json: { error: "No groups or people were provided."}, status: :unprocessable_entity
+      return
     end
 
     people.each do |person|
