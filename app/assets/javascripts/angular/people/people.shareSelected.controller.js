@@ -12,10 +12,6 @@
         vm.mediumSize = true;
       }
 
-      if (people.length === 0) {
-        // DO SOMETHING!!!
-      }
-
       vm.close = function() {
         $uibModalInstance.close();
       };
@@ -33,6 +29,7 @@
           .then(function(success) {
             var message = 'Your selected people have been sent to ' + vm.email;
             AuthFactory.messageModalOpen(message);
+            vm.email = "";
           })
           .catch(function(error) {
             var message = 'There was an error while sharing your people. Please try again.';
