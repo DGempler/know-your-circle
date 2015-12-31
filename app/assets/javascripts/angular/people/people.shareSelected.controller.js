@@ -16,7 +16,7 @@
         $uibModalInstance.close();
       };
 
-      vm.send = function(id) {
+      vm.send = function() {
         var payload = {};
         payload.people_ids = [];
         vm.people.forEach(function(person) {
