@@ -14,7 +14,7 @@
       }
 
       vm.signUp = function(isValid) {
-        if (isValid && !vm.alreadyHasEmail) {
+        if (isValid) {
           AuthFactory.signUp(vm.user, $uibModalInstance)
             .catch(function(failure) {
               vm.failureToggle = !vm.failureToggle;
@@ -26,9 +26,6 @@
                 vm.refresh = true;
               }
             });
-        }
-        if (isValid && vm.alreadyHasEmail) {
-          AuthFactory.updateUser(vm.user);
         }
       };
 
