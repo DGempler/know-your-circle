@@ -16,22 +16,34 @@ module Overrides
         @resource.email = sign_up_params[:email]
       end
 
-      # give redirect value from params priority
-      @redirect_url = params[:confirm_success_url]
+      pending_user = User.includes(:people).find_by(email: (sign_up_params[:email].try :downcase), share_pending: true)
 
-      # fall back to default value if provided
-      @redirect_url ||= DeviseTokenAuth.default_confirm_success_url
+      unless pending_user.present?
+        other_user_existed = false
 
-      # success redirect url is required
-      if resource_class.devise_modules.include?(:confirmable) && !@redirect_url
-        return render_create_error_missing_confirm_success_url
-      end
+        # give redirect value from params priority
+        @redirect_url = params[:confirm_success_url]
 
-      # if whitelist is set, validate redirect_url against whitelist
-      if DeviseTokenAuth.redirect_whitelist
-        unless DeviseTokenAuth.redirect_whitelist.include?(@redirect_url)
-          return render_create_error_redirect_url_not_allowed
+        # fall back to default value if provided
+        @redirect_url ||= DeviseTokenAuth.default_confirm_success_url
+
+        # success redirect url is required
+        if resource_class.devise_modules.include?(:confirmable) && !@redirect_url
+          return render_create_error_missing_confirm_success_url
         end
+
+        # if whitelist is set, validate redirect_url against whitelist
+        if DeviseTokenAuth.redirect_whitelist
+          unless DeviseTokenAuth.redirect_whitelist.include?(@redirect_url)
+            return render_create_error_redirect_url_not_allowed
+          end
+        end
+
+      else
+        other_user_existed = true
+        pending_user.email = "example123@example123.zxy"
+        pending_user.save
+        @resource.skip_confirmation!
       end
 
       begin
@@ -48,6 +60,15 @@ module Overrides
             })
 
           else
+
+            if other_user_existed
+              pending_user.people.each do |person|
+                person.user_id = @resource.id
+                person.save
+              end
+              pending_user.delete
+            end
+
             # email auth has been bypassed, authenticate user
             @client_id = SecureRandom.urlsafe_base64(nil, false)
             @token     = SecureRandom.urlsafe_base64(nil, false)
