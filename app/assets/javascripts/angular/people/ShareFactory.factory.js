@@ -48,7 +48,7 @@
       $http.post('/api/share', payload).then(function(user) {
         deferred.resolve(user);
       }, function(error) {
-        deffered.resolve(error);
+        deferred.reject(error);
       });
       return deferred.promise;
     };
