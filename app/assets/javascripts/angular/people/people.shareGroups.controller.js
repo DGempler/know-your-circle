@@ -47,7 +47,7 @@
           })
           .catch(function(error) {
             var message;
-            if (error.data.error === "No people exist in chosen group(s).") {
+            if (error.data.error) {
               message = error.data.error;
             } else {
               message = 'There was an error while sharing the people in your selected groups. Please try again.';
