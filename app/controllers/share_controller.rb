@@ -2,6 +2,11 @@ class ShareController < ApplicationController
   before_action :authenticate_user!
 
   def create
+    if (share_params[:email] =~ /\A([^@\s]+)@((?:[-a-z0-9]+\.)+[a-z]{2,})\Z/).nil?
+      render json: { error: "Invalid Email."}, status: :unprocessable_entity
+      return
+    end
+
     other_user = User.where(email: (share_params[:email].try :downcase))
 
     unless other_user.present?
