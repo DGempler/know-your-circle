@@ -7,12 +7,17 @@
   function ShareFactory($uibModal, $http) {
     var shareFactory = {};
 
-    shareFactory.shareSelectedModalOpen = function() {
+    shareFactory.shareSelectedModalOpen = function(people) {
       var modalInstance = $uibModal.open({
         animation: true,
         templateUrl: '/partials/people/_shareSelected_modal.html',
         controller: 'shareSelectedController as modal',
-        windowClass: "modal fade"
+        windowClass: "modal fade",
+        resolve: {
+          people: function() {
+            return people;
+          }
+        }
       });
     };
 
