@@ -46,7 +46,12 @@
             vm.email = "";
           })
           .catch(function(error) {
-            var message = 'There was an error while sharing the people in your selected groups. Please try again.';
+            var message;
+            if (error.data.error === "No people exist in chosen group(s).") {
+              message = error.data.error;
+            } else {
+              message = 'There was an error while sharing the people in your selected groups. Please try again.';
+            }
             AuthFactory.messageModalOpen(message);
           });
       };
