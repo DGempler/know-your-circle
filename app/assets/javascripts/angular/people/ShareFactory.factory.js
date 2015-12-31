@@ -17,6 +17,9 @@
         resolve: {
           people: function() {
             return people;
+          },
+          size: function() {
+            return size;
           }
         }
       });
@@ -32,6 +35,9 @@
         resolve: {
           groups: function() {
             return groups;
+          },
+          size: function() {
+            return size;
           }
         }
       });
