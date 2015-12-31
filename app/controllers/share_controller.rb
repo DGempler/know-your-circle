@@ -19,7 +19,7 @@ class ShareController < ApplicationController
       other_user_existed = true
     end
 
-    people = []
+    people_to_add = []
 
     if share_params[:group_ids]
       have_people_to_add = false
@@ -28,7 +28,7 @@ class ShareController < ApplicationController
         if group.people.present?
           have_people_to_add = true
           group.people.each do |person|
-            people << person if !people.include? person
+            people_to_add << person if !people_to_add.include? person
           end
         end
       end
@@ -39,7 +39,7 @@ class ShareController < ApplicationController
     elsif share_params[:people_ids]
       share_params[:people_ids].each do |id|
         person = current_user.people.find(id)
-        people << person if !people.include? person
+        people_to_add << person if !people_to_add.include? person
       end
     else
       render json: { error: "No groups or people were provided."}, status: :unprocessable_entity
@@ -54,7 +54,7 @@ class ShareController < ApplicationController
       end
     end
 
-    people.each do |person|
+    people_to_add.each do |person|
       unless other_user_people_original_ids.include? person.original_id
         duplicate_person = person.dup
         if person.image.url != "/assets/images/original/missing.png"
