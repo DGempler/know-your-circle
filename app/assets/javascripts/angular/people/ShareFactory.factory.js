@@ -36,8 +36,9 @@
       });
     };
 
-    shareFactory.shareGroups = function(payload) {
+    shareFactory.share = function(payload) {
       $http.post('/api/share', payload).then(function(user) {
+        // ADD SUCCESS RESPONSE
         console.log(user);
       }, function(error) {
         // ADD ERROR MODAL!
