@@ -26,7 +26,7 @@ class ShareController < ApplicationController
         end
       end
       if !have_people_to_add
-        render json: { error: "No people exist in chosen groups."}, status: :unprocessable_entity
+        render json: { error: "No people exist in chosen group(s)."}, status: :unprocessable_entity
         return
       end
     elsif share_params[:people_ids]
