@@ -1,0 +1,25 @@
+<div class="modal-header text-center">
+  <h3 class="modal-title">Share Selected People</h3>
+</div>
+
+<div class="modal-body">
+  <form class='extra-bottom-margins' ng-submit='modal.send()'>
+    <div class="form-group">
+      <label for="email">Email address</label>
+      <input ng-model="modal.email" type="email" class="form-control" id="email" autofocus required="required" >
+    </div>
+    <button type="submit" class="btn btn-primary btn-block">Send</button>
+  </form>
+  <div>
+    <h4 ng-show='modal.people.length > 0'>Selected People</h5>
+    <div class='extra-bottom-margins'>
+      <span class="label label-info" ng-repeat='person in modal.people'>
+        {{ person.first_name }} {{ person.middle_name }} {{ person.last_name }}
+      </span>
+    </div>
+  </div>
+</div>
+
+<div class="modal-footer">
+  <a class="btn btn-success" type="button" ng-click="modal.close()">Cancel</a>
+</div>
