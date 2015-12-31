@@ -204,13 +204,13 @@
     };
 
     vm.shareSelected = function() {
-      var selectedPeople = [];
+      var selectedPeopleIds = [];
       angular.forEach(vm.people, function(person) {
         if (person.selected) {
-          selectedPeople.push(person);
+          selectedPeopleIds.push(person.id);
         }
       });
-      ShareFactory.shareSelectedModalOpen(selectedPeople);
+      ShareFactory.shareSelectedModalOpen(selectedPeopleIds);
     };
 
     vm.shareGroups = function() {
