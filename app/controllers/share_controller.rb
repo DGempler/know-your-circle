@@ -46,13 +46,23 @@ class ShareController < ApplicationController
       return
     end
 
-    people.each do |person|
-      duplicate_person = person.dup
-      if person.image.url != "/assets/images/original/missing.png"
-        image = URI.parse(person.image.url)
-        duplicate_person.image = image
+    other_user_people_original_ids = []
+
+    if other_user_existed
+      other_user.people.each do |person|
+        other_user_people_original_ids << person.original_id
       end
-      other_user.people << duplicate_person
+    end
+
+    people.each do |person|
+      unless other_user_people_original_ids.include? person.original_id
+        duplicate_person = person.dup
+        if person.image.url != "/assets/images/original/missing.png"
+          image = URI.parse(person.image.url)
+          duplicate_person.image = image
+        end
+        other_user.people << duplicate_person
+      end
     end
 
     unless other_user_existed
