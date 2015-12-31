@@ -210,11 +210,21 @@
           selectedPeople.push(person);
         }
       });
-      ShareFactory.shareSelectedModalOpen(selectedPeople);
+      if (selectedPeople.length > 25) {
+        size = null;
+      } else {
+        size = 'sm';
+      }
+      ShareFactory.shareSelectedModalOpen(selectedPeople, size);
     };
 
     vm.shareGroups = function() {
-      ShareFactory.shareGroupsModalOpen(vm.groups);
+      if (vm.groups.length > 25) {
+        size = null;
+      } else {
+        size = 'sm';
+      }
+      ShareFactory.shareGroupsModalOpen(vm.groups, size);
     };
 
     getPeople();
