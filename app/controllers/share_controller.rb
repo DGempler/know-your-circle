@@ -5,6 +5,9 @@ class ShareController < ApplicationController
     if (share_params[:email] =~ /\A([^@\s]+)@((?:[-a-z0-9]+\.)+[a-z]{2,})\Z/).nil?
       render json: { error: "Invalid Email."}, status: :unprocessable_entity
       return
+    elsif (share_params[:email].try :downcase) == current_user.email
+      render json: { error: "You are not allowed to share people with yourself."}, status: :unprocessable_entity
+      return
     end
 
     other_user = User.where(email: (share_params[:email].try :downcase))
