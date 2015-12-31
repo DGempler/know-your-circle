@@ -2,9 +2,9 @@
   angular.module('knowYourCircle.people')
     .factory('ShareFactory', ShareFactory);
 
-  ShareFactory.$inject = ['$uibModal', '$http'];
+  ShareFactory.$inject = ['$uibModal', '$http', '$q'];
 
-  function ShareFactory($uibModal, $http) {
+  function ShareFactory($uibModal, $http, $q) {
     var shareFactory = {};
 
     shareFactory.shareSelectedModalOpen = function(people, size) {
@@ -44,13 +44,15 @@
     };
 
     shareFactory.share = function(payload) {
+      var deferred = $q.defer();
       $http.post('/api/share', payload).then(function(user) {
-        // ADD SUCCESS RESPONSE
         console.log(user);
+        deferred.resolve(user);
       }, function(error) {
-        // ADD ERROR MODAL!
         console.log(error);
+        deffered.resolve(error);
       });
+      return deferred.promise;
     };
 
     return shareFactory;
