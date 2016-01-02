@@ -7,7 +7,7 @@
     function configuration($authProvider) {
       $authProvider.configure({
         apiUrl: '/api',
-        confirmationSuccessUrl: '/#/profile/edit?first=true'
+        confirmationSuccessUrl: window.location.protocol + "//" + window.location.hostname + (window.location.port ? ':' + window.location.port : '') + '/#/profile/edit/true'
       });
     }
 
