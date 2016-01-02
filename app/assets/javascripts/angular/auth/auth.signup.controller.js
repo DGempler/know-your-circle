@@ -18,7 +18,7 @@
           AuthFactory.signUp(vm.user, $uibModalInstance)
             .then(function(email) {
               if (vm.alreadyHasEmail) {
-                window.location.href = '/#/profile/edit?first=true';
+                window.location.href = '/#/profile/edit/true';
               } else {
                 AuthFactory.messageModalOpen(null, email);
               }
