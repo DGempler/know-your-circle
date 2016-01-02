@@ -68,7 +68,7 @@
           }]
         }
       })
-      .when('/profile/edit', {
+      .when('/profile/edit/:first', {
         templateUrl: 'partials/users/edit.profile.html',
         controller: 'editProfileController as profile',
         resolve: {
