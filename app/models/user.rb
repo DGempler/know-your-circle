@@ -10,7 +10,7 @@ class User < ActiveRecord::Base
           :confirmable, :omniauthable
   include DeviseTokenAuth::Concerns::User
 
-  validates_presence_of :email
+  validates_presence_of :email, :first_name, :last_name
   validates_uniqueness_of :email
 
   # This method associates the attribute ":image_url" with a file attachment
