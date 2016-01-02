@@ -4,7 +4,7 @@
 
     signupController.$inject = ['$uibModalInstance', 'email', 'AuthFactory'];
 
-    function signupController($uibModalInstance, email ,AuthFactory) {
+    function signupController($uibModalInstance, email, AuthFactory) {
       var vm = this;
       vm.user = {};
 
@@ -16,6 +16,13 @@
       vm.signUp = function(isValid) {
         if (isValid) {
           AuthFactory.signUp(vm.user, $uibModalInstance)
+            .then(function(email) {
+              if (vm.alreadyHasEmail) {
+                window.location.href = '/#/profile/edit?first=true';
+              } else {
+                AuthFactory.messageModalOpen(null, email);
+              }
+            })
             .catch(function(failure) {
               vm.failureToggle = !vm.failureToggle;
               if (failure.data.errors) {

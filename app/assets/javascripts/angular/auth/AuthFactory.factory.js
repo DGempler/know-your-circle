@@ -65,7 +65,7 @@
         $auth.submitRegistration(user)
           .then(function(resp) {
             modal.close();
-            factory.messageModalOpen(null, resp.data.data.email);
+            deferred.resolve(resp.data.data.email);
           })
           .catch(function(error) {
             deferred.reject(error);
