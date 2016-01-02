@@ -18,7 +18,7 @@
       if (!vm.user.image_updated_at) {
 
       }
-      if ($routeParams.first) {
+      if ($routeParams.first === "true") {
         var name = vm.user.first_name + " " + vm.user.last_name;
         UserFactory.welcomeModalOpen(name);
       }
