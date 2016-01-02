@@ -1,4 +1,4 @@
-angular.module('knowYourCircle')
+/*angular.module('knowYourCircle')
   .run(run);
 
   run.$inject = ['$rootScope', 'AuthFactory', 'UserFactory'];
@@ -13,4 +13,4 @@ angular.module('knowYourCircle')
       var message = "There was an error. Please try again.";
       AuthFactory.messageModalOpen(message);
     });
-  }
+  }*/

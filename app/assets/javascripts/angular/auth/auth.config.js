@@ -7,7 +7,7 @@
     function configuration($authProvider) {
       $authProvider.configure({
         apiUrl: '/api',
-        confirmationSuccessUrl: '/#/profile/edit'
+        confirmationSuccessUrl: '/#/profile/edit?first=true'
       });
     }
 
