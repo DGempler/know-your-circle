@@ -13,7 +13,7 @@
       DemoFactory.getGuestUserPeople()
         .then(function(people) {
           vm.people.people = people;
-          vm.stillWaitingForDB = false;
+          getDemoGroups();
         })
         .catch(function(people) {
           var message = 'An error occured while loading your people. Please refresh the page to try again.';
@@ -41,6 +41,17 @@
           var message = 'An error occured while loading your groups. Please refresh the page to try again.';
           AuthFactory.messageModalOpen(message);
         });
+    }
+
+    function getDemoGroups() {
+      vm.groups = [
+        {name: "Dead"},
+        {name: "Alive"},
+        {name: "Democratic"},
+        {name: "Republican"},
+        {name: "Other Party"}
+      ];
+      vm.stillWaitingForDB = false;
     }
 
     vm.open = function() {

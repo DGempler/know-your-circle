@@ -63,11 +63,11 @@
       vm.choosingPeople = false;
     };
 
-    vm.selectGroup = function(id) {
-      if (vm.selected[id]) {
-        delete vm.selected[id];
+    vm.selectGroup = function(name) {
+      if (vm.selected[name]) {
+        delete vm.selected[name];
       } else {
-        vm.selected[id] = true;
+        vm.selected[name] = true;
       }
     };
 
@@ -80,7 +80,7 @@
       } else {
         people.forEach(function(person) {
           person.groups.forEach(function(group) {
-            if ((selected.indexOf(group.id.toString()) !== -1) && vm.people.indexOf(person) === -1) {
+            if ((selected.indexOf(group.name) !== -1) && vm.people.indexOf(person) === -1) {
               vm.people.push(person);
             }
           });
