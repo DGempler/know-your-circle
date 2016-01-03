@@ -73,7 +73,6 @@
 
     vm.playByGroups = function() {
       var selected = Object.keys(vm.selected);
-      console.log(selected);
       vm.people = [];
       if (selected.length === 0) {
         vm.choosingPeople = false;
@@ -81,9 +80,7 @@
       } else {
         people.forEach(function(person) {
           person.groups.forEach(function(group) {
-            console.log(group);
             if ((selected.indexOf(group.id.toString()) !== -1) && vm.people.indexOf(person) === -1) {
-              console.log(person);
               vm.people.push(person);
             }
           });
