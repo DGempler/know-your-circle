@@ -13,6 +13,7 @@
       DemoFactory.getGuestUserPeople()
         .then(function(people) {
           vm.people.people = people;
+          vm.stillWaitingForDB = false;
         })
         .catch(function(people) {
           var message = 'An error occured while loading your people. Please refresh the page to try again.';
@@ -43,7 +44,6 @@
     }
 
     vm.open = function() {
-
       var modalInstance = $uibModal.open({
         animation: true,
         templateUrl: 'partials/games/_flashcard_modal.html',
