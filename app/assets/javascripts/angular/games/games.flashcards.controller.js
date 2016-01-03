@@ -2,10 +2,19 @@
   angular.module('knowYourCircle.games')
     .controller('gamesFlashcardsController', gamesFlashcardsController);
 
-  gamesFlashcardsController.$inject = ['$uibModalInstance', 'people'];
+  gamesFlashcardsController.$inject = ['$uibModalInstance', 'people', 'groups'];
 
-  function gamesFlashcardsController($uibModalInstance, people) {
+  function gamesFlashcardsController($uibModalInstance, people, groups) {
     var vm = this;
+    vm.selected = {};
+
+    if (!groups || groups.length === 0) {
+      vm.choosingPeople = false;
+    } else {
+      vm.choosingPeople = true;
+      vm.groups = groups;
+    }
+
     vm.person = {};
     vm.person.guessPerson = {};
     vm.game = {};
@@ -45,6 +54,21 @@
       vm.game.hintCount = 0;
     }
 
+    vm.playAllPeople = function() {
+      vm.choosingPeople = false;
+    };
+
+    vm.selectGroup = function(id) {
+      if (vm.selected[id]) {
+        delete vm.selected[id];
+      } else {
+        vm.selected[id] = true;
+      }
+    };
+
+    vm.playByGroups = function() {
+      vm.choosingPeople = false;
+    };
 
     vm.submitPerson = function() {
       var scoredThisRound = 0;

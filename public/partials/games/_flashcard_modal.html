@@ -4,18 +4,22 @@
 </div>
 
 <div ng-show='game.choosingPeople' class="modal-body">
-  <div class='row'>
-    <a class="btn btn-success" type="button" ng-click="game.playAllPeople()">Play All People</a>
+  <div class='row text-center'>
+    <a class="btn btn-success btn-lg" type="button" ng-click="game.playAllPeople()">Play All People</a>
+  </div>
+  <br />
   <div class="row">
-    <h4 class='text-center'>Play By Groups</h4>
+    <h4 class='text-center'>Or Play By Groups</h4>
     <p class='text-center'>Select Groups:</p>
     <div class='extra-bottom-margins'>
       <span class="label" ng-repeat='group in game.groups' ng-class="{'label-info': !game.selected[group.id], 'label-success': game.selected[group.id]}">
         <a href='' ng-click='game.selectGroup(group.id)'>{{ group.name }}</a>
       </span>
     </div>
-  </div>
-    <a class="btn btn-success text-center" type="button" ng-click="game.playByGroups()">Play Selected Groups</a>
+    <br />
+    <div class='text-center'>
+      <a class="btn btn-success btn-lg" type="button" ng-click="game.playByGroups()">Play Selected Groups</a>
+    </div>
   </div>
 </div>
 
@@ -103,6 +107,8 @@
       </form>
     </div>
   </div>
+</div>
+<div ng-show='game.choosingPeople' class="modal-footer">
 </div>
 <div ng-hide='game.choosingPeople' class="modal-footer">
   <div class='row'>
