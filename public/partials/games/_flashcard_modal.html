@@ -1,12 +1,31 @@
 <div class="modal-header text-center">
-  <h3 class="modal-title">Who is this?</h3>
+  <h3 ng-hide='game.choosingPeople' class="modal-title">Who is this?</h3>
+  <h3 ng-show='game.choosingPeople' class="modal-title">Choose People to Memorize</h3>
 </div>
-<div class="modal-body">
+
+<div ng-show='game.choosingPeople' class="modal-body">
+  <div class='row'>
+    <a class="btn btn-success" type="button" ng-click="game.playAllPeople()">Play All People</a>
+  <div class="row">
+    <h4 class='text-center'>Play By Groups</h4>
+    <p class='text-center'>Select Groups:</p>
+    <div class='extra-bottom-margins'>
+      <span class="label" ng-repeat='group in game.groups' ng-class="{'label-info': !game.selected[group.id], 'label-success': game.selected[group.id]}">
+        <a href='' ng-click='game.selectGroup(group.id)'>{{ group.name }}</a>
+      </span>
+    </div>
+  </div>
+    <a class="btn btn-success text-center" type="button" ng-click="game.playByGroups()">Play Selected Groups</a>
+  </div>
+</div>
+
+<div ng-hide='game.choosingPeople' class="modal-body">
   <div class='text-center' ng-hide='game.person.randomPerson'>
     <h4>Can't tell?</h4>
     <p>That's because you have no people!</p>
     <p>Click <a ng-click='game.quit()' href='#/people/new'>here</a> to add some!</p>
   </div>
+
   <div ng-show='game.person.randomPerson' class='row'>
     <img ng-src='{{ game.person.randomPerson.medium }}' class='center-block'/>
 
@@ -85,7 +104,7 @@
     </div>
   </div>
 </div>
-<div class="modal-footer">
+<div ng-hide='game.choosingPeople' class="modal-footer">
   <div class='row'>
     <div class='col-sm-8 text-center'>
       <div ng-show='game.person.randomPerson' class="well well-sm text-info">
