@@ -26,8 +26,9 @@
 <div ng-hide='game.choosingPeople' class="modal-body">
   <div class='text-center' ng-hide='game.person.randomPerson'>
     <h4>Can't tell?</h4>
-    <p>That's because you have no people!</p>
-    <p>Click <a ng-click='game.quit()' href='#/people/new'>here</a> to add some!</p>
+    <p>That's because you have no people {{ game.noPeopleInGroup }}!</p>
+    <p ng-show="game.noPeopleInGroup">Click <a ng-click='game.choosingPeople = true' href=''>here</a> to go back,</p>
+    <p>{{ game.clickOr }} <a ng-click='game.quit()' href='#/people/new'>here</a> to add some {{ game.addSomePeople }}!</p>
   </div>
 
   <div ng-show='game.person.randomPerson' class='row'>

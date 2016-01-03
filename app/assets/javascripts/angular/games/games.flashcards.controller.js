@@ -11,6 +11,7 @@
     vm.game = {};
     var otherHintsShown = [];
     var randomNumber;
+    vm.clickOr = "Click";
 
     if (!groups || groups.length === 0) {
       vm.choosingPeople = false;
@@ -58,6 +59,9 @@
     }
 
     vm.playAllPeople = function() {
+      vm.noPeopleInGroup = "";
+      vm.addSomePeople = "";
+      vm.clickOr = "Click";
       vm.people = people;
       setUpGame();
       vm.choosingPeople = false;
@@ -72,6 +76,9 @@
     };
 
     vm.playByGroups = function() {
+      vm.noPeopleInGroup = "";
+      vm.addSomePeople = "";
+      vm.clickOr = "Click";
       var selected = Object.keys(vm.selected);
       vm.people = [];
       if (selected.length === 0) {
@@ -86,6 +93,12 @@
           });
         });
         setUpGame();
+        if (vm.people.length === 0) {
+          vm.noPeopleInGroup = "in the selected groups";
+          vm.addSomePeople = "people";
+          vm.clickOr = "or";
+          vm.selected = {};
+        }
         vm.choosingPeople = false;
       }
     };
