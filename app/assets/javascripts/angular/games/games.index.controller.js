@@ -7,6 +7,7 @@
   function gamesIndexController($routeParams, $uibModal, PersonFactory, DemoFactory, AuthFactory, GroupFactory) {
     var vm = this;
     vm.people = {};
+    vm.stillWaitingForDB = true;
 
     if ($routeParams.demo === 'true') {
       DemoFactory.getGuestUserPeople()
@@ -33,6 +34,7 @@
       GroupFactory.getGroups()
         .then(function(groups) {
           vm.groups = groups;
+          vm.stillWaitingForDB = false;
         })
         .catch(function(error) {
           var message = 'An error occured while loading your groups. Please refresh the page to try again.';
@@ -40,15 +42,18 @@
         });
     }
 
-    vm.open = function () {
+    vm.open = function() {
 
       var modalInstance = $uibModal.open({
         animation: true,
         templateUrl: 'partials/games/_flashcard_modal.html',
         controller: 'gamesFlashcardsController as game',
         resolve: {
-          people: function () {
+          people: function() {
             return vm.people.people;
+          },
+          groups: function() {
+            return vm.groups;
           }
         }
       });
