@@ -8,16 +8,16 @@
     <a class="btn btn-success btn-lg" type="button" ng-click="game.playAllPeople()">Play All People</a>
   </div>
   <br />
-  <div class="row">
-    <h4 class='text-center'>Or Play By Groups</h4>
-    <p class='text-center'>Select Groups:</p>
+  <div class="row text-center">
+    <h4>Or Play By Groups</h4>
+    <p>Select Groups:</p>
     <div class='extra-bottom-margins'>
       <span class="label" ng-repeat='group in game.groups' ng-class="{'label-info': !game.selected[group.name], 'label-success': game.selected[group.name]}">
         <a href='' ng-click='game.selectGroup(group.name)'>{{ group.name }}</a>
       </span>
     </div>
     <br />
-    <div class='text-center'>
+    <div>
       <a class="btn btn-success btn-lg" type="button" ng-click="game.playByGroups()">Play Selected Groups</a>
     </div>
   </div>
