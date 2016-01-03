@@ -2,9 +2,9 @@
   angular.module('knowYourCircle.games')
     .controller('gamesIndexController', gamesIndexController);
 
-  gamesIndexController.$inject = ['$routeParams', '$uibModal', 'PersonFactory', 'DemoFactory', 'AuthFactory'];
+  gamesIndexController.$inject = ['$routeParams', '$uibModal', 'PersonFactory', 'DemoFactory', 'AuthFactory', 'GroupFactory'];
 
-  function gamesIndexController($routeParams, $uibModal, PersonFactory, DemoFactory, AuthFactory) {
+  function gamesIndexController($routeParams, $uibModal, PersonFactory, DemoFactory, AuthFactory, GroupFactory) {
     var vm = this;
     vm.people = {};
 
@@ -21,6 +21,7 @@
       PersonFactory.getPeople()
         .then(function(people) {
           vm.people.people = people;
+          getGroups();
         })
         .catch(function(people) {
           var message = 'An error occured while loading your people. Please refresh the page to try again.';
@@ -28,6 +29,16 @@
         });
     }
 
+    function getGroups() {
+      GroupFactory.getGroups()
+        .then(function(groups) {
+          vm.groups = groups;
+        })
+        .catch(function(error) {
+          var message = 'An error occured while loading your groups. Please refresh the page to try again.';
+          AuthFactory.messageModalOpen(message);
+        });
+    }
 
     vm.open = function () {
 
