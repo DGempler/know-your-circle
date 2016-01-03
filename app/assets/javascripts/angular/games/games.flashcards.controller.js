@@ -67,7 +67,21 @@
     };
 
     vm.playByGroups = function() {
-      vm.choosingPeople = false;
+      var selected = Object.keys(vm.selected);
+      vm.people = [];
+      if (selected.length === 0) {
+        vm.choosingPeople = false;
+        return;
+      } else {
+        people.forEach(function(person) {
+          person.groups.forEach(function(group) {
+            if ((selected.indexOf(group.id) !== -1) && vm.people.indexOf(person) === -1) {
+              vm.people.push(person);
+            }
+          });
+        });
+        vm.choosingPeople = false;
+      }
     };
 
     vm.submitPerson = function() {
