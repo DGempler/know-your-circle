@@ -7,6 +7,10 @@
   function gamesFlashcardsController($uibModalInstance, people, groups) {
     var vm = this;
     vm.selected = {};
+    vm.person = {};
+    vm.game = {};
+    var otherHintsShown = [];
+    var randomNumber;
 
     if (!groups || groups.length === 0) {
       vm.choosingPeople = false;
@@ -15,23 +19,22 @@
       vm.groups = groups;
     }
 
-    vm.person = {};
-    vm.person.guessPerson = {};
-    vm.game = {};
-    vm.game.roundScore = 5;
-    vm.game.totalScore = 0;
-    vm.game.totalPossibleScore = 0;
-    vm.game.scoreMessage = "Max Round Score:";
-    var otherHintsShown = [];
-    vm.game.hintCount = 0;
-    var randomNumber = Math.floor(Math.random() * people.length);
-    vm.person.randomPerson = people[randomNumber];
+    function setUpGame() {
+      vm.person.guessPerson = {};
+      vm.game.roundScore = 5;
+      vm.game.totalScore = 0;
+      vm.game.totalPossibleScore = 0;
+      vm.game.scoreMessage = "Max Round Score:";
+      vm.game.hintCount = 0;
+      randomNumber = Math.floor(Math.random() * vm.people.length);
+      vm.person.randomPerson = vm.people[randomNumber];
+    }
 
     function chooseNewRandomNumber() {
-      if (people.length === 1) {
+      if (vm.people.length === 1) {
         return randomNumber;
       } else {
-        var newRandomNumber = Math.floor(Math.random() * people.length);
+        var newRandomNumber = Math.floor(Math.random() * vm.people.length);
         if (newRandomNumber !== randomNumber) {
           randomNumber = newRandomNumber;
           return randomNumber;
@@ -48,13 +51,15 @@
       vm.person.lastNameRight = false;
       vm.person.result = false;
       vm.person.guessPerson = {};
-      vm.person.randomPerson = people[chooseNewRandomNumber()];
+      vm.person.randomPerson = vm.people[chooseNewRandomNumber()];
       vm.game.scoreMessage = "Max Round Score:";
       vm.game.roundScore = 5;
       vm.game.hintCount = 0;
     }
 
     vm.playAllPeople = function() {
+      vm.people = people;
+      setUpGame();
       vm.choosingPeople = false;
     };
 
@@ -80,6 +85,7 @@
             }
           });
         });
+        setUpGame();
         vm.choosingPeople = false;
       }
     };
