@@ -41,6 +41,7 @@
           vm.noneSelected = false;
         }
 
+        vm.busy = true;
         var payload = {};
         payload.email = vm.email;
         payload.group_ids = selected;
@@ -59,6 +60,9 @@
               message = 'There was an error while sharing the people in your selected groups. Please try again.';
             }
             AuthFactory.messageModalOpen(message);
+          })
+          .finally(function() {
+            vm.busy = false;
           });
       };
 
