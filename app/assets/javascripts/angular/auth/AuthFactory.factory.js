@@ -59,11 +59,10 @@
         }, 500);
       };
 
-      factory.signUp = function(user, modal) {
+      factory.signUp = function(user) {
         var deferred = $q.defer();
         $auth.submitRegistration(user)
           .then(function(resp) {
-            modal.close();
             deferred.resolve(resp.data.data.email);
           })
           .catch(function(error) {

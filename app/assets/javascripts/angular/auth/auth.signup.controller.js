@@ -15,8 +15,10 @@
 
       vm.signUp = function(isValid) {
         if (isValid) {
-          AuthFactory.signUp(vm.user, $uibModalInstance)
+          vm.busy = true;
+          AuthFactory.signUp(vm.user)
             .then(function(email) {
+              $uibModalInstance.close();
               if (vm.alreadyHasEmail) {
                 window.location.href = '/#/profile/edit/true';
               } else {
@@ -32,6 +34,9 @@
                 vm.error = "An error occured";
                 vm.refresh = true;
               }
+            })
+            .finally(function() {
+              vm.busy = false;
             });
         }
       };

@@ -1,3 +1,5 @@
+<div ng-show='auth.busy' ng-class="{ 'hideSpinner' : !auth.busy }" id='spinner'></div>
+
 <div ng-show='auth.error' class="alert text-center" ng-class="{'alert-danger': !auth.failureToggle , 'alert-warning': auth.failureToggle }">
   <h4>{{ auth.error }}.</h4>
   <p>Please <span ng-show='auth.refresh'>refresh the page and </span>try again</p>
