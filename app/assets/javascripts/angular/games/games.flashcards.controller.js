@@ -9,7 +9,7 @@
     vm.selected = {};
     vm.person = {};
     vm.game = {};
-    vm.gamePeople = [];
+    gamePeople = [];
     var otherHintsShown = [];
     var randomNumber;
     vm.clickOr = "Click";
@@ -29,19 +29,19 @@
       vm.game.scoreMessage = "Max Round Score:";
       vm.game.hintCount = 0;
       setUpGamePeople();
-      randomNumber = Math.floor(Math.random() * vm.gamePeople.length);
-      vm.person.randomPerson = vm.gamePeople[randomNumber];
-      vm.gamePeople.splice(randomNumber, 1);
+      randomNumber = Math.floor(Math.random() * gamePeople.length);
+      vm.person.randomPerson = gamePeople[randomNumber];
+      gamePeople.splice(randomNumber, 1);
     }
 
     function setUpGamePeople() {
-      vm.people.forEach(function(person) {
-        vm.gamePeople.push(person);
+      selectedPeople.forEach(function(person) {
+        gamePeople.push(person);
       });
     }
 
     function chooseNewRandomNumber() {
-      var newRandomNumber = Math.floor(Math.random() * vm.gamePeople.length);
+      var newRandomNumber = Math.floor(Math.random() * gamePeople.length);
       randomNumber = newRandomNumber;
       return randomNumber;
     }
@@ -53,11 +53,11 @@
       vm.person.lastNameRight = false;
       vm.person.result = false;
       vm.person.guessPerson = {};
-      if (vm.gamePeople.length === 0) {
+      if (gamePeople.length === 0) {
         setUpGamePeople();
       }
-      vm.person.randomPerson = vm.gamePeople[chooseNewRandomNumber()];
-      vm.gamePeople.splice(randomNumber, 1);
+      vm.person.randomPerson = gamePeople[chooseNewRandomNumber()];
+      gamePeople.splice(randomNumber, 1);
       vm.game.scoreMessage = "Max Round Score:";
       vm.game.roundScore = 5;
       vm.game.hintCount = 0;
@@ -67,7 +67,7 @@
       vm.noPeopleInGroup = "";
       vm.addSomePeople = "";
       vm.clickOr = "Click";
-      vm.people = people;
+      selectedPeople = people;
       setUpGame();
       vm.choosingPeople = false;
     };
@@ -85,20 +85,20 @@
       vm.addSomePeople = "";
       vm.clickOr = "Click";
       var selected = Object.keys(vm.selected);
-      vm.people = [];
+      selectedPeople = [];
       if (selected.length === 0) {
         vm.choosingPeople = false;
         return;
       } else {
         people.forEach(function(person) {
           person.groups.forEach(function(group) {
-            if ((selected.indexOf(group.name) !== -1) && vm.people.indexOf(person) === -1) {
-              vm.people.push(person);
+            if ((selected.indexOf(group.name) !== -1) && selectedPeople.indexOf(person) === -1) {
+              selectedPeople.push(person);
             }
           });
         });
         setUpGame();
-        if (vm.people.length === 0) {
+        if (selectedPeople.length === 0) {
           vm.noPeopleInGroup = "in the selected groups";
           vm.addSomePeople = "people";
           vm.clickOr = "or";
