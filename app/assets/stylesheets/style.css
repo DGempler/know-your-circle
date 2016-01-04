@@ -53,3 +53,23 @@ span.glyphicon {
   width: 200px;
   height: 80px;
 }
+
+.person-grid {
+  height: 100px;
+  text-align: center;
+}
+
+.height-inherit {
+  height: inherit;
+}
+
+.person-image-helper {
+  display: inline-block;
+  height: 100%;
+  vertical-align: middle;
+}
+
+.person-image {
+  vertical-align: middle;
+  max-height: 100px;
+}

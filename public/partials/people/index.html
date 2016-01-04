@@ -66,19 +66,26 @@
 
 <div class='row'>
   <div class='col-sm-2' ng-repeat='person in people.people | showPerson | orderBy : people.sortPeopleBy '>
-      <div class='row'>
-        <div class='col-sm-12'>
-          <div class='row text-center'>
+      <div class='row person-grid'>
+        <div class='col-sm-12 height-inherit'>
+          <div class='row text-center height-inherit'>
             <div class='col-sm-2'>
               <input type="checkbox" ng-model='person.selected' ng-click='people.personSelected()' />
             </div>
             <div class='col-sm-9'>
-              <a ng-hide='people.demoMode' href='#/people/show/{{person.id}}'>
-                <img ng-src='{{person.thumb}}' class="img-responsive" alt="Responsive image"/>
-              </a>
-              <a ng-show='people.demoMode' href='#/people/demo/show/{{person.id}}'>
-                <img ng-src='{{person.thumb}}' class="img-responsive" alt="Responsive image"/>
-              </a>
+              <div ng-hide='people.demoMode'>
+                <a href='#/people/show/{{person.id}}'>
+                <div class='person-image-helper'>
+                </div>
+                <img ng-src='{{person.thumb}}' class="img-responsive person-image" alt="Responsive image"/>
+                </a>
+              </div>
+              <div ng-show='people.demoMode'>
+                <a href='#/people/demo/show/{{person.id}}'>
+                <div class='person-image-helper'></div>
+                <img ng-src='{{person.thumb}}' class="img-responsive person-image" alt="Responsive image"/>
+                </a>
+              </div>
             </div>
           </div>
         </div>
