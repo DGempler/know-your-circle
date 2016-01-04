@@ -62,3 +62,14 @@ span.glyphicon {
 .person-box img {
   vertical-align: middle;
 }
+
+.flashcard-box {
+  height: 250px;
+  line-height: 247px;
+
+}
+
+.flashcard-box img {
+  vertical-align: middle;
+  max-height: 250px;
+}
