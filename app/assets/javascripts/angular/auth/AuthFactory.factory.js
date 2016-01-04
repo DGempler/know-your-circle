@@ -124,22 +124,16 @@
       };
 
       factory.updateUser = function(user) {
+        var deferred = $q.defer();
         $auth.updateAccount(user)
           .then(function(res) {
             $rootScope.user = res.data.data;
-            $location.path('/profile');
+            deferred.resolve();
           })
           .catch(function(err) {
-            var message;
-            if (err.data.errors.full_messages) {
-              // err.data.errors.full_messages[0];
-              message = "Email address is already in use. Please try again.";
-            } else {
-              // err.statusText;
-              message = 'An error occured while trying update your information. Please try again.';
-            }
-            factory.messageModalOpen(message);
+            deferred.reject(err);
           });
+        return deferred.promise;
       };
 
       factory.updateUserWithImage = function(user) {
@@ -158,7 +152,7 @@
         }, function (err) {
           deferred.reject();
         });
-        return deferred.promise();
+        return deferred.promise;
       };
 
       factory.deleteUser = function() {
