@@ -94,13 +94,11 @@
         });
       };
 
-      factory.submitChangePassword = function(user, modal) {
+      factory.submitChangePassword = function(user) {
         var deferred = $q.defer();
         $auth.updatePassword(user)
           .then(function(res) {
-            modal.close();
-            var message = "Your password has been successfully updated.";
-            factory.messageModalOpen(message);
+            deferred.resolve();
           })
           .catch(function(err) {
             deferred.reject(err);
