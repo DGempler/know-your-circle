@@ -2,9 +2,9 @@
   angular.module('knowYourCircle.auth')
     .controller('loginController', loginController);
 
-    loginController.$inject = ['$uibModalInstance','AuthFactory'];
+    loginController.$inject = ['$uibModalInstance','AuthFactory', '$location'];
 
-    function loginController($uibModalInstance, AuthFactory) {
+    function loginController($uibModalInstance, AuthFactory, $location) {
       var vm = this;
       vm.user = {};
 
