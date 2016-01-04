@@ -161,16 +161,15 @@
       };
 
       factory.deleteUser = function() {
+        var deferred = $q.defer();
         $auth.destroyAccount()
         .then(function(res) {
-          $location.path('/');
-          var message = 'Your account has been successfully deleted.';
-          factory.messageModalOpen(message);
+          deferred.resolve();
         })
         .catch(function(err) {
-          var message = 'An error occured while trying to delete your account. Please try again.';
-          factory.messageModalOpen(message);
+          deferred.reject();
         });
+        return deferred.promise;
       };
 
       return factory;

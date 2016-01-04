@@ -2,9 +2,9 @@
   angular.module('knowYourCircle.users')
     .controller('profileController', profileController);
 
-  profileController.$inject = ['$rootScope', 'UserFactory', 'AuthFactory'];
+  profileController.$inject = ['$rootScope', 'UserFactory', 'AuthFactory', '$location'];
 
-function profileController($rootScope, UserFactory, AuthFactory) {
+function profileController($rootScope, UserFactory, AuthFactory, $location) {
     var vm = this;
     vm.user = {};
 
@@ -23,7 +23,20 @@ function profileController($rootScope, UserFactory, AuthFactory) {
       var message = "Are you sure you want to delete your account and your whole circle?";
       UserFactory.confirmMessageModalOpen(message)
         .then(function() {
-          AuthFactory.deleteUser();
+          vm.busy = true;
+          AuthFactory.deleteUser()
+            .then(function() {
+              $location.path('/');
+              var message = 'Your account has been successfully deleted.';
+              AuthFactory.messageModalOpen(message);
+            })
+            .catch(function() {
+              var message = 'An error occured while trying to delete your account. Please try again.';
+              AuthFactory.messageModalOpen(message);
+            })
+            .finally(function() {
+              vm.busy = false;
+            });
         });
     };
 
