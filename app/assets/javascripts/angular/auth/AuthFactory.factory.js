@@ -158,12 +158,12 @@
       factory.deleteUser = function() {
         var deferred = $q.defer();
         $auth.destroyAccount()
-        .then(function(res) {
-          deferred.resolve();
-        })
-        .catch(function(err) {
-          deferred.reject();
-        });
+          .then(function(res) {
+            deferred.resolve();
+          })
+          .catch(function(err) {
+            deferred.reject();
+          });
         return deferred.promise;
       };
 
