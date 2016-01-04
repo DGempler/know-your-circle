@@ -24,3 +24,7 @@
     -webkit-transform:rotate(360deg);
   }
 }
+
+.hideSpinner {
+  visibility: hidden;
+}
