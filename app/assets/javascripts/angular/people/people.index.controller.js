@@ -9,6 +9,7 @@
     vm.sortPeopleBy = "first_name";
 
     function getPeople() {
+      vm.busy = true;
       PersonFactory.getPeople().then(function(people) {
         vm.people = people;
         vm.people.forEach(function(person) {
@@ -17,8 +18,9 @@
         getGroups();
       })
       .catch(function(error) {
-          var message = 'An error occured while loading your people. Please refresh the page to try again.';
-          AuthFactory.messageModalOpen(message);
+        var message = 'An error occured while loading your people. Please refresh the page to try again.';
+        AuthFactory.messageModalOpen(message);
+        vm.busy = false;
       });
     }
 
@@ -30,6 +32,9 @@
         .catch(function(error) {
           var message = 'An error occured while loading your groups. Please refresh the page to try again.';
           AuthFactory.messageModalOpen(message);
+        })
+        .finally(function() {
+          vm.busy = false;
         });
     }
 
@@ -40,6 +45,7 @@
           promiseArray.push(PersonFactory.deletePerson(person.id));
         }
       });
+      vm.busy = true;
       $q.all(promiseArray)
         .then(function(people) {
           vm.someoneSelected = false;
@@ -48,6 +54,9 @@
         .catch(function(errors) {
           var message = 'An error occured while deleting your people. Please refresh the page and try again.';
           AuthFactory.messageModalOpen(message);
+        })
+        .finally(function() {
+          vm.busy = false;
         });
     }
 
@@ -150,6 +159,7 @@
         }
       });
       if (promiseArray.length > 0) {
+        vm.busy = true;
         $q.all(promiseArray)
           .then(function(people) {
             message = newGroup.name + " has been added to: ";
@@ -176,6 +186,9 @@
           .catch(function(error) {
             message = 'An error occured while applying your group. Please refresh the page and try again.';
             AuthFactory.messageModalOpen(message);
+          })
+          .finally(function() {
+            vm.busy = false;
           });
       } else {
         message = "This group already exists on selected person(s).";
