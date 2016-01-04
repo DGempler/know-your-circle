@@ -7,7 +7,7 @@
   function gamesIndexController($routeParams, $uibModal, PersonFactory, DemoFactory, AuthFactory, GroupFactory) {
     var vm = this;
     vm.people = {};
-    vm.stillWaitingForDB = true;
+    vm.busy = true;
 
     if ($routeParams.demo === 'true') {
       DemoFactory.getGuestUserPeople()
@@ -18,6 +18,7 @@
         .catch(function(people) {
           var message = 'An error occured while loading your people. Please refresh the page to try again.';
           AuthFactory.messageModalOpen(message);
+          vm.busy = false;
         });
     } else {
       PersonFactory.getPeople()
@@ -28,6 +29,7 @@
         .catch(function(people) {
           var message = 'An error occured while loading your people. Please refresh the page to try again.';
           AuthFactory.messageModalOpen(message);
+          vm.busy = false;
         });
     }
 
@@ -35,11 +37,14 @@
       GroupFactory.getGroups()
         .then(function(groups) {
           vm.groups = groups;
-          vm.stillWaitingForDB = false;
+          vm.busy = false;
         })
         .catch(function(error) {
           var message = 'An error occured while loading your groups. Please refresh the page to try again.';
           AuthFactory.messageModalOpen(message);
+        })
+        .finally(function() {
+          vm.busy = false;
         });
     }
 
@@ -51,7 +56,7 @@
         {name: "Republican"},
         {name: "Other Party"}
       ];
-      vm.stillWaitingForDB = false;
+      vm.busy = false;
     }
 
     vm.open = function() {
