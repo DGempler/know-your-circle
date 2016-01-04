@@ -34,6 +34,8 @@
         .catch(function(error) {
           var message = 'There was an error while loading your groups. Please refresh the page to try again.';
           AuthFactory.messageModalOpen(message);
+        })
+        .finally(function() {
         });
     }
 
@@ -96,10 +98,19 @@
 
     vm.submitPerson = function(isValid) {
       if (isValid) {
+        vm.busy = true;
         var cleanedPerson = {person: cleanPersonProps(vm.person)};
-        PersonFactory.createWithAttachment(cleanedPerson).then(function(data) {
-          $location.path('/people/show/' + data.id);
-        });
+        PersonFactory.createWithAttachment(cleanedPerson)
+          .then(function(data) {
+            $location.path('/people/show/' + data.id);
+          })
+          .catch(function(error) {
+            var message = 'There was an error while submitting your person. Please refresh the page to try again.';
+            AuthFactory.messageModalOpen(message);
+          })
+          .finally(function() {
+            vm.busy = false;
+          });
       }
     };
 
