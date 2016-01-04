@@ -24,6 +24,7 @@
           vm.emailsMatch = false;
         }
 
+        vm.busy = true;
         var payload = {};
         payload.people_ids = [];
         vm.people.forEach(function(person) {
@@ -46,6 +47,9 @@
               message = 'There was an error while sharing your people. Please try again.';
             }
             AuthFactory.messageModalOpen(message);
+          })
+          .finally(function() {
+            vm.busy = false;
           });
       };
 
