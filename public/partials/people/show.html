@@ -1,3 +1,5 @@
+<div ng-show='person.busy' ng-class="{ 'hideSpinner' : !person.busy }" id='spinner'></div>
+
 <div class="page-header">
   <h1 class='center-block'><center>{{ person.person.first_name }} {{ person.person.middle_name }} {{ person.person.last_name }}</center></h1>
 </div>
@@ -31,7 +33,7 @@
   <div class='col-sm-4 col-sm-offset-4'>
     <div class='text-center'>
       <a ng-class="{ 'disabled' : person.demoMode }" class="btn btn-info"  href='#/people/{{person.person.id}}/edit'>Edit Person</a>
-      <button ng-class="{ 'disabled' : person.demoMode }" class="btn btn-danger" ng-click='deletePerson()'>Delete Person</button>
+      <button ng-class="{ 'disabled' : person.demoMode }" class="btn btn-danger" ng-click='person.deletePerson()'>Delete Person</button>
     </div>
   </div>
 </div>
