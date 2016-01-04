@@ -24,7 +24,7 @@
         }, 500);
       };
 
-      factory.logIn = function(user, modal) {
+      factory.logIn = function(user) {
         var deferred = $q.defer();
         $auth.submitLogin(user)
           .then(function(resp) {

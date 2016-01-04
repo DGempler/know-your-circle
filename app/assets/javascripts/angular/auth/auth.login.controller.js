@@ -11,7 +11,7 @@
       vm.logIn = function(isValid) {
         if (isValid) {
           vm.busy = true;
-          AuthFactory.logIn(vm.user, $uibModalInstance)
+          AuthFactory.logIn(vm.user)
             .then(function() {
               $uibModalInstance.close();
               $location.path('/people/index');
