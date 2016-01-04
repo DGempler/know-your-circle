@@ -22,6 +22,7 @@
           }
         });
         if (!matchCheck) {
+          vm.busy = true;
           GroupFactory.submitNewGroup(vm.group.new)
             .then(function(data) {
               vm.group.groups.push(data);
@@ -36,6 +37,9 @@
               }
               AuthFactory.messageModalOpen(message);
               vm.group.new = "";
+            })
+            .finally(function() {
+              vm.busy = false;
             });
         } else {
           var message = 'This group already exists.';
@@ -71,6 +75,7 @@
       }
 
       vm.deleteGroups = function(id) {
+        vm.busy = true;
         var promiseArray = [];
         var stagedForDeletionArray = Object.keys(vm.stagedForDeletion);
         stagedForDeletionArray.forEach(function(id) {
@@ -84,6 +89,9 @@
         .catch(function(error) {
           var message = 'There was an error while deleting your groups. Please refresh the page to try again.';
           AuthFactory.messageModalOpen(message);
+        })
+        .finally(function() {
+          vm.busy = false;
         });
       };
 
@@ -105,6 +113,7 @@
             }
           });
           if (!matchCheck) {
+            vm.busy = true;
             GroupFactory.updateGroup(vm.group.edit.id, vm.group.editName)
               .then(function(updatedGroup) {
                 vm.group.edit = {};
@@ -124,6 +133,9 @@
                   message = 'There was an error while changing your group. Please refresh the page to try again.';
                 }
                 AuthFactory.messageModalOpen(message);
+              })
+              .finally(function() {
+                vm.busy = false;
               });
           } else {
             var message = 'This group already exists.';
