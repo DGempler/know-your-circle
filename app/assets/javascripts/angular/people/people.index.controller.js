@@ -39,13 +39,13 @@
     }
 
     function deleteSelected() {
+      vm.busy = true;
       var promiseArray = [];
       angular.forEach(vm.people, function(person) {
         if (person.selected) {
           promiseArray.push(PersonFactory.deletePerson(person.id));
         }
       });
-      vm.busy = true;
       $q.all(promiseArray)
         .then(function(people) {
           vm.someoneSelected = false;
