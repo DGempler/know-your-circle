@@ -143,6 +143,7 @@
       };
 
       factory.updateUserWithImage = function(user) {
+        var deferred = $q.defer();
         Upload.upload({
           url: 'api/auth',
           method: 'PUT',
@@ -153,11 +154,11 @@
         })
         .then(function (resp) {
           $rootScope.user = resp.data.data;
-          $location.path('/profile');
+          deferred.resolve();
         }, function (err) {
-          var message = 'An error occured while trying to update your information. Please try again.';
-          factory.messageModalOpen(message);
+          deferred.reject();
         });
+        return deferred.promise();
       };
 
       factory.deleteUser = function() {

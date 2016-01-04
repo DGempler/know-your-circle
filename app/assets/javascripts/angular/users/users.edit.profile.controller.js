@@ -36,9 +36,20 @@
 
     vm.submitUpdateUserAccount = function(isValid) {
       if (isValid) {
+        vm.busy = true;
         if (vm.user.image) {
           var submitUser = removeNullValues();
-          AuthFactory.updateUserWithImage(submitUser);
+          AuthFactory.updateUserWithImage(submitUser)
+            .then(function() {
+              $location.path('/profile');
+            })
+            .catch(function() {
+              var message = 'An error occured while trying to update your information. Please try again.';
+              AuthFactory.messageModalOpen(message);
+            })
+            .finally(function() {
+              vm.busy = false;
+            };
         } else {
           if (vm.user.deleteImage) {
             vm.user.image= null;
