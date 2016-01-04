@@ -9,6 +9,7 @@
     vm.selected = {};
     vm.person = {};
     vm.game = {};
+    vm.gamePeople = [];
     var otherHintsShown = [];
     var randomNumber;
     vm.clickOr = "Click";
@@ -27,22 +28,22 @@
       vm.game.totalPossibleScore = 0;
       vm.game.scoreMessage = "Max Round Score:";
       vm.game.hintCount = 0;
-      randomNumber = Math.floor(Math.random() * vm.people.length);
-      vm.person.randomPerson = vm.people[randomNumber];
+      setUpGamePeople();
+      randomNumber = Math.floor(Math.random() * vm.gamePeople.length);
+      vm.person.randomPerson = vm.gamePeople[randomNumber];
+      vm.gamePeople.splice(randomNumber, 1);
+    }
+
+    function setUpGamePeople() {
+      vm.people.forEach(function(person) {
+        vm.gamePeople.push(person);
+      });
     }
 
     function chooseNewRandomNumber() {
-      if (vm.people.length === 1) {
-        return randomNumber;
-      } else {
-        var newRandomNumber = Math.floor(Math.random() * vm.people.length);
-        if (newRandomNumber !== randomNumber) {
-          randomNumber = newRandomNumber;
-          return randomNumber;
-        } else {
-          return chooseNewRandomNumber();
-        }
-      }
+      var newRandomNumber = Math.floor(Math.random() * vm.gamePeople.length);
+      randomNumber = newRandomNumber;
+      return randomNumber;
     }
 
     function next() {
@@ -52,7 +53,11 @@
       vm.person.lastNameRight = false;
       vm.person.result = false;
       vm.person.guessPerson = {};
-      vm.person.randomPerson = vm.people[chooseNewRandomNumber()];
+      if (vm.gamePeople.length === 0) {
+        setUpGamePeople();
+      }
+      vm.person.randomPerson = vm.gamePeople[chooseNewRandomNumber()];
+      vm.gamePeople.splice(randomNumber, 1);
       vm.game.scoreMessage = "Max Round Score:";
       vm.game.roundScore = 5;
       vm.game.hintCount = 0;
