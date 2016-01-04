@@ -20,7 +20,6 @@
     }
 
     function getGroups() {
-      vm.busy = true;
       GroupFactory.getGroups()
         .then(function(groups) {
           originalGroups = groups;
@@ -34,9 +33,6 @@
           var message = 'An error occured while loading your groups. Please refresh the page to try again.';
           AuthFactory.messageModalOpen(message);
         })
-        .finally(function() {
-          vm.busy = false;
-        });
     }
 
     vm.createGroup = function() {
