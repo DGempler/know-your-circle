@@ -10,10 +10,18 @@
 
       vm.logIn = function(isValid) {
         if (isValid) {
+          vm.busy = true;
           AuthFactory.logIn(vm.user, $uibModalInstance)
+            .then(function() {
+              $uibModalInstance.close();
+              $location.path('/people/index');
+            })
             .catch(function(failure) {
               vm.failureToggle = !vm.failureToggle;
               vm.error = failure.errors[0];
+            })
+            .finally(function() {
+              vm.busy = false;
             });
         }
       };

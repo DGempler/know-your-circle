@@ -28,8 +28,7 @@
         var deferred = $q.defer();
         $auth.submitLogin(user)
           .then(function(resp) {
-            modal.close();
-            $location.path('/people/index');
+            deferred.resolve();
           })
           .catch(function(error) {
             deferred.reject(error);
