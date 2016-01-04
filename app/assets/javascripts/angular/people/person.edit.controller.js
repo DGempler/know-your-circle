@@ -20,6 +20,7 @@
     }
 
     function getGroups() {
+      vm.busy = true;
       GroupFactory.getGroups()
         .then(function(groups) {
           originalGroups = groups;
@@ -32,6 +33,9 @@
         .catch(function(error) {
           var message = 'An error occured while loading your groups. Please refresh the page to try again.';
           AuthFactory.messageModalOpen(message);
+        })
+        .finally(function() {
+          vm.busy = false;
         });
     }
 
@@ -95,6 +99,7 @@
 
     vm.submitPerson = function(isValid) {
       if (isValid) {
+        vm.busy = true;
         var cleanedPerson;
         if (vm.person.image) {
           cleanedPerson = {person: cleanPersonProps(vm.person)};
@@ -105,6 +110,9 @@
             .catch(function(err) {
               var message = 'An error occured while updating your person. Please refresh the page and try again.';
               AuthFactory.messageModalOpen(message);
+            })
+            .finally(function() {
+              vm.busy = false;
             });
         } else {
           if (vm.person.deleteImage) {
@@ -118,6 +126,9 @@
             .catch(function(error) {
               var message = 'An error occured while updating your person. Please refresh the page and try again.';
               AuthFactory.messageModalOpen(message);
+            })
+            .finally(function() {
+              vm.busy = false;
             });
         }
       }
