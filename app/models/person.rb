@@ -12,12 +12,12 @@ class Person < ActiveRecord::Base
     medium: '300x300>'
   },
   default_url: "/assets/images/:style/missing.png",
-  only_process: lambda { |a| a.instance.save_images_in_background ? [:original] : [:thumb, :medium] }
+  only_process: lambda { |a| a.instance.save_images_in_background ? [:original] : [:medium] }
 
   # Validate the attached image is image/jpg, image/png, etc
   validates_attachment_content_type :image, :content_type => /\Aimage\/.*\Z/
 
-  process_in_background :image, only_process: lambda { |a| a.instance.save_images_in_background ? [:thumb, :medium] : [] }
+  process_in_background :image, only_process: lambda { |a| a.instance.save_images_in_background ? [:thumb, :medium] : [:thumb] }
 
   after_create :assign_original_id
 
