@@ -75,14 +75,14 @@ class ShareController < ApplicationController
 
     unless other_user_existed
       if other_user.save!(validate: false)
-        ShareMailer.new_user(current_user, other_user).deliver_now
+        ShareMailer.new_user(current_user, other_user).deliver_later
         render json: { success: true } , status: :created
       else
         render json: other_user.errors, status: :unprocessable_entity
       end
     else
       if other_user.save
-        ShareMailer.existing_user(current_user, other_user).deliver_now
+        ShareMailer.existing_user(current_user, other_user).deliver_later
         render json: { success: true }, status: :ok
       else
         render json: other_user.errors, status: :unprocessable_entity
