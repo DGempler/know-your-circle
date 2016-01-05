@@ -2,7 +2,7 @@ class PresidentsWorker
   include Sidekiq::Worker
   sidekiq_options retry: false
 
-  def perform(president_array, index, groups)
+  def perform(president_array, groups)
     president = Hash.new
     image = ""
     party = president_array[2]
@@ -29,7 +29,7 @@ class PresidentsWorker
       image = wiki_response_pages[page_id]['thumbnail']['source']
     end
 
-    order = index + 1
+    order = president_array[3] + 1
 
     if order == 1 || order == 21 || order == 31 || order == 41
       number_suffix = "st"
