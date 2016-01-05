@@ -32,7 +32,7 @@
         .catch(function(error) {
           var message = 'An error occured while loading your groups. Please refresh the page to try again.';
           AuthFactory.messageModalOpen(message);
-        })
+        });
     }
 
     vm.createGroup = function() {
@@ -69,8 +69,8 @@
     // prevent "null" from being sent as a value to server if form field is left blank
     function removeNullValues(submittedPerson, newPerson) {
       for (var key in submittedPerson) {
-        // if original person had value, and submitted person doesn't OR sumbitted person now has a value
-        if ((originalPerson[key] && !submittedPerson[key]) || submittedPerson[key] || key === 'image') {
+        // if original person had value OR sumbitted person now has a value
+        if (originalPerson[key] || submittedPerson[key]) {
           newPerson[key] = submittedPerson[key];
         }
       }
@@ -96,9 +96,8 @@
     vm.submitPerson = function(isValid) {
       if (isValid) {
         vm.busy = true;
-        var cleanedPerson;
+        var cleanedPerson = {person: cleanPersonProps(vm.person)};
         if (vm.person.image) {
-          cleanedPerson = {person: cleanPersonProps(vm.person)};
           PersonFactory.updateWithAttachment(cleanedPerson)
             .then(function(data) {
               $location.path('/people/show/' + data.id);
@@ -111,9 +110,6 @@
               vm.busy = false;
             });
         } else {
-          if (vm.person.deleteImage) {
-            vm.person.image = null;
-          }
           cleanedPerson = {person: cleanPersonProps(vm.person)};
           PersonFactory.updateWithoutAttachment(cleanedPerson)
             .then(function(data) {
