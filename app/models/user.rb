@@ -3,7 +3,7 @@ class User < ActiveRecord::Base
   has_many :groups, dependent: :destroy
 
   # Include default devise modules.
-  devise :database_authenticatable, :registerable,
+  devise :database_authenticatable, :async, :registerable,
           :recoverable, :rememberable, :trackable, :validatable,
           :confirmable, :omniauthable
   include DeviseTokenAuth::Concerns::User
