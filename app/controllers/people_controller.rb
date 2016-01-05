@@ -17,7 +17,9 @@ class PeopleController < ApplicationController
   end
 
   def create
-    @person = current_user.people.new person_params
+    updated_person_params = person_params
+    updated_person_params[:save_images_in_background] = false
+    @person = current_user.people.new updated_person_params
     if @person.save
       render json: @person, status: :created
     else
