@@ -1,6 +1,4 @@
 class GuestUserPerson < ActiveRecord::Base
-  has_many :ownerships, dependent: :destroy
-  has_many :users, through: :ownerships
   has_many :memberships, dependent: :destroy
   has_many :groups, through: :memberships
 
