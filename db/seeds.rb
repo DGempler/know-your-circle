@@ -7,15 +7,15 @@
 #   Mayor.create(name: 'Emanuel', city: cities.first)
 
 Person.create([
-{first_name: "Austen", last_name: "Rawle"},
-{first_name: "Breanna", last_name: "Gaudioso"},
-{first_name: "Chris", last_name: "Hansen"},
-{first_name: "Clayton", last_name: "Perszyk"},
-{first_name: "Dmitry", last_name: "Gempler"},
-{first_name: "Donald", last_name: "Brunais"},
-{first_name: "Kate", last_name: "Stearns"},
-{first_name: "Lionel", last_name: "Lints"},
-{first_name: "Mary", last_name: "Mott"},
-{first_name: "Rachel", last_name: "Rouston"},
-{first_name: "Teagan", last_name: "Wrest"}
+{first_name: "Austen", last_name: "Rawle", user_id: 13},
+{first_name: "Breanna", last_name: "Gaudioso", user_id: 13},
+{first_name: "Chris", last_name: "Hansen", user_id: 13},
+{first_name: "Clayton", last_name: "Perszyk", user_id: 13},
+{first_name: "Dmitry", last_name: "Gempler", user_id: 13},
+{first_name: "Donald", last_name: "Brunais", user_id: 13},
+{first_name: "Kate", last_name: "Stearns", user_id: 13},
+{first_name: "Lionel", last_name: "Lints", user_id: 13},
+{first_name: "Mary", last_name: "Mott", user_id: 13},
+{first_name: "Rachel", last_name: "Rouston", user_id: 13},
+{first_name: "Teagan", last_name: "Wrest", user_id: 13}
 ])
