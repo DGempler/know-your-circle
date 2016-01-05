@@ -79,26 +79,21 @@
       vm.clickOr = "Click";
       var selected = Object.keys(vm.selected);
       selectedPeople = [];
-      if (selected.length === 0) {
-        vm.choosingPeople = false;
-        return;
-      } else {
-        people.forEach(function(person) {
-          person.groups.forEach(function(group) {
-            if ((selected.indexOf(group.name) !== -1) && selectedPeople.indexOf(person) === -1) {
-              selectedPeople.push(person);
-            }
-          });
+      people.forEach(function(person) {
+        person.groups.forEach(function(group) {
+          if ((selected.indexOf(group.name) !== -1) && selectedPeople.indexOf(person) === -1) {
+            selectedPeople.push(person);
+          }
         });
-        setUpGame();
-        if (selectedPeople.length === 0) {
-          vm.noPeopleInGroup = "in the selected groups";
-          vm.addSomePeople = "people";
-          vm.clickOr = "or";
-          vm.selected = {};
-        }
-        vm.choosingPeople = false;
+      });
+      setUpGame();
+      if (selectedPeople.length === 0) {
+        vm.noPeopleInGroup = "in the selected groups";
+        vm.addSomePeople = "people";
+        vm.clickOr = "or";
+        vm.selected = {};
       }
+      vm.choosingPeople = false;
     };
 
     vm.submitPerson = function() {
