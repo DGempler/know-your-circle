@@ -7,7 +7,6 @@ class Person < ActiveRecord::Base
 
   # This method associates the attribute ":image_url" with a file attachment
   has_attached_file :image, styles: {
-    original: '300x300>',
     thumb: '100x100>',
     medium: '300x300>'
   },
