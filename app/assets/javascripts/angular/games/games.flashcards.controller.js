@@ -14,13 +14,6 @@
     var randomNumber;
     vm.clickOr = "Click";
 
-    if (!groups || groups.length === 0) {
-      vm.choosingPeople = false;
-    } else {
-      vm.choosingPeople = true;
-      vm.groups = groups;
-    }
-
     function setUpGame() {
       vm.person.guessPerson = {};
       vm.game.roundScore = 5;
@@ -239,5 +232,13 @@
       vm.game.totalPossibleScore = 0;
       vm.game.scorePercentage = vm.game.totalScore / vm.game.totalPossibleScore;
     };
+
+    if (!groups || groups.length === 0) {
+      vm.choosingPeople = false;
+      vm.playAllPeople();
+    } else {
+      vm.choosingPeople = true;
+      vm.groups = groups;
+    }
   }
 })();
