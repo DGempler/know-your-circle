@@ -47,6 +47,9 @@ gem 'omniauth'
 # typheous for external http requests
 gem "typhoeus"
 
+#devise-async gem for async devise mailers
+gem "devise-async"
+
 # sidekiq and redis for workers
 gem 'sidekiq'
 gem 'redis'
