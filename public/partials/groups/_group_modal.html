@@ -7,7 +7,7 @@
 <div class="modal-body">
   <div>
     <h5 ng-show='modal.group.groups.length > 0'>Click to edit or delete:</h5>
-    <div class='extra-bottom-margins'>
+    <div class='extra-bottom-margins text-center'>
       <span class="label" ng-repeat='group in modal.group.groups' ng-class="{'label-info': !modal.stagedForDeletion[group.id], 'label-danger': modal.stagedForDeletion[group.id]}">
         <a href='' ng-click='modal.editGroup(group)'>{{ group.name }}</a>&nbsp;
         <a href='' ng-click='modal.stageGroupForDeletion(group.id)'>
