@@ -61,6 +61,7 @@ class ShareController < ApplicationController
         have_people_to_add = true
         duplicate_person = person.dup
         if person.image.url != "/assets/images/original/missing.png"
+          duplicate_person.save_images_in_background = true
           image = URI.parse(person.image.url)
           duplicate_person.image = image
         end
