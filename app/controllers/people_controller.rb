@@ -37,7 +37,13 @@ class PeopleController < ApplicationController
   end
 
   def update
-    if @person.update person_params
+    updated_person_params = person_params
+    updated_person_params[:save_images_in_background] = false
+    if updated_person_params[:deleteImage]
+      @person.image.destroy
+    end
+    updated_person_params.delete(:deleteImage)
+    if @person.update updated_person_params
       render json: @person, status: :ok
     else
       render json: @person.errors, status: :unprocessable_entity
@@ -53,7 +59,7 @@ class PeopleController < ApplicationController
   def person_params
     params[:person][:hints] ||= []
     params[:person][:group_ids] ||= []
-    params.require(:person).permit(:first_name, :middle_name, :last_name, :image, :sex, :nickname, :bio, :location, :occupation, :dob, hints: [], group_ids: [])
+    params.require(:person).permit(:first_name, :middle_name, :last_name, :image, :sex, :nickname, :bio, :location, :occupation, :dob, :deleteImage, hints: [], group_ids: [])
   end
 
   def set_person
