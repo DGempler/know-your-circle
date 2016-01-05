@@ -31,6 +31,9 @@ gem 'aws-sdk', '~> 2'
 #Paperclip, for images
 gem "paperclip", git: "git://github.com/thoughtbot/paperclip.git"
 
+#delayed_paperclip to use sidekiq when saving images
+gem 'delayed_paperclip'
+
 #Bootstrap
 gem 'bootstrap-sass'
 
