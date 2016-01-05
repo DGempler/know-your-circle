@@ -7,13 +7,17 @@ class Person < ActiveRecord::Base
 
   # This method associates the attribute ":image_url" with a file attachment
   has_attached_file :image, styles: {
+    original: '300x300>',
     thumb: '100x100>',
     medium: '300x300>'
   },
-  default_url: "/assets/images/:style/missing.png"
+  default_url: "/assets/images/:style/missing.png",
+  only_process: lambda { |a| a.instance.save_images_in_background ? [:original] : [:thumb, :medium] }
 
   # Validate the attached image is image/jpg, image/png, etc
   validates_attachment_content_type :image, :content_type => /\Aimage\/.*\Z/
+
+  process_in_background :image, only_process: lambda { |a| a.instance.save_images_in_background ? [:thumb, :medium] : [] }
 
   after_create :assign_original_id
 
@@ -21,6 +25,7 @@ class Person < ActiveRecord::Base
   def assign_original_id
     unless self.original_id
       self.original_id = self.id
+      self.save
     end
   end
 
