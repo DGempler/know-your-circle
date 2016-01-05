@@ -9,6 +9,40 @@
     var originalPerson;
     var originalGroups;
 
+    function getPerson () {
+      PersonFactory.getPerson($routeParams.id).then(function(person) {
+        originalPerson = person;
+        vm.person = {};
+        for (var prop in person) {
+          if (prop === 'hints') {
+            vm.person.hints = [];
+            if (vm.person.hints.length === 0) {
+              vm.person.hints.push("");
+            } else {
+              person.hints.forEach(function(hint) {
+                if (hint) {
+                  vm.person.hints.push(hint);
+                }
+              });
+            }
+          } else if (prop === 'dob') {
+            if (person.dob) {
+              vm.person.dob = new Date(person.dob);
+            }
+          } else if (prop === 'groups') {
+            vm.person.group_ids = [];
+            person.groups.forEach(function(group) {
+              vm.person.group_ids.push(group.id);
+            });
+          } else {
+            vm.person[prop] = person[prop];
+          }
+        }
+
+        getGroups();
+      });
+    }
+
     function cleanGroupIds(groupIds, allGroups) {
       var newGroupIds = [];
       allGroups.forEach(function(group) {
@@ -136,37 +170,7 @@
       }
     };
 
-    PersonFactory.getPerson($routeParams.id).then(function(person) {
-      originalPerson = person;
-      vm.person = {};
-      for (var prop in person) {
-        if (prop === 'hints') {
-          vm.person.hints = [];
-          if (vm.person.hints.length === 0) {
-            vm.person.hints.push("");
-          } else {
-            person.hints.forEach(function(hint) {
-              if (hint) {
-                vm.person.hints.push(hint);
-              }
-            });
-          }
-        } else if (prop === 'dob') {
-          if (person.dob) {
-            vm.person.dob = new Date(person.dob);
-          }
-        } else if (prop === 'groups') {
-          vm.person.group_ids = [];
-          person.groups.forEach(function(group) {
-            vm.person.group_ids.push(group.id);
-          });
-        } else {
-          vm.person[prop] = person[prop];
-        }
-      }
-
-      getGroups();
-    });
+    getPerson();
 
   }
 })();
