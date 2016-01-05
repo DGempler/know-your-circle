@@ -139,33 +139,32 @@
     PersonFactory.getPerson($routeParams.id).then(function(person) {
       originalPerson = person;
       vm.person = {};
-      vm.person.first_name = person.first_name;
-      vm.person.last_name = person.last_name;
-      vm.person.sex = person.sex;
-      vm.person.nickname = person.nickname;
-      vm.person.middle_name = person.middle_name;
-      vm.person.location = person.location;
-      vm.person.occupation = person.occupation;
-      if (person.dob) {
-        vm.person.dob = new Date(person.dob);
-      }
-      vm.person.bio = person.bio;
-      vm.person.id = person.id;
-      vm.person.group_ids = [];
-      vm.person.image_updated_at = person.image_updated_at;
-      vm.person.image_file_name = person.image_file_name;
-      person.groups.forEach(function(group) {
-        vm.person.group_ids.push(group.id);
-      });
-      vm.person.hints = [];
-      person.hints.forEach(function(hint) {
-        if (hint) {
-          vm.person.hints.push(hint);
+      for (var prop in person) {
+        if (prop === 'hints') {
+          vm.person.hints = [];
+          if (vm.person.hints.length === 0) {
+            vm.person.hints.push("");
+          } else {
+            person.hints.forEach(function(hint) {
+              if (hint) {
+                vm.person.hints.push(hint);
+              }
+            });
+          }
+        } else if (prop === 'dob') {
+          if (person.dob) {
+            vm.person.dob = new Date(person.dob);
+          }
+        } else if (prop === 'groups') {
+          vm.person.group_ids = [];
+          person.groups.forEach(function(group) {
+            vm.person.group_ids.push(group.id);
+          });
+        } else {
+          vm.person[prop] = person[prop];
         }
-      });
-      if (vm.person.hints.length === 0) {
-        vm.person.hints.push("");
       }
+
       getGroups();
     });
 
