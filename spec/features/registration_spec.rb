@@ -12,10 +12,6 @@ feature "Registration", js: true do
 
     expect(page).to have_content("A confirmation email has been sent to #{@user.email}")
 
-    expect(ActionMailer::Base.deliveries.count).to eq(1)
-
-    expect(ActionMailer::Base.deliveries.first.to).to eq([@user.email])
-
   end
 
   scenario 'with a password less than 8 characters' do
