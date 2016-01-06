@@ -4,18 +4,18 @@
   <h1 class='center-block'><center>{{ profile.user.first_name }} {{ profile.user.middle_name }} {{ profile.user.last_name }}</center></h1>
 </div>
 
-<div class='row'>
+<div class='row extra-bottom-margins'>
   <div class='col-sm-12'>
     <img ng-src='{{ profile.user.medium }}' class='center-block'/>
   </div>
 </div>
 <div class='row'>
-  <div class='col-sm-4 col-sm-offset-2'>
+  <div ng-class="{ 'col-sm-6' : !profile.user.location && !profile.user.occupation && !profile.user.dob && !profile.user.bio, 'col-sm-offset-3' : !profile.user.location && !profile.user.occupation && !profile.user.dob && !profile.user.bio, 'text-center' : !profile.user.location && !profile.user.occupation && !profile.user.dob && !profile.user.bio, 'col-sm-4' : profile.user.location || profile.user.occupation || profile.user.dob || profile.user.bio, 'col-sm-offset-2' : profile.user.location || profile.user.occupation || profile.user.dob || profile.user.bio }">
     <p ng-show="profile.user.email">Email: {{ profile.user.email }}</p>
     <p ng-show="profile.user.sex">Sex: {{ profile.user.sex }}</p>
     <p ng-show="profile.user.nickname">Nickname: {{ profile.user.nickname }}</p>
   </div>
-  <div class='col-sm-4'>
+  <div ng-show="profile.user.location || profile.user.occupation || profile.user.dob || profile.user.bio" class='col-sm-4'>
     <p ng-show="profile.user.location">Location: {{ profile.user.location }}</p>
     <p ng-show="profile.user.occupation">Occupation: {{ profile.user.occupation }}</p>
     <p ng-show="profile.user.dob">DOB: {{ profile.user.dob }}</p>
