@@ -11,7 +11,7 @@ feature 'Authentication', js: true do
     scenario 'with valid inputs' do
       @login_modal.log_in(@user.email, @user.password)
       expect(page).to have_content("Add People")
-      expect(page).to have_content("Play Games")
+      expect(page).to have_content("Play")
       expect(page).to have_content("Account")
     end
 
