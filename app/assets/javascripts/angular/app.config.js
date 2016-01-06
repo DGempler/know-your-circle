@@ -11,6 +11,9 @@
         templateUrl: 'partials/index.html',
         controller: 'indexController as index'
       })
+      .when('/about', {
+        templateUrl: 'partials/about.html'
+      })
       .when('/people/demo', {
         templateUrl: 'partials/people/index.html',
         controller: 'peopleDemoController as people'
