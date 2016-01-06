@@ -143,7 +143,6 @@
       var promiseArray = [];
       var alreadyExistsArray = [];
       var message;
-      vm.someoneSelected = false;
       angular.forEach(vm.people, function(person) {
         if (person.selected) {
           person.group_ids = [];
@@ -180,6 +179,7 @@
                 }
               });
             }
+            vm.someoneSelected = false;
             getPeople();
             AuthFactory.messageModalOpen(message);
           })
