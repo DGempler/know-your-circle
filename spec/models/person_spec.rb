@@ -9,7 +9,7 @@ describe Person, 'response' do
   it { is_expected.to respond_to :bio }
   it { is_expected.to respond_to :location }
   it { is_expected.to respond_to :dob }
-  it { is_expected.to respond_to :dod }
+  # it { is_expected.to respond_to :dod }
   it { is_expected.to respond_to :occupation }
   it { is_expected.to respond_to :image }
   it { is_expected.to respond_to :hints }
