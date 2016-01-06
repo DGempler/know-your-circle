@@ -24,14 +24,15 @@ feature 'Authentication', js: true do
   end
 
   feature 'page access' do
-    scenario 'visiting people index when signed in' do
-      @login_modal.log_in(@user.email, @user.password)
-      expect(page).to have_css('h1', text: 'Your people')
+    scenario 'visiting people index when not signed in' do
+      visit '#/people/index'
+      expect(page).to have_css('a', text: 'Log In')
     end
 
-    scenario 'visiting "groups" page when not signed in' do
-      visit '#/people/index'
-      expect(page).not_to have_css('h1', text: 'Your people')
+    scenario 'visiting people index when signed in' do
+      @login_modal.log_in(@user.email, @user.password)
+      expect(page).to have_css('h1', text: 'Your Circle')
     end
+
   end
 end
