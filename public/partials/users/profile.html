@@ -11,15 +11,15 @@
 </div>
 <div class='row'>
   <div class='col-sm-4 col-sm-offset-2'>
-    <p>Email: {{ profile.user.email }}</p>
-    <p>Sex: {{ profile.user.sex }}</p>
-    <p>Nickname: {{ profile.user.nickname }}</p>
+    <p ng-show="profile.user.email">Email: {{ profile.user.email }}</p>
+    <p ng-show="profile.user.sex">Sex: {{ profile.user.sex }}</p>
+    <p ng-show="profile.user.nickname">Nickname: {{ profile.user.nickname }}</p>
   </div>
   <div class='col-sm-4'>
-    <p>Location: {{ profile.user.location }}</p>
-    <p>Occupation: {{ profile.user.occupation }}</p>
-    <p>DOB: {{ profile.user.dob }}</p>
-    <p>Bio: {{ profile.user.bio }}</p>
+    <p ng-show="profile.user.location">Location: {{ profile.user.location }}</p>
+    <p ng-show="profile.user.occupation">Occupation: {{ profile.user.occupation }}</p>
+    <p ng-show="profile.user.dob">DOB: {{ profile.user.dob }}</p>
+    <p ng-show="profile.user.bio">Bio: {{ profile.user.bio }}</p>
   </div>
 </div>
 <div class='row'>
