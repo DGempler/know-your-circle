@@ -18,15 +18,15 @@
 </div>
 <div class='row'>
   <div ng-class="{ 'col-sm-10' : person.demoMode, 'col-sm-offset-1' : person.demoMode, 'col-sm-4' : !person.demoMode, 'col-sm-offset-2' : !person.demoMode }">
-    <p ng-hide='person.demoMode'>Sex: {{ person.person.sex }}</p>
-    <p ng-hide='person.demoMode'>Nickname: {{ person.person.nickname }}</p>
+    <p ng-hide='person.demoMode || !person.person.sex' ng-show='person.person.sex'>Sex: {{ person.person.sex }}</p>
+    <p ng-hide='person.demoMode || !person.person.sex'>Nickname: {{ person.person.nickname }}</p>
     <p ng-repeat='hint in person.person.hints track by $index'>Hint {{ $index + 1 }}: {{ hint }}</p>
   </div>
   <div ng-class="{ 'col-sm-10' : person.demoMode, 'col-sm-offset-1' : person.demoMode, 'col-sm-4' : !person.demoMode, 'col-sm-offset-2' : !person.demoMode }">
-    <p ng-hide='person.demoMode'>Location: {{ person.person.location }}</p>
-    <p ng-hide='person.demoMode'>Occupation: {{ person.person.occupation }}</p>
-    <p ng-hide='person.demoMode'>DOB: {{ person.person.dob }}</p>
-    <p>Bio: {{ person.person.bio }}</p>
+    <p ng-hide='person.demoMode || !person.person.location'>Location: {{ person.person.location }}</p>
+    <p ng-hide='person.demoMode || !person.person.occupation'>Occupation: {{ person.person.occupation }}</p>
+    <p ng-hide='person.demoMode || !person.person.dob'>DOB: {{ person.person.dob }}</p>
+    <p ng-hide='!person.person.bio'>Bio: {{ person.person.bio }}</p>
   </div>
 </div>
 <div class='row'>
