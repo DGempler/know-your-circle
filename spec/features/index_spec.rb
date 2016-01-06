@@ -5,7 +5,7 @@ feature "Visit website", js: true do
     visit '/'
 
     expect(page).to have_content("Memorize names and faces")
-    expect(page).to have_content("Welcome to Know your Circle!")
+    expect(page).to have_content("Welcome to Know Your Circle!")
   end
 
   scenario "anonymous user" do
