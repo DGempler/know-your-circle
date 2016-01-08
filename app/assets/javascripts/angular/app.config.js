@@ -59,7 +59,7 @@
         }
       })
       .when('/games/index/:demo', {
-        templateUrl: 'partials/games/index.html',
+        templateUrl: 'partials/games/games_index.html',
         controller: 'gamesIndexController as games'
       })
       .when('/profile', {
