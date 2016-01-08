@@ -1,3 +1,3 @@
 (function() {
-  angular.module('knowYourCircle.auth', ['ui.bootstrap', 'ng-token-auth', 'ngAnimate', 'ngMessages']);
+  angular.module('knowYourCircle.auth', ['ng-token-auth']);
 })();

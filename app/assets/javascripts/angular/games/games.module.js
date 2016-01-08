@@ -1,3 +1,3 @@
  (function() {
-  angular.module('knowYourCircle.games', ['ui.bootstrap']);
+  angular.module('knowYourCircle.games', []);
 })();

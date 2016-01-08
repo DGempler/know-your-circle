@@ -1,3 +1,3 @@
 (function() {
-  angular.module('knowYourCircle.users', ['ngFileUpload', 'ngAnimate', 'knowYourCircle.auth']);
+  angular.module('knowYourCircle.users', ['ngFileUpload']);
 })();
