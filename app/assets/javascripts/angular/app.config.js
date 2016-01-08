@@ -20,7 +20,7 @@
       })
       .when('/people/demo/show/:id', {
         templateUrl: 'partials/people/people_show.html',
-        controller: 'personDemoShowController as person',
+        controller: 'peopleDemoShowController as person',
       })
       .when('/people/index', {
         templateUrl: 'partials/people/people_index.html',
