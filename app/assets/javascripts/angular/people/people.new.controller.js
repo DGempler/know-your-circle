@@ -1,10 +1,10 @@
 (function() {
   angular.module('knowYourCircle.people')
-    .controller('personNewController', personNewController);
+    .controller('peopleNewController', peopleNewController);
 
-  personNewController.$inject = ['PersonFactory', '$location', 'GroupFactory', 'AuthFactory'];
+  peopleNewController.$inject = ['PersonFactory', '$location', 'GroupFactory', 'AuthFactory'];
 
-  function personNewController(PersonFactory, $location, GroupFactory, AuthFactory) {
+  function peopleNewController(PersonFactory, $location, GroupFactory, AuthFactory) {
     var vm = this;
     vm.person = {};
     vm.person.hints = [""];
