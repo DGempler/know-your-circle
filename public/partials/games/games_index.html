@@ -1,4 +1,4 @@
-<div ng-show='games.busy' ng-class="{ 'hide-spinner' : !games.busy }" id='spinner'></div>
+<div ng-show='index.busy' ng-class="{ 'hide-spinner' : !index.busy }" id='spinner'></div>
 
 <div class="page-header">
   <h1>Choose a Memory Game</h1>
@@ -8,7 +8,7 @@
   <div class='row'>
     <div class='col-sm-6 col-sm-offset-3 text-center' style='background-color: #2b3e50'>
         <br/>
-        <button ng-class="{ 'disabled' : games.busy } " type="button" class="btn btn-primary" ng-click="games.stillWaitingForDB || games.open()">Flashcards</button>
+        <button ng-class="{ 'disabled' : index.busy } " type="button" class="btn btn-primary" ng-click="index.stillWaitingForDB || index.open()">Flashcards</button>
         <br/><br/>
     </div>
   </div>
