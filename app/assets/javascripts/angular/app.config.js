@@ -63,7 +63,7 @@
         controller: 'gamesIndexController as games'
       })
       .when('/profile', {
-        templateUrl: 'partials/users/profile.html',
+        templateUrl: 'partials/users/user_profile.html',
         controller: 'profileController as profile',
         resolve: {
           auth: ['$auth', function($auth) {
@@ -72,7 +72,7 @@
         }
       })
       .when('/profile/edit/:first', {
-        templateUrl: 'partials/users/edit.profile.html',
+        templateUrl: 'partials/users/user_profile_edit.html',
         controller: 'editProfileController as profile',
         resolve: {
           auth: ['$auth', function($auth) {
