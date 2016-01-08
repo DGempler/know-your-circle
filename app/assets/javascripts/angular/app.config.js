@@ -16,7 +16,7 @@
       })
       .when('/people/demo', {
         templateUrl: 'partials/people/people_index.html',
-        controller: 'peopleDemoController as people'
+        controller: 'peopleDemoController as index'
       })
       .when('/people/demo/show/:id', {
         templateUrl: 'partials/people/people_show.html',
@@ -24,7 +24,7 @@
       })
       .when('/people/index', {
         templateUrl: 'partials/people/people_index.html',
-        controller: 'peopleIndexController as people',
+        controller: 'peopleIndexController as index',
         resolve: {
           auth: ['$auth', function($auth) {
             return $auth.validateUser();
