@@ -51,7 +51,7 @@
       })
       .when('/people/:id/edit', {
         templateUrl: 'partials/people/people_edit.html',
-        controller: 'peopleEditController as person',
+        controller: 'peopleEditController as edit',
         resolve: {
           auth: ['$auth', function($auth) {
             return $auth.validateUser();
