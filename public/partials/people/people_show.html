@@ -1,39 +1,39 @@
-<div ng-show='person.busy' ng-class="{ 'hide-spinner' : !person.busy }" id='spinner'></div>
+<div ng-show='show.busy' ng-class="{ 'hide-spinner' : !show.busy }" id='spinner'></div>
 
 <div class="page-header">
-  <h1 class='center-block'><center>{{ person.person.first_name }} {{ person.person.middle_name }} {{ person.person.last_name }}</center></h1>
+  <h1 class='center-block'><center>{{ show.person.first_name }} {{ show.person.middle_name }} {{ show.person.last_name }}</center></h1>
 </div>
 
 <div class='row'>
   <div class='col-sm-12'>
-    <img ng-src='{{ person.person.medium }}' class='center-block'/>
+    <img ng-src='{{ show.person.medium }}' class='center-block'/>
   </div>
 </div>
 <div class='row'>
   <div class='col-sm-8 col-sm-offset-2'>
     <div class='extra-bottom-margins text-center'>
-      <span class="label label-info" ng-repeat='group in person.person.groups'>{{ group.name }}</span>
+      <span class="label label-info" ng-repeat='group in show.person.groups'>{{ group.name }}</span>
     </div>
   </div>
 </div>
 <div class='row'>
-  <div ng-class="{ 'col-sm-10' : person.demoMode, 'col-sm-offset-1' : person.demoMode, 'col-sm-4' : !person.demoMode, 'col-sm-offset-2' : !person.demoMode }">
-    <p ng-hide='person.demoMode || !person.person.sex' ng-show='person.person.sex'>Sex: {{ person.person.sex }}</p>
-    <p ng-hide='person.demoMode || !person.person.sex'>Nickname: {{ person.person.nickname }}</p>
-    <p ng-repeat='hint in person.person.hints track by $index'>Hint {{ $index + 1 }}: {{ hint }}</p>
+  <div ng-class="{ 'col-sm-10' : show.demoMode, 'col-sm-offset-1' : show.demoMode, 'col-sm-4' : !show.demoMode, 'col-sm-offset-2' : !show.demoMode }">
+    <p ng-hide='show.demoMode || !show.person.sex' ng-show='show.person.sex'>Sex: {{ show.person.sex }}</p>
+    <p ng-hide='show.demoMode || !show.person.sex'>Nickname: {{ show.person.nickname }}</p>
+    <p ng-repeat='hint in show.person.hints track by $index'>Hint {{ $index + 1 }}: {{ hint }}</p>
   </div>
-  <div ng-class="{ 'col-sm-10' : person.demoMode, 'col-sm-offset-1' : person.demoMode, 'col-sm-4' : !person.demoMode, 'col-sm-offset-2' : !person.demoMode }">
-    <p ng-hide='person.demoMode || !person.person.location'>Location: {{ person.person.location }}</p>
-    <p ng-hide='person.demoMode || !person.person.occupation'>Occupation: {{ person.person.occupation }}</p>
-    <p ng-hide='person.demoMode || !person.person.dob'>DOB: {{ person.person.dob }}</p>
-    <p ng-hide='!person.person.bio'>Bio: {{ person.person.bio }}</p>
+  <div ng-class="{ 'col-sm-10' : show.demoMode, 'col-sm-offset-1' : show.demoMode, 'col-sm-4' : !show.demoMode, 'col-sm-offset-2' : !show.demoMode }">
+    <p ng-hide='show.demoMode || !show.person.location'>Location: {{ show.person.location }}</p>
+    <p ng-hide='show.demoMode || !show.person.occupation'>Occupation: {{ show.person.occupation }}</p>
+    <p ng-hide='show.demoMode || !show.person.dob'>DOB: {{ show.person.dob }}</p>
+    <p ng-hide='!show.person.bio'>Bio: {{ show.person.bio }}</p>
   </div>
 </div>
 <div class='row'>
   <div class='col-sm-4 col-sm-offset-4'>
     <div class='text-center'>
-      <a ng-class="{ 'disabled' : person.demoMode }" class="btn btn-info"  href='#/people/{{person.person.id}}/edit'>Edit Person</a>
-      <button ng-class="{ 'disabled' : person.demoMode }" class="btn btn-danger" ng-click='person.deletePerson()'>Delete Person</button>
+      <a ng-class="{ 'disabled' : show.demoMode }" class="btn btn-info"  href='#/people/{{show.person.id}}/edit'>Edit Person</a>
+      <button ng-class="{ 'disabled' : show.demoMode }" class="btn btn-danger" ng-click='show.deletePerson()'>Delete Person</button>
     </div>
   </div>
 </div>

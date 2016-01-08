@@ -20,7 +20,7 @@
       })
       .when('/people/demo/show/:id', {
         templateUrl: 'partials/people/people_show.html',
-        controller: 'peopleDemoShowController as person',
+        controller: 'peopleDemoShowController as show',
       })
       .when('/people/index', {
         templateUrl: 'partials/people/people_index.html',
@@ -42,7 +42,7 @@
       })
       .when('/people/show/:id', {
         templateUrl: 'partials/people/people_show.html',
-        controller: 'peopleShowController as person',
+        controller: 'peopleShowController as show',
         resolve: {
           auth: ['$auth', function($auth) {
             return $auth.validateUser();
