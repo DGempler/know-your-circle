@@ -42,7 +42,7 @@
       <label for="password">Password</label>
       <input ng-model="auth.user.password" type="password" class="form-control" id="password" placeholder='Password' required="required" name='password' minlength="8" maxlength="72" >
       <div ng-show='password.buttonClicked' ng-messages="signUpForm.password.$error" class="text-warning">
-        <div ng-messages-include="partials/auth/messages.html"></div>
+        <div ng-messages-include="partials/auth/auth_error_messages.html"></div>
       </div>
     </div>
 
@@ -50,7 +50,7 @@
       <label for="password-confirmation">Confirm Password</label>
       <input ng-model="auth.user.password_confirmation" type="password" class="form-control" id="password-confirmation" placeholder='Confirm Password' required="required" name='password_confirmation' minlength="8" maxlength="72" match-to='auth.user.password'>
       <div ng-show='password.buttonClicked' ng-messages="signUpForm.password_confirmation.$error" class="text-warning">
-        <div ng-messages-include="partials/auth/messages.html"></div>
+        <div ng-messages-include="partials/auth/auth_error_messages.html"></div>
       </div>
     </div>
 
