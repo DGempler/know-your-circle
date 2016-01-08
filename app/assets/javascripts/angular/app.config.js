@@ -42,7 +42,7 @@
       })
       .when('/people/show/:id', {
         templateUrl: 'partials/people/people_show.html',
-        controller: 'personShowController as person',
+        controller: 'peopleShowController as person',
         resolve: {
           auth: ['$auth', function($auth) {
             return $auth.validateUser();

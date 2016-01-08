@@ -1,10 +1,10 @@
 (function() {
   angular.module('knowYourCircle.people')
-    .controller('personShowController', personShowController);
+    .controller('peopleShowController', peopleShowController);
 
-  personShowController.$inject = ['$routeParams', '$location', 'PersonFactory', 'UserFactory', 'AuthFactory'];
+  peopleShowController.$inject = ['$routeParams', '$location', 'PersonFactory', 'UserFactory', 'AuthFactory'];
 
-  function personShowController($routeParams, $location, PersonFactory, UserFactory, AuthFactory) {
+  function peopleShowController($routeParams, $location, PersonFactory, UserFactory, AuthFactory) {
     var vm = this;
     vm.busy = true;
     PersonFactory.getPerson($routeParams.id)
