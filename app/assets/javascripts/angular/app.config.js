@@ -15,15 +15,15 @@
         templateUrl: 'partials/about.html'
       })
       .when('/people/demo', {
-        templateUrl: 'partials/people/index.html',
+        templateUrl: 'partials/people/people_index.html',
         controller: 'peopleDemoController as people'
       })
       .when('/people/demo/show/:id', {
-        templateUrl: 'partials/people/show.html',
+        templateUrl: 'partials/people/people_show.html',
         controller: 'personDemoShowController as person',
       })
       .when('/people/index', {
-        templateUrl: 'partials/people/index.html',
+        templateUrl: 'partials/people/people_index.html',
         controller: 'peopleIndexController as people',
         resolve: {
           auth: ['$auth', function($auth) {
@@ -32,7 +32,7 @@
         }
       })
       .when('/people/new', {
-        templateUrl: 'partials/people/new.html',
+        templateUrl: 'partials/people/people_new.html',
         controller: 'personNewController as person',
         resolve: {
           auth: ['$auth', function($auth) {
@@ -41,7 +41,7 @@
         }
       })
       .when('/people/show/:id', {
-        templateUrl: 'partials/people/show.html',
+        templateUrl: 'partials/people/people_show.html',
         controller: 'personShowController as person',
         resolve: {
           auth: ['$auth', function($auth) {
@@ -50,7 +50,7 @@
         }
       })
       .when('/people/:id/edit', {
-        templateUrl: 'partials/people/edit.html',
+        templateUrl: 'partials/people/people_edit.html',
         controller: 'personEditController as person',
         resolve: {
           auth: ['$auth', function($auth) {
