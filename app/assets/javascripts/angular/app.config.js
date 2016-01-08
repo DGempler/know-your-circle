@@ -33,7 +33,7 @@
       })
       .when('/people/new', {
         templateUrl: 'partials/people/people_new.html',
-        controller: 'peopleNewController as person',
+        controller: 'peopleNewController as new',
         resolve: {
           auth: ['$auth', function($auth) {
             return $auth.validateUser();

@@ -1,25 +1,25 @@
-<div ng-show='person.busy' ng-class="{ 'hide-spinner' : !person.busy }" id='spinner'></div>
+<div ng-show='new.busy' ng-class="{ 'hide-spinner' : !new.busy }" id='spinner'></div>
 
 <div class="page-header">
   <h1>Add a Person</h1>
 </div>
 
-<form ng-submit='person.submitPerson(newPersonForm.$valid)' name='newPersonForm'>
+<form ng-submit='new.submitPerson(newPersonForm.$valid)' name='newPersonForm'>
   <div class='row'>
-    <div class='col-sm-6' ng-class='{"col-sm-offset-3": !person.addedInputFields}'>
+    <div class='col-sm-6' ng-class='{"col-sm-offset-3": !new.addedInputFields}'>
       <div class="form-group">
         <label for="firstNameInput">First Name</label>
-        <input ng-model="person.person.first_name" type="text" class="form-control" id="firstNameInput" placeholder='Required' autofocus required />
+        <input ng-model="new.person.first_name" type="text" class="form-control" id="firstNameInput" placeholder='Required' autofocus required />
       </div>
       <div class="form-group">
         <label for="lastNameInput">Last Name</label>
-        <input ng-model="person.person.last_name" type="text" class="form-control" id="lastNameInput"  placeholder='Required' required />
+        <input ng-model="new.person.last_name" type="text" class="form-control" id="lastNameInput"  placeholder='Required' required />
       </div>
       <div class='row extra-bottom-margins'>
         <div class='col-sm-4'>
           <div class="btn-group" data-toggle='buttons'>
-            <label class='btn btn-default' ng-click='person.person.sex = "Male"' ng-class='{"active": person.person.sex === "Male"}'><input type="radio" />Male</label>
-            <label class='btn btn-default' ng-click='person.person.sex = "Female"' ng-class='{"active": person.person.sex === "Female"}'><input type="radio" />Female</label>
+            <label class='btn btn-default' ng-click='new.person.sex = "Male"' ng-class='{"active": new.person.sex === "Male"}'><input type="radio" />Male</label>
+            <label class='btn btn-default' ng-click='new.person.sex = "Female"' ng-class='{"active": new.person.sex === "Female"}'><input type="radio" />Female</label>
           </div>
         </div>
         <div class='col-sm-8'>
@@ -30,9 +30,9 @@
                 <span class="caret"></span>
               </button>
               <ul class="dropdown-menu dropdown-menu-left" aria-labelledby="groupDropDown">
-                <li><a href="" ng-repeat='group in person.groups | unchosenGroups : person.person.group_ids' ng-click='person.applyGroup(group)'>{{ group.name }}</a></li>
+                <li><a href="" ng-repeat='group in new.groups | unchosenGroups : new.person.group_ids' ng-click='new.applyGroup(group)'>{{ group.name }}</a></li>
                 <li role="separator" class="divider"></li>
-                <li><a href='' ng-click='person.createGroup()'>Create a new group</a></li>
+                <li><a href='' ng-click='new.createGroup()'>Create a new group</a></li>
               </ul>
             </div>
             <a type='button' class='btn btn-default' tooltip-class='group-help' uib-tooltip="Groups are a useful way to label and categorize your people. They also make it easy to send your people to others." tooltip-placement="right">
@@ -42,14 +42,14 @@
         </div>
       </div>
       <div class='extra-bottom-margins'>
-        <span class="label label-info" ng-repeat='group in person.groups | chosenGroups : person.person.group_ids'>{{ group.name }} <a href='' ng-click='person.removeGroup(group.id)'><span class="glyphicon glyphicon-remove" aria-hidden="true"></span></a></span>
+        <span class="label label-info" ng-repeat='group in new.groups | chosenGroups : new.person.group_ids'>{{ group.name }} <a href='' ng-click='new.removeGroup(group.id)'><span class="glyphicon glyphicon-remove" aria-hidden="true"></span></a></span>
       </div>
 
       <div class="form-group">
-        <label for="imageFileInput">Upload person's Headshot (recommended for games)</label>
-        <input type="file" ng-model="person.person.image" accept="image/*" id="imageFileInput" ngf-select ngf-pattern="'image/*'" ngf-max-size="5MB" ngf-min-height="50" class="text-info" name="image" />
+        <label for="imageFileInput">Upload new's Headshot (recommended for games)</label>
+        <input type="file" ng-model="new.person.image" accept="image/*" id="imageFileInput" ngf-select ngf-pattern="'image/*'" ngf-max-size="5MB" ngf-min-height="50" class="text-info" name="image" />
 
-        <div ng-show='person.buttonClicked' ng-messages="newPersonForm.image.$error" class="text-warning">
+        <div ng-show='new.buttonClicked' ng-messages="newPersonForm.image.$error" class="text-warning">
           <p ng-message="minHeight">Image must be a minimum of 50px tall.</p>
           <p ng-message="maxSize">Image is too large. The maximum allowed is 5 MB.</p>
         </div>
@@ -57,36 +57,36 @@
 
       <div class="form-group">
         <label for="nicknameInput">Nickname</label>
-        <input ng-model="person.person.nickname" type="text" class="form-control" id="nicknameInput"  />
+        <input ng-model="new.person.nickname" type="text" class="form-control" id="nicknameInput"  />
       </div>
       <div class="form-group">
         <label for="hintInput">Hint</label>
-        <a ng-click='person.addHintInputs()' class="btn btn-default btn-xs pull-right" ng-class='{"disabled": person.hints.hints.length > 2}'>
+        <a ng-click='new.addHintInputs()' class="btn btn-default btn-xs pull-right" ng-class='{"disabled": new.hints.hints.length > 2}'>
           <span class="glyphicon glyphicon-plus" aria-hidden="true"></span> Add more hints
         </a>
-        <input ng-repeat='hint in person.person.hints track by $index' type="text" class="form-control" ng-model='person.person.hints[$index]' id='hintInput' />
+        <input ng-repeat='hint in new.person.hints track by $index' type="text" class="form-control" ng-model='new.person.hints[$index]' id='hintInput' />
       </div>
     </div>
-    <div ng-show='person.addedInputFields' class='col-sm-6'>
+    <div ng-show='new.addedInputFields' class='col-sm-6'>
       <div class="form-group">
         <label for="middleNameInput">Middle Name</label>
-        <input ng-model="person.person.middle_name" type="text" class="form-control" id="middleNameInput" />
+        <input ng-model="new.person.middle_name" type="text" class="form-control" id="middleNameInput" />
       </div>
       <div class="form-group">
         <label for="locationInput">Location</label>
-        <input ng-model="person.person.location" type="text" class="form-control" id="locationInput" >
+        <input ng-model="new.person.location" type="text" class="form-control" id="locationInput" >
       </div>
       <div class="form-group">
         <label for="occupationInput">Occupation</label>
-        <input ng-model="person.person.occupation" type="text" class="form-control" id="occupationInput" >
+        <input ng-model="new.person.occupation" type="text" class="form-control" id="occupationInput" >
       </div>
       <div class="form-group">
         <label for="dobInput">Date of Birth</label>
-        <input ng-model="person.person.dob" type="date" class="form-control" id="dobInput" >
+        <input ng-model="new.person.dob" type="date" class="form-control" id="dobInput" >
       </div>
       <div class="form-group">
         <label for="bioInput">Bio</label>
-        <textarea rows="3" ng-model="person.person.bio" type="text" class="form-control" id="bioInput" ></textarea>
+        <textarea rows="3" ng-model="new.person.bio" type="text" class="form-control" id="bioInput" ></textarea>
       </div>
     </div>
   </div>
@@ -94,8 +94,8 @@
     <div class='col-sm-6 col-sm-offset-3'>
       <div class='text-center'>
         <a href='#/people/index' class="btn btn-default">Cancel</a>
-        <a ng-click='person.addInputFields()' ng-hide='person.addedInputFields' class="btn btn-success">Add more details</a>
-        <button type="submit" class="btn btn-primary" ng-click='person.buttonClicked = true'>Submit</button>
+        <a ng-click='new.addInputFields()' ng-hide='new.addedInputFields' class="btn btn-success">Add more details</a>
+        <button type="submit" class="btn btn-primary" ng-click='new.buttonClicked = true'>Submit</button>
       </div>
     </div>
   </div>
