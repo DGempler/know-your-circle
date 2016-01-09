@@ -12,7 +12,7 @@
     if ($routeParams.demo === 'true') {
       DemoFactory.getGuestUserPeople()
         .then(function(people) {
-          vm.people.people = people;
+          vm.people = people;
           getDemoGroups();
         })
         .catch(function(people) {
@@ -23,7 +23,7 @@
     } else {
       PersonFactory.getPeople()
         .then(function(people) {
-          vm.people.people = people;
+          vm.people = people;
           getGroups();
         })
         .catch(function(people) {
@@ -66,7 +66,7 @@
         controller: 'gamesFlashcardsController as game',
         resolve: {
           people: function() {
-            return vm.people.people;
+            return vm.people;
           },
           groups: function() {
             return vm.groups;
