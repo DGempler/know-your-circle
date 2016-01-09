@@ -106,23 +106,6 @@
           return deferred.promise;
       };
 
-      factory.messageModalOpen = function(message, email) {
-        var modalInstance = $uibModal.open({
-          animation: true,
-          templateUrl: '/partials/auth/_message_modal.html',
-          controller: 'messageController as message',
-          windowClass: "modal fade",
-          resolve: {
-            message: function() {
-              return message;
-            },
-            email: function() {
-              return email;
-            }
-          }
-        });
-      };
-
       factory.updateUser = function(user) {
         var deferred = $q.defer();
         $auth.updateAccount(user)
