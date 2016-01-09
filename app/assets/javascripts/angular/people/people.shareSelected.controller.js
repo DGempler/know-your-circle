@@ -2,9 +2,9 @@
   angular.module('knowYourCircle.groups')
     .controller('shareSelectedController', shareSelectedController);
 
-    shareSelectedController.$inject = ['$uibModalInstance', 'people', 'size', 'ShareFactory', 'AuthFactory', '$rootScope'];
+    shareSelectedController.$inject = ['$uibModalInstance', 'people', 'size', 'ShareFactory', 'Message', '$rootScope'];
 
-    function shareSelectedController($uibModalInstance, people, size, ShareFactory, AuthFactory, $rootScope) {
+    function shareSelectedController($uibModalInstance, people, size, ShareFactory, Message, $rootScope) {
       var vm = this;
       vm.people = people;
 
@@ -36,7 +36,7 @@
         ShareFactory.share(payload)
           .then(function(success) {
             var message = 'Your selected people have been sent to ' + vm.email;
-            AuthFactory.messageModalOpen(message);
+            Message.open(message);
             vm.email = "";
           })
           .catch(function(error) {
@@ -46,7 +46,7 @@
             } else {
               message = 'There was an error while sharing your people. Please try again.';
             }
-            AuthFactory.messageModalOpen(message);
+            Message.open(message);
           })
           .finally(function() {
             vm.busy = false;
