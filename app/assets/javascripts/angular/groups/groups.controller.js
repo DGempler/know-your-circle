@@ -2,9 +2,9 @@
   angular.module('knowYourCircle.groups')
     .controller('groupController', groupController);
 
-    groupController.$inject = ['$uibModalInstance', 'groups', 'GroupFactory', 'AuthFactory', '$q'];
+    groupController.$inject = ['$uibModalInstance', 'groups', 'GroupFactory', 'Message', '$q'];
 
-    function groupController($uibModalInstance, groups, GroupFactory, AuthFactory, $q) {
+    function groupController($uibModalInstance, groups, GroupFactory, Message, $q) {
       var vm = this;
       vm.groups = groups;
       vm.stagedForDeletion = {};
@@ -34,7 +34,7 @@
               } else {
                 message = 'There was an error while creating your group. Please refresh the page to try again.';
               }
-              AuthFactory.messageModalOpen(message);
+              Message.open(message);
               vm.new = "";
             })
             .finally(function() {
@@ -42,7 +42,7 @@
             });
         } else {
           var message = 'This group already exists.';
-          AuthFactory.messageModalOpen(message);
+          Message.open(message);
         }
       };
 
@@ -86,7 +86,7 @@
           })
           .catch(function(error) {
             var message = 'There was an error while deleting your groups. Please refresh the page to try again.';
-            AuthFactory.messageModalOpen(message);
+            Message.open(message);
           });
       };
 
@@ -127,18 +127,18 @@
                 } else {
                   message = 'There was an error while changing your group. Please refresh the page to try again.';
                 }
-                AuthFactory.messageModalOpen(message);
+                Message.open(message);
               })
               .finally(function() {
                 vm.busy = false;
               });
           } else {
             var message = 'This group already exists.';
-            AuthFactory.messageModalOpen(message);
+            Message.open(message);
           }
         } else {
           var message = 'Your submitted group name matches the existing one. Please try again.';
-          AuthFactory.messageModalOpen(message);
+          Message.open(message);
         }
       };
 
