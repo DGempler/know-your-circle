@@ -2,9 +2,9 @@
   angular.module('knowYourCircle.people')
     .controller('peopleIndexController', peopleIndexController);
 
-  peopleIndexController.$inject = ['PersonFactory', 'GroupFactory', '$q', 'AuthFactory', 'UserFactory', 'ShareFactory'];
+  peopleIndexController.$inject = ['PersonFactory', 'GroupFactory', '$q', 'Message', 'UserFactory', 'ShareFactory'];
 
-  function peopleIndexController(PersonFactory, GroupFactory, $q, AuthFactory, UserFactory, ShareFactory) {
+  function peopleIndexController(PersonFactory, GroupFactory, $q, Message, UserFactory, ShareFactory) {
     var vm = this;
     vm.sortPeopleBy = "first_name";
 
@@ -19,7 +19,7 @@
       })
       .catch(function(error) {
         var message = 'An error occured while loading your people. Please refresh the page to try again.';
-        AuthFactory.messageModalOpen(message);
+        Message.open(message);
         vm.busy = false;
       });
     }
@@ -31,7 +31,7 @@
         })
         .catch(function(error) {
           var message = 'An error occured while loading your groups. Please refresh the page to try again.';
-          AuthFactory.messageModalOpen(message);
+          Message.open(message);
         })
         .finally(function() {
           vm.busy = false;
@@ -44,7 +44,7 @@
       $q.all(promiseArray)
         .catch(function(errors) {
           var message = 'An error occured while deleting your people. Please refresh the page and try again.';
-          AuthFactory.messageModalOpen(message);
+          Message.open(message);
         });
     }
 
@@ -187,18 +187,18 @@
             }
             vm.someoneSelected = false;
             getPeople();
-            AuthFactory.messageModalOpen(message);
+            Message.open(message);
           })
           .catch(function(error) {
             message = 'An error occured while applying your group. Please refresh the page and try again.';
-            AuthFactory.messageModalOpen(message);
+            Message.open(message);
           })
           .finally(function() {
             vm.busy = false;
           });
       } else {
         message = "This group already exists on selected person(s).";
-        AuthFactory.messageModalOpen(message);
+        Message.open(message);
       }
     };
 
