@@ -2,9 +2,9 @@
   angular.module('knowYourCircle.users')
     .controller('editProfileController', editProfileController);
 
-  editProfileController.$inject=['$rootScope', 'AuthFactory', '$auth', '$routeParams', 'UserFactory', '$location'];
+  editProfileController.$inject=['$rootScope', 'AuthFactory', '$auth', '$routeParams', 'UserFactory', '$location', 'Message'];
 
-  function editProfileController($rootScope, AuthFactory, $auth, $routeParams, UserFactory, $location) {
+  function editProfileController($rootScope, AuthFactory, $auth, $routeParams, UserFactory, $location, Message) {
     var vm = this;
     vm.user = {};
 
@@ -45,7 +45,7 @@
             })
             .catch(function() {
               var message = 'An error occured while trying to update your information. Please try again.';
-              AuthFactory.messageModalOpen(message);
+              Message.open(message);
             })
             .finally(function() {
               vm.busy = false;
@@ -67,7 +67,7 @@
                 // err.statusText;
                 message = 'An error occured while trying update your information. Please try again.';
               }
-              factory.messageModalOpen(message);
+              Message.open(message);
             })
             .finally(function() {
               vm.busy = false;
