@@ -2,9 +2,9 @@
   angular.module('knowYourCircle.people')
     .controller('peopleShowController', peopleShowController);
 
-  peopleShowController.$inject = ['$routeParams', '$location', 'PersonFactory', 'UserFactory', 'AuthFactory'];
+  peopleShowController.$inject = ['$routeParams', '$location', 'PersonFactory', 'UserFactory', 'Message'];
 
-  function peopleShowController($routeParams, $location, PersonFactory, UserFactory, AuthFactory) {
+  function peopleShowController($routeParams, $location, PersonFactory, UserFactory, Message) {
     var vm = this;
     vm.busy = true;
     PersonFactory.getPerson($routeParams.id)
@@ -18,7 +18,7 @@
       })
       .catch(function(error) {
         var message = 'An error occured while loading your person. Please refresh the page to try again.';
-        AuthFactory.messageModalOpen(message);
+        Message.open(message);
       })
       .finally(function() {
         vm.busy = false;
@@ -37,7 +37,7 @@
           })
           .catch(function(error) {
             var message = 'An error occured while deleting your person. Please refresh the page and try again.';
-            AuthFactory.messageModalOpen(message);
+            Message.open(message);
           })
           .finally(function() {
             vm.busy = false;
