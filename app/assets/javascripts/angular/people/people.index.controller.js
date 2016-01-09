@@ -38,28 +38,25 @@
         });
     }
 
-    function deleteSelected() {
-      vm.busy = true;
-      var promiseArray = [];
-      angular.forEach(vm.people, function(person) {
-        if (person.selected) {
-          promiseArray.push(PersonFactory.deletePerson(person.id));
-        }
-      });
+    function deleteSelected(idArray, promiseArray) {
+      vm.people = cleanPeople(idArray);
+      vm.someoneSelected = false;
       $q.all(promiseArray)
-        .then(function(people) {
-          vm.someoneSelected = false;
-          getPeople();
-        })
         .catch(function(errors) {
           var message = 'An error occured while deleting your people. Please refresh the page and try again.';
           AuthFactory.messageModalOpen(message);
-        })
-        .finally(function() {
-          vm.busy = false;
         });
     }
 
+    function cleanPeople(deletePeopleIds) {
+      var newPeople = [];
+      angular.forEach(vm.people, function(person) {
+        if (deletePeopleIds.indexOf(person.id) === -1) {
+          newPeople.push(person);
+        }
+      });
+      return newPeople;
+    }
 
     vm.selectAllCheckbox = function(bool) {
       if (bool && vm.people.length > 0) {
@@ -122,10 +119,19 @@
     };
 
     vm.clickDelete = function() {
-      var message = "Are you sure?";
+      var idArray = [];
+      var promiseArray = [];
+      var message;
+      angular.forEach(vm.people, function(person) {
+        if (person.selected) {
+          idArray.push(person.id);
+          promiseArray.push(PersonFactory.deletePerson(person.id));
+        }
+      });
+      message = "Are you sure you want to delete " + promiseArray.length + " of your people?";
       UserFactory.confirmMessageModalOpen(message)
         .then(function() {
-          deleteSelected();
+          deleteSelected(idArray, promiseArray);
         });
     };
 
