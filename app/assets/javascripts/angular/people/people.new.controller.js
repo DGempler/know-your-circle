@@ -2,9 +2,9 @@
   angular.module('knowYourCircle.people')
     .controller('peopleNewController', peopleNewController);
 
-  peopleNewController.$inject = ['PersonFactory', '$location', 'GroupFactory', 'AuthFactory'];
+  peopleNewController.$inject = ['PersonFactory', '$location', 'GroupFactory', 'Message'];
 
-  function peopleNewController(PersonFactory, $location, GroupFactory, AuthFactory) {
+  function peopleNewController(PersonFactory, $location, GroupFactory, Message) {
     var vm = this;
     vm.person = {};
     vm.person.hints = [""];
@@ -33,7 +33,7 @@
         })
         .catch(function(error) {
           var message = 'There was an error while loading your groups. Please refresh the page to try again.';
-          AuthFactory.messageModalOpen(message);
+          Message.open(message);
         })
         .finally(function() {
         });
@@ -106,7 +106,7 @@
           })
           .catch(function(error) {
             var message = 'There was an error while submitting your person. Please refresh the page to try again.';
-            AuthFactory.messageModalOpen(message);
+            Message.open(message);
           })
           .finally(function() {
             vm.busy = false;
