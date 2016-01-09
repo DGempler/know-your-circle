@@ -6,9 +6,9 @@
 
 <div class="modal-body">
   <div>
-    <h5 ng-show='modal.group.groups.length > 0'>Click to edit or delete:</h5>
+    <h5 ng-show='modal.groups.length > 0'>Click to edit or delete:</h5>
     <div class='extra-bottom-margins text-center'>
-      <span class="label" ng-repeat='group in modal.group.groups' ng-class="{'label-info': !modal.stagedForDeletion[group.id], 'label-danger': modal.stagedForDeletion[group.id]}">
+      <span class="label" ng-repeat='group in modal.groups' ng-class="{'label-info': !modal.stagedForDeletion[group.id], 'label-danger': modal.stagedForDeletion[group.id]}">
         <a href='' ng-click='modal.editGroup(group)'>{{ group.name }}</a>&nbsp;
         <a href='' ng-click='modal.stageGroupForDeletion(group.id)'>
           <span class="glyphicon glyphicon-remove" aria-hidden="true"></span>
@@ -20,14 +20,14 @@
   <form class='extra-bottom-margins' ng-show='modal.showNewForm' ng-submit='modal.submitNewGroup()'>
     <div class="form-group">
       <label for="new-group">New group name</label>
-      <input ng-model="modal.group.new" type="text" class="form-control" id="new-group" autofocus required="required" >
+      <input ng-model="modal.new" type="text" class="form-control" id="new-group" autofocus required="required" >
     </div>
     <button type="submit" class="btn btn-primary btn-block">Submit</button>
   </form>
   <form class='extra-bottom-margins' ng-show='modal.showEditForm' ng-submit='modal.submitEditGroup()'>
     <div class="form-group">
       <label for="edit-group">Change group name</label>
-      <input ng-model="modal.group.editName" type="text" class="form-control" id="edit-group" autofocus required="required" >
+      <input ng-model="modal.editName" type="text" class="form-control" id="edit-group" autofocus required="required" >
     </div>
     <button uib-tooltip="Group name change will apply to ALL people" tooltip-placement="bottom" type="submit" class="btn btn-warning btn-block">Submit New Name</button>
   </form>

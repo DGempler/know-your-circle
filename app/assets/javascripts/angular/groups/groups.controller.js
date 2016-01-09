@@ -6,27 +6,26 @@
 
     function groupController($uibModalInstance, groups, GroupFactory, AuthFactory, $q) {
       var vm = this;
-      vm.group = {};
-      vm.group.groups = groups;
+      vm.groups = groups;
       vm.stagedForDeletion = {};
 
       vm.close = function() {
-        $uibModalInstance.close(vm.group.groups);
+        $uibModalInstance.close(vm.groups);
       };
 
       vm.submitNewGroup = function() {
         var matchCheck = false;
-        vm.group.groups.forEach(function(group) {
-          if (vm.group.new.toLowerCase() === group.name.toLowerCase()) {
+        vm.groups.forEach(function(group) {
+          if (vm.new.toLowerCase() === group.name.toLowerCase()) {
             matchCheck = true;
           }
         });
         if (!matchCheck) {
           vm.busy = true;
-          GroupFactory.submitNewGroup(vm.group.new)
+          GroupFactory.submitNewGroup(vm.new)
             .then(function(data) {
-              vm.group.groups.push(data);
-              vm.group.new = "";
+              vm.groups.push(data);
+              vm.new = "";
             })
             .catch(function(err) {
               var message;
@@ -36,7 +35,7 @@
                 message = 'There was an error while creating your group. Please refresh the page to try again.';
               }
               AuthFactory.messageModalOpen(message);
-              vm.group.new = "";
+              vm.new = "";
             })
             .finally(function() {
               vm.busy = false;
@@ -60,8 +59,8 @@
         }
         vm.showEditForm = false;
         vm.showNewForm = false;
-        vm.group.edit = {};
-        vm.group.editName = "";
+        vm.edit = {};
+        vm.editName = "";
       };
 
       function cleanGroups(deletedGroupIds, oldGroups) {
@@ -83,7 +82,7 @@
         });
 
         $q.all(promiseArray).then(function(groups) {
-          vm.group.groups = cleanGroups(stagedForDeletionArray, vm.group.groups);
+          vm.groups = cleanGroups(stagedForDeletionArray, vm.groups);
           vm.showDeleteGroupsButton = false;
         })
         .catch(function(error) {
@@ -100,27 +99,27 @@
         vm.showNewForm = false;
         vm.showDeleteGroupsButton = false;
         vm.stagedForDeletion = {};
-        vm.group.edit = group;
-        vm.group.editName = group.name;
+        vm.edit = group;
+        vm.editName = group.name;
       };
 
       vm.submitEditGroup = function() {
-        if (vm.group.editName !== vm.group.edit.name) {
+        if (vm.editName !== vm.edit.name) {
           var matchCheck = false;
-          vm.group.groups.forEach(function(group) {
-            if (vm.group.editName.toLowerCase() === group.name.toLowerCase()) {
+          vm.groups.forEach(function(group) {
+            if (vm.editName.toLowerCase() === group.name.toLowerCase()) {
               matchCheck = true;
             }
           });
           if (!matchCheck) {
             vm.busy = true;
-            GroupFactory.updateGroup(vm.group.edit.id, vm.group.editName)
+            GroupFactory.updateGroup(vm.edit.id, vm.editName)
               .then(function(updatedGroup) {
-                vm.group.edit = {};
-                vm.group.editName = "";
-                vm.group.groups.forEach(function(oldGroup, index) {
+                vm.edit = {};
+                vm.editName = "";
+                vm.groups.forEach(function(oldGroup, index) {
                   if (oldGroup.id === updatedGroup.id) {
-                    vm.group.groups[index] = updatedGroup;
+                    vm.groups[index] = updatedGroup;
                   }
                 });
                 vm.showEditForm = false;
@@ -152,8 +151,8 @@
         vm.showEditForm = false;
         vm.showDeleteGroupsButton = false;
         vm.stagedForDeletion = {};
-        vm.group.edit = {};
-        vm.group.editName = "";
+        vm.edit = {};
+        vm.editName = "";
       };
 
     }
