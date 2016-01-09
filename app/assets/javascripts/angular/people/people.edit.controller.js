@@ -2,9 +2,9 @@
   angular.module('knowYourCircle.people')
     .controller('peopleEditController', peopleEditController);
 
-  peopleEditController.$inject = ['$routeParams', '$location', 'PersonFactory', 'GroupFactory', 'AuthFactory'];
+  peopleEditController.$inject = ['$routeParams', '$location', 'PersonFactory', 'GroupFactory', 'Message'];
 
-  function peopleEditController($routeParams, $location, PersonFactory, GroupFactory, AuthFactory) {
+  function peopleEditController($routeParams, $location, PersonFactory, GroupFactory, Message) {
     var vm = this;
     var originalPerson;
     var originalGroups;
@@ -45,7 +45,7 @@
       })
       .catch(function(error) {
         var message = 'An error occured while loading your person. Please refresh the page to try again.';
-        AuthFactory.messageModalOpen(message);
+        Message.open(message);
       });
     }
 
@@ -71,7 +71,7 @@
         })
         .catch(function(error) {
           var message = 'An error occured while loading your groups. Please refresh the page to try again.';
-          AuthFactory.messageModalOpen(message);
+          Message.open(message);
         });
     }
 
@@ -144,7 +144,7 @@
             })
             .catch(function(err) {
               var message = 'An error occured while updating your person. Please refresh the page and try again.';
-              AuthFactory.messageModalOpen(message);
+              Message.open(message);
             })
             .finally(function() {
               vm.busy = false;
@@ -156,7 +156,7 @@
             })
             .catch(function(error) {
               var message = 'An error occured while updating your person. Please refresh the page and try again.';
-              AuthFactory.messageModalOpen(message);
+              Message.open(message);
             })
             .finally(function() {
               vm.busy = false;
