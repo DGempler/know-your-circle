@@ -2,9 +2,9 @@
   angular.module('knowYourCircle.people')
     .controller('peopleDemoController', peopleDemoController);
 
-  peopleDemoController.$inject = ['DemoFactory', '$q', 'AuthFactory'];
+  peopleDemoController.$inject = ['DemoFactory', '$q', 'Message'];
 
-  function peopleDemoController(DemoFactory, $q, AuthFactory) {
+  function peopleDemoController(DemoFactory, $q, Message) {
     var vm = this;
     vm.demoMode = true;
     vm.sortPeopleBy = "id";
@@ -21,7 +21,7 @@
         })
         .catch(function(error) {
           var message = 'An error occured while loading your people. Please refresh the page to try again.';
-          AuthFactory.messageModalOpen(message);
+          Message.open(message);
         })
         .finally(function() {
           vm.busy = false;
