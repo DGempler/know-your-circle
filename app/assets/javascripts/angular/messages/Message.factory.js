@@ -10,7 +10,7 @@
       factory.open = function(message, email) {
         var modalInstance = $uibModal.open({
           animation: true,
-          templateUrl: '/partials/auth/_message_modal.html',
+          templateUrl: '/partials/messages/_message_modal.html',
           controller: 'messageController as message',
           windowClass: "modal fade",
           resolve: {
