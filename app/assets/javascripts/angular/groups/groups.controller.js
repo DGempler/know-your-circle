@@ -63,10 +63,10 @@
         vm.editName = "";
       };
 
-      function cleanGroups(deletedGroupIds, oldGroups) {
+      function cleanGroups(deleteGroupIds) {
         var newGroups = [];
-        oldGroups.forEach(function(group) {
-          if (deletedGroupIds.indexOf(group.id.toString()) === -1) {
+        vm.groups.forEach(function(group) {
+          if (deleteGroupIds.indexOf(group.id.toString()) === -1) {
             newGroups.push(group);
           }
         });
@@ -74,24 +74,20 @@
       }
 
       vm.deleteGroups = function(id) {
-        vm.busy = true;
         var promiseArray = [];
-        var stagedForDeletionArray = Object.keys(vm.stagedForDeletion);
-        stagedForDeletionArray.forEach(function(id) {
+        var idArray = Object.keys(vm.stagedForDeletion);
+        idArray.forEach(function(id) {
           promiseArray.push(GroupFactory.deleteGroup(id));
         });
-
-        $q.all(promiseArray).then(function(groups) {
-          vm.groups = cleanGroups(stagedForDeletionArray, vm.groups);
-          vm.showDeleteGroupsButton = false;
-        })
-        .catch(function(error) {
-          var message = 'There was an error while deleting your groups. Please refresh the page to try again.';
-          AuthFactory.messageModalOpen(message);
-        })
-        .finally(function() {
-          vm.busy = false;
-        });
+        vm.groups = cleanGroups(idArray);
+        $q.all(promiseArray)
+          .then(function(groups) {
+            vm.showDeleteGroupsButton = false;
+          })
+          .catch(function(error) {
+            var message = 'There was an error while deleting your groups. Please refresh the page to try again.';
+            AuthFactory.messageModalOpen(message);
+          });
       };
 
       vm.editGroup = function(group) {
