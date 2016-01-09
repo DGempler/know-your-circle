@@ -2,9 +2,9 @@
   angular.module('knowYourCircle.auth')
     .controller('signupController', signupController);
 
-    signupController.$inject = ['$uibModalInstance', 'email', 'AuthFactory'];
+    signupController.$inject = ['$uibModalInstance', 'email', 'AuthFactory', 'Message'];
 
-    function signupController($uibModalInstance, email, AuthFactory) {
+    function signupController($uibModalInstance, email, AuthFactory, Message) {
       var vm = this;
       vm.user = {};
 
@@ -22,7 +22,7 @@
               if (vm.alreadyHasEmail) {
                 window.location.href = '/#/profile/edit/true';
               } else {
-                AuthFactory.messageModalOpen(null, email);
+                Message.open(null, email);
               }
             })
             .catch(function(failure) {
