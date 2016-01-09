@@ -2,9 +2,9 @@
   angular.module('knowYourCircle.auth')
     .factory('AuthFactory', AuthFactory);
 
-    AuthFactory.$inject = ['$uibModal', '$auth', '$location', '$q', '$rootScope', 'Upload'];
+    AuthFactory.$inject = ['$uibModal', '$auth', '$location', '$q', '$rootScope', 'Upload', 'Message'];
 
-    function AuthFactory($uibModal, $auth, $location, $q, $rootScope, Upload) {
+    function AuthFactory($uibModal, $auth, $location, $q, $rootScope, Upload, Message) {
       var factory = {};
 
       factory.logInOpen = function() {
@@ -76,11 +76,11 @@
           .then(function(resp) {
             $location.path('/');
             var message = "You have been logged out.";
-            factory.messageModalOpen(message);
+            Message.open(message);
           })
           .catch(function(error) {
             var message = 'There was an error logging you out. Please refresh the page and try again.';
-            factory.messageModalOpen(message);
+            Message.open(message);
           });
       };
 
