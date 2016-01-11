@@ -1,5 +1,5 @@
 (function() {
-  angular.module('knowYourCircle.people')
+  angular.module('knowYourCircle.demo')
     .factory('DemoFactory', DemoFactory);
 
   DemoFactory.$inject = ['$http', '$q'];
@@ -31,4 +31,5 @@
 
     return demoFactory;
   }
+
 })();

@@ -1,5 +1,5 @@
 (function() {
-  angular.module('knowYourCircle.people')
+  angular.module('knowYourCircle.demo')
     .controller('peopleDemoController', peopleDemoController);
 
   peopleDemoController.$inject = ['DemoFactory', '$q', 'Message'];

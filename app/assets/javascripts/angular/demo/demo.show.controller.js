@@ -1,5 +1,5 @@
 (function() {
-  angular.module('knowYourCircle.people')
+  angular.module('knowYourCircle.demo')
     .controller('peopleDemoShowController', peopleDemoShowController);
 
   peopleDemoShowController.$inject = ['$routeParams', 'DemoFactory', 'Message'];
