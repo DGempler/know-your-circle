@@ -1,10 +1,10 @@
 (function() {
   angular.module('knowYourCircle.demo')
-    .controller('peopleDemoController', peopleDemoController);
+    .controller('demoIndexController', demoIndexController);
 
-  peopleDemoController.$inject = ['DemoFactory', '$q', 'Message'];
+  demoIndexController.$inject = ['DemoFactory', '$q', 'Message'];
 
-  function peopleDemoController(DemoFactory, $q, Message) {
+  function demoIndexController(DemoFactory, $q, Message) {
     var vm = this;
     vm.demoMode = true;
     vm.sortPeopleBy = "id";

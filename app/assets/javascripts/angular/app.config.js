@@ -16,11 +16,11 @@
       })
       .when('/people/demo', {
         templateUrl: 'partials/people/people_index.html',
-        controller: 'peopleDemoController as index'
+        controller: 'demoIndexController as index'
       })
       .when('/people/demo/show/:id', {
         templateUrl: 'partials/people/people_show.html',
-        controller: 'peopleDemoShowController as show',
+        controller: 'demoShowController as show',
       })
       .when('/people/index', {
         templateUrl: 'partials/people/people_index.html',
