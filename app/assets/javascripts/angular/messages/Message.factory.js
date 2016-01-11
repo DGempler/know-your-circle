@@ -28,7 +28,7 @@
         var deferred = $q.defer();
         var modalInstance = $uibModal.open({
           animation: true,
-          templateUrl: '/partials/users/_confirmMessage_modal.html',
+          templateUrl: '/partials/messages/_confirmMessage_modal.html',
           controller: 'confirmMessageController as message',
           windowClass: "modal fade",
           resolve: {
@@ -49,7 +49,7 @@
       factory.openWelcome = function(name) {
         var modalInstance = $uibModal.open({
           animation: true,
-          templateUrl: '/partials/users/_welcome_modal.html',
+          templateUrl: '/partials/messages/_welcome_modal.html',
           controller: 'welcomeController as message',
           windowClass: "modal fade",
           resolve: {
