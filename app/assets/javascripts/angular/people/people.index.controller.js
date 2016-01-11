@@ -2,9 +2,9 @@
   angular.module('knowYourCircle.people')
     .controller('peopleIndexController', peopleIndexController);
 
-  peopleIndexController.$inject = ['PersonFactory', 'GroupFactory', '$q', 'Message', 'UserFactory', 'ShareFactory'];
+  peopleIndexController.$inject = ['PersonFactory', 'GroupFactory', '$q', 'Message', 'ShareFactory'];
 
-  function peopleIndexController(PersonFactory, GroupFactory, $q, Message, UserFactory, ShareFactory) {
+  function peopleIndexController(PersonFactory, GroupFactory, $q, Message, ShareFactory) {
     var vm = this;
     vm.sortPeopleBy = "first_name";
 
@@ -129,7 +129,7 @@
         }
       });
       message = "Are you sure you want to delete " + promiseArray.length + " of your people?";
-      UserFactory.confirmMessageModalOpen(message)
+      Message.openConfirm(message)
         .then(function() {
           deleteSelected(idArray, promiseArray);
         });
