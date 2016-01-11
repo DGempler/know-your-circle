@@ -2,9 +2,9 @@
   angular.module('knowYourCircle.users')
     .controller('profileController', profileController);
 
-  profileController.$inject = ['$rootScope', 'Message', 'AuthFactory', '$location', 'Message'];
+  profileController.$inject = ['$rootScope', 'AuthFactory', '$location', 'Message'];
 
-function profileController($rootScope, Message, AuthFactory, $location, Message) {
+function profileController($rootScope, AuthFactory, $location, Message) {
     var vm = this;
     vm.user = {};
 
