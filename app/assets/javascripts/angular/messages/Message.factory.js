@@ -42,7 +42,6 @@
         }, function() {
           deferred.reject();
         });
-
         return deferred.promise;
       };
 
