@@ -1,5 +1,5 @@
 (function() {
-  angular.module('knowYourCircle.groups')
+  angular.module('knowYourCircle.share')
     .controller('shareSelectedController', shareSelectedController);
 
     shareSelectedController.$inject = ['$uibModalInstance', 'people', 'size', 'ShareFactory', 'Message', '$rootScope'];

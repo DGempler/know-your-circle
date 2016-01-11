@@ -1,5 +1,5 @@
 (function() {
-  angular.module('knowYourCircle.people')
+  angular.module('knowYourCircle.share')
     .factory('ShareFactory', ShareFactory);
 
   ShareFactory.$inject = ['$uibModal', '$http', '$q'];
