@@ -9,19 +9,30 @@
     vm.demoMode = true;
     vm.sortPeopleBy = "id";
 
+    function addShowToAllPeople() {
+      angular.forEach(vm.people, function(person) {
+        person.show = true;
+      });
+    }
+
+    function handleGetPeopleSuccess() {
+      vm.people = people;
+      addShowToAllPeople();
+      getGroups();
+    }
+
+    function handleGetPeopleError() {
+      var message = 'An error occured while loading your people. Please refresh the page to try again.';
+      Message.open(message);
+    }
+
     function getGuestUserPeople() {
       vm.busy = true;
       DemoFactory.getGuestUserPeople()
         .then(function(people) {
-          vm.people = people;
-          vm.people.forEach(function(person) {
-            person.show = true;
-          });
-          getGroups();
+          handleGetPeopleSuccess();
         })
         .catch(function(error) {
-          var message = 'An error occured while loading your people. Please refresh the page to try again.';
-          Message.open(message);
         })
         .finally(function() {
           vm.busy = false;
@@ -100,9 +111,7 @@
 
     vm.showAll = function() {
       vm.filteredByGroup = false;
-      angular.forEach(vm.people, function(person) {
-        person.show = true;
-      });
+      addShowToAllPeople();
     };
 
     vm.filterGroup = function(chosenGroup) {
