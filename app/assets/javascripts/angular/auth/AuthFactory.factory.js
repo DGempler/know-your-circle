@@ -7,6 +7,27 @@
     function AuthFactory($uibModal, $auth, $location, $q, $rootScope, Upload, Message) {
       var factory = {};
 
+      function handleLogoutSuccess() {
+        $location.path('/');
+        var message = "You have been logged out.";
+        Message.open(message);
+      }
+
+      function handleLogoutError() {
+        var message = 'There was an error logging you out. Please refresh the page and try again.';
+        Message.open(message);
+      }
+
+      factory.logOut = function() {
+        $auth.signOut()
+          .then(function(resp) {
+            handleLogoutSuccess();
+          })
+          .catch(function(error) {
+            handleLogoutError();
+          });
+      };
+
       factory.logInOpen = function() {
         var modalInstance = $uibModal.open({
           animation: true,
@@ -69,19 +90,6 @@
             deferred.reject(error);
           });
         return deferred.promise;
-      };
-
-      factory.logOut = function() {
-        $auth.signOut()
-          .then(function(resp) {
-            $location.path('/');
-            var message = "You have been logged out.";
-            Message.open(message);
-          })
-          .catch(function(error) {
-            var message = 'There was an error logging you out. Please refresh the page and try again.';
-            Message.open(message);
-          });
       };
 
       factory.openChangePasswordModal = function() {
