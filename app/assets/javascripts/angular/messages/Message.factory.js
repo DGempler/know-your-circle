@@ -50,7 +50,7 @@
         var modalInstance = $uibModal.open({
           animation: true,
           templateUrl: '/partials/users/_welcome_modal.html',
-          controller: 'welcomeController as welcome',
+          controller: 'welcomeController as message',
           windowClass: "modal fade",
           resolve: {
             name: function() {
