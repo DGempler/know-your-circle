@@ -1,10 +1,10 @@
 (function() {
-  angular.module('knowYourCircle.auth')
+  angular.module('knowYourCircle.messages')
     .factory('Message', Message);
 
-    Message.$inject = ['$uibModal'];
+    Message.$inject = ['$uibModal', '$q'];
 
-    function Message($uibModal) {
+    function Message($uibModal, $q) {
       var factory = {};
 
       factory.open = function(message, email) {
@@ -37,7 +37,6 @@
             }
           }
         });
-
         modalInstance.result.then(function() {
           deferred.resolve();
         }, function() {
@@ -47,6 +46,19 @@
         return deferred.promise;
       };
 
+      factory.openWelcome = function(name) {
+        var modalInstance = $uibModal.open({
+          animation: true,
+          templateUrl: '/partials/users/_welcome_modal.html',
+          controller: 'welcomeController as welcome',
+          windowClass: "modal fade",
+          resolve: {
+            name: function() {
+              return name;
+            }
+          }
+        });
+      };
 
       return factory;
     }
