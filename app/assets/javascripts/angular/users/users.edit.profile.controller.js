@@ -2,9 +2,9 @@
   angular.module('knowYourCircle.users')
     .controller('editProfileController', editProfileController);
 
-  editProfileController.$inject=['$rootScope', 'AuthFactory', '$auth', '$routeParams', 'UserFactory', '$location', 'Message'];
+  editProfileController.$inject=['$rootScope', 'AuthFactory', '$auth', '$routeParams', '$location', 'Message'];
 
-  function editProfileController($rootScope, AuthFactory, $auth, $routeParams, UserFactory, $location, Message) {
+  function editProfileController($rootScope, AuthFactory, $auth, $routeParams, $location, Message) {
     var vm = this;
     vm.user = {};
 
@@ -20,7 +20,7 @@
       }
       if ($routeParams.first === "true") {
         var name = vm.user.first_name + " " + vm.user.last_name;
-        UserFactory.welcomeModalOpen(name);
+        Message.openWelcome(name);
       }
     }
 
