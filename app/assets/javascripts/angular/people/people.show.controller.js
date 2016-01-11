@@ -2,9 +2,9 @@
   angular.module('knowYourCircle.people')
     .controller('peopleShowController', peopleShowController);
 
-  peopleShowController.$inject = ['$routeParams', '$location', 'PersonFactory', 'UserFactory', 'Message'];
+  peopleShowController.$inject = ['$routeParams', '$location', 'PersonFactory', 'Message'];
 
-  function peopleShowController($routeParams, $location, PersonFactory, UserFactory, Message) {
+  function peopleShowController($routeParams, $location, PersonFactory, Message) {
     var vm = this;
     vm.busy = true;
     PersonFactory.getPerson($routeParams.id)
@@ -26,7 +26,7 @@
 
   vm.deletePerson = function() {
     var message = "Are you sure?";
-    UserFactory.confirmMessageModalOpen(message)
+    Message.openConfirm(message)
       .then(function() {
         vm.busy = true;
         PersonFactory.deletePerson($routeParams.id)
