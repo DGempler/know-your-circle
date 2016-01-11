@@ -21,7 +21,7 @@ function profileController($rootScope, Message, AuthFactory, $location, Message)
 
     vm.deleteUser = function() {
       var message = "Are you sure you want to delete your account and your whole circle?";
-      Message.confirmOpen(message)
+      Message.openConfirm(message)
         .then(function() {
           vm.busy = true;
           AuthFactory.deleteUser()
