@@ -8,9 +8,23 @@
       var vm = this;
       vm.user = {};
 
-      if (email) {
-        vm.alreadyHasEmail = true;
-        vm.user.email = email;
+      function handleSuccess(email) {
+        $uibModalInstance.close();
+        if (vm.alreadyHasEmail) {
+          window.location.href = '/#/profile/edit/true';
+        } else {
+          Message.open(null, email);
+        }
+      }
+
+      function handleFailure(failure) {
+        vm.failureToggle = !vm.failureToggle;
+        if (failure.data.errors) {
+          vm.error = failure.data.errors.full_messages[0];
+        } else {
+          vm.error = "An error occured";
+          vm.refresh = true;
+        }
       }
 
       vm.signUp = function(isValid) {
@@ -18,22 +32,10 @@
           vm.busy = true;
           AuthFactory.signUp(vm.user)
             .then(function(email) {
-              $uibModalInstance.close();
-              if (vm.alreadyHasEmail) {
-                window.location.href = '/#/profile/edit/true';
-              } else {
-                Message.open(null, email);
-              }
+              handleSuccess(email);
             })
             .catch(function(failure) {
-              vm.failureToggle = !vm.failureToggle;
-              if (failure.data.errors) {
-                vm.error = failure.data.errors.full_messages[0];
-              } else {
-                // failure.statusText;
-                vm.error = "An error occured";
-                vm.refresh = true;
-              }
+              handleFailure(failure);
             })
             .finally(function() {
               vm.busy = false;
@@ -44,6 +46,11 @@
       vm.openLogInModal = function() {
         AuthFactory.openLogInModal($uibModalInstance);
       };
+
+      if (email) {
+        vm.alreadyHasEmail = true;
+        vm.user.email = email;
+      }
 
     }
 
