@@ -10,7 +10,7 @@
     shareFactory.shareSelectedModalOpen = function(people, size) {
       var modalInstance = $uibModal.open({
         animation: true,
-        templateUrl: '/partials/people/_shareSelected_modal.html',
+        templateUrl: '/partials/share/_shareSelected_modal.html',
         controller: 'shareSelectedController as modal',
         windowClass: "modal fade",
         size: size,
@@ -28,7 +28,7 @@
     shareFactory.shareGroupsModalOpen = function(groups, size) {
       var modalInstance = $uibModal.open({
         animation: true,
-        templateUrl: '/partials/people/_shareGroups_modal.html',
+        templateUrl: '/partials/share/_shareGroups_modal.html',
         controller: 'shareGroupsController as modal',
         windowClass: "modal fade",
         size: size,
