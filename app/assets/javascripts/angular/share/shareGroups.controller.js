@@ -2,9 +2,9 @@
   angular.module('knowYourCircle.share')
     .controller('shareGroupsController', shareGroupsController);
 
-    shareGroupsController.$inject = ['$uibModalInstance', 'groups', 'size', 'ShareFactory', 'Message', '$rootScope'];
+    shareGroupsController.$inject = ['$uibModalInstance', 'groups', 'size', 'Share', 'Message', '$rootScope'];
 
-    function shareGroupsController($uibModalInstance, groups, size, ShareFactory, Message, $rootScope) {
+    function shareGroupsController($uibModalInstance, groups, size, Share, Message, $rootScope) {
       var vm = this;
       vm.groups = groups;
       vm.selected = {};
@@ -46,7 +46,7 @@
         payload.email = vm.email;
         payload.group_ids = selected;
 
-        ShareFactory.share(payload)
+        Share.share(payload)
           .then(function(success) {
             var message = 'The people in your selected groups have been sent to ' + vm.email;
             Message.open(message);

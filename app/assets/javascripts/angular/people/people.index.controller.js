@@ -2,9 +2,9 @@
   angular.module('knowYourCircle.people')
     .controller('peopleIndexController', peopleIndexController);
 
-  peopleIndexController.$inject = ['PersonFactory', 'GroupFactory', '$q', 'Message', 'ShareFactory'];
+  peopleIndexController.$inject = ['PersonFactory', 'GroupFactory', '$q', 'Message', 'Share'];
 
-  function peopleIndexController(PersonFactory, GroupFactory, $q, Message, ShareFactory) {
+  function peopleIndexController(PersonFactory, GroupFactory, $q, Message, Share) {
     var vm = this;
     vm.sortPeopleBy = "first_name";
 
@@ -234,7 +234,7 @@
       } else {
         size = 'sm';
       }
-      ShareFactory.shareSelectedModalOpen(selectedPeople, size);
+      Share.shareSelectedModalOpen(selectedPeople, size);
     };
 
     vm.shareGroups = function() {
@@ -243,7 +243,7 @@
       } else {
         size = 'sm';
       }
-      ShareFactory.shareGroupsModalOpen(vm.groups, size);
+      Share.shareGroupsModalOpen(vm.groups, size);
     };
 
     getPeople();

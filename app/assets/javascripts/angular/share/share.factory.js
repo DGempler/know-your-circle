@@ -1,10 +1,10 @@
 (function() {
   angular.module('knowYourCircle.share')
-    .factory('ShareFactory', ShareFactory);
+    .factory('Share', Share);
 
-  ShareFactory.$inject = ['$uibModal', '$http', '$q'];
+  Share.$inject = ['$uibModal', '$http', '$q'];
 
-  function ShareFactory($uibModal, $http, $q) {
+  function Share($uibModal, $http, $q) {
     var shareFactory = {};
 
     shareFactory.shareSelectedModalOpen = function(people, size) {
