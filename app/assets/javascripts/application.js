@@ -21,5 +21,6 @@
 //= require angular/users/users.module.js
 //= require angular/groups/groups.module.js
 //= require angular/messages/messages.module.js
+//= require angular/demo/demo.module.js
 //= require angular/app.module.js
 //= require_tree .
