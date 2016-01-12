@@ -121,6 +121,52 @@
       }
     }
 
+    function showHint() {
+      clearHintText();
+      vm.game.hintsShown = true;
+      vm.game.roundScore--;
+      vm.game.hintCount++;
+    }
+
+    function prepNextGameRound(reset) {
+      clearHintText();
+      vm.game.firstNameHintView = false;
+      vm.game.lastNameHintView = false;
+      vm.game.hintsShown = false;
+      otherHintsShown = [];
+      if (!reset) {
+        vm.game.totalPossibleScore += 5;
+      }
+      vm.game.scorePercentage = vm.game.totalScore / vm.game.totalPossibleScore;
+    }
+
+    function clearHintText() {
+      vm.game.firstNameHintText = "";
+      vm.game.firstNameHint = "";
+      vm.game.lastNameHintText = "";
+      vm.game.lastNameHint = "";
+    }
+
+    function clearOtherHintsShownIfAllShown() {
+      if (otherHintsShown.length === vm.person.randomPerson.hints.length) {
+        otherHintsShown = [];
+      }
+    }
+
+    function getRandomHintIndex(otherHintsLength) {
+      var randomHintIndex;
+      if (otherHintsLength !== 1) {
+        randomHintIndex = Math.floor(Math.random() * otherHintsLength);
+        while (otherHintsShown.indexOf(randomHintIndex) !== -1) {
+          randomHintIndex = Math.floor(Math.random() * otherHintsLength);
+        }
+      } else {
+        randomHintIndex = 0;
+      }
+      otherHintsShown.push(randomHintIndex);
+      return randomHintIndex;
+    }
+
     vm.playAllPeople = function() {
       clearNoPeopleProps();
       selectedPeople = people;
@@ -174,26 +220,6 @@
       vm.game[nameType] = vm.person.randomPerson.nickname;
     };
 
-    function clearOtherHintsShownIfAllShown() {
-      if (otherHintsShown.length === vm.person.randomPerson.hints.length) {
-        otherHintsShown = [];
-      }
-    }
-
-    function getRandomHintIndex(otherHintsLength) {
-      var randomHintIndex;
-      if (otherHintsLength !== 1) {
-        randomHintIndex = Math.floor(Math.random() * otherHintsLength);
-        while (otherHintsShown.indexOf(randomHintIndex) !== -1) {
-          randomHintIndex = Math.floor(Math.random() * otherHintsLength);
-        }
-      } else {
-        randomHintIndex = 0;
-      }
-      otherHintsShown.push(randomHintIndex);
-      return randomHintIndex;
-    }
-
     vm.game.hintOther = function(nameType) {
       var randomHintIndex;
       var otherHintsLength = vm.person.randomPerson.hints.length;
@@ -211,32 +237,6 @@
     vm.game.closeLastNameHint = function() {
       vm.game.lastNameHintView = false;
     };
-
-    function showHint() {
-      clearHintText();
-      vm.game.hintsShown = true;
-      vm.game.roundScore--;
-      vm.game.hintCount++;
-    }
-
-    function prepNextGameRound(reset) {
-      clearHintText();
-      vm.game.firstNameHintView = false;
-      vm.game.lastNameHintView = false;
-      vm.game.hintsShown = false;
-      otherHintsShown = [];
-      if (!reset) {
-        vm.game.totalPossibleScore += 5;
-      }
-      vm.game.scorePercentage = vm.game.totalScore / vm.game.totalPossibleScore;
-    }
-
-    function clearHintText() {
-      vm.game.firstNameHintText = "";
-      vm.game.firstNameHint = "";
-      vm.game.lastNameHintText = "";
-      vm.game.lastNameHint = "";
-    }
 
     vm.next = function() {
       next();
