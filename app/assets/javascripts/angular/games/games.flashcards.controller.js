@@ -219,13 +219,12 @@
       vm.game.hintCount++;
     }
 
-    function prepNextGameRound (reset) {
+    function prepNextGameRound(reset) {
       clearHintText();
       vm.game.firstNameHintView = false;
       vm.game.lastNameHintView = false;
       vm.game.hintsShown = false;
       otherHintsShown = [];
-      hintCount = 0;
       if (!reset) {
         vm.game.totalPossibleScore += 5;
       }
