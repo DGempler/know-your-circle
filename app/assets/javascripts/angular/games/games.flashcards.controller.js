@@ -9,6 +9,8 @@
     var selectedPeople;
     vm.selected = {};
     vm.person = {};
+    vm.randomPerson = {};
+    vm.guessPerson = {};
     vm.game = {};
     vm.clickOr = "Click";
     scoredThisRound = 0;
@@ -42,7 +44,7 @@
     function setUpGame() {
       randomNumber = Math.floor(Math.random() * gamePeople.length);
       vm.choosingPeople = false;
-      vm.person.guessPerson = {};
+      vm.guessPerson = {};
       zeroOutTotalScores();
       setUpGamePeople();
       setRndPersonAndGameProps(randomNumber);
@@ -54,7 +56,7 @@
       vm.person.firstNameRight = false;
       vm.person.lastNameRight = false;
       vm.person.result = false;
-      vm.person.guessPerson = {};
+      vm.guessPerson = {};
       if (gamePeople.length === 0) {
         setUpGamePeople();
       }
@@ -95,8 +97,8 @@
 
     function checkGuess(guessType, typeRightWrong) {
       var guessedName;
-      if (vm.person.guessPerson[guessType]) {
-        guessedName = vm.person.guessPerson[guessType].toLowerCase();
+      if (vm.guessPerson[guessType]) {
+        guessedName = vm.guessPerson[guessType].toLowerCase();
       }
       if (guessedName === vm.randomPerson[guessType].toLowerCase()) {
         correctGuessResult(typeRightWrong + 'Right');

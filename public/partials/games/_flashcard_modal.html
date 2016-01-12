@@ -41,7 +41,7 @@
         <div ng-hide='game.person.result || game.game.firstNameHintView' class="form-group">
           <label for="firstNameInput">First Name</label>
           <div class='input-group'>
-            <input ng-model="game.person.guessPerson.first_name" type="text" class="form-control" id="firstNameInput" autofocus>
+            <input ng-model="game.guessPerson.first_name" type="text" class="form-control" id="firstNameInput" autofocus>
             <div class="input-group-btn">
               <a class="btn btn-info dropdown-toggle" ng-class="{'disabled': game.game.hintCount > 2 || game.game.firstNameHintView || game.game.lastNameHintView }" type="button" id="firstNameHintDropdown" data-toggle="dropdown" aria-haspopup="true" aria-expanded="true">
                 Get Hint &nbsp;
@@ -72,7 +72,7 @@
         <div ng-hide='game.person.result || game.game.lastNameHintView' class="form-group">
           <label for="lastNameInput">Last Name</label>
           <div class='input-group'>
-            <input ng-model="game.person.guessPerson.last_name" type="text" class="form-control" id="lastNameInput">
+            <input ng-model="game.guessPerson.last_name" type="text" class="form-control" id="lastNameInput">
               <div class="input-group-btn">
               <a class="btn btn-info dropdown-toggle" ng-class="{'disabled': game.game.hintCount > 2 || game.game.firstNameHintView || game.game.lastNameHintView }" type="button" id="lastNameHintDropdown" data-toggle="dropdown" aria-haspopup="true" aria-expanded="true">
                 Get Hint &nbsp;
