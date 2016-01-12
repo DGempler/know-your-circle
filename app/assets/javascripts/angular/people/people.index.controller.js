@@ -35,7 +35,7 @@
     function getPeople() {
       vm.busy = true;
       PersonFactory.getPeople().then(function(people) {
-        handleGetPeopleSuccess();
+        handleGetPeopleSuccess(people);
       })
       .catch(function(error) {
         handleGetPeopleError();
@@ -191,13 +191,13 @@
         });
     };
 
-    function createGroupIdsArrayAndPrepForReq(person, promises, exists) {
+    function prepPersonForPutRequest(person, groupId, promises, exists) {
       person.group_ids = [];
       person.groups.forEach(function(existingGroup) {
         person.group_ids.push(existingGroup.id);
       });
-      if (person.group_ids.indexOf(newGroup.id) === -1) {
-        addGroupToIdArrayAndPromise(person, newGroup.id, promises);
+      if (person.group_ids.indexOf(groupId) === -1) {
+        addGroupToIdArrayAndPromise(person, groupId, promises);
       } else {
         exists.push(person);
       }
@@ -208,10 +208,10 @@
       promises.push(PersonFactory.updateGroups(person));
     }
 
-    function checkSelectedForApplyGroup(promises, exists) {
+    function checkSelectedForApplyGroup(groupId, promises, exists) {
       angular.forEach(vm.people, function(person) {
         if (person.selected) {
-          prepPersonForPutRequest(person, promises, exists);
+          prepPersonForPutRequest(person, groupId, promises, exists);
         }
       });
     }
@@ -277,7 +277,7 @@
     vm.applyGroup = function(newGroup) {
       var promiseArray = [];
       var alreadyExistsArray = [];
-      checkSelectedForApplyGroup(promiseArray, alreadyExistsArray);
+      checkSelectedForApplyGroup(newGroup.id, promiseArray, alreadyExistsArray);
       if (promiseArray.length > 0) {
         applyNewGroup(newGroup, promiseArray, alreadyExistsArray);
       } else {
