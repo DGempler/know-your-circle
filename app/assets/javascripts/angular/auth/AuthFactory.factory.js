@@ -7,13 +7,13 @@
     function AuthFactory($uibModal, $auth, $location, $q, $rootScope, Upload, Message) {
       var factory = {};
 
-      function handleLogoutSuccess() {
+      function logoutSuccess() {
         $location.path('/');
         var message = "You have been logged out.";
         Message.open(message);
       }
 
-      function handleLogoutError() {
+      function logoutError() {
         var message = 'There was an error logging you out. Please refresh the page and try again.';
         Message.open(message);
       }
@@ -21,10 +21,10 @@
       factory.logOut = function() {
         $auth.signOut()
           .then(function(resp) {
-            handleLogoutSuccess();
+            logoutSuccess();
           })
           .catch(function(error) {
-            handleLogoutError();
+            logoutError();
           });
       };
 
