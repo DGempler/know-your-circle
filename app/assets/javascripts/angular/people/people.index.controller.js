@@ -14,6 +14,12 @@
       });
     }
 
+    function toggleSelectedOnAllPeople(isSelected) {
+      angular.forEach(vm.people, function(person) {
+        person.selected = isSelected;
+      });
+    }
+
     function handleGetPeopleSuccess(people) {
       vm.people = people;
       addShowToAllPeople();
@@ -66,10 +72,10 @@
         });
     }
 
-    function deleteSelected(idArray, promiseArray) {
-      vm.people = cleanPeople(idArray);
+    function deleteSelected(deletionArrays) {
+      vm.people = cleanPeople(deletionArrays.idArray);
       vm.someoneSelected = false;
-      sendDeletedToBackend(promiseArray);
+      sendDeletedToBackend(deletionArrays.promiseArray);
     }
 
     function cleanPeople(deletePeopleIds) {
@@ -80,6 +86,23 @@
         }
       });
       return newPeople;
+    }
+
+    function addSelectedToDeletionArrays(deletionArrays) {
+      angular.forEach(vm.people, function(person) {
+        if (person.selected) {
+          deletionArrays.idArray.push(person.id);
+          deletionArrays.promiseArray.push(PersonFactory.deletePerson(person.id));
+        }
+      });
+    }
+
+    function openConfirmMessage(deletionArrays) {
+      var message = "Are you sure you want to delete " + deletionArrays.promiseArray.length + " of your people?";
+      Message.openConfirm(message)
+        .then(function() {
+          deleteSelected(deletionArrays);
+        });
     }
 
     vm.selectAllCheckbox = function(bool) {
@@ -94,17 +117,13 @@
     vm.selectAll = function() {
       if (vm.people.length > 0) {
         vm.someoneSelected = true;
-        angular.forEach(vm.people, function(person) {
-          person.selected = true;
-        });
+        toggleSelectedOnAllPeople(true);
       }
     };
 
     vm.selectNone = function() {
-        vm.someoneSelected = false;
-        angular.forEach(vm.people, function(person) {
-          person.selected = false;
-        });
+      vm.someoneSelected = false;
+      toggleSelectedOnAllPeople(false);
     };
 
     vm.selectAllShown = function() {
@@ -143,20 +162,12 @@
     };
 
     vm.clickDelete = function() {
-      var idArray = [];
-      var promiseArray = [];
-      var message;
-      angular.forEach(vm.people, function(person) {
-        if (person.selected) {
-          idArray.push(person.id);
-          promiseArray.push(PersonFactory.deletePerson(person.id));
-        }
-      });
-      message = "Are you sure you want to delete " + promiseArray.length + " of your people?";
-      Message.openConfirm(message)
-        .then(function() {
-          deleteSelected(idArray, promiseArray);
-        });
+      var deletionArrays = {
+        idArray: [],
+        promiseArray: []
+      };
+      addSelectedToDeletionArrays(deletionArrays);
+      openConfirmMessage(deletionArrays);
     };
 
     vm.editGroups = function() {
