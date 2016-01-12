@@ -8,7 +8,7 @@
       var vm = this;
       vm.user = {};
 
-      function handleSuccess(email) {
+      function signUpSuccess(email) {
         $uibModalInstance.close();
         if (vm.alreadyHasEmail) {
           window.location.href = '/#/profile/edit/true';
@@ -17,7 +17,7 @@
         }
       }
 
-      function handleFailure(failure) {
+      function signUpFailure(failure) {
         vm.failureToggle = !vm.failureToggle;
         if (failure.data.errors) {
           vm.error = failure.data.errors.full_messages[0];
@@ -32,10 +32,10 @@
           vm.busy = true;
           AuthFactory.signUp(vm.user)
             .then(function(email) {
-              handleSuccess(email);
+              signUpSuccess(email);
             })
             .catch(function(failure) {
-              handleFailure(failure);
+              signUpFailure(failure);
             })
             .finally(function() {
               vm.busy = false;
