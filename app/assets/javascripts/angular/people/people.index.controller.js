@@ -8,20 +8,37 @@
     var vm = this;
     vm.sortPeopleBy = "first_name";
 
+    function addShowToAllPeople() {
+      angular.forEach(vm.people, function(person) {
+        person.show = true;
+      });
+    }
+
+    function handleGetPeopleSuccess(people) {
+      vm.people = people;
+      addShowToAllPeople();
+      getGroups();
+    }
+
+    function handleGetPeopleError() {
+      var message = 'An error occured while loading your people. Please refresh the page to try again.';
+      Message.open(message);
+      vm.busy = false;
+    }
+
     function getPeople() {
       vm.busy = true;
       PersonFactory.getPeople().then(function(people) {
-        vm.people = people;
-        vm.people.forEach(function(person) {
-          person.show = true;
-        });
-        getGroups();
+        handleGetPeopleSuccess();
       })
       .catch(function(error) {
-        var message = 'An error occured while loading your people. Please refresh the page to try again.';
-        Message.open(message);
-        vm.busy = false;
+        handleGetPeopleError();
       });
+    }
+
+    function handleGetGroupsError() {
+      var message = 'An error occured while loading your groups. Please refresh the page to try again.';
+      Message.open(message);
     }
 
     function getGroups() {
@@ -30,22 +47,29 @@
           vm.groups = groups;
         })
         .catch(function(error) {
-          var message = 'An error occured while loading your groups. Please refresh the page to try again.';
-          Message.open(message);
+          handleGetGroupsError();
         })
         .finally(function() {
           vm.busy = false;
         });
     }
 
+    function handleDeletePeopleError() {
+      var message = 'An error occured while deleting your people. Please refresh the page and try again.';
+      Message.open(message);
+    }
+
+    function sendDeletedToBackend(promiseArray) {
+      $q.all(promiseArray)
+        .catch(function(errors) {
+          handleDeletePeopleError();
+        });
+    }
+
     function deleteSelected(idArray, promiseArray) {
       vm.people = cleanPeople(idArray);
       vm.someoneSelected = false;
-      $q.all(promiseArray)
-        .catch(function(errors) {
-          var message = 'An error occured while deleting your people. Please refresh the page and try again.';
-          Message.open(message);
-        });
+      sendDeletedToBackend(promiseArray);
     }
 
     function cleanPeople(deletePeopleIds) {
