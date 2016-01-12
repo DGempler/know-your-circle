@@ -216,8 +216,8 @@
       });
     }
 
-    function addGroupAppliedPeopleToMessage(people) {
-      var message = group.name + " has been added to: ";
+    function addGroupAppliedPeopleToMessage(people, groupName) {
+      var message = groupName + " has been added to: ";
       people.forEach(function(person, index) {
         if (index !== people.length - 1) {
           message += person.first_name + " " + person.last_name + ", ";
@@ -228,8 +228,8 @@
       return message;
     }
 
-    function addGroupExistedPeopleToMessage(people, message) {
-      var message = " It already existed on: ";
+    function addGroupExistedPeopleToMessage(exists) {
+      var message = "It already existed on: ";
       exists.forEach(function(person, index) {
         if (index !== exists.length - 1) {
           message += person.first_name + " " + person.last_name + ", ";
@@ -242,9 +242,9 @@
 
     function handleApplyGroupSuccess(people, group, exists) {
       vm.someoneSelected = false;
-      var message = addGroupAppliedPeopleToMessage(people);
+      var message = addGroupAppliedPeopleToMessage(people, group.name);
       if (exists.length > 0) {
-        message += addGroupExistedPeopleToMessage();
+        message += addGroupExistedPeopleToMessage(exists);
       }
       Message.open(message);
       getPeople();
@@ -257,7 +257,7 @@
 
     function applyNewGroup(group, promises, exists) {
       vm.busy = true;
-      $q.all(promiseArray)
+      $q.all(promises)
         .then(function(people) {
           handleApplyGroupSuccess(people, group, exists);
         })
