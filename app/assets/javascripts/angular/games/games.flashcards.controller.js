@@ -19,17 +19,35 @@
       vm.game.totalPossibleScore = 0;
     }
 
+    function setRndPersonAndGameProps(randNum) {
+      vm.person.randomPerson = gamePeople[randNum];
+      gamePeople.splice(randNum, 1);
+      vm.game.roundScore = 5;
+      vm.game.hintCount = 0;
+      vm.game.scoreMessage = "Max Round Score:";
+    }
+
     function setUpGame() {
+      randomNumber = Math.floor(Math.random() * gamePeople.length);
       vm.choosingPeople = false;
       vm.person.guessPerson = {};
-      vm.game.roundScore = 5;
-      vm.game.scoreMessage = "Max Round Score:";
-      vm.game.hintCount = 0;
       zeroOutTotalScores();
       setUpGamePeople();
-      randomNumber = Math.floor(Math.random() * gamePeople.length);
-      vm.person.randomPerson = gamePeople[randomNumber];
-      gamePeople.splice(randomNumber, 1);
+      setRndPersonAndGameProps(randomNumber);
+    }
+
+    function next() {
+      var rndNum = chooseNewRandomNumber();
+      vm.person.firstNameWrong = false;
+      vm.person.lastNameWrong = false;
+      vm.person.firstNameRight = false;
+      vm.person.lastNameRight = false;
+      vm.person.result = false;
+      vm.person.guessPerson = {};
+      if (gamePeople.length === 0) {
+        setUpGamePeople();
+      }
+      setRndPersonAndGameProps(rndNum);
     }
 
     function setUpGamePeople() {
@@ -42,23 +60,6 @@
       var newRandomNumber = Math.floor(Math.random() * gamePeople.length);
       randomNumber = newRandomNumber;
       return randomNumber;
-    }
-
-    function next() {
-      vm.person.firstNameWrong = false;
-      vm.person.lastNameWrong = false;
-      vm.person.firstNameRight = false;
-      vm.person.lastNameRight = false;
-      vm.person.result = false;
-      vm.person.guessPerson = {};
-      if (gamePeople.length === 0) {
-        setUpGamePeople();
-      }
-      vm.person.randomPerson = gamePeople[chooseNewRandomNumber()];
-      gamePeople.splice(randomNumber, 1);
-      vm.game.scoreMessage = "Max Round Score:";
-      vm.game.roundScore = 5;
-      vm.game.hintCount = 0;
     }
 
     vm.playAllPeople = function() {
