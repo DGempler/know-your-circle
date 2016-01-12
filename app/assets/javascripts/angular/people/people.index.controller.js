@@ -105,6 +105,17 @@
         });
     }
 
+    function checkPeopleGroups(chosenGroup) {
+      angular.forEach(vm.people, function(person) {
+        person.show = false;
+        person.groups.forEach(function(personGroup) {
+          if (chosenGroup.id === personGroup.id) {
+            person.show = true;
+          }
+        });
+      });
+    }
+
     vm.selectAllCheckbox = function(bool) {
       if (bool && vm.people.length > 0) {
         vm.selectAll();
@@ -247,14 +258,7 @@
     vm.filterGroup = function(chosenGroup) {
       vm.filteredByGroup = true;
       vm.filteredGroup = chosenGroup.name;
-      angular.forEach(vm.people, function(person) {
-        person.show = false;
-        person.groups.forEach(function(personGroup) {
-          if (chosenGroup.id === personGroup.id) {
-            person.show = true;
-          }
-        });
-      });
+      checkPeopleGroups(chosenGroup);
     };
 
     vm.shareSelected = function() {
