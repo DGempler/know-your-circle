@@ -10,10 +10,11 @@
     vm.selected = {};
     vm.person = {};
     vm.game = {};
+    vm.clickOr = "Click";
+    scoredThisRound = 0;
     gamePeople = [];
     var otherHintsShown = [];
     var randomNumber;
-    vm.clickOr = "Click";
 
     function zeroOutTotalScores() {
       vm.game.totalScore = 0;
@@ -128,7 +129,7 @@
     };
 
     vm.submitPerson = function() {
-      var scoredThisRound = 0;
+      scoredThisRound = 0;
 
       checkGuess('first_name', 'firstName');
       checkGuess('last_name', 'lastName');
@@ -138,18 +139,19 @@
       prepNextGameRound();
     };
 
-    vm.game.hintFirstLetterFirstName = function() {
+    function getHint(camelCase, english, snake_case) {
       showHint();
-      vm.game.firstNameHintView = true;
-      vm.game.firstNameHintText = "This person's first name starts with:";
-      vm.game.firstNameHint = vm.person.randomPerson.first_name[0];
+      vm.game[camelCase + 'HintView'] = true;
+      vm.game[camelCase + 'HintText'] = "This person's " + english + " starts with:";
+      vm.game[camelCase + 'Hint'] = vm.person.randomPerson[snake_case][0];
+    }
+
+    vm.game.hintFirstLetterFirstName = function() {
+      getHint('firstName', 'first name', 'first_name');
     };
 
     vm.game.hintFirstLetterLastName = function() {
-      showHint();
-      vm.game.lastNameHintView = true;
-      vm.game.lastNameHintText = "This person's last name starts with:";
-      vm.game.lastNameHint = vm.person.randomPerson.last_name[0];
+      getHint('lastName', 'last name', 'last_name');
     };
 
     vm.game.hintNickname = function(nameType) {
