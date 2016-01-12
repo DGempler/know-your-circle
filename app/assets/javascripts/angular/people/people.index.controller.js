@@ -20,13 +20,13 @@
       });
     }
 
-    function handleGetPeopleSuccess(people) {
+    function getPeopleSuccess(people) {
       vm.people = people;
       addShowToAllPeople();
       getGroups();
     }
 
-    function handleGetPeopleError() {
+    function getPeopleError() {
       var message = 'An error occured while loading your people. Please refresh the page to try again.';
       Message.open(message);
       vm.busy = false;
@@ -35,14 +35,14 @@
     function getPeople() {
       vm.busy = true;
       PersonFactory.getPeople().then(function(people) {
-        handleGetPeopleSuccess(people);
+        getPeopleSuccess(people);
       })
       .catch(function(error) {
-        handleGetPeopleError();
+        getPeopleError();
       });
     }
 
-    function handleGetGroupsError() {
+    function getGroupsError() {
       var message = 'An error occured while loading your groups. Please refresh the page to try again.';
       Message.open(message);
     }
@@ -53,14 +53,14 @@
           vm.groups = groups;
         })
         .catch(function(error) {
-          handleGetGroupsError();
+          getGroupsError();
         })
         .finally(function() {
           vm.busy = false;
         });
     }
 
-    function handleDeletePeopleError() {
+    function deletePeopleError() {
       var message = 'An error occured while deleting your people. Please refresh the page and try again.';
       Message.open(message);
     }
@@ -68,7 +68,7 @@
     function sendDeletedToBackend(promiseArray) {
       $q.all(promiseArray)
         .catch(function(errors) {
-          handleDeletePeopleError();
+          deletePeopleError();
         });
     }
 
@@ -240,7 +240,7 @@
       return message;
     }
 
-    function handleApplyGroupSuccess(people, group, exists) {
+    function applyGroupSuccess(people, group, exists) {
       vm.someoneSelected = false;
       var message = addGroupAppliedPeopleToMessage(people, group.name);
       if (exists.length > 0) {
@@ -250,7 +250,7 @@
       getPeople();
     }
 
-    function handleApplyGroupError() {
+    function applyGroupError() {
       var message = 'An error occured while applying your group. Please refresh the page and try again.';
       Message.open(message);
     }
@@ -259,10 +259,10 @@
       vm.busy = true;
       $q.all(promises)
         .then(function(people) {
-          handleApplyGroupSuccess(people, group, exists);
+          applyGroupSuccess(people, group, exists);
         })
         .catch(function(error) {
-          handleApplyGroupError();
+          applyGroupError();
         })
         .finally(function() {
           vm.busy = false;
