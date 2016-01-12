@@ -15,13 +15,13 @@
       });
     }
 
-    function handleGetPeopleSuccess(people) {
+    function getPeopleSuccess(people) {
       vm.people = people;
       addShowToAllPeople();
       getGroups();
     }
 
-    function handleGetPeopleError() {
+    function getPeopleError() {
       var message = 'An error occured while loading your people. Please refresh the page to try again.';
       Message.open(message);
     }
@@ -30,10 +30,10 @@
       vm.busy = true;
       DemoFactory.getGuestUserPeople()
         .then(function(people) {
-          handleGetPeopleSuccess(people);
+          getPeopleSuccess(people);
         })
         .catch(function(error) {
-          handleGetPeopleError();
+          getPeopleError();
         })
         .finally(function() {
           vm.busy = false;
