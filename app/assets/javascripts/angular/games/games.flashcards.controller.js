@@ -14,14 +14,18 @@
     var randomNumber;
     vm.clickOr = "Click";
 
+    function zeroOutTotalScores() {
+      vm.game.totalScore = 0;
+      vm.game.totalPossibleScore = 0;
+    }
+
     function setUpGame() {
       vm.choosingPeople = false;
       vm.person.guessPerson = {};
       vm.game.roundScore = 5;
-      vm.game.totalScore = 0;
-      vm.game.totalPossibleScore = 0;
       vm.game.scoreMessage = "Max Round Score:";
       vm.game.hintCount = 0;
+      zeroOutTotalScores();
       setUpGamePeople();
       randomNumber = Math.floor(Math.random() * gamePeople.length);
       vm.person.randomPerson = gamePeople[randomNumber];
@@ -222,8 +226,7 @@
     vm.reset = function () {
       prepNextGameRound(true);
       next();
-      vm.game.totalScore = 0;
-      vm.game.totalPossibleScore = 0;
+      zeroOutTotalScores();
       vm.game.scorePercentage = vm.game.totalScore / vm.game.totalPossibleScore;
     };
 
