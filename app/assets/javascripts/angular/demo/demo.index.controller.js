@@ -15,7 +15,7 @@
       });
     }
 
-    function handleGetPeopleSuccess() {
+    function handleGetPeopleSuccess(people) {
       vm.people = people;
       addShowToAllPeople();
       getGroups();
@@ -30,9 +30,10 @@
       vm.busy = true;
       DemoFactory.getGuestUserPeople()
         .then(function(people) {
-          handleGetPeopleSuccess();
+          handleGetPeopleSuccess(people);
         })
         .catch(function(error) {
+          handleGetPeopleError();
         })
         .finally(function() {
           vm.busy = false;
