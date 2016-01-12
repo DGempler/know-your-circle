@@ -9,18 +9,26 @@
     vm.demoMode = true;
     vm.busy = true;
 
-    DemoFactory.getGuestUserPerson($routeParams.id)
-      .then(function(person) {
-        vm.person = person;
+    function getPersonSuccess(person) {
+      vm.person = person;
         if (vm.person.dob === 'null' || vm.person.dob === null) {
           vm.person.dob = "";
         } else {
           vm.person.dob = moment(vm.person.dob).format("MMM Do YYYY");
         }
+    }
+
+    function getPersonError() {
+      var message = 'An error occured while loading your person. Please refresh the page to try again.';
+      Message.open(message);
+    }
+
+    DemoFactory.getGuestUserPerson($routeParams.id)
+      .then(function(person) {
+        getPersonSuccess(person);
       })
       .catch(function(error) {
-        var message = 'An error occured while loading your person. Please refresh the page to try again.';
-        Message.open(message);
+        getPersonError();
       })
       .finally(function() {
         vm.busy = false;
