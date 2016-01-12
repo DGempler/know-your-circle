@@ -69,6 +69,13 @@
       vm.clickOr = "Click";
     }
 
+    function setNoPeopleProps() {
+      vm.noPeopleInGroup = "in the selected groups";
+      vm.addSomePeople = "people";
+      vm.clickOr = "or";
+      vm.selected = {};
+    }
+
     vm.playAllPeople = function() {
       clearNoPeopleProps();
       selectedPeople = people;
@@ -96,10 +103,7 @@
       });
       setUpGame();
       if (selectedPeople.length === 0) {
-        vm.noPeopleInGroup = "in the selected groups";
-        vm.addSomePeople = "people";
-        vm.clickOr = "or";
-        vm.selected = {};
+        setNoPeopleProps();
       }
     };
 
