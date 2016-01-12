@@ -6,6 +6,7 @@
 
   function gamesFlashcardsController($uibModalInstance, people, groups) {
     var vm = this;
+    var selectedPeople;
     vm.selected = {};
     vm.person = {};
     vm.game = {};
@@ -62,10 +63,14 @@
       return randomNumber;
     }
 
-    vm.playAllPeople = function() {
+    function clearNoPeopleProps() {
       vm.noPeopleInGroup = "";
       vm.addSomePeople = "";
       vm.clickOr = "Click";
+    }
+
+    vm.playAllPeople = function() {
+      clearNoPeopleProps();
       selectedPeople = people;
       setUpGame();
     };
@@ -79,11 +84,9 @@
     };
 
     vm.playByGroups = function() {
-      vm.noPeopleInGroup = "";
-      vm.addSomePeople = "";
-      vm.clickOr = "Click";
       var selected = Object.keys(vm.selected);
       selectedPeople = [];
+      clearNoPeopleProps();
       people.forEach(function(person) {
         person.groups.forEach(function(group) {
           if ((selected.indexOf(group.name) !== -1) && selectedPeople.indexOf(person) === -1) {
