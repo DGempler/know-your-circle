@@ -39,7 +39,6 @@
     }
 
     function next() {
-      var rndNum = chooseNewRandomNumber();
       vm.person.firstNameWrong = false;
       vm.person.lastNameWrong = false;
       vm.person.firstNameRight = false;
@@ -49,7 +48,8 @@
       if (gamePeople.length === 0) {
         setUpGamePeople();
       }
-      setRndPersonAndGameProps(rndNum);
+      chooseNewRandomNumber();
+      setRndPersonAndGameProps(randomNumber);
     }
 
     function setUpGamePeople() {
@@ -61,7 +61,6 @@
     function chooseNewRandomNumber() {
       var newRandomNumber = Math.floor(Math.random() * gamePeople.length);
       randomNumber = newRandomNumber;
-      return randomNumber;
     }
 
     function clearNoPeopleProps() {
@@ -104,6 +103,16 @@
       vm.game[camelCase + 'Hint'] = vm.person.randomPerson[snake_case][0];
     }
 
+    function addPeopleWithSelectedGroups(selectedGroups, selectedPeople) {
+      people.forEach(function(person) {
+        person.groups.forEach(function(group) {
+          if ((selectedGroups.indexOf(group.name) !== -1) && selectedPeople.indexOf(person) === -1) {
+            selectedPeople.push(person);
+          }
+        });
+      });
+    }
+
     vm.playAllPeople = function() {
       clearNoPeopleProps();
       selectedPeople = people;
@@ -119,16 +128,10 @@
     };
 
     vm.playByGroups = function() {
-      var selected = Object.keys(vm.selected);
+      var selectedGroups = Object.keys(vm.selected);
       selectedPeople = [];
       clearNoPeopleProps();
-      people.forEach(function(person) {
-        person.groups.forEach(function(group) {
-          if ((selected.indexOf(group.name) !== -1) && selectedPeople.indexOf(person) === -1) {
-            selectedPeople.push(person);
-          }
-        });
-      });
+      addPeopleWithSelectedGroups(selectedGroups, selectedPeople);
       setUpGame();
       if (selectedPeople.length === 0) {
         setNoPeopleProps();
