@@ -113,6 +113,14 @@
       });
     }
 
+    function determineFirstOrLastNameHint(nameType) {
+      if (nameType === 'firstNameHint') {
+        vm.game.firstNameHintView = true;
+      } else {
+        vm.game.lastNameHintView = true;
+      }
+    }
+
     vm.playAllPeople = function() {
       clearNoPeopleProps();
       selectedPeople = people;
@@ -140,10 +148,8 @@
 
     vm.submitPerson = function() {
       scoredThisRound = 0;
-
       checkGuess('first_name', 'firstName');
       checkGuess('last_name', 'lastName');
-
       vm.game.scoreMessage = "Scored this round:";
       vm.game.roundScore = scoredThisRound;
       prepNextGameRound();
@@ -168,18 +174,14 @@
       vm.game[nameType] = vm.person.randomPerson.nickname;
     };
 
-    vm.game.hintOther = function(nameType) {
-      if (nameType === 'firstNameHint') {
-        vm.game.firstNameHintView = true;
-      } else {
-        vm.game.lastNameHintView = true;
-      }
-      var randomHintIndex;
-      showHint();
+    function clearOtherHintsShownIfAllShown() {
       if (otherHintsShown.length === vm.person.randomPerson.hints.length) {
         otherHintsShown = [];
       }
-      var otherHintsLength = vm.person.randomPerson.hints.length;
+    }
+
+    function getRandomHintIndex(otherHintsLength) {
+      var randomHintIndex;
       if (otherHintsLength !== 1) {
         randomHintIndex = Math.floor(Math.random() * otherHintsLength);
         while (otherHintsShown.indexOf(randomHintIndex) !== -1) {
@@ -189,6 +191,16 @@
         randomHintIndex = 0;
       }
       otherHintsShown.push(randomHintIndex);
+      return randomHintIndex;
+    }
+
+    vm.game.hintOther = function(nameType) {
+      var randomHintIndex;
+      var otherHintsLength = vm.person.randomPerson.hints.length;
+      determineFirstOrLastNameHint(nameType);
+      showHint();
+      clearOtherHintsShownIfAllShown();
+      randomHintIndex = getRandomHintIndex(otherHintsLength);
       vm.game[nameType + "Text"] = vm.person.randomPerson.hints[randomHintIndex];
     };
 
