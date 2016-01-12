@@ -15,6 +15,7 @@
     vm.clickOr = "Click";
 
     function setUpGame() {
+      vm.choosingPeople = false;
       vm.person.guessPerson = {};
       vm.game.roundScore = 5;
       vm.game.totalScore = 0;
@@ -62,7 +63,6 @@
       vm.clickOr = "Click";
       selectedPeople = people;
       setUpGame();
-      vm.choosingPeople = false;
     };
 
     vm.selectGroup = function(name) {
@@ -93,7 +93,6 @@
         vm.clickOr = "or";
         vm.selected = {};
       }
-      vm.choosingPeople = false;
     };
 
     vm.submitPerson = function() {
