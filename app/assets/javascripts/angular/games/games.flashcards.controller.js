@@ -76,6 +76,26 @@
       vm.selected = {};
     }
 
+    function correctGuessResult(typeRight) {
+      vm.person[typeRight] = true;
+      vm.person.result = true;
+      vm.game.totalScore += (vm.game.roundScore / 2);
+      scoredThisRound += (vm.game.roundScore / 2);
+    }
+
+    function checkGuess(guessType, typeRightWrong) {
+      var guessedName;
+      if (vm.person.guessPerson[guessType]) {
+        guessedName = vm.person.guessPerson[guessType].toLowerCase();
+      }
+      if (guessedName === vm.person.randomPerson[guessType].toLowerCase()) {
+        correctGuessResult(typeRightWrong + 'Right');
+      } else {
+        vm.person.result = true;
+        vm.person[typeRightWrong + 'Wrong'] = true;
+      }
+    }
+
     vm.playAllPeople = function() {
       clearNoPeopleProps();
       selectedPeople = people;
@@ -110,33 +130,12 @@
     vm.submitPerson = function() {
       var scoredThisRound = 0;
 
-      function correctGuessResult(typeRight) {
-        vm.person[typeRight] = true;
-        vm.person.result = true;
-        vm.game.totalScore += (vm.game.roundScore / 2);
-        scoredThisRound += (vm.game.roundScore / 2);
-      }
-
-      function checkGuess(guessType, typeRightWrong) {
-        var guessedName;
-        if (vm.person.guessPerson[guessType]) {
-          guessedName = vm.person.guessPerson[guessType].toLowerCase();
-        }
-        if (guessedName === vm.person.randomPerson[guessType].toLowerCase()) {
-          correctGuessResult(typeRightWrong + 'Right');
-        } else {
-          vm.person.result = true;
-          vm.person[typeRightWrong + 'Wrong'] = true;
-        }
-      }
-
       checkGuess('first_name', 'firstName');
       checkGuess('last_name', 'lastName');
 
       vm.game.scoreMessage = "Scored this round:";
       vm.game.roundScore = scoredThisRound;
       prepNextGameRound();
-
     };
 
     vm.game.hintFirstLetterFirstName = function() {
