@@ -24,16 +24,16 @@
 </div>
 
 <div ng-hide='game.choosingPeople' class="modal-body">
-  <div class='text-center' ng-hide='game.person.randomPerson'>
+  <div class='text-center' ng-hide='game.randomPerson'>
     <h4>Can't tell?</h4>
     <p>That's because you have no people {{ game.noPeopleInGroup }}!</p>
     <p ng-show="game.noPeopleInGroup">Click <a ng-click='game.choosingPeople = true' href=''>here</a> to go back,</p>
     <p>{{ game.clickOr }} <a ng-click='game.quit()' href='#/people/new'>here</a> to add some {{ game.addSomePeople }}!</p>
   </div>
 
-  <div ng-show='game.person.randomPerson' class='row'>
+  <div ng-show='game.randomPerson' class='row'>
     <div class='center-block flashcard-box text-center'>
-      <img ng-src='{{ game.person.randomPerson.medium }}'/>
+      <img ng-src='{{ game.randomPerson.medium }}'/>
     </div>
     <div class='col-sm-10 col-sm-offset-1'>
       <form ng-submit='game.submitPerson()' autocomplete='off'>
@@ -49,8 +49,8 @@
               </a>
               <ul class="dropdown-menu dropdown-menu-right bg-info" aria-labelledby="firstNameHintDropdown">
                 <li><a href="" ng-click='game.game.hintFirstLetterFirstName()' class='bg-info'>Starts with...</a></li>
-                <li ng-hide='!game.person.randomPerson.nickname'><a href="" ng-click='game.game.hintNickname("firstNameHint")' class='bg-info'>Nickname</a></li>
-                <li ng-hide='game.person.randomPerson.hints.length === 0'><a href="" ng-click='game.game.hintOther("firstNameHint")' class='bg-info'>Other Hint</a></li>
+                <li ng-hide='!game.randomPerson.nickname'><a href="" ng-click='game.game.hintNickname("firstNameHint")' class='bg-info'>Nickname</a></li>
+                <li ng-hide='game.randomPerson.hints.length === 0'><a href="" ng-click='game.game.hintOther("firstNameHint")' class='bg-info'>Other Hint</a></li>
               </ul>
             </div>
           </div>
@@ -63,7 +63,7 @@
 
         <div ng-show='game.person.firstNameWrong' class="alert alert-warning">
           <h4>Wrong!</h4>
-          <p>The correct first name was <b>{{ game.person.randomPerson.first_name }}</b></p>
+          <p>The correct first name was <b>{{ game.randomPerson.first_name }}</b></p>
         </div>
         <div ng-show='game.person.firstNameRight' class="alert alert-success">
           <h4>Correct!</h4>
@@ -80,8 +80,8 @@
               </a>
               <ul class="dropdown-menu dropdown-menu-right" aria-labelledby="lastNameHintDropdown">
                 <li><a href="" ng-click='game.game.hintFirstLetterLastName()' class='bg-info'>Starts with...</a></li>
-                <li ng-hide='!game.person.randomPerson.nickname'><a href="" ng-click='game.game.hintNickname("lastNameHint")' class='bg-info'>Nickname</a></li>
-                <li ng-hide='game.person.randomPerson.hints.length === 0'><a href="" ng-click='game.game.hintOther("lastNameHint")' class='bg-info'>Other Hint</a></li>
+                <li ng-hide='!game.randomPerson.nickname'><a href="" ng-click='game.game.hintNickname("lastNameHint")' class='bg-info'>Nickname</a></li>
+                <li ng-hide='game.randomPerson.hints.length === 0'><a href="" ng-click='game.game.hintOther("lastNameHint")' class='bg-info'>Other Hint</a></li>
               </ul>
             </div>
           </div>
@@ -94,7 +94,7 @@
 
         <div ng-show='game.person.lastNameWrong' class="alert alert-warning">
           <h4>Wrong!</h4>
-          <p>The correct last name was <b>{{ game.person.randomPerson.last_name }}</b></p>
+          <p>The correct last name was <b>{{ game.randomPerson.last_name }}</b></p>
         </div>
         <div ng-show='game.person.lastNameRight' class="alert alert-success">
           <h4>Correct!</h4>
@@ -115,7 +115,7 @@
 <div ng-hide='game.choosingPeople' class="modal-footer">
   <div class='row'>
     <div class='col-sm-8 text-center'>
-      <div ng-show='game.person.randomPerson' class="well well-sm text-info">
+      <div ng-show='game.randomPerson' class="well well-sm text-info">
         {{ game.game.scoreMessage }} &nbsp;&nbsp;
 
         <span ng-show='game.game.scoreMessage === "Max Round Score:"' ng-class="{'text-success': game.game.hintCount === 0, 'text-warning': game.game.hintCount === 1, 'text-primary': game.game.hintCount === 2, 'text-danger': game.game.hintCount === 3}">
@@ -135,9 +135,9 @@
       </div>
     </div>
     <div class='col-sm-4'>
-      <button ng-show='game.person.randomPerson' class="btn btn-warning" type="button" ng-click="game.reset()">Reset</button>
-      <button ng-show='game.person.randomPerson' class="btn btn-primary" type="button" ng-click="game.quit()">Quit</button>
-      <button ng-hide='game.person.randomPerson' class="btn btn-primary" type="button" ng-click="game.quit()">Close</button>
+      <button ng-show='game.randomPerson' class="btn btn-warning" type="button" ng-click="game.reset()">Reset</button>
+      <button ng-show='game.randomPerson' class="btn btn-primary" type="button" ng-click="game.quit()">Quit</button>
+      <button ng-hide='game.randomPerson' class="btn btn-primary" type="button" ng-click="game.quit()">Close</button>
     </div>
   </div>
 </div>

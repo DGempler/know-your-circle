@@ -32,7 +32,7 @@
     }
 
     function setRndPersonAndGameProps(randNum) {
-      vm.person.randomPerson = gamePeople[randNum];
+      vm.randomPerson = gamePeople[randNum];
       gamePeople.splice(randNum, 1);
       vm.game.roundScore = 5;
       vm.game.hintCount = 0;
@@ -98,7 +98,7 @@
       if (vm.person.guessPerson[guessType]) {
         guessedName = vm.person.guessPerson[guessType].toLowerCase();
       }
-      if (guessedName === vm.person.randomPerson[guessType].toLowerCase()) {
+      if (guessedName === vm.randomPerson[guessType].toLowerCase()) {
         correctGuessResult(typeRightWrong + 'Right');
       } else {
         vm.person.result = true;
@@ -110,7 +110,7 @@
       showHint();
       vm.game[camelCase + 'HintView'] = true;
       vm.game[camelCase + 'HintText'] = "This person's " + english + " starts with:";
-      vm.game[camelCase + 'Hint'] = vm.person.randomPerson[snake_case][0];
+      vm.game[camelCase + 'Hint'] = vm.randomPerson[snake_case][0];
     }
 
     function addPeopleWithSelectedGroups(selectedGroups, selectedPeople) {
@@ -158,7 +158,7 @@
     }
 
     function clearOtherHintsShownIfAllShown() {
-      if (otherHintsShown.length === vm.person.randomPerson.hints.length) {
+      if (otherHintsShown.length === vm.randomPerson.hints.length) {
         otherHintsShown = [];
       }
     }
@@ -227,17 +227,17 @@
       }
       showHint();
       vm.game[nameType + "Text"] = "This person's nickname is:";
-      vm.game[nameType] = vm.person.randomPerson.nickname;
+      vm.game[nameType] = vm.randomPerson.nickname;
     };
 
     vm.game.hintOther = function(nameType) {
       var randomHintIndex;
-      var otherHintsLength = vm.person.randomPerson.hints.length;
+      var otherHintsLength = vm.randomPerson.hints.length;
       determineFirstOrLastNameHint(nameType);
       showHint();
       clearOtherHintsShownIfAllShown();
       randomHintIndex = getRandomHintIndex(otherHintsLength);
-      vm.game[nameType + "Text"] = vm.person.randomPerson.hints[randomHintIndex];
+      vm.game[nameType + "Text"] = vm.randomPerson.hints[randomHintIndex];
     };
 
     vm.game.closeFirstNameHint = function() {
