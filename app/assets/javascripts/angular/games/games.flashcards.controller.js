@@ -97,6 +97,13 @@
       }
     }
 
+    function getHint(camelCase, english, snake_case) {
+      showHint();
+      vm.game[camelCase + 'HintView'] = true;
+      vm.game[camelCase + 'HintText'] = "This person's " + english + " starts with:";
+      vm.game[camelCase + 'Hint'] = vm.person.randomPerson[snake_case][0];
+    }
+
     vm.playAllPeople = function() {
       clearNoPeopleProps();
       selectedPeople = people;
@@ -138,13 +145,6 @@
       vm.game.roundScore = scoredThisRound;
       prepNextGameRound();
     };
-
-    function getHint(camelCase, english, snake_case) {
-      showHint();
-      vm.game[camelCase + 'HintView'] = true;
-      vm.game[camelCase + 'HintText'] = "This person's " + english + " starts with:";
-      vm.game[camelCase + 'Hint'] = vm.person.randomPerson[snake_case][0];
-    }
 
     vm.game.hintFirstLetterFirstName = function() {
       getHint('firstName', 'first name', 'first_name');
