@@ -9,18 +9,23 @@
       vm.groups = groups;
       vm.stagedForDeletion = {};
 
+      function checkForMatchingGroup() {
+        var hasMatch = false;
+        vm.groups.forEach(function(group) {
+          if (vm.new.toLowerCase() === group.name.toLowerCase()) {
+            hasMatch = true;
+          }
+        });
+        return hasMatch;
+      }
+
       vm.close = function() {
         $uibModalInstance.close(vm.groups);
       };
 
       vm.submitNewGroup = function() {
-        var matchCheck = false;
-        vm.groups.forEach(function(group) {
-          if (vm.new.toLowerCase() === group.name.toLowerCase()) {
-            matchCheck = true;
-          }
-        });
-        if (!matchCheck) {
+        var hasMatch = checkForMatchingGroup();
+        if (!hasMatch) {
           vm.busy = true;
           GroupFactory.submitNewGroup(vm.new)
             .then(function(data) {
