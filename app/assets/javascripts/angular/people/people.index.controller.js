@@ -105,7 +105,7 @@
         });
     }
 
-    function checkPeopleGroups(chosenGroup) {
+    function checkPeopleGroupsForFilter(chosenGroup) {
       angular.forEach(vm.people, function(person) {
         person.show = false;
         person.groups.forEach(function(personGroup) {
@@ -303,7 +303,7 @@
     vm.filterGroup = function(chosenGroup) {
       vm.filteredByGroup = true;
       vm.filteredGroup = chosenGroup.name;
-      checkPeopleGroups(chosenGroup);
+      checkPeopleGroupsForFilter(chosenGroup);
     };
 
     vm.shareSelected = function() {
