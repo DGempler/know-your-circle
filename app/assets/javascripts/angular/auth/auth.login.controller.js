@@ -8,17 +8,25 @@
       var vm = this;
       vm.user = {};
 
+      function logInSuccess() {
+        $uibModalInstance.close();
+        $location.path('/people/index');
+      }
+
+      function logInError(failure) {
+        vm.failureToggle = !vm.failureToggle;
+        vm.error = failure.errors[0];
+      }
+
       vm.logIn = function(isValid) {
         if (isValid) {
           vm.busy = true;
           AuthFactory.logIn(vm.user)
             .then(function() {
-              $uibModalInstance.close();
-              $location.path('/people/index');
+              logInSuccess();
             })
             .catch(function(failure) {
-              vm.failureToggle = !vm.failureToggle;
-              vm.error = failure.errors[0];
+              logInError(failure);
             })
             .finally(function() {
               vm.busy = false;
