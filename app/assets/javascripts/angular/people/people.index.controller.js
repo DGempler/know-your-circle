@@ -191,60 +191,97 @@
         });
     };
 
+    function createGroupIdsArrayAndPrepForReq(person, promises, exists) {
+      person.group_ids = [];
+      person.groups.forEach(function(existingGroup) {
+        person.group_ids.push(existingGroup.id);
+      });
+      if (person.group_ids.indexOf(newGroup.id) === -1) {
+        addGroupToIdArrayAndPromise(person, newGroup.id, promises);
+      } else {
+        exists.push(person);
+      }
+    }
+
+    function addGroupToIdArrayAndPromise(person, id, promises) {
+      person.group_ids.push(id);
+      promises.push(PersonFactory.updateGroups(person));
+    }
+
+    function checkSelectedForApplyGroup(promises, exists) {
+      angular.forEach(vm.people, function(person) {
+        if (person.selected) {
+          prepPersonForPutRequest(person, promises, exists);
+        }
+      });
+    }
+
+    function addGroupAppliedPeopleToMessage(people) {
+      var message = group.name + " has been added to: ";
+      people.forEach(function(person, index) {
+        if (index !== people.length - 1) {
+          message += person.first_name + " " + person.last_name + ", ";
+        } else {
+          message += person.first_name + " " + person.last_name + ".";
+        }
+      });
+      return message;
+    }
+
+    function addGroupExistedPeopleToMessage(people, message) {
+      var message = " It already existed on: ";
+      exists.forEach(function(person, index) {
+        if (index !== exists.length - 1) {
+          message += person.first_name + " " + person.last_name + ", ";
+        } else {
+          message += person.first_name + " " + person.last_name + ".";
+        }
+      });
+      return message;
+    }
+
+    function handleApplyGroupSuccess(people, group, exists) {
+      vm.someoneSelected = false;
+      var message = addGroupAppliedPeopleToMessage(people);
+      if (exists.length > 0) {
+        message += addGroupExistedPeopleToMessage();
+      }
+      Message.open(message);
+      getPeople();
+    }
+
+    function handleApplyGroupError() {
+      var message = 'An error occured while applying your group. Please refresh the page and try again.';
+      Message.open(message);
+    }
+
+    function applyNewGroup(group, promises, exists) {
+      vm.busy = true;
+      $q.all(promiseArray)
+        .then(function(people) {
+          handleApplyGroupSuccess(people, group, exists);
+        })
+        .catch(function(error) {
+          handleApplyGroupError();
+        })
+        .finally(function() {
+          vm.busy = false;
+        });
+    }
+
+    function groupAlreadyExistsMessage() {
+      var message = "This group already exists on selected person(s).";
+      Message.open(message);
+    }
+
     vm.applyGroup = function(newGroup) {
       var promiseArray = [];
       var alreadyExistsArray = [];
-      var message;
-      angular.forEach(vm.people, function(person) {
-        if (person.selected) {
-          person.group_ids = [];
-          person.groups.forEach(function(existingGroup) {
-            person.group_ids.push(existingGroup.id);
-          });
-          if (person.group_ids.indexOf(newGroup.id) === -1) {
-            person.group_ids.push(newGroup.id);
-            promiseArray.push(PersonFactory.updateGroups(person));
-          } else {
-            alreadyExistsArray.push(person);
-          }
-        }
-      });
+      checkSelectedForApplyGroup(promiseArray, alreadyExistsArray);
       if (promiseArray.length > 0) {
-        vm.busy = true;
-        $q.all(promiseArray)
-          .then(function(people) {
-            message = newGroup.name + " has been added to: ";
-            people.forEach(function(person, index) {
-              if (index !== people.length - 1) {
-                message += person.first_name + " " + person.last_name + ", ";
-              } else {
-                message += person.first_name + " " + person.last_name + ".";
-              }
-            });
-            if (alreadyExistsArray.length > 0) {
-              message += " It already existed on: ";
-              alreadyExistsArray.forEach(function(person, index) {
-                if (index !== alreadyExistsArray.length - 1) {
-                  message += person.first_name + " " + person.last_name + ", ";
-                } else {
-                  message += person.first_name + " " + person.last_name + ".";
-                }
-              });
-            }
-            vm.someoneSelected = false;
-            getPeople();
-            Message.open(message);
-          })
-          .catch(function(error) {
-            message = 'An error occured while applying your group. Please refresh the page and try again.';
-            Message.open(message);
-          })
-          .finally(function() {
-            vm.busy = false;
-          });
+        applyNewGroup(newGroup, promiseArray, alreadyExistsArray);
       } else {
-        message = "This group already exists on selected person(s).";
-        Message.open(message);
+        groupAlreadyExistsMessage();
       }
     };
 
