@@ -9,13 +9,21 @@
     vm.people = {};
     vm.busy = true;
 
+    function initiate() {
+      if ($routeParams.demo === 'true') {
+        getDemoPeople();
+      } else {
+        getUsersPeople();
+      }
+    }
+
     function openErrorMessage(type) {
       var message = 'An error occured while loading your ' + type + '. Please refresh the page to try again.';
       Message.open(message);
       vm.busy = false;
     }
 
-    if ($routeParams.demo === 'true') {
+    function getDemoPeople() {
       DemoFactory.getGuestUserPeople()
         .then(function(people) {
           vm.people = people;
@@ -24,7 +32,9 @@
         .catch(function(people) {
           openErrorMessage('people');
         });
-    } else {
+    }
+
+    function getUsersPeople() {
       PersonFactory.getPeople()
         .then(function(people) {
           vm.people = people;
@@ -72,5 +82,7 @@
         }
       });
     };
+
+    initiate();
   }
 })();
