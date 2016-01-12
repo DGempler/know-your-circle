@@ -9,6 +9,12 @@
     vm.people = {};
     vm.busy = true;
 
+    function openErrorMessage(type) {
+      var message = 'An error occured while loading your ' + type + '. Please refresh the page to try again.';
+      Message.open(message);
+      vm.busy = false;
+    }
+
     if ($routeParams.demo === 'true') {
       DemoFactory.getGuestUserPeople()
         .then(function(people) {
@@ -16,9 +22,7 @@
           getDemoGroups();
         })
         .catch(function(people) {
-          var message = 'An error occured while loading your people. Please refresh the page to try again.';
-          Message.open(message);
-          vm.busy = false;
+          openErrorMessage('people');
         });
     } else {
       PersonFactory.getPeople()
@@ -27,9 +31,7 @@
           getGroups();
         })
         .catch(function(people) {
-          var message = 'An error occured while loading your people. Please refresh the page to try again.';
-          Message.open(message);
-          vm.busy = false;
+          openErrorMessage('people');
         });
     }
 
@@ -40,11 +42,7 @@
           vm.busy = false;
         })
         .catch(function(error) {
-          var message = 'An error occured while loading your groups. Please refresh the page to try again.';
-          Message.open(message);
-        })
-        .finally(function() {
-          vm.busy = false;
+          openErrorMessage('groups');
         });
     }
 
