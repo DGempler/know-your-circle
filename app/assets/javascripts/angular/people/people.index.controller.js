@@ -274,6 +274,14 @@
       Message.open(message);
     }
 
+    function checkSelectedForSharing(selected) {
+      angular.forEach(vm.people, function(person) {
+        if (person.selected) {
+          selected.push(person);
+        }
+      });
+    }
+
     vm.applyGroup = function(newGroup) {
       var promiseArray = [];
       var alreadyExistsArray = [];
@@ -300,11 +308,7 @@
 
     vm.shareSelected = function() {
       var selectedPeople = [];
-      angular.forEach(vm.people, function(person) {
-        if (person.selected) {
-          selectedPeople.push(person);
-        }
-      });
+      checkSelectedForSharing(selectedPeople);
       if (selectedPeople.length > 25) {
         size = null;
       } else {
