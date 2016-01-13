@@ -26,9 +26,13 @@
       getGroups();
     }
 
-    function getPeopleError() {
-      var message = 'An error occured while loading your people. Please refresh the page to try again.';
+    function openErrorMessage(type, joiner) {
+      var message = 'An error occured while ' + type + '. Please refresh the page ' + joiner + ' try again.';
       Message.open(message);
+    }
+
+    function getPeopleError() {
+      openErrorMessage('loading your people', 'to');
       vm.busy = false;
     }
 
@@ -43,8 +47,7 @@
     }
 
     function getGroupsError() {
-      var message = 'An error occured while loading your groups. Please refresh the page to try again.';
-      Message.open(message);
+      openErrorMessage('loading your groups', 'to');
     }
 
     function getGroups() {
@@ -61,8 +64,7 @@
     }
 
     function deletePeopleError() {
-      var message = 'An error occured while deleting your people. Please refresh the page and try again.';
-      Message.open(message);
+      openErrorMessage('deleting your people', 'and');
     }
 
     function sendDeletedToBackend(promiseArray) {
@@ -251,8 +253,7 @@
     }
 
     function applyGroupError() {
-      var message = 'An error occured while applying your group. Please refresh the page and try again.';
-      Message.open(message);
+      openErrorMessage('applying your group', 'and');
     }
 
     function applyNewGroup(group, promises, exists) {
