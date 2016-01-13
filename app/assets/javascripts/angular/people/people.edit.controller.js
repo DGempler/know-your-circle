@@ -153,21 +153,8 @@
       return newPerson;
     }
 
-    function updateWithAttachment(cleanedPerson) {
-      PersonFactory.updateWithAttachment(cleanedPerson)
-        .then(function(data) {
-          $location.path('/people/show/' + data.id);
-        })
-        .catch(function(err) {
-          errorMessage('updating your person', 'and');
-        })
-        .finally(function() {
-          vm.busy = false;
-        });
-    }
-
-    function updateWithoutAttachment(cleanedPerson) {
-      PersonFactory.updateWithoutAttachment(cleanedPerson)
+    function updatePerson(updateFunction, cleanedPerson) {
+      updateFunction(cleanedPerson)
         .then(function(data) {
           $location.path('/people/show/' + data.id);
         })
@@ -182,9 +169,9 @@
     function cleanAndUpdatePerson() {
       var cleanedPerson = {person: cleanPersonProps(vm.person)};
         if (vm.person.image) {
-          updateWithAttachment(cleanedPerson);
+          updatePerson(PersonFactory.updateWithAttachment, cleanedPerson);
         } else {
-          updateWithoutAttachment(cleanedPerson);
+          updatePerson(PersonFactory.updateWithoutAttachment, cleanedPerson);
         }
     }
 
