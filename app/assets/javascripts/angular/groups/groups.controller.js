@@ -72,6 +72,16 @@
         vm.editName = "";
       }
 
+      function cleanGroups(deleteGroupIds) {
+        var newGroups = [];
+        vm.groups.forEach(function(group) {
+          if (deleteGroupIds.indexOf(group.id.toString()) === -1) {
+            newGroups.push(group);
+          }
+        });
+        return newGroups;
+      }
+
       vm.close = function() {
         $uibModalInstance.close(vm.groups);
       };
@@ -90,16 +100,6 @@
         deleteOrAddStagedForDeletion(id);
         toggleShowDeleteGroupsStuff();
       };
-
-      function cleanGroups(deleteGroupIds) {
-        var newGroups = [];
-        vm.groups.forEach(function(group) {
-          if (deleteGroupIds.indexOf(group.id.toString()) === -1) {
-            newGroups.push(group);
-          }
-        });
-        return newGroups;
-      }
 
       vm.deleteGroups = function(id) {
         var promiseArray = [];
