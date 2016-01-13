@@ -29,6 +29,17 @@
         });
       }
 
+      function sendPayload(user) {
+        return Upload.upload({
+          url: 'api/auth',
+          method: 'PUT',
+          fields: user,
+          arrayKey: '[]',
+          file: user.image,
+          fileFormDataName: 'user[image]',
+        });
+      }
+
       factory.logOut = function() {
         $auth.signOut()
           .then(function(resp) {
@@ -133,20 +144,13 @@
 
       factory.updateUserWithImage = function(user) {
         var deferred = $q.defer();
-        Upload.upload({
-          url: 'api/auth',
-          method: 'PUT',
-          fields: user,
-          arrayKey: '[]',
-          file: user.image,
-          fileFormDataName: 'user[image]',
-        })
-        .then(function (resp) {
-          $rootScope.user = resp.data.data;
-          deferred.resolve();
-        }, function (err) {
-          deferred.reject();
-        });
+        sendPayload(user)
+          .then(function (resp) {
+            $rootScope.user = resp.data.data;
+            deferred.resolve();
+          }, function (err) {
+            deferred.reject();
+          });
         return deferred.promise;
       };
 
