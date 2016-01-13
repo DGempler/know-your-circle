@@ -128,10 +128,8 @@
       }
     };
 
-    // prevent "null" from being sent as a value to server if form field is left blank
     function removeNullValues(submittedPerson, newPerson) {
       for (var key in submittedPerson) {
-        // if original person had value OR sumbitted person now has a value
         if (originalPerson[key] || submittedPerson[key]) {
           newPerson[key] = submittedPerson[key];
         }
