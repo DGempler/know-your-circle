@@ -191,7 +191,7 @@
         });
     };
 
-    function prepPersonForPutRequest(person, groupId, promises, exists) {
+    function prepPersonForUpdate(person, groupId, promises, exists) {
       person.group_ids = [];
       person.groups.forEach(function(existingGroup) {
         person.group_ids.push(existingGroup.id);
@@ -211,7 +211,7 @@
     function checkSelectedForApplyGroup(groupId, promises, exists) {
       angular.forEach(vm.people, function(person) {
         if (person.selected) {
-          prepPersonForPutRequest(person, groupId, promises, exists);
+          prepPersonForUpdate(person, groupId, promises, exists);
         }
       });
     }
