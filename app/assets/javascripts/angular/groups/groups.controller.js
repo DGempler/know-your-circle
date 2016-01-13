@@ -82,7 +82,7 @@
         return newGroups;
       }
 
-      function addGroupsToPromiseArray() {
+      function addGroupsToPromiseArray(idArray, promiseArray) {
         idArray.forEach(function(id) {
           promiseArray.push(GroupFactory.deleteGroup(id));
         });
@@ -91,6 +91,43 @@
       function errorMessage(type) {
         var message = 'There was an error while ' + type + ' your groups. Please refresh the page to try again.';
         Message.open(message);
+      }
+
+      function updateGroupInScope(updatedGroup) {
+        vm.groups.forEach(function(oldGroup, index) {
+          if (oldGroup.id === updatedGroup.id) {
+            vm.groups[index] = updatedGroup;
+          }
+        });
+      }
+
+      function updateGroupSuccess(updatedGroup) {
+        vm.edit = {};
+        vm.editName = "";
+        vm.showEditForm = false;
+        updateGroupInScope(updatedGroup);
+      }
+
+      function updateGroupError(error) {
+        if (error.data && error.data.name) {
+          var message = error.data.name[0];
+          Message.open(message);
+        } else {
+          errorMessage('changing');
+        }
+      }
+
+      function updateGroup() {
+        GroupFactory.updateGroup(vm.edit.id, vm.editName)
+          .then(function(updatedGroup) {
+            updateGroupSuccess(updatedGroup);
+          })
+          .catch(function(error) {
+            updateGroupError(error);
+          })
+          .finally(function() {
+            vm.busy = false;
+          });
       }
 
       vm.close = function() {
@@ -140,28 +177,7 @@
           var hasMatch = checkForMatchingGroup('editName');
           if (!hasMatch) {
             vm.busy = true;
-            GroupFactory.updateGroup(vm.edit.id, vm.editName)
-              .then(function(updatedGroup) {
-                vm.edit = {};
-                vm.editName = "";
-                vm.groups.forEach(function(oldGroup, index) {
-                  if (oldGroup.id === updatedGroup.id) {
-                    vm.groups[index] = updatedGroup;
-                  }
-                });
-                vm.showEditForm = false;
-              })
-              .catch(function(error) {
-                if (error.data && error.data.name) {
-                  var message = error.data.name[0];
-                  Message.open(message);
-                } else {
-                  errorMessage('changing');
-                }
-              })
-              .finally(function() {
-                vm.busy = false;
-              });
+            updateGroup();
           } else {
             groupAlreadyExistsMessage();
           }
