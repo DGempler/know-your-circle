@@ -16,16 +16,19 @@
       }, function(err) {
         deferred.reject(err);
       });
+
       return deferred.promise;
     };
 
     demoFactory.getGuestUserPerson = function(id) {
       var deferred = $q.defer();
+
       $http.get('/api/demo/' + id).then(function(guestUserPerson) {
         deferred.resolve(guestUserPerson.data);
       }, function(err) {
         deferred.reject(err);
       });
+
       return deferred.promise;
     };
 
