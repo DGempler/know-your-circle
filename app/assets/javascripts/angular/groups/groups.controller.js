@@ -19,15 +19,8 @@
         return hasMatch;
       }
 
-      vm.close = function() {
-        $uibModalInstance.close(vm.groups);
-      };
-
-      vm.submitNewGroup = function() {
-        var hasMatch = checkForMatchingGroup();
-        if (!hasMatch) {
-          vm.busy = true;
-          GroupFactory.submitNewGroup(vm.new)
+      function submitNewGroup() {
+        GroupFactory.submitNewGroup(vm.new)
             .then(function(data) {
               vm.groups.push(data);
               vm.new = "";
@@ -45,6 +38,17 @@
             .finally(function() {
               vm.busy = false;
             });
+      }
+
+      vm.close = function() {
+        $uibModalInstance.close(vm.groups);
+      };
+
+      vm.submitNewGroup = function() {
+        var hasMatch = checkForMatchingGroup();
+        if (!hasMatch) {
+          vm.busy = true;
+          submitNewGroup();
         } else {
           var message = 'This group already exists.';
           Message.open(message);
