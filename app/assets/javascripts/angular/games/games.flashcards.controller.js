@@ -7,16 +7,16 @@
   function gamesFlashcardsController($uibModalInstance, people, groups) {
     var vm = this;
     var selectedPeople;
+    var scoredThisRound = 0;
+    var gamePeople = [];
+    var otherHintsShown = [];
+    var randomNumber;
     vm.selected = {};
     vm.person = {};
     vm.randomPerson = {};
     vm.guessPerson = {};
     vm.game = {};
     vm.clickOr = "Click";
-    scoredThisRound = 0;
-    gamePeople = [];
-    var otherHintsShown = [];
-    var randomNumber;
 
     function checkGameType() {
       if (!groups || groups.length === 0) {
