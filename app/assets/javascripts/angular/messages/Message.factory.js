@@ -14,7 +14,7 @@
           controller: controllerName + ' as message',
           windowClass: "modal fade",
           resolve: resolveObject
-          });
+        });
       }
 
       factory.open = function(message, email) {
@@ -28,24 +28,30 @@
             return email;
           }
         };
+
         createModalInstance(fileName, controllerName, resolve);
       };
 
       factory.openConfirm = function(message) {
         var deferred = $q.defer();
+
         var fileName = '_confirmMessage_modal';
         var controllerName = 'confirmMessageController';
+        var modalInstance;
         var resolve = {
           message: function() {
             return message;
           }
         };
-        var modalInstance = createModalInstance(fileName, controllerName, resolve);
+
+        modalInstance = createModalInstance(fileName, controllerName, resolve);
+
         modalInstance.result.then(function() {
           deferred.resolve();
         }, function() {
           deferred.reject();
         });
+
         return deferred.promise;
       };
 
