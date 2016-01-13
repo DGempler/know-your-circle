@@ -105,12 +105,7 @@
     vm.createGroup = function() {
       GroupFactory.openGroupModal(originalGroups)
         .then(function(groups) {
-          originalGroups = groups;
-          vm.person.group_ids = cleanGroupIds(vm.person.group_ids, groups);
-          vm.groups = [];
-          groups.forEach(function(group) {
-            vm.groups.push(group);
-          });
+          getGroupSuccess(groups);
         })
         .catch(function() {
           getGroups();
