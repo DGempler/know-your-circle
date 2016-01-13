@@ -79,15 +79,23 @@
       return newGroupIds;
     }
 
+    function copyGroups(groups) {
+      originalGroups = groups;
+      vm.groups = [];
+      groups.forEach(function(group) {
+        vm.groups.push(group);
+      });
+    }
+
+    function getGroupSuccess(groups) {
+      copyGroups(groups);
+      vm.person.group_ids = cleanGroupIds(vm.person.group_ids, groups);
+    }
+
     function getGroups() {
       GroupFactory.getGroups()
         .then(function(groups) {
-          originalGroups = groups;
-          vm.person.group_ids = cleanGroupIds(vm.person.group_ids, groups);
-          vm.groups = [];
-          groups.forEach(function(group) {
-            vm.groups.push(group);
-          });
+          getGroupSuccess(groups);
         })
         .catch(function(error) {
           errorMessage('loading your groups', 'to');
