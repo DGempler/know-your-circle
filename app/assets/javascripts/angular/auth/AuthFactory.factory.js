@@ -18,6 +18,17 @@
         Message.open(message);
       }
 
+      function createModalInstance(fileName, controllerName, resolveObject) {
+        return $uibModal.open({
+          animation: true,
+          templateUrl: '/partials/auth/' + fileName + '.html',
+          controller: controllerName,
+          size: 'sm',
+          windowClass: "modal fade",
+          resolve: resolveObject
+        });
+      }
+
       factory.logOut = function() {
         $auth.signOut()
           .then(function(resp) {
@@ -29,13 +40,11 @@
       };
 
       factory.logInOpen = function() {
-        var modalInstance = $uibModal.open({
-          animation: true,
-          templateUrl: '/partials/auth/_login_modal.html',
-          controller: 'loginController as auth',
-          size: 'sm',
-          windowClass: "modal fade"
-        });
+        var fileName = '_login_modal';
+        var controllerName = 'loginController as auth';
+        var size = 'sm';
+
+        createModalInstance(fileName, controllerName);
       };
 
       factory.openLogInModal = function(modal) {
@@ -59,18 +68,16 @@
 
 
       factory.signUpOpen = function(email) {
-        var modalInstance = $uibModal.open({
-          animation: true,
-          templateUrl: '/partials/auth/_signup_modal.html',
-          controller: 'signupController as auth',
-          size: 'sm',
-          windowClass: "modal fade",
-          resolve: {
-            email: function() {
-              return email;
-            }
+        var fileName = '_signup_modal';
+        var controllerName = 'signupController as auth';
+        var size = 'sm';
+        var resolve = {
+          email: function() {
+            return email;
           }
-        });
+        };
+
+        createModalInstance(fileName, controllerName, resolve);
       };
 
       factory.openSignUpModal = function(modal) {
@@ -93,13 +100,10 @@
       };
 
       factory.openChangePasswordModal = function() {
-        var modalInstance = $uibModal.open({
-          animation: true,
-          templateUrl: 'partials/auth/_changePassword_modal.html',
-          controller: 'changePasswordController as password',
-          size: 'sm',
-          windowClass: "modal fade"
-        });
+        var fileName = '_changePassword_modal';
+        var controllerName = 'changePasswordController as password';
+
+        createModalInstance(fileName, controllerName);
       };
 
       factory.submitChangePassword = function(user) {
