@@ -21,15 +21,23 @@
       return newGroupIds;
     }
 
+    function copyGroups(groups) {
+      originalGroups = groups;
+      vm.groups = [];
+      groups.forEach(function(group) {
+        vm.groups.push(group);
+      });
+    }
+
+    function getGroupsSuccess(groups) {
+      copyGroups(groups);
+      vm.person.group_ids = cleanGroupIds(vm.person.group_ids, groups);
+    }
+
     function getGroups() {
       GroupFactory.getGroups()
         .then(function(groups) {
-          originalGroups = groups;
-          vm.person.group_ids = cleanGroupIds(vm.person.group_ids, groups);
-          vm.groups = [];
-          groups.forEach(function(group) {
-            vm.groups.push(group);
-          });
+          getGroupsSuccess(groups);
         })
         .catch(function(error) {
           var message = 'There was an error while loading your groups. Please refresh the page to try again.';
@@ -42,12 +50,7 @@
     vm.createGroup = function() {
       GroupFactory.openGroupModal(originalGroups)
         .then(function(groups) {
-          originalGroups = groups;
-          vm.person.group_ids = cleanGroupIds(vm.person.group_ids, groups);
-          vm.groups = [];
-          groups.forEach(function(group) {
-            vm.groups.push(group);
-          });
+          getGroupsSuccess(groups);
         })
         .catch(function() {
           getGroups();
