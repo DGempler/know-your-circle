@@ -82,6 +82,17 @@
         return newGroups;
       }
 
+      function addGroupsToPromiseArray() {
+        idArray.forEach(function(id) {
+          promiseArray.push(GroupFactory.deleteGroup(id));
+        });
+      }
+
+      function errorMessage(type) {
+        var message = 'There was an error while ' + type + ' your groups. Please refresh the page to try again.';
+        Message.open(message);
+      }
+
       vm.close = function() {
         $uibModalInstance.close(vm.groups);
       };
@@ -104,17 +115,14 @@
       vm.deleteGroups = function(id) {
         var promiseArray = [];
         var idArray = Object.keys(vm.stagedForDeletion);
-        idArray.forEach(function(id) {
-          promiseArray.push(GroupFactory.deleteGroup(id));
-        });
+        addGroupsToPromiseArray(idArray, promiseArray);
         vm.groups = cleanGroups(idArray);
         $q.all(promiseArray)
           .then(function(groups) {
             vm.showDeleteGroupsButton = false;
           })
           .catch(function(error) {
-            var message = 'There was an error while deleting your groups. Please refresh the page to try again.';
-            Message.open(message);
+            errorMessage('deleting');
           });
       };
 
@@ -149,13 +157,12 @@
                 vm.showEditForm = false;
               })
               .catch(function(error) {
-                var message;
                 if (error.data && error.data.name) {
-                  message = error.data.name[0];
+                  var message = error.data.name[0];
+                  Message.open(message);
                 } else {
-                  message = 'There was an error while changing your group. Please refresh the page to try again.';
+                  errorMessage('changing');
                 }
-                Message.open(message);
               })
               .finally(function() {
                 vm.busy = false;
