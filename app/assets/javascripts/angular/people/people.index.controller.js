@@ -46,31 +46,23 @@
       });
     }
 
-    function getGroupsError() {
-      openErrorMessage('loading your groups', 'to');
-    }
-
     function getGroups() {
       GroupFactory.getGroups()
         .then(function(groups) {
           vm.groups = groups;
         })
         .catch(function(error) {
-          getGroupsError();
+          openErrorMessage('loading your groups', 'to');
         })
         .finally(function() {
           vm.busy = false;
         });
     }
 
-    function deletePeopleError() {
-      openErrorMessage('deleting your people', 'and');
-    }
-
     function sendDeletedToBackend(promiseArray) {
       $q.all(promiseArray)
         .catch(function(errors) {
-          deletePeopleError();
+          openErrorMessage('deleting your people', 'and');
         });
     }
 
@@ -252,10 +244,6 @@
       getPeople();
     }
 
-    function applyGroupError() {
-      openErrorMessage('applying your group', 'and');
-    }
-
     function applyNewGroup(group, promises, exists) {
       vm.busy = true;
       $q.all(promises)
@@ -263,7 +251,7 @@
           applyGroupSuccess(people, group, exists);
         })
         .catch(function(error) {
-          applyGroupError();
+          openErrorMessage('applying your group', 'and');
         })
         .finally(function() {
           vm.busy = false;
