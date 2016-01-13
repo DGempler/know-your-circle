@@ -47,6 +47,31 @@
           });
       }
 
+      function groupAlreadyExistsMessage() {
+        var message = 'This group already exists.';
+        Message.open(message);
+      }
+
+      function deleteOrAddStagedForDeletion(id) {
+        if (vm.stagedForDeletion[id]) {
+          delete vm.stagedForDeletion[id];
+        } else {
+          vm.stagedForDeletion[id] = true;
+        }
+      }
+
+      function toggleShowDeleteGroupsStuff() {
+        if (Object.keys(vm.stagedForDeletion).length !== 0) {
+          vm.showDeleteGroupsButton = true;
+        } else {
+          vm.showDeleteGroupsButton = false;
+        }
+        vm.showEditForm = false;
+        vm.showNewForm = false;
+        vm.edit = {};
+        vm.editName = "";
+      }
+
       vm.close = function() {
         $uibModalInstance.close(vm.groups);
       };
@@ -57,26 +82,13 @@
           vm.busy = true;
           submitNewGroup();
         } else {
-          var message = 'This group already exists.';
-          Message.open(message);
+          groupAlreadyExistsMessage();
         }
       };
 
       vm.stageGroupForDeletion = function(id) {
-        if (vm.stagedForDeletion[id]) {
-          delete vm.stagedForDeletion[id];
-        } else {
-          vm.stagedForDeletion[id] = true;
-        }
-        if (Object.keys(vm.stagedForDeletion).length !== 0) {
-          vm.showDeleteGroupsButton = true;
-        } else {
-          vm.showDeleteGroupsButton = false;
-        }
-        vm.showEditForm = false;
-        vm.showNewForm = false;
-        vm.edit = {};
-        vm.editName = "";
+        deleteOrAddStagedForDeletion(id);
+        toggleShowDeleteGroupsStuff();
       };
 
       function cleanGroups(deleteGroupIds) {
@@ -149,8 +161,7 @@
                 vm.busy = false;
               });
           } else {
-            var message = 'This group already exists.';
-            Message.open(message);
+            groupAlreadyExistsMessage();
           }
         } else {
           var message = 'Your submitted group name matches the existing one. Please try again.';
