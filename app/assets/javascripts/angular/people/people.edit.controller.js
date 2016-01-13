@@ -9,40 +9,56 @@
     var originalPerson;
     var originalGroups;
 
-    function getPerson () {
-      PersonFactory.getPerson($routeParams.id).then(function(person) {
-        var approvedKeys = [
-          'first_name', 'last_name', 'sex', 'nickname', 'middle_name', 'location',
-          'occupation', 'bio', 'id', 'image_updated_at', 'image_file_name'];
-        originalPerson = person;
-        vm.person = {};
-        vm.person.hints = [];
-        vm.person.group_ids = [];
+    function createFilteredPerson(person) {
+      originalPerson = person;
+      vm.person = {};
+      approvedKeysFilter(person);
+      hintsFilter(person);
+      groupsFilter(person);
+      dobFilter(person);
+    }
 
-        for (var i = 0; i < approvedKeys.length; i++) {
-          vm.person[approvedKeys[i]] = person[approvedKeys[i]];
-        }
+    function approvedKeysFilter(person) {
+      var approvedKeys = [
+        'first_name', 'last_name', 'sex', 'nickname', 'middle_name', 'location',
+        'occupation', 'bio', 'id', 'image_updated_at', 'image_file_name'];
+      for (var i = 0; i < approvedKeys.length; i++) {
+        vm.person[approvedKeys[i]] = person[approvedKeys[i]];
+      }
+    }
 
-        if (person.hints.length === 0) {
-          vm.person.hints.push("");
-        } else {
-          person.hints.forEach(function(hint) {
-            if (hint) {
-              vm.person.hints.push(hint);
-            }
-          });
-        }
-
-        person.groups.forEach(function(group) {
-          vm.person.group_ids.push(group.id);
+    function hintsFilter(person) {
+      vm.person.hints = [];
+      if (person.hints.length === 0) {
+        vm.person.hints.push("");
+      } else {
+        person.hints.forEach(function(hint) {
+          if (hint) {
+            vm.person.hints.push(hint);
+          }
         });
+      }
+    }
 
-        if (person.dob) {
-          vm.person.dob = new Date(person.dob);
-        }
+    function groupsFilter(person) {
+      vm.person.group_ids = [];
+      person.groups.forEach(function(group) {
+        vm.person.group_ids.push(group.id);
+      });
+    }
 
-        getGroups();
-      })
+    function dobFilter(person) {
+      if (person.dob) {
+        vm.person.dob = new Date(person.dob);
+      }
+    }
+
+    function getPerson () {
+      PersonFactory.getPerson($routeParams.id)
+        .then(function(person) {
+          createFilteredPerson(person);
+          getGroups();
+        })
       .catch(function(error) {
         var message = 'An error occured while loading your person. Please refresh the page to try again.';
         Message.open(message);
