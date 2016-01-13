@@ -87,7 +87,7 @@
       });
     }
 
-    function getGroupSuccess(groups) {
+    function getGroupsSuccess(groups) {
       copyGroups(groups);
       vm.person.group_ids = cleanGroupIds(vm.person.group_ids, groups);
     }
@@ -95,7 +95,7 @@
     function getGroups() {
       GroupFactory.getGroups()
         .then(function(groups) {
-          getGroupSuccess(groups);
+          getGroupsSuccess(groups);
         })
         .catch(function(error) {
           errorMessage('loading your groups', 'to');
@@ -105,7 +105,7 @@
     vm.createGroup = function() {
       GroupFactory.openGroupModal(originalGroups)
         .then(function(groups) {
-          getGroupSuccess(groups);
+          getGroupsSuccess(groups);
         })
         .catch(function() {
           getGroups();
