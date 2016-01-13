@@ -9,10 +9,10 @@
       vm.groups = groups;
       vm.stagedForDeletion = {};
 
-      function checkForMatchingGroup() {
+      function checkForMatchingGroup(type) {
         var hasMatch = false;
         vm.groups.forEach(function(group) {
-          if (vm.new.toLowerCase() === group.name.toLowerCase()) {
+          if (vm[type].toLowerCase() === group.name.toLowerCase()) {
             hasMatch = true;
           }
         });
@@ -98,7 +98,7 @@
       };
 
       vm.submitNewGroup = function() {
-        var hasMatch = checkForMatchingGroup();
+        var hasMatch = checkForMatchingGroup('new');
         if (!hasMatch) {
           vm.busy = true;
           submitNewGroup();
@@ -137,13 +137,8 @@
 
       vm.submitEditGroup = function() {
         if (vm.editName !== vm.edit.name) {
-          var matchCheck = false;
-          vm.groups.forEach(function(group) {
-            if (vm.editName.toLowerCase() === group.name.toLowerCase()) {
-              matchCheck = true;
-            }
-          });
-          if (!matchCheck) {
+          var hasMatch = checkForMatchingGroup('editName');
+          if (!hasMatch) {
             vm.busy = true;
             GroupFactory.updateGroup(vm.edit.id, vm.editName)
               .then(function(updatedGroup) {
