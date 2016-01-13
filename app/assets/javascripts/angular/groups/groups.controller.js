@@ -19,25 +19,33 @@
         return hasMatch;
       }
 
+      function newGroupSuccess(data) {
+        vm.groups.push(data);
+        vm.new = "";
+      }
+
+      function newGroupError(err) {
+        var message;
+        if (err.data && err.data.name) {
+          message = err.data.name[0];
+        } else {
+          message = 'There was an error while creating your group. Please refresh the page to try again.';
+        }
+        Message.open(message);
+        vm.new = "";
+      }
+
       function submitNewGroup() {
         GroupFactory.submitNewGroup(vm.new)
-            .then(function(data) {
-              vm.groups.push(data);
-              vm.new = "";
-            })
-            .catch(function(err) {
-              var message;
-              if (err.data && err.data.name) {
-                message = err.data.name[0];
-              } else {
-                message = 'There was an error while creating your group. Please refresh the page to try again.';
-              }
-              Message.open(message);
-              vm.new = "";
-            })
-            .finally(function() {
-              vm.busy = false;
-            });
+          .then(function(data) {
+            newGroupSuccess(data);
+          })
+          .catch(function(err) {
+            newGroupError(err);
+          })
+          .finally(function() {
+            vm.busy = false;
+          });
       }
 
       vm.close = function() {
