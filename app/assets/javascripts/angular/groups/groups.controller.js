@@ -21,7 +21,6 @@
 
       function newGroupSuccess(data) {
         vm.groups.push(data);
-        vm.new = "";
       }
 
       function newGroupError(err) {
@@ -32,7 +31,6 @@
           message = 'There was an error while creating your group. Please refresh the page to try again.';
         }
         Message.open(message);
-        vm.new = "";
       }
 
       function submitNewGroup() {
@@ -44,6 +42,7 @@
             newGroupError(err);
           })
           .finally(function() {
+            vm.new = "";
             vm.busy = false;
           });
       }
