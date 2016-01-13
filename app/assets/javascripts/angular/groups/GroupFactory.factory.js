@@ -7,9 +7,8 @@
     function GroupFactory($uibModal, $q, Group) {
       var factory = {};
 
-      factory.openGroupModal = function(groups) {
-        var deferred = $q.defer();
-        var modalInstance = $uibModal.open({
+      function createModalInstance(groups) {
+        return $uibModal.open({
           animation: true,
           templateUrl: '/partials/groups/_group_modal.html',
           controller: 'groupController as modal',
@@ -21,6 +20,12 @@
             }
           }
         });
+      }
+
+      factory.openGroupModal = function(groups) {
+        var deferred = $q.defer();
+
+        var modalInstance = createModalInstance(groups);
 
         modalInstance.result.then(function(groups) {
           deferred.resolve(groups);
