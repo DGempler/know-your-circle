@@ -153,33 +153,45 @@
       return newPerson;
     }
 
+    function updateWithAttachment(cleanedPerson) {
+      PersonFactory.updateWithAttachment(cleanedPerson)
+        .then(function(data) {
+          $location.path('/people/show/' + data.id);
+        })
+        .catch(function(err) {
+          errorMessage('updating your person', 'and');
+        })
+        .finally(function() {
+          vm.busy = false;
+        });
+    }
+
+    function updateWithoutAttachment(cleanedPerson) {
+      PersonFactory.updateWithoutAttachment(cleanedPerson)
+        .then(function(data) {
+          $location.path('/people/show/' + data.id);
+        })
+        .catch(function(error) {
+          errorMessage('updating your person', 'and');
+        })
+        .finally(function() {
+          vm.busy = false;
+        });
+    }
+
+    function cleanAndUpdatePerson() {
+      var cleanedPerson = {person: cleanPersonProps(vm.person)};
+        if (vm.person.image) {
+          updateWithAttachment(cleanedPerson);
+        } else {
+          updateWithoutAttachment(cleanedPerson);
+        }
+    }
+
     vm.submitPerson = function(isValid) {
       if (isValid) {
         vm.busy = true;
-        var cleanedPerson = {person: cleanPersonProps(vm.person)};
-        if (vm.person.image) {
-          PersonFactory.updateWithAttachment(cleanedPerson)
-            .then(function(data) {
-              $location.path('/people/show/' + data.id);
-            })
-            .catch(function(err) {
-              errorMessage('updating your person', 'and');
-            })
-            .finally(function() {
-              vm.busy = false;
-            });
-        } else {
-          PersonFactory.updateWithoutAttachment(cleanedPerson)
-            .then(function(data) {
-              $location.path('/people/show/' + data.id);
-            })
-            .catch(function(error) {
-              errorMessage('updating your person', 'and');
-            })
-            .finally(function() {
-              vm.busy = false;
-            });
-        }
+        cleanAndUpdatePerson();
       }
     };
 
