@@ -29,7 +29,7 @@
       vm.busy = true;
       PersonFactory.getPerson($routeParams.id)
         .then(function(person) {
-          getPersonSuccess();
+          getPersonSuccess(person);
         })
         .catch(function(error) {
           errorMessage('loading your person', 'to');
