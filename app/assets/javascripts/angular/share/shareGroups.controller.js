@@ -28,15 +28,22 @@
         }
       };
 
-      vm.send = function() {
+      function checkIfEmailMatchesExisting() {
         if (vm.email.toLowerCase() === $rootScope.user.email) {
           vm.emailsMatch = true;
-          return;
+          return true;
         } else {
           vm.emailsMatch = false;
         }
+      }
 
-        var selected = Object.keys(vm.selected);
+      vm.send = function() {
+        var selected;
+        if (checkIfEmailMatchesExisting()) {
+          return;
+        }
+
+        selected = Object.keys(vm.selected);
         if (selected.length === 0) {
           vm.noneSelected = true;
           return;
