@@ -31,33 +31,36 @@
 
     personFactory.getPeople = function() {
       var deferred = $q.defer();
-      Person.query(function(people) {
-        deferred.resolve(people);
-      }, function(err) {
-        deferred.reject(err);
-      });
+      Person.query(
+        function(people) {
+          deferred.resolve(people);
+        }, function(err) {
+          deferred.reject(err);
+        });
       return deferred.promise;
     };
 
     personFactory.getPerson = function(id) {
       var deferred = $q.defer();
-      Person.get({id: id}, function(person) {
-        deferred.resolve(person);
-      }, function(err) {
-        deferred.reject(err);
-      });
+      Person.get({id: id},
+        function(person) {
+          deferred.resolve(person);
+        }, function(err) {
+          deferred.reject(err);
+        });
       return deferred.promise;
     };
 
     personFactory.deletePerson = function(id) {
       var deferred = $q.defer();
-      Person.delete({id: id}, function(person) {
-        if (person) {
-          deferred.resolve(person);
-        }
-      }, function(err) {
-        deferred.reject(err);
-      });
+      Person.delete({id: id},
+        function(person) {
+          if (person) {
+            deferred.resolve(person);
+          }
+        }, function(err) {
+          deferred.reject(err);
+        });
       return deferred.promise;
     };
 
