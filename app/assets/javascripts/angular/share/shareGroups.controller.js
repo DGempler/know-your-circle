@@ -65,8 +65,8 @@
       }
 
       function prepPayloadAndSend(selected) {
-        vm.busy = true;
         var payload = {};
+        vm.busy = true;
         payload.email = vm.email;
         payload.group_ids = selected;
         sendPayload(payload);
