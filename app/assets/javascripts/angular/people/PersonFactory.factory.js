@@ -32,8 +32,7 @@
     personFactory.getPeople = function() {
       var deferred = $q.defer();
       Person.query(function(people) {
-        personFactory.people = people;
-        deferred.resolve(personFactory.people);
+        deferred.resolve(people);
       }, function(err) {
         deferred.reject(err);
       });
