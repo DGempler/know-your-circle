@@ -49,32 +49,6 @@
         });
     }
 
-    vm.createGroup = function() {
-      GroupFactory.openGroupModal(originalGroups)
-        .then(function(groups) {
-          getGroupsSuccess(groups);
-        })
-        .catch(function() {
-          getGroups();
-        });
-    };
-
-    vm.applyGroup = function(group) {
-      if (vm.person.group_ids.indexOf(group.id) === -1) {
-        vm.person.group_ids.push(group.id);
-      }
-    };
-
-    vm.removeGroup = function(removeId) {
-      //splice inside of iteration OK here because it only happens once
-      for (var i = 0; i < vm.person.group_ids.length; i++) {
-        if (removeId === vm.person.group_ids[i]) {
-          vm.person.group_ids.splice(i, 1);
-          break;
-        }
-      }
-    };
-
     function removeNullValues(submittedPerson, newPerson) {
       for (var key in submittedPerson) {
         if (submittedPerson[key] || key == 'image') {
@@ -113,6 +87,32 @@
           vm.busy = false;
         });
     }
+
+    vm.createGroup = function() {
+      GroupFactory.openGroupModal(originalGroups)
+        .then(function(groups) {
+          getGroupsSuccess(groups);
+        })
+        .catch(function() {
+          getGroups();
+        });
+    };
+
+    vm.applyGroup = function(group) {
+      if (vm.person.group_ids.indexOf(group.id) === -1) {
+        vm.person.group_ids.push(group.id);
+      }
+    };
+
+    vm.removeGroup = function(removeId) {
+      //splice inside of iteration OK here because it only happens once
+      for (var i = 0; i < vm.person.group_ids.length; i++) {
+        if (removeId === vm.person.group_ids[i]) {
+          vm.person.group_ids.splice(i, 1);
+          break;
+        }
+      }
+    };
 
     vm.submitPerson = function(isValid) {
       if (isValid) {
