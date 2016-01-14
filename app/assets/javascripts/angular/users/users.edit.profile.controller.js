@@ -8,20 +8,29 @@
     var vm = this;
     vm.user = {};
 
-    function copyUser() {
+    function copyUserProps() {
       for (var prop in $rootScope.user) {
         vm.user[prop] = $rootScope.user[prop];
       }
+    }
+
+    function dobFilter(person) {
       if ($rootScope.user.dob) {
         vm.user.dob = new Date($rootScope.user.dob);
       }
-      if (!vm.user.image_updated_at) {
+    }
 
-      }
+    function firstVisitMessage() {
       if ($routeParams.first === "true") {
         var name = vm.user.first_name + " " + vm.user.last_name;
         Message.openWelcome(name);
       }
+    }
+
+    function createFilteredUser() {
+      copyUserProps();
+      dobFilter();
+      firstVisitMessage();
     }
 
     function removeNullValues() {
@@ -80,7 +89,7 @@
       AuthFactory.openChangePasswordModal();
     };
 
-    copyUser();
+    createFilteredUser();
   }
 
 })();
