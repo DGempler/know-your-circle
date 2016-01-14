@@ -29,6 +29,11 @@
       });
     }
 
+    function errorMessage(type) {
+      var message = 'An error occured while ' + type + '. Please refresh the page to try again.';
+      Message.open(message);
+    }
+
     function getGroupsSuccess(groups) {
       copyGroups(groups);
       vm.person.group_ids = cleanGroupIds(vm.person.group_ids, groups);
@@ -40,10 +45,7 @@
           getGroupsSuccess(groups);
         })
         .catch(function(error) {
-          var message = 'There was an error while loading your groups. Please refresh the page to try again.';
-          Message.open(message);
-        })
-        .finally(function() {
+          errorMessage('loading your groups');
         });
     }
 
@@ -108,8 +110,7 @@
             $location.path('/people/show/' + data.id);
           })
           .catch(function(error) {
-            var message = 'There was an error while submitting your person. Please refresh the page to try again.';
-            Message.open(message);
+            errorMessage('submitting your person');
           })
           .finally(function() {
             vm.busy = false;
