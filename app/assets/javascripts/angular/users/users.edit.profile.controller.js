@@ -43,45 +43,63 @@
       return newUser;
     }
 
+    function updateWithImageError() {
+      var message = 'An error occured while trying to update your information. Please try again.';
+      Message.open(message);
+    }
+
+    function updateWithoutImageError(err) {
+      var message;
+      if (err.data.errors.full_messages) {
+        message = "Email address is already in use. Please try again.";
+      } else {
+        message = 'An error occured while trying update your information. Please try again.';
+      }
+      Message.open(message);
+    }
+
+    function updateWithImage() {
+      var submitUser = removeNullValues();
+      AuthFactory.updateUserWithImage(submitUser)
+        .then(function() {
+          $location.path('/profile');
+        })
+        .catch(function() {
+          updateErrorMessage();
+        })
+        .finally(function() {
+          vm.busy = false;
+        });
+    }
+
+    function updateWithoutImage() {
+      if (vm.user.deleteImage) {
+        vm.user.image= null;
+      }
+      AuthFactory.updateUser(vm.user)
+        .then(function() {
+          $location.path('/profile');
+        })
+        .catch(function(err) {
+          updateWithoutImageError(err);
+        })
+        .finally(function() {
+          vm.busy = false;
+        });
+    }
+
+    function updateUser() {
+      vm.busy = true;
+        if (vm.user.image) {
+          updateWithImage();
+        } else {
+          updateWithoutImage();
+        }
+    }
+
     vm.submitUpdateUserAccount = function(isValid) {
       if (isValid) {
-        vm.busy = true;
-        if (vm.user.image) {
-          var submitUser = removeNullValues();
-          AuthFactory.updateUserWithImage(submitUser)
-            .then(function() {
-              $location.path('/profile');
-            })
-            .catch(function() {
-              var message = 'An error occured while trying to update your information. Please try again.';
-              Message.open(message);
-            })
-            .finally(function() {
-              vm.busy = false;
-            });
-        } else {
-          if (vm.user.deleteImage) {
-            vm.user.image= null;
-          }
-          AuthFactory.updateUser(vm.user)
-            .then(function() {
-              $location.path('/profile');
-            })
-            .catch(function(err) {
-              var message;
-              if (err.data.errors.full_messages) {
-                // err.data.errors.full_messages[0];
-                message = "Email address is already in use. Please try again.";
-              } else {
-                // err.statusText;
-                message = 'An error occured while trying update your information. Please try again.';
-              }
-              Message.open(message);
-            })
-            .finally(function() {
-              vm.busy = false;
-            });
-        }
+        updateUser();
       }
     };
 
