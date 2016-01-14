@@ -75,7 +75,6 @@
       }
     };
 
-    // prevent "null" from being sent as a value to server if form field is left blank
     function removeNullValues(submittedPerson, newPerson) {
       for (var key in submittedPerson) {
         if (submittedPerson[key] || key == 'image') {
