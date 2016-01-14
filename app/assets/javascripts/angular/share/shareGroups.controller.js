@@ -16,7 +16,7 @@
         }
       }
 
-      function checkIfEmailMatchesExisting() {
+      function checkIfEmailMatchesUsers() {
         if (vm.email.toLowerCase() === $rootScope.user.email) {
           vm.emailsMatch = true;
           return true;
@@ -86,7 +86,7 @@
 
       vm.send = function() {
         var selected = Object.keys(vm.selected);
-        if (!checkIfEmailMatchesExisting() && setSelectedGroups(selected)) {
+        if (!checkIfEmailMatchesUsers() && setSelectedGroups(selected)) {
           prepPayloadAndSend(selected);
         }
       };
