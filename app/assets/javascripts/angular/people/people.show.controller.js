@@ -39,26 +39,30 @@
         });
     }
 
+    function deletePerson() {
+      vm.busy = true;
+      PersonFactory.deletePerson($routeParams.id)
+        .then(function(person) {
+          if (person) {
+            $location.path('/people/index');
+          }
+        })
+        .catch(function(error) {
+          errorMessage('deleting your person', 'and');
+        })
+        .finally(function() {
+          vm.busy = false;
+        });
+    }
 
-
-  vm.deletePerson = function() {
-    var message = "Are you sure?";
-    Message.openConfirm(message)
-      .then(function() {
-        vm.busy = true;
-        PersonFactory.deletePerson($routeParams.id)
-          .then(function(person) {
-            if (person) {
-              $location.path('/people/index');
-            }
-          })
-          .catch(function(error) {
-            errorMessage('deleting your person', 'and');
-          })
-          .finally(function() {
-            vm.busy = false;
-          });
-      });
+    vm.deletePerson = function() {
+      var message = "Are you sure?";
+      Message.openConfirm(message)
+        .then(function() {
+          deletePerson();
+        });
     };
+
+    getPerson();
   }
 })();
