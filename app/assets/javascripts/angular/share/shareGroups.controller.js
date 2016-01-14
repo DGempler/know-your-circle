@@ -38,7 +38,6 @@
       }
 
       function setSelectedGroups(selected) {
-        selected = Object.keys(vm.selected);
         if (selected.length === 0) {
           vm.noneSelected = true;
           return false;
@@ -86,7 +85,7 @@
       }
 
       vm.send = function() {
-        var selected;
+        var selected = Object.keys(vm.selected);
         if (!checkIfEmailMatchesExisting() && setSelectedGroups(selected)) {
           prepPayloadAndSend(selected);
         }
