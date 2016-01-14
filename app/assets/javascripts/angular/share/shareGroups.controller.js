@@ -87,15 +87,9 @@
 
       vm.send = function() {
         var selected;
-        if (checkIfEmailMatchesExisting()) {
-          return;
+        if (!checkIfEmailMatchesExisting() && setSelectedGroups(selected)) {
+          prepPayloadAndSend(selected);
         }
-
-        if (!setSelectedGroups(selected)) {
-          return;
-        }
-
-        prepPayloadAndSend(selected);
       };
 
       initialize();
