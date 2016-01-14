@@ -16,18 +16,6 @@
         }
       }
 
-      vm.close = function() {
-        $uibModalInstance.close();
-      };
-
-      vm.selectGroup = function(id) {
-        if (vm.selected[id]) {
-          delete vm.selected[id];
-        } else {
-          vm.selected[id] = true;
-        }
-      };
-
       function checkIfEmailMatchesExisting() {
         if (vm.email.toLowerCase() === $rootScope.user.email) {
           vm.emailsMatch = true;
@@ -83,6 +71,18 @@
         payload.group_ids = selected;
         sendPayload(payload);
       }
+
+      vm.close = function() {
+        $uibModalInstance.close();
+      };
+
+      vm.selectGroup = function(id) {
+        if (vm.selected[id]) {
+          delete vm.selected[id];
+        } else {
+          vm.selected[id] = true;
+        }
+      };
 
       vm.send = function() {
         var selected = Object.keys(vm.selected);
