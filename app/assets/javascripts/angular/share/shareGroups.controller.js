@@ -48,21 +48,7 @@
         }
       }
 
-      vm.send = function() {
-        var selected;
-        if (checkIfEmailMatchesExisting()) {
-          return;
-        }
-
-        if (!setSelectedGroups(selected)) {
-          return;
-        }
-
-        vm.busy = true;
-        var payload = {};
-        payload.email = vm.email;
-        payload.group_ids = selected;
-
+      function sendPayload(payload) {
         Share.share(payload)
           .then(function(success) {
             var message = 'The people in your selected groups have been sent to ' + vm.email;
@@ -81,6 +67,29 @@
           .finally(function() {
             vm.busy = false;
           });
+      }
+
+      function prepPayloadAndSend(selected) {
+        vm.busy = true;
+        var payload = {};
+        payload.email = vm.email;
+        payload.group_ids = selected;
+
+        sendPayload(payload);
+      }
+
+      vm.send = function() {
+        var selected;
+        if (checkIfEmailMatchesExisting()) {
+          return;
+        }
+
+        if (!setSelectedGroups(selected)) {
+          return;
+        }
+
+        prepPayloadAndSend(selected);
+
       };
 
       initialize();
