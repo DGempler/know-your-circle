@@ -27,24 +27,34 @@ function profileController($rootScope, AuthFactory, $location, Message) {
       dobFilter();
     }
 
+    function openMessage(message) {
+      Message.open(message);
+    }
+
+    function deleteUserSuccess() {
+      $location.path('/');
+      openMessage('Your account has been successfully deleted.');
+    }
+
+    function deleteUser() {
+      vm.busy = true;
+      AuthFactory.deleteUser()
+        .then(function() {
+          deleteUserSuccess();
+        })
+        .catch(function() {
+          openMessage('An error occured while trying to delete your account. Please try again.');
+        })
+        .finally(function() {
+          vm.busy = false;
+        });
+    }
+
     vm.deleteUser = function() {
       var message = "Are you sure you want to delete your account and your whole circle?";
       Message.openConfirm(message)
         .then(function() {
-          vm.busy = true;
-          AuthFactory.deleteUser()
-            .then(function() {
-              $location.path('/');
-              var message = 'Your account has been successfully deleted.';
-              Message.open(message);
-            })
-            .catch(function() {
-              var message = 'An error occured while trying to delete your account. Please try again.';
-              Message.open(message);
-            })
-            .finally(function() {
-              vm.busy = false;
-            });
+          deleteUser();
         });
     };
 
