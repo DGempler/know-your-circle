@@ -7,40 +7,45 @@
   function Share($uibModal, $http, $q) {
     var shareFactory = {};
 
-    shareFactory.shareSelectedModalOpen = function(people, size) {
-      var modalInstance = $uibModal.open({
+    function createModalInstance(fileName, controllerName, size, resolveObject) {
+      return $uibModal.open({
         animation: true,
-        templateUrl: '/partials/share/_shareSelected_modal.html',
-        controller: 'shareSelectedController as modal',
-        windowClass: "modal fade",
+        templateUrl: '/partials/share/' + fileName + '.html',
+        controller: controllerName + ' as modal',
         size: size,
-        resolve: {
-          people: function() {
-            return people;
-          },
-          size: function() {
-            return size;
-          }
-        }
+        windowClass: "modal fade",
+        resolve: resolveObject
       });
+    }
+
+    shareFactory.shareSelectedModalOpen = function(people, size) {
+      var fileName = '_shareSelected_modal';
+      var controllerName = 'shareSelectedController';
+      var resolve = {
+        people: function() {
+          return people;
+        },
+        size: function() {
+          return size;
+        }
+      };
+
+      createModalInstance(fileName, controllerName, size, resolve);
     };
 
     shareFactory.shareGroupsModalOpen = function(groups, size) {
-      var modalInstance = $uibModal.open({
-        animation: true,
-        templateUrl: '/partials/share/_shareGroups_modal.html',
-        controller: 'shareGroupsController as modal',
-        windowClass: "modal fade",
-        size: size,
-        resolve: {
-          groups: function() {
-            return groups;
-          },
-          size: function() {
-            return size;
-          }
+      var fileName = '_shareGroups_modal';
+      var controllerName = 'shareGroupsController';
+      var resolve = {
+        groups: function() {
+          return groups;
+        },
+        size: function() {
+          return size;
         }
-      });
+      };
+
+      createModalInstance(fileName, controllerName, size, resolve);
     };
 
     shareFactory.share = function(payload) {
