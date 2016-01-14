@@ -18,12 +18,18 @@
         $uibModalInstance.close();
       };
 
-      vm.send = function() {
+      function checkIfEmailMatchesUsers() {
         if (vm.email.toLowerCase() === $rootScope.user.email) {
           vm.emailsMatch = true;
-          return;
+          return true;
         } else {
           vm.emailsMatch = false;
+        }
+      }
+
+      vm.send = function() {
+        if (checkIfEmailMatchesUsers()) {
+          return true;
         }
 
         vm.busy = true;
