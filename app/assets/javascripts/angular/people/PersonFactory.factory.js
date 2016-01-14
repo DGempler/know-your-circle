@@ -8,20 +8,24 @@
     var personFactory = {};
 
     function sendPayload(formData, method, url) {
-      var deferred = $q.defer();
-      Upload.upload({
+      return Upload.upload({
         url: url,
         method: method,
         fields: formData,
         arrayKey: '[]',
         file: formData.person.image,
         fileFormDataName: 'person[image]',
-      })
-      .then(function (resp) {
-        deferred.resolve(resp.data);
-      }, function (err) {
-        deferred.reject(err);
       });
+    }
+
+    function updatePerson(formData, method, url) {
+      var deferred = $q.defer();
+      sendPayload(formData, method, url)
+        .then(function (resp) {
+          deferred.resolve(resp.data);
+        }, function (err) {
+          deferred.reject(err);
+        });
       return deferred.promise;
     }
 
@@ -60,7 +64,7 @@
 
     personFactory.createWithAttachment = function(formData) {
       var deferred = $q.defer();
-      sendPayload(formData, "POST", "/api/people")
+      updatePerson(formData, "POST", "/api/people")
         .then(function(data) {
           deferred.resolve(data);
         })
@@ -72,7 +76,7 @@
 
     personFactory.updateWithAttachment = function(formData) {
       var deferred = $q.defer();
-      sendPayload(formData, "PUT", "/api/people/" + formData.person.id)
+      updatePerson(formData, "PUT", "/api/people/" + formData.person.id)
         .then(function(data) {
           deferred.resolve(data);
         })
