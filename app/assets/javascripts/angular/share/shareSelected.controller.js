@@ -27,38 +27,55 @@
         }
       }
 
-      vm.send = function() {
-        if (checkIfEmailMatchesUsers()) {
-          return true;
-        }
-
-        vm.busy = true;
-        var payload = {};
+      function addPeopleIds(payload) {
         payload.people_ids = [];
         vm.people.forEach(function(person) {
           payload.people_ids.push(person.id);
         });
+      }
 
-        payload.email = vm.email;
+      function sendPayloadSuccess() {
+        var message = 'Your selected people have been sent to ' + vm.email;
+        Message.open(message);
+        vm.email = "";
+      }
 
+      function sendPayloadError(error) {
+        var message;
+        if (error.data.error) {
+          message = error.data.error;
+        } else {
+          message = 'There was an error while sharing your people. Please try again.';
+        }
+        Message.open(message);
+      }
+
+      function sendPayload(payload) {
         Share.share(payload)
           .then(function(success) {
-            var message = 'Your selected people have been sent to ' + vm.email;
-            Message.open(message);
-            vm.email = "";
+            sendPayloadSuccess();
           })
           .catch(function(error) {
-            var message;
-            if (error.data.error) {
-              message = error.data.error;
-            } else {
-              message = 'There was an error while sharing your people. Please try again.';
-            }
-            Message.open(message);
+            sendPayloadError(error);
           })
           .finally(function() {
             vm.busy = false;
           });
+      }
+
+      function prepPayloadAndSend() {
+        var payload = {};
+        vm.busy = true;
+        addPeopleIds(payload);
+        payload.email = vm.email;
+        sendPayload(payload);
+      }
+
+      vm.send = function() {
+        if (checkIfEmailMatchesUsers()) {
+          return;
+        }
+        prepPayloadAndSend();
       };
 
       initialize();
