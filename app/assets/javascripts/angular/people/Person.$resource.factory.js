@@ -6,7 +6,7 @@
 
   function Person($resource) {
     return $resource('/api/people/:id', null, {
-          update: {
+      update: {
         method:'PUT'
       }
     });
