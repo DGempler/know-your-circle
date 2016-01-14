@@ -37,18 +37,25 @@
         }
       }
 
+      function setSelectedGroups(selected) {
+        selected = Object.keys(vm.selected);
+        if (selected.length === 0) {
+          vm.noneSelected = true;
+          return false;
+        } else {
+          vm.noneSelected = false;
+          return true;
+        }
+      }
+
       vm.send = function() {
         var selected;
         if (checkIfEmailMatchesExisting()) {
           return;
         }
 
-        selected = Object.keys(vm.selected);
-        if (selected.length === 0) {
-          vm.noneSelected = true;
+        if (!setSelectedGroups(selected)) {
           return;
-        } else {
-          vm.noneSelected = false;
         }
 
         vm.busy = true;
