@@ -6,23 +6,40 @@
 
   function peopleShowController($routeParams, $location, PersonFactory, Message) {
     var vm = this;
-    vm.busy = true;
-    PersonFactory.getPerson($routeParams.id)
-      .then(function(person) {
-        vm.person = person;
-        if (vm.person.dob === 'null' || vm.person.dob === null) {
-          vm.person.dob = "";
-        } else {
-          vm.person.dob = moment(vm.person.dob).format("MMM Do YYYY");
-        }
-      })
-      .catch(function(error) {
-        var message = 'An error occured while loading your person. Please refresh the page to try again.';
-        Message.open(message);
-      })
-      .finally(function() {
-        vm.busy = false;
-      });
+
+    function filterPerson() {
+      if (vm.person.dob === 'null' || vm.person.dob === null) {
+        vm.person.dob = "";
+      } else {
+        vm.person.dob = moment(vm.person.dob).format("MMM Do YYYY");
+      }
+    }
+
+    function getPersonSuccess(person) {
+      vm.person = person;
+      filterPerson();
+    }
+
+    function errorMessage(type, joiner) {
+      var message = 'An error occured while ' + type + '. Please refresh the page ' + joiner + ' try again.';
+      Message.open(message);
+    }
+
+    function getPerson(argument) {
+      vm.busy = true;
+      PersonFactory.getPerson($routeParams.id)
+        .then(function(person) {
+          getPersonSuccess();
+        })
+        .catch(function(error) {
+          errorMessage('loading your person', 'to');
+        })
+        .finally(function() {
+          vm.busy = false;
+        });
+    }
+
+
 
   vm.deletePerson = function() {
     var message = "Are you sure?";
@@ -36,8 +53,7 @@
             }
           })
           .catch(function(error) {
-            var message = 'An error occured while deleting your person. Please refresh the page and try again.';
-            Message.open(message);
+            errorMessage('deleting your person', 'and');
           })
           .finally(function() {
             vm.busy = false;
