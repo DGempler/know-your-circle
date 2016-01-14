@@ -8,8 +8,10 @@
       var vm = this;
       vm.people = people;
 
-      if (size !== 'sm') {
-        vm.mediumSize = true;
+      function initialize() {
+        if (size !== 'sm') {
+          vm.mediumSize = true;
+        }
       }
 
       vm.close = function() {
@@ -52,6 +54,8 @@
             vm.busy = false;
           });
       };
+
+      initialize();
 
     }
 
