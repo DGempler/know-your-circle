@@ -14,10 +14,6 @@
         }
       }
 
-      vm.close = function() {
-        $uibModalInstance.close();
-      };
-
       function checkIfEmailMatchesUsers() {
         if (vm.email.toLowerCase() === $rootScope.user.email) {
           vm.emailsMatch = true;
@@ -70,6 +66,10 @@
         payload.email = vm.email;
         sendPayload(payload);
       }
+
+      vm.close = function() {
+        $uibModalInstance.close();
+      };
 
       vm.send = function() {
         if (checkIfEmailMatchesUsers()) {
