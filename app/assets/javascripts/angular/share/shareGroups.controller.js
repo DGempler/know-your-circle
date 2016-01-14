@@ -48,21 +48,29 @@
         }
       }
 
+      function sendPayloadSuccess() {
+        var message = 'The people in your selected groups have been sent to ' + vm.email;
+        Message.open(message);
+        vm.email = "";
+      }
+
+      function sendPayloadError(error) {
+        var message;
+        if (error.data.error) {
+          message = error.data.error;
+        } else {
+          message = 'There was an error while sharing the people in your selected groups. Please try again.';
+        }
+        Message.open(message);
+      }
+
       function sendPayload(payload) {
         Share.share(payload)
           .then(function(success) {
-            var message = 'The people in your selected groups have been sent to ' + vm.email;
-            Message.open(message);
-            vm.email = "";
+            sendPayloadSuccess();
           })
           .catch(function(error) {
-            var message;
-            if (error.data.error) {
-              message = error.data.error;
-            } else {
-              message = 'There was an error while sharing the people in your selected groups. Please try again.';
-            }
-            Message.open(message);
+            sendPayloadError(error);
           })
           .finally(function() {
             vm.busy = false;
@@ -74,7 +82,6 @@
         var payload = {};
         payload.email = vm.email;
         payload.group_ids = selected;
-
         sendPayload(payload);
       }
 
@@ -89,7 +96,6 @@
         }
 
         prepPayloadAndSend(selected);
-
       };
 
       initialize();
