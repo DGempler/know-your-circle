@@ -6,11 +6,14 @@
 
     function shareGroupsController($uibModalInstance, groups, size, Share, Message, $rootScope) {
       var vm = this;
-      vm.groups = groups;
-      vm.selected = {};
 
-      if (size !== 'sm') {
-        vm.mediumSize = true;
+      function initialize() {
+        vm.groups = groups;
+        vm.selected = {};
+
+        if (size !== 'sm') {
+          vm.mediumSize = true;
+        }
       }
 
       vm.close = function() {
@@ -65,6 +68,8 @@
             vm.busy = false;
           });
       };
+
+      initialize();
 
     }
 
