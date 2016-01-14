@@ -100,20 +100,24 @@
       return newPerson;
     }
 
+    function cleanAndUpdatePerson() {
+      var cleanedPerson = {person: cleanPersonProps(vm.person)};
+      PersonFactory.createWithAttachment(cleanedPerson)
+        .then(function(data) {
+          $location.path('/people/show/' + data.id);
+        })
+        .catch(function(error) {
+          errorMessage('submitting your person');
+        })
+        .finally(function() {
+          vm.busy = false;
+        });
+    }
+
     vm.submitPerson = function(isValid) {
       if (isValid) {
         vm.busy = true;
-        var cleanedPerson = {person: cleanPersonProps(vm.person)};
-        PersonFactory.createWithAttachment(cleanedPerson)
-          .then(function(data) {
-            $location.path('/people/show/' + data.id);
-          })
-          .catch(function(error) {
-            errorMessage('submitting your person');
-          })
-          .finally(function() {
-            vm.busy = false;
-          });
+        cleanAndUpdatePerson();
       }
     };
 
