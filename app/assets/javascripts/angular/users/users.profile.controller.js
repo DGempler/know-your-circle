@@ -8,15 +8,23 @@ function profileController($rootScope, AuthFactory, $location, Message) {
     var vm = this;
     vm.user = {};
 
-    function copyUser() {
+    function copyUserProps() {
       for (var prop in $rootScope.user) {
         vm.user[prop] = $rootScope.user[prop];
       }
+    }
+
+    function dobFilter(person) {
       if ($rootScope.user.dob === 'null' || $rootScope.user.dob === null) {
         vm.user.dob = "";
       } else {
         vm.user.dob = moment($rootScope.user.dob).format("MMM Do YYYY");
       }
+    }
+
+    function createFilteredUser() {
+      copyUserProps();
+      dobFilter();
     }
 
     vm.deleteUser = function() {
@@ -44,7 +52,7 @@ function profileController($rootScope, AuthFactory, $location, Message) {
       AuthFactory.openChangePasswordModal();
     };
 
-    copyUser();
+    createFilteredUser();
 
   }
 
