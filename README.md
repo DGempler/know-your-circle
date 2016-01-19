@@ -28,7 +28,7 @@ ImageMagick • Paperclip • Devise • Mailers • Sidekiq • Redis • Backg
 
 I demonstrate some of the features available to an unauthorized user: the flashcard game and pre-populated Circle (43 U.S. presidents, pics & bios seeded from the Wikipedia API).
 
-[![Demo Version Walkthrough](https://img.youtube.com/vi/GFpl3K6XMGg/0.jpg)](https://www.youtube.com/watch?v=GFpl3K6XMGg)
+<a href="https://www.youtube.com/watch?v=GFpl3K6XMGg" target="\_blank"><img src="https://img.youtube.com/vi/GFpl3K6XMGg/0.jpg"/></a>
 
 ### Coming Soon
 
