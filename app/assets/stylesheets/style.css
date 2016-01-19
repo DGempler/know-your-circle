@@ -73,3 +73,7 @@ span.glyphicon {
   vertical-align: middle;
   max-height: 250px;
 }
+
+#container {
+  margin-bottom: 40px;
+}
