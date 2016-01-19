@@ -22,6 +22,15 @@ ImageMagick • Paperclip • Devise • Mailers • Sidekiq • Redis • Backg
 - Clean up backend code (Ruby on Rails)
 - Add more tests
 
+### Videos
+
+#### Demo Version Walkthrough
+
+I demonstrate some of the features available to an unauthorized user: the flashcard game and pre-populated Circle (43 U.S. presidents, pics & bios seeded from the Wikipedia API).
+
+<iframe width="420" height="315" src="https://www.youtube.com/embed/GFpl3K6XMGg" frameborder="0" allowfullscreen></iframe>
+
+
 ### Coming Soon
 
 - More UI Features
