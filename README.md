@@ -15,7 +15,7 @@ Users upload images of people into their "Circle", organize via "Groups", and pe
 
 ### Also Uses
 
-ImageMagick • Paperclip • File Uploading • Devise • Mailers • Sidekiq • Redis • Background Jobs • Promises • Wikipedia API • Heroku
+ImageMagick • Paperclip • Devise • Mailers • Sidekiq • Redis • Background Jobs • Promises • Wikipedia API • Heroku
 
 ### Major ToDo
 
@@ -36,6 +36,6 @@ ImageMagick • Paperclip • File Uploading • Devise • Mailers • Sidekiq 
 
 I'm a web developer with a background in small business, project management, and construction. Although I've always had a strong interest in computers and tech since childhood, I discovered my passion for programming while running my small but successful exterior remodeling company. As soon as I was able to sell the business, I dived into coding full-time and discovered <a href="http://www.galvanize.com/courses/full-stack/" target="\_blank">Galvanize</a>. I created this web app as my capstone project while taking the 6-month web development course there.
 
-<a href="www.linkedin.com/in/dgempler" target="\_blank">LinkedIn Page</a>
+<a href="https://www.linkedin.com/in/dgempler" target="\_blank">LinkedIn Page</a>
 <br />
 <a href="https://resume.creddle.io/resume/6cdx6umyc02" target="\_blank">Resume</a>
