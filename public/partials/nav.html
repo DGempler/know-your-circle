@@ -17,9 +17,9 @@
         <li ng-show='user.id'><a href="#/games/index/false">Play</a></li>
         <li><a href="#/people/demo">Demo Circle</a></li>
         <li><a href="#/games/index/true">Demo Play</a></li>
+        <li><a href="#/about">About</a></li>
         <li ng-show='!user.id'><a ng-click='nav.signUpOpen()' id='sign-up' href="">Sign Up</a></li>
         <li ng-show='!user.id'><a ng-click='nav.logInOpen()' id='log-in' href="">Log In</a></li>
-        <li><a href="#/about">About</a></li>
         <li ng-show='user.id' class="dropdown">
           <a id='accountDropdown' class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false" href="">Account <span class="caret"></span></a>
           <ul class="dropdown-menu" aria-labelledby='accountDropdown'>
