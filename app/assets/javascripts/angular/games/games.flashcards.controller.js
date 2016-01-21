@@ -42,11 +42,11 @@
     }
 
     function setUpGame() {
-      randomNumber = Math.floor(Math.random() * gamePeople.length);
       vm.choosingPeople = false;
       vm.guessPerson = {};
       zeroOutTotalScores();
       setUpGamePeople();
+      randomNumber = Math.floor(Math.random() * gamePeople.length);
       setRndPersonAndGameProps(randomNumber);
     }
 
